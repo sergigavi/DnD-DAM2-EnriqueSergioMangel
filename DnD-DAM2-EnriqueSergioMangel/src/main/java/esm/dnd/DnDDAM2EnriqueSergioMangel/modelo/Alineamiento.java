@@ -1,0 +1,6 @@
+package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
+
+public enum Alineamiento {
+
+	LEGAL_BUENO, NEUTRAL_BUENO, CAOTICO_BUENO, LEGAL_NEUTRAL, NEUTRAL, CAOTICO_NEUTRAL, LEGAL_MALO, NEUTRAL_MALO, CAOTICO_MALO;
+}
