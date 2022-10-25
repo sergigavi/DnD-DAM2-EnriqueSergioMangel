@@ -1,7 +1,5 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
-import org.springframework.data.annotation.Id;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,34 +14,20 @@ import lombok.NonNull;
 @Builder
 
 @Entity
-public class Equipamiento {
+public class Equipo_Personaje {
 
-	@Id
 	@NonNull
+	@Id
 	@EqualsAndHashCode.Include
 	private String idEquipo;
 	
-	private String nombre;
+	//onetoone
+	private String idPersonaje;
 	
-	private TipoEquipo tipo;
+	//manytoone
+	private String idEquipamiento;
 	
-	private CatEquipo categoria;
+	private int cantidad;
 	
-	private PropiedadEquipo propiedad;
-	
-	private String modificador;
-	
-	private double danio;
-	
-	private double alcance;
-	
-	private double precio;
-	
-	private double peso;
-	
-	private String ca;
-	
-	private String descripcion;
-	
-	
+	private boolean equipado;
 }

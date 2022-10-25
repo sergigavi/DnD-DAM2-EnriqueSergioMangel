@@ -16,34 +16,18 @@ import lombok.NonNull;
 @Builder
 
 @Entity
-public class Equipamiento {
-
+public class Caracteristica {
+	
 	@Id
 	@NonNull
 	@EqualsAndHashCode.Include
-	private String idEquipo;
+	private String idHabilidad;
+	
+	private String idFicha;
 	
 	private String nombre;
 	
-	private TipoEquipo tipo;
-	
-	private CatEquipo categoria;
-	
-	private PropiedadEquipo propiedad;
-	
-	private String modificador;
-	
-	private double danio;
-	
-	private double alcance;
-	
-	private double precio;
-	
-	private double peso;
-	
-	private String ca;
-	
-	private String descripcion;
-	
-	
+	private String competencia;
+
 }
+

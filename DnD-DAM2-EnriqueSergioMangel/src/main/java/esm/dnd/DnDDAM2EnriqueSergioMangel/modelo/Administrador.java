@@ -23,7 +23,7 @@ import lombok.NonNull;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 
-//@Entity
+@Entity
 public class Administrador {
 	
 	@NonNull
