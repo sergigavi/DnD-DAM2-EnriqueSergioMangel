@@ -1,7 +1,5 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
-import java.time.LocalDate;
-
 import org.springframework.data.annotation.Id;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +15,6 @@ import lombok.NonNull;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 
-@Entity
 public class Habilidad {
 	
 	@Id

@@ -15,7 +15,6 @@ import lombok.NonNull;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 
-@Entity
 public class Caracteristica {
 	
 	@Id
