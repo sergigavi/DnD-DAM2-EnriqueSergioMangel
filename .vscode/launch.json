@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DnDDam2EnriqueSergioMangelApplication<DnD-DAM2-EnriqueSergioMangel>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "esm.dnd.DnDDAM2EnriqueSergioMangel.DnDDam2EnriqueSergioMangelApplication",
+            "projectName": "DnD-DAM2-EnriqueSergioMangel",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
