@@ -14,18 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Alineamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Clase;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Raza;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.services.IFichaPersonajeService;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.services.IHabilidadService;
 
-@CrossOrigin
+@CrossOrigin    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
 @RestController
 @RequestMapping("/dndtools/personajes")
 public class FichaPersonajeController {
     
+    //Le inyecto otros servicios ya que aqui cargo los datos de todo
+    @Autowired private IHabilidadService habilidadServicio;
+    
     @Autowired private IFichaPersonajeService fichaPersonajeServicio;
     
     @GetMapping("/dametodos")
-    public ResponseEntity<Iterable<FichaPersonaje>> obtenerTodosLosPilotos()
+    public ResponseEntity<Iterable<FichaPersonaje>> obtenerTodasLasFichasDePersonaje()
     {
         ResponseEntity<Iterable<FichaPersonaje>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -55,8 +60,20 @@ public class FichaPersonajeController {
     }
 
     private void cargarDatos() {
-
+        
         Set<FichaPersonaje> fichasPersonaje = new HashSet<>();
+
+        Set<Habilidad> habilidades = new HashSet<>();
+        
+        cargarFichasPersonaje(fichasPersonaje);
+        
+        cargarHabilidades(habilidades);       
+        
+    }
+
+
+
+    private void cargarFichasPersonaje(Set<FichaPersonaje> fichasPersonaje) {
         
         fichasPersonaje.add(FichaPersonaje.builder()
                 .idFichaPersonaje("C_fp_1")
@@ -85,6 +102,20 @@ public class FichaPersonajeController {
                 .build());
         
         fichaPersonajeServicio.addAllFichasPersonaje(fichasPersonaje);
+        
+    }
+
+    private void cargarHabilidades(Set<Habilidad> habilidades) {
+        
+        
+        habilidades.add(Habilidad.builder()
+                .idHabilidad("C_h_1")
+                .idFicha("C_fp_1")
+                .nombre("Mata Demonys")
+                .competencia("matar demonios")
+                .build());
+        
+        habilidadServicio.addAllHabilidades(habilidades);
         
     }
 
