@@ -7,10 +7,11 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.UsuarioRepository;
 
 @Service
-public class UsuarioServicio {
+public class UsuarioServicio implements IUsuarioServicio{
     
     @Autowired UsuarioRepository usuarioDAO;
 
+    @Override
 	public boolean insertarUsuario(Usuario a) {
 		boolean exito=false;
 		
@@ -22,6 +23,7 @@ public class UsuarioServicio {
 		return exito;
 	}
 
+    @Override
 	public boolean eliminarUsuario(String idUser) {
 		boolean exito=false;
 		
@@ -33,11 +35,13 @@ public class UsuarioServicio {
 		return exito;
 	}
 
+    @Override
 	public boolean existeUsuario(String idUser) {
 		return usuarioDAO.existsById(idUser);
 	}
 
-    public boolean cambiarContraseña(String idUser, String contrasenia){
+    @Override
+    public boolean cambiarContrasenia(String idUser, String contrasenia){
         boolean exito=false;
         Usuario a;
 

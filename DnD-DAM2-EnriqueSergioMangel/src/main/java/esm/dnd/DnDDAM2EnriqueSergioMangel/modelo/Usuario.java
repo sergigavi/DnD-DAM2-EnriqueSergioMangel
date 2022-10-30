@@ -1,7 +1,5 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
-import java.time.LocalDate;
-
 //import javax.persistence.Entity;
 import org.springframework.data.annotation.Id;
 
@@ -16,7 +14,7 @@ import lombok.NonNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Builder
+CMBuilder
 
 //@Entity
 public class Usuario {
