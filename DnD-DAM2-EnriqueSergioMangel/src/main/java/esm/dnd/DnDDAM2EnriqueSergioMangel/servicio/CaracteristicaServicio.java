@@ -24,15 +24,20 @@ public class CaracteristicaServicio implements ICaracteristicaServicio{
 	}
 
 	@Override
-	public boolean eliminarAdministrador(String idHabilidad) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean eliminarCaracteristica(String idHabilidad) {
+		boolean exito=false;
+		
+		if(caracteristicaDAO.existsById(idHabilidad)) {
+			caracteristicaDAO.deleteById(idHabilidad);
+			exito=true;
+		}
+			
+		return exito;
 	}
 
 	@Override
-	public boolean existeAdministrador(String idHabilidad) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean existeCaracteristica(String idHabilidad) {
+		return caracteristicaDAO.existsById(idHabilidad);
 	}
 
    

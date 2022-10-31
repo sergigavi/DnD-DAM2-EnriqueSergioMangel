@@ -30,8 +30,14 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 	}
 
 	@Override
-	public boolean insertarEqupamiento(Equipamiento a) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean insertarEquipamiento(Equipamiento a) {
+		boolean exito=false;
+		
+		if(!equipamientoDAO.existsById(a.getIdEquipo())) {
+			equipamientoDAO.save(a);
+			exito=true;
+		}
+		
+		return exito;
 	}
 }
