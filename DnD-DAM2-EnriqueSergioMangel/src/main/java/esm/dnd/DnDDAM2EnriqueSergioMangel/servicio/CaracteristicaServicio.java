@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Caracteristica;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.CaracteristicaRepository;
 
+@Service
 public class CaracteristicaServicio implements ICaracteristicaServicio{
     
     @Autowired CaracteristicaRepository caracteristicaDAO;
@@ -22,20 +23,17 @@ public class CaracteristicaServicio implements ICaracteristicaServicio{
 		return exito;
 	}
 
-    @Override
-	public boolean eliminarCaracteristica(String idHabilidad) {
-		boolean exito=false;
-		
-		if(caracteristicaDAO.existsById(idHabilidad)) {
-			caracteristicaDAO.deleteById(idHabilidad);
-			exito=true;
-		}
-			
-		return exito;
+	@Override
+	public boolean eliminarAdministrador(String idHabilidad) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
-    @Override
-	public boolean existeCaracteristica(String idHabilidad) {
-		return caracteristicaDAO.existsById(idHabilidad);
+	@Override
+	public boolean existeAdministrador(String idHabilidad) {
+		// TODO Auto-generated method stub
+		return false;
 	}
+
+   
 }

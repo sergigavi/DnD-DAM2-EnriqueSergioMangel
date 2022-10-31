@@ -6,21 +6,11 @@ import org.springframework.stereotype.Service;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Equipamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.EquipamientoRepository;
 
+@Service
 public class EquipamientoServicio implements IEquipamientoServicio{
     
     @Autowired EquipamientoRepository equipamientoDAO;
 
-    @Override
-	public boolean insertarEquipamiento(Administrador a) {
-		boolean exito=false;
-		
-		if(!equipamientoDAO.existsById(a.getIdEquipo())) {
-			equipamientoDAO.save(a);
-			exito=true;
-		}
-		
-		return exito;
-	}
 
     @Override
 	public boolean eliminarEquipamiento(String idEquipo) {
@@ -37,5 +27,11 @@ public class EquipamientoServicio implements IEquipamientoServicio{
     @Override
 	public boolean existeEquipamiento(String idEquipo) {
 		return equipamientoDAO.existsById(idEquipo);
+	}
+
+	@Override
+	public boolean insertarEqupamiento(Equipamiento a) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

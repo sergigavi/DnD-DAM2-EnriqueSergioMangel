@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.FichaPersonajeRepository;
 
+@Service
 public class FichaPersonajeServicio implements IFichaPersonajeServicio{
     
     @Autowired FichaPersonajeRepository fichaPersonajeDAO;

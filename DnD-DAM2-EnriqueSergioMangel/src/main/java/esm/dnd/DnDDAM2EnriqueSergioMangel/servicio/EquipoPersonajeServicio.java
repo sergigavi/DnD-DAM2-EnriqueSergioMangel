@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Equipo_Personaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.EquipoPersonajeRepository;
 
+@Service
 public class EquipoPersonajeServicio implements IEquipoPersonajeServicio{
     
     @Autowired EquipoPersonajeRepository equipoPersonajeDAO;

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Administrador;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.AdministradorRepository;
 
+@Service
 public class AdministradorServicio implements IAdministradorServicio{
     
     @Autowired AdministradorRepository administradorDAO;

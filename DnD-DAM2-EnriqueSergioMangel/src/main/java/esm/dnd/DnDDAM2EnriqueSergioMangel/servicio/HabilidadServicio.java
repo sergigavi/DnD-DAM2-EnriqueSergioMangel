@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.HabilidadRepository;
 
+@Service
 public class HabilidadServicio implements IHabilidadServicio{
     
     @Autowired HabilidadRepository habilidadDAO;
