@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
-import esm.dnd.DnDDAM2EnriqueSergioMangel.services.IHabilidadService;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IHabilidadServicio;
 
 @CrossOrigin
 @RestController
@@ -19,7 +19,7 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.services.IHabilidadService;
 public class HabilidadController {
     
     @Autowired
-    private IHabilidadService habilidadServicio;
+    private IHabilidadServicio habilidadServicio;
     
     @GetMapping("/dametodas")
     public ResponseEntity<Iterable<Habilidad>> obtenerTodasLasHabilidades()

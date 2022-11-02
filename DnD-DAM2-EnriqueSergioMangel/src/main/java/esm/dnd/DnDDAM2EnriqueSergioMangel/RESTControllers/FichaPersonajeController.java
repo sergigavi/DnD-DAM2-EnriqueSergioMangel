@@ -16,8 +16,8 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Clase;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Raza;
-import esm.dnd.DnDDAM2EnriqueSergioMangel.services.IFichaPersonajeService;
-import esm.dnd.DnDDAM2EnriqueSergioMangel.services.IHabilidadService;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IFichaPersonajeServicio;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IHabilidadServicio;
 
 @CrossOrigin    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
 @RestController
@@ -25,9 +25,9 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.services.IHabilidadService;
 public class FichaPersonajeController {
     
     //Le inyecto otros servicios ya que aqui cargo los datos de todo
-    @Autowired private IHabilidadService habilidadServicio;
+    @Autowired private IHabilidadServicio habilidadServicio;
     
-    @Autowired private IFichaPersonajeService fichaPersonajeServicio;
+    @Autowired private IFichaPersonajeServicio fichaPersonajeServicio;
     
     @GetMapping("/dametodos")
     public ResponseEntity<Iterable<FichaPersonaje>> obtenerTodasLasFichasDePersonaje()
