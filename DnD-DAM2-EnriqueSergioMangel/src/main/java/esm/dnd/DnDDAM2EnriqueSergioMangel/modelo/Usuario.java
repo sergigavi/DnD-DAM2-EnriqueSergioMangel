@@ -18,7 +18,6 @@ import lombok.NonNull;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 
-//@Entity
 public class Usuario {
 	
 	@Id
