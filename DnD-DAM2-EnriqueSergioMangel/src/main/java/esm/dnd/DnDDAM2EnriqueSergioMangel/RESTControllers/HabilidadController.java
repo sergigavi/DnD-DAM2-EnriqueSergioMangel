@@ -15,7 +15,7 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IHabilidadServicio;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/dndtools/habilidades")
+@RequestMapping("/API/dndtools/habilidades")
 public class HabilidadController {
     
     @Autowired

@@ -21,7 +21,7 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IHabilidadServicio;
 
 @CrossOrigin    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
 @RestController
-@RequestMapping("/dndtools/personajes")
+@RequestMapping("/API/dndtools/personajes")
 public class FichaPersonajeController {
     
     //Le inyecto otros servicios ya que aqui cargo los datos de todo
