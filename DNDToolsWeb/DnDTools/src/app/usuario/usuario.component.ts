@@ -8,16 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class UsuarioComponent implements OnInit {
 
   private idUser:String;
-  private nombre:String;
-  private apellidos:String;
-  private contrasenia:String;
-  private nickname:String;
-  private biografia:String;
-  private email:String;
-  private fechaNac:String;
-  private urlImage:String;
-  private activo:boolean;
-  private pais:String;
+  public nombre:String;
+  public apellidos:String;
+  public contrasenia:String;
+  public nickname:String;
+  public biografia:String;
+  public email:String;
+  public fechaNac:String;
+  public urlImage:String;
+  public activo:boolean;
+  public pais:String;
 
   constructor() {
 
