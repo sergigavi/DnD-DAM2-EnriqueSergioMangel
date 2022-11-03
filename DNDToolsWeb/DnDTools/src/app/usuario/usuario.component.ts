@@ -94,5 +94,41 @@ export class UsuarioComponent implements OnInit {
     this.nombre = nombre;
   }
 
+  public setApellidos(apellidos:String){
+    this.apellidos = apellidos;
+  }
+
+  public setContrasenia(contra:String){
+    this.contrasenia = contra;
+  }
+
+  public setNickname(nickname:String){
+    this.nickname = nickname;
+  }
+
+  public setBiografia(biografia:String){
+    this.biografia = biografia;
+  }
+
+  public setEmail (email:String){
+    this.email = email;
+  }
+
+  public setFechaNac(fechaNac:String){
+    this.fechaNac = fechaNac;
+  }
+
+  public setUrlImage(urlImage:String){
+    this.urlImage = urlImage;
+  }
+
+  public activar(activo:boolean){
+    this.activo = activo;
+  }
+
+  public setPais(pais:String){
+    this.pais = pais;
+  }
+
 
 }
