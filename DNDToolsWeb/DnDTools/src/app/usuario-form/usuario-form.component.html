@@ -1,0 +1,32 @@
+<p>Insertar usuario:</p>
+
+<br><br>
+
+<form #usuarioForm="ngForm" (ngSubmit)="submitedFormUsuario()">
+
+	<input type="text" name="nombre" placeholder="nombre" [(ngModel)]="usuarioModel.setNombre">
+	<br>
+	<input type="text" name="apellidos" placeholder="apellidos" [(ngModel)]="usuarioModel.setApellidos">
+	<br>
+	<input type="password" name="contrasenia" placeholder="contrasenia" [(ngModel)]="usuarioModel.setContrasenia">
+	<br>
+  <input type="text" name="nickname" placeholder="nickname" [(ngModel)]="usuarioModel.setNickname">
+	<br>
+  <input type="text" name="biografia" placeholder="biografia" [(ngModel)]="usuarioModel.setBiografia">
+	<br>
+  <input type="text" name="e-mail" placeholder="E-MAIL" [(ngModel)]="usuarioModel.setEmail">
+	<br>
+  <input type="text" name="fechaNac" placeholder="fecha de nacimiento" [(ngModel)]="usuarioModel.setFechaNac">
+	<br>
+  <input type="text" name="urlImage" placeholder="URL de la imagen" [(ngModel)]="usuarioModel.setUrlImage">
+	<br>
+  <input type="text" name="isActivo" placeholder="activo" [(ngModel)]="usuarioModel.isActivo">
+	<br>
+  <input type="text" name="pais" placeholder="pais" [(ngModel)]="usuarioModel.setPais">
+	<br>
+	<button type="submit">Guardar</button>
+
+</form>
+
+<h2>Depurando usuario:</h2>
+{{ usuarioModel | json }}
