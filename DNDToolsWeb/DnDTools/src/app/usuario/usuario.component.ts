@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioServiceService } from "../usuario-service/usuario-service.service"; //  Importo mi servicio
 
 @Component({
   selector: 'usuario',
@@ -19,7 +20,7 @@ export class UsuarioComponent implements OnInit {
   public activo:boolean;
   public pais:String;
 
-  constructor() {
+  constructor(private usuarioService: UsuarioServiceService) {
 
     this.idUser = "";
     this.nombre = "";

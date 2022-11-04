@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioComponent } from '../usuario/usuario.component';
+import { UsuarioServiceService } from "../usuario-service/usuario-service.service"; //  Importo mi servicio
 
 @Component({
   selector: 'usuario-form',
@@ -8,7 +9,7 @@ import { UsuarioComponent } from '../usuario/usuario.component';
 })
 export class UsuarioFormComponent implements OnInit {
 
-  usuarioModel = new UsuarioComponent();
+  usuarioModel = new UsuarioComponent(new UsuarioServiceService);
 
   constructor() {
 
@@ -19,7 +20,7 @@ export class UsuarioFormComponent implements OnInit {
 
   submitedFormUsuario()
   {
-    
+
     console.log("Se ha insertado el usuario: ", this.usuarioModel)
   }
 
