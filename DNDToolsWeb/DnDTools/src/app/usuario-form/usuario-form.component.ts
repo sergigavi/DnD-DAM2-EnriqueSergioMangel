@@ -19,6 +19,7 @@ export class UsuarioFormComponent implements OnInit {
 
   submitedFormUsuario()
   {
+    
     console.log("Se ha insertado el usuario: ", this.usuarioModel)
   }
 

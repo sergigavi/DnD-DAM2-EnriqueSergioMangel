@@ -3,6 +3,10 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 //https://spring.io/guides/gs/securing-web/
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -74,5 +78,54 @@ public class UsuarioController {
     	
     	return res;
     }
+    
+    @PutMapping("/insertarPorURL/nombre/apellidos/nickname/email")
+    public ResponseEntity<String> insertarPorURL(@PathParam(value = "nombre") String nombre, @PathParam(value = "apellidos") String apellidos, @PathParam(value = "nickname") String nickname, @PathParam(value = "email") String email)
+    {
+    	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
+    	
+    	Usuario u = Usuario.builder().build();
+    	
+    	try {
+    		
+			u = Usuario.builder()
+					.idUser(generarIdUser())	//	Genero un id nuevo
+					.nombre(nombre)
+					.apellidos(apellidos)
+					//.contrasenia(contrasenia)
+					.nickname(nickname)
+					//.biografia(biografia)
+					.email(email)
+					//.fechaNacimiento(LocalDate.parse(fechaNac))
+					//.urlImage(urlImage)
+					//.activo(activo)
+					//.pais(pais)
+					.build();
+			
+			usuarioServicio.insertarUsuario(u);
+			
+			res = new ResponseEntity<>("Usuario insertado correctamente", HttpStatus.OK);
+    		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	return res;
+    }
+
+
+	private String generarIdUser() {
+
+		Set<Usuario> usuarios = (Set<Usuario>) usuarioServicio.findAllUsuarios();
+		
+		String lastId = usuarios.stream()
+		.sorted((u1, u2) -> u1.getIdUser().compareTo(u2.getIdUser()))
+		.map(u -> u.getIdUser())
+		.findFirst().get();
+		
+		return lastId;		
+		
+	}
     
 }
