@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioComponent } from '../usuario/usuario.component';
 import { UsuarioServiceService } from "../usuario-service/usuario-service.service"; //  Importo mi servicio
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'usuario-form',
@@ -9,10 +10,10 @@ import { UsuarioServiceService } from "../usuario-service/usuario-service.servic
 })
 export class UsuarioFormComponent implements OnInit {
 
-  usuarioModel = new UsuarioComponent(new UsuarioServiceService);
+  public usuarioModel: UsuarioComponent;
 
   constructor() {
-
+    this.usuarioModel = new UsuarioComponent(new UsuarioServiceService(HttpClient));//TODO;
    }
 
   ngOnInit(): void {
