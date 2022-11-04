@@ -3,16 +3,14 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 //https://spring.io/guides/gs/securing-web/
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
-
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,8 +77,8 @@ public class UsuarioController {
     	return res;
     }
     
-    @PutMapping("/insertarPorURL/nombre/apellidos/nickname/email")
-    public ResponseEntity<String> insertarPorURL(@PathParam(value = "nombre") String nombre, @PathParam(value = "apellidos") String apellidos, @PathParam(value = "nickname") String nickname, @PathParam(value = "email") String email)
+    @PutMapping("/insertarPorURL/{nombre}/{apellidos}/{nickname}/{email}")
+    public ResponseEntity<String> insertarPorURL(@PathVariable String nombre, @PathVariable String apellidos, @PathVariable String nickname, @PathVariable String email)
     {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	
