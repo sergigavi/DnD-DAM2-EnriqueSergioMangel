@@ -68,9 +68,9 @@ public class UsuarioController {
     {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	
-    	Usuario u = Usuario.builder().build();
-    	
     	try {
+
+			Usuario u ;
     		
     		if (!usuarioServicio.existeUsuario(idUser))
     		{
@@ -105,10 +105,10 @@ public class UsuarioController {
     {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	
-    	Usuario u = Usuario.builder().build();
-    	
     	try {
     		
+			Usuario u;
+
 			u = Usuario.builder()
 					.idUser(generarIdUser())	//	Genero un id nuevo
 					.nombre(nombre)
