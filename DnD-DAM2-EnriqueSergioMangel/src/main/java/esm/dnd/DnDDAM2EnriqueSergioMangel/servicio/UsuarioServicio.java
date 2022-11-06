@@ -1,5 +1,7 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,4 +69,30 @@ public class UsuarioServicio implements IUsuarioServicio{
         
         return exito;
     }
+
+	@Override
+	public boolean addAllUsuarios(Iterable<Usuario> usuarios) {
+		boolean exito = false;
+        
+        try {
+            
+            usuarioDAO.saveAll(usuarios);
+            exito = true;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return exito;
+	}
+
+	@Override
+	public Iterable<Usuario> findAllUsuarios() {
+		return usuarioDAO.findAll();
+	}
+
+	@Override
+	public Optional<Usuario> findUsuarioById(String idUsuario) {
+		return usuarioDAO.findById(idUsuario);
+	}
 }
