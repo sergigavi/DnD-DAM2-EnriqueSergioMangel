@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +41,29 @@ public class UsuarioController {
         return res;
     }
 
+	@PostMapping("/insertarUsuario")
+    public ResponseEntity<String> insertarUsuario(@RequestBody Usuario usuario)
+    {
+    	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
+    	    	
+    	try {
+			if (usuarioServicio.existeUsuario(usuario.getIdUser()))
+			{
+				usuario.setIdUser(generarIdUser());
+			}else {
+				usuarioServicio.insertarUsuario(usuario);
+				res = new ResponseEntity<>("Usuario insertado correctamente", HttpStatus.OK);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	return res;
+    }
+
     
-    @PutMapping("/insertarPorParametro")
+    @PostMapping("/insertarPorParametro")
     public ResponseEntity<String> insertarPorParametros(@RequestParam String idUser, @RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
     {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
@@ -122,7 +145,8 @@ public class UsuarioController {
 		.map(u -> u.getIdUser())
 		.findFirst().get();
 		
-		return lastId;		
+		//cojo todo el id ultimo menos el ultimo digito y se lo sumo al ultimo digito mas uno pasado a string
+		return lastId.substring(0,lastId.length()-1) + Integer.toString(Integer.parseInt(lastId.substring(lastId.length()-1)) + 1);		
 		
 	}
     
