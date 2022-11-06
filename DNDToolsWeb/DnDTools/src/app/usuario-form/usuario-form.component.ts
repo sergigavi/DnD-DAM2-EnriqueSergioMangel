@@ -9,8 +9,17 @@ import { Usuario } from '../modelo/usuario/usuario';
 })
 export class UsuarioFormComponent implements OnInit {
 
-  constructor(private usuario: Usuario) {   //esto es la inyeccion propia
+  nombre :String = "";
+  apellidos :String = "";
+  contrasenia :String = "";
+  nickname :String = "";
+  biografia :String = "";
+  email :String = "";
+  fechaNac :String = "";
+  urlImage :String = "";
+  pais :String = "";
 
+  constructor(private usuario: Usuario, private usuarioService: UsuarioServiceService) {   //esto es la inyeccion propia
    }
 
   ngOnInit(): void {
@@ -18,8 +27,20 @@ export class UsuarioFormComponent implements OnInit {
 
   submitedFormUsuario()
   {
+    this.usuario.nombre = this.nombre
+    this.usuario.apellidos = this.nombre
+    this.usuario.contrasenia = this.contrasenia
+    this.usuario.nickname = this.nickname
+    this.usuario.biografia = this.biografia
+    this.usuario.email = this.email
+    this.usuario.fechaNac= this.fechaNac
+    this.usuario.urlImage= this.urlImage
+    this.usuario.pais = this.pais
+
+    this.usuarioService.annadirUsuario(this.usuario)
 
     console.log("Se ha insertado el usuario: ", this.usuario)
+
   }
 
 }

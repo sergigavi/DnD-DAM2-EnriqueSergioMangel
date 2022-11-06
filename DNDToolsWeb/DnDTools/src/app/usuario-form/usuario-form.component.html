@@ -4,28 +4,25 @@
 
 <form #usuarioForm="ngForm" (ngSubmit)="submitedFormUsuario()">
   Nombre:
-	<input type="text" name="nombre" placeholder="nombre" [(ngModel)]="usuarioModel.nombre">
+	<input type="text" name="nombre" placeholder="nombre" [(ngModel)]="nombre">
 	Apellidos:
-	<input type="text" name="apellidos" placeholder="apellidos" [(ngModel)]="usuarioModel.apellidos">
+	<input type="text" name="apellidos" placeholder="apellidos" [(ngModel)]="apellidos">
 	Contraseña:
-	<input type="password" name="contrasenia" placeholder="contrasenia" [(ngModel)]="usuarioModel.contrasenia">
+	<input type="password" name="contrasenia" placeholder="contrasenia" [(ngModel)]="contrasenia">
 	<br>Nickname:
-  <input type="text" name="nickname" placeholder="nickname" [(ngModel)]="usuarioModel.nickname">
+  <input type="text" name="nickname" placeholder="nickname" [(ngModel)]="nickname">
 	Biografia:
-  <input type="text" name="biografia" placeholder="biografia" [(ngModel)]="usuarioModel.biografia">
+  <input type="text" name="biografia" placeholder="biografia" [(ngModel)]="biografia">
 	E-mail:
-  <input type="text" name="e-mail" placeholder="E-MAIL" [(ngModel)]="usuarioModel.email">
+  <input type="text" name="e-mail" placeholder="E-MAIL" [(ngModel)]="email">
 	<br>Fecha de nacimiento:
-  <input type="text" name="fechaNac" placeholder="fecha de nacimiento" [(ngModel)]="usuarioModel.fechaNac">
+  <input type="text" name="fechaNac" placeholder="fecha de nacimiento" [(ngModel)]="fechaNac">
 	URL de la imagen de usuario:
-  <input type="text" name="urlImage" placeholder="URL de la imagen" [(ngModel)]="usuarioModel.urlImage">
+  <input type="text" name="urlImage" placeholder="URL de la imagen" [(ngModel)]="urlImage">
 	Pais:
-  <input type="text" name="pais" placeholder="pais" [(ngModel)]="usuarioModel.pais">
+  <input type="text" name="pais" placeholder="pais" [(ngModel)]="pais">
 
   <br>
 	<button type="submit">Guardar</button>
 
 </form>
-
-<h2>Depurando usuario:</h2>
-{{ usuarioModel | json }}
