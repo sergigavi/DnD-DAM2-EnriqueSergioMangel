@@ -22,7 +22,7 @@ import { Usuario } from './modelo/usuario/usuario';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [UsuarioServiceService],
+  //providers: [UsuarioServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
