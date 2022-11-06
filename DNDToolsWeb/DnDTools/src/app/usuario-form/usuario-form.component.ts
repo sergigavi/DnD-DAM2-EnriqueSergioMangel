@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioServiceService } from "../services/usuario-service/usuario-service.service"; //  Importo mi servicio
 import { HttpClient } from '@angular/common/http';
-import { Usuario } from '../modelo/usuario/usuario.component';
+import { Usuario } from '../modelo/usuario/usuario';
 
 @Component({
   selector: 'usuario-form',

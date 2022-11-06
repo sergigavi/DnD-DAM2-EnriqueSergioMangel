@@ -15,7 +15,7 @@ export class Usuario {
   public activo:boolean;
   public pais:String;
 
-  constructor(private usuarioService: UsuarioServiceService) {
+  constructor() { //  private usuarioService: UsuarioServiceService
 
     this.idUser = "";
     this.nombre = "";
