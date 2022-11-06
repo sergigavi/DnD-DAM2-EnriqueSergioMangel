@@ -25,7 +25,14 @@ public class FichaPersonaje {
 	private String idUsuario;
 	
 	private String nombre;
+
+	//	Estos 3 se guardan embebidos ya que mongo lo permite
+	private Iterable<Equipo_Personaje> equipo;
+
+	private Iterable<Caracteristica> caracteristicas;
 	
+	private Iterable<Habilidad> habilidades;
+
 	private Clase clase;
 	
 	private Raza raza;

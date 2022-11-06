@@ -105,6 +105,8 @@ public class FichaPersonajeController {
 	}
 
 	private void cargarFichasPersonaje(Set<FichaPersonaje> fichasPersonaje) {
+
+
         
         fichasPersonaje.add(FichaPersonaje.builder()
                 .idFichaPersonaje("C_fp_1")
