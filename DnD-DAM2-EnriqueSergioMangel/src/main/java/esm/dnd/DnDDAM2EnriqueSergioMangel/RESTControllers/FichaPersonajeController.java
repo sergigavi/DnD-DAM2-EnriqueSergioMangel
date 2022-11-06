@@ -19,7 +19,6 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Raza;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IFichaPersonajeServicio;
-import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IHabilidadServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
 
 @CrossOrigin    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
@@ -27,9 +26,7 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
 @RequestMapping("/API/dndtools/personajes")
 public class FichaPersonajeController {
     
-    //Le inyecto otros servicios ya que aqui cargo los datos de todo
-    @Autowired private IHabilidadServicio habilidadServicio;
-    
+    //Le inyecto otros servicios ya que aqui cargo los datos de todo    
     @Autowired private IFichaPersonajeServicio fichaPersonajeServicio;
     
     @Autowired private IUsuarioServicio usuarioServicio;
@@ -67,16 +64,12 @@ public class FichaPersonajeController {
     private void cargarDatos() {
         
         Set<FichaPersonaje> fichasPersonaje = new HashSet<>();
-
-        Set<Habilidad> habilidades = new HashSet<>();
         
         Set<Usuario> usuarios = new HashSet<>();
         
         //
         
         cargarFichasPersonaje(fichasPersonaje);
-        
-        cargarHabilidades(habilidades);
         
         cargarUsuarios(usuarios);
         
@@ -112,6 +105,14 @@ public class FichaPersonajeController {
                 .idFichaPersonaje("C_fp_1")
                 .idUsuario("C_us_1")
                 .nombre("Ganker el Escapante")
+                .habilidades(Set.of(
+                    Habilidad.builder()
+                .idHabilidad("C_h_1")
+                .idFicha("C_fp_1")
+                .nombre("Mata Demonys")
+                .competencia("matar demonios")
+                .build()
+                ))
                 .clase(Clase.DRUIDA)
                 .raza(Raza.TIFLIN)
                 .alineamiento(Alineamiento.CAOTICO_NEUTRAL)
@@ -138,18 +139,5 @@ public class FichaPersonajeController {
         
     }
 
-    private void cargarHabilidades(Set<Habilidad> habilidades) {
-        
-        
-        habilidades.add(Habilidad.builder()
-                .idHabilidad("C_h_1")
-                .idFicha("C_fp_1")
-                .nombre("Mata Demonys")
-                .competencia("matar demonios")
-                .build());
-        
-        habilidadServicio.addAllHabilidades(habilidades);
-        
-    }
 
 }
