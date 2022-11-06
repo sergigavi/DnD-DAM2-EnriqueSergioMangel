@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioServiceService } from "../services/usuario-service/usuario-service.service"; //  Importo mi servicio
-import { Usuario } from '../modelo/usuario/usuario';
+import { UsuarioServiceService } from "../../services/usuario-service/usuario-service.service"; //  Importo mi servicio
+import { Usuario } from '../../modelo/usuario/usuario';
 
 @Component({
   selector: 'usuario-form',
