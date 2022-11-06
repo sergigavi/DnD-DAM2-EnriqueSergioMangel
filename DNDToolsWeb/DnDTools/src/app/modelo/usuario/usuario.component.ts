@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { UsuarioServiceService } from "../usuario-service/usuario-service.service"; //  Importo mi servicio
+//import { Component, OnInit } from '@angular/core';
+import { UsuarioServiceService } from "../../services/usuario-service/usuario-service.service"; //  Importo mi servicio
 
-@Component({
-  selector: 'usuario',
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css']
-})
-export class UsuarioComponent implements OnInit {
+export class Usuario {
 
   private idUser:String;
   public nombre:String;
@@ -34,10 +29,6 @@ export class UsuarioComponent implements OnInit {
     this.activo = false;
     this.pais = "";
   }
-
-  ngOnInit(): void {
-  }
-
 
   //  Getters
 

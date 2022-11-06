@@ -8,14 +8,13 @@ import { HttpClientModule } from "@angular/common/http";  //  Para las peticione
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UsuarioComponent } from './usuario/usuario.component';
 import { UsuarioFormComponent } from './usuario-form/usuario-form.component';
-import { UsuarioServiceService } from './usuario-service/usuario-service.service';
+import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
+import { Usuario } from './modelo/usuario/usuario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsuarioComponent,
     UsuarioFormComponent
   ],
   imports: [

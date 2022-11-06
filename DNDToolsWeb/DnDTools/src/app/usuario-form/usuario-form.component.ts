@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioComponent } from '../usuario/usuario.component';
-import { UsuarioServiceService } from "../usuario-service/usuario-service.service"; //  Importo mi servicio
+import { UsuarioServiceService } from "../services/usuario-service/usuario-service.service"; //  Importo mi servicio
 import { HttpClient } from '@angular/common/http';
+import { Usuario } from '../modelo/usuario/usuario.component';
 
 @Component({
   selector: 'usuario-form',
@@ -10,10 +10,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UsuarioFormComponent implements OnInit {
 
-  public usuarioModel: UsuarioComponent;
+  constructor(private usuario: Usuario) {   //esto es la inyeccion propia
 
-  constructor() {
-    this.usuarioModel = new UsuarioComponent(new UsuarioServiceService(HttpClient));//TODO;fix
    }
 
   ngOnInit(): void {
@@ -22,7 +20,7 @@ export class UsuarioFormComponent implements OnInit {
   submitedFormUsuario()
   {
 
-    console.log("Se ha insertado el usuario: ", this.usuarioModel)
+    console.log("Se ha insertado el usuario: ", this.usuario)
   }
 
 }
