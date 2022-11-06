@@ -1,4 +1,4 @@
-package esm.dnd.DnDDAM2EnriqueSergioMangel.services;
+package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.Optional;
 
@@ -9,7 +9,7 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.FichaPersonajeRepository;
 
 @Service
-public class FichaPersonajeServiceImpl implements IFichaPersonajeService {
+public class FichaPersonajeServicio implements IFichaPersonajeServicio {
     
     @Autowired private FichaPersonajeRepository fichaPersonajeDAO;
 

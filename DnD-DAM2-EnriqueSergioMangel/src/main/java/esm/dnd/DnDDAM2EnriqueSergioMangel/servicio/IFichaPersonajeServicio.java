@@ -1,10 +1,10 @@
-package esm.dnd.DnDDAM2EnriqueSergioMangel.services;
+package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.Optional;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 
-public interface IFichaPersonajeService {
+public interface IFichaPersonajeServicio {
     
 public boolean addAllFichasPersonaje(Iterable<FichaPersonaje> fichasPersonaje);
     

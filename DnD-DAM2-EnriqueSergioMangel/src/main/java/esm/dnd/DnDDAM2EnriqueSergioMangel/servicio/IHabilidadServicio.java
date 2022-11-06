@@ -1,11 +1,11 @@
-package esm.dnd.DnDDAM2EnriqueSergioMangel.services;
+package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.Optional;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 
 
-public interface IHabilidadService {
+public interface IHabilidadServicio {
 
     public boolean addAllHabilidades(Iterable<Habilidad> habilidades);
     

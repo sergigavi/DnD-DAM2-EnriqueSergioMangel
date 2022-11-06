@@ -1,4 +1,4 @@
-package esm.dnd.DnDDAM2EnriqueSergioMangel.services;
+package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.Optional;
 
@@ -9,7 +9,7 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.HabilidadRepository;
 
 @Service
-public class HabilidadServiceImpl implements IHabilidadService {
+public class HabilidadServicio implements IHabilidadServicio {
 
     @Autowired private HabilidadRepository habilidadDAO;
 
