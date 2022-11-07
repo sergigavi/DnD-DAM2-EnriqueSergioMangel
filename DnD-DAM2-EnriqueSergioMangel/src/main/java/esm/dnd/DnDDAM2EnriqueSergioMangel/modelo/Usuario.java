@@ -1,6 +1,7 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 //import javax.persistence.Entity;
 import org.springframework.data.annotation.Id;
@@ -23,7 +24,7 @@ public class Usuario {
 	@Id
 	@NonNull
 	@EqualsAndHashCode.Include
-	private String idUser;
+	private UUID idUser;
 	
 	private String nombre;
 	

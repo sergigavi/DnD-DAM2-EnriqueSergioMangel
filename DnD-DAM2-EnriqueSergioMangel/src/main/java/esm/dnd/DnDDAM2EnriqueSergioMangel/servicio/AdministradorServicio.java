@@ -1,5 +1,7 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class AdministradorServicio implements IAdministradorServicio{
 	}
 
     @Override
-	public boolean eliminarAdministrador(String idAdmin) {
+	public boolean eliminarAdministrador(UUID idAdmin) {
 		boolean exito=false;
 		
 		if(administradorDAO.existsById(idAdmin)) {
@@ -36,7 +38,7 @@ public class AdministradorServicio implements IAdministradorServicio{
 	}
 
     @Override
-	public boolean existeAdministrador(String idAdmin) {
+	public boolean existeAdministrador(UUID idAdmin) {
 		return administradorDAO.existsById(idAdmin);
 	}
 }

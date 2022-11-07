@@ -22,7 +22,6 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Raza;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IFichaPersonajeServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
-import lombok.Builder;
 
 @CrossOrigin    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
 @RestController
@@ -72,7 +71,7 @@ public class FichaPersonajeController {
         Set<Usuario> usuarios = new HashSet<>();
 
         Usuario u1= Usuario.builder()
-                .idUser("C_U_001")
+                .idUser(UUID.randomUUID())
                 .nombre("Sergio")
                 .apellidos("GV")
                 .contrasenia("123abc")
@@ -93,7 +92,6 @@ public class FichaPersonajeController {
                 .nombre("Ganker el Escapante")
                 .habilidades(List.of(
                     Habilidad.builder()
-                .idHabilidad("C_h_1")
                 .nombre("Mata Demonys")
                 .competencia(true)
                 .build()

@@ -4,6 +4,7 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +42,7 @@ public class UsuarioController {
 
     
     @PutMapping("/insertarPorParametro")
-    public ResponseEntity<String> insertarPorParametros(@RequestParam String idUser, @RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
+    public ResponseEntity<String> insertarPorParametros(@RequestParam UUID idUser, @RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
     {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	
@@ -87,7 +88,7 @@ public class UsuarioController {
     	try {
     		
 			u = Usuario.builder()
-					.idUser(generarIdUser())	//	Genero un id nuevo
+					.idUser(UUID.randomUUID())	//	Genero un id nuevo
 					.nombre(nombre)
 					.apellidos(apellidos)
 					//.contrasenia(contrasenia)
@@ -111,19 +112,4 @@ public class UsuarioController {
     	
     	return res;
     }
-
-
-	private String generarIdUser() {
-
-		Set<Usuario> usuarios = (Set<Usuario>) usuarioServicio.findAllUsuarios();
-		
-		String lastId = usuarios.stream()
-		.sorted((u1, u2) -> u1.getIdUser().compareTo(u2.getIdUser()))
-		.map(u -> u.getIdUser())
-		.findFirst().get();
-		
-		return lastId;		
-		
-	}
-    
 }
