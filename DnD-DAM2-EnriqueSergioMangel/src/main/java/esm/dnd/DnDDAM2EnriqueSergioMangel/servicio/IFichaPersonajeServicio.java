@@ -1,6 +1,7 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 
@@ -12,11 +13,11 @@ public boolean addAllFichasPersonaje(Iterable<FichaPersonaje> fichasPersonaje);
 
     public Iterable<FichaPersonaje> findAllFichasPersonaje();
     
-    public Optional<FichaPersonaje> findFichaPersonajeById(String idFichaPersonaje);
+    public Optional<FichaPersonaje> findFichaPersonajeById(UUID idFichaPersonaje);
     
-    public boolean existsByIdFichaPersonaje(String id);
+    public boolean existsByIdFichaPersonaje(UUID id);
     
-    public FichaPersonaje deleteFichaPersonajeById(String id);
+    public FichaPersonaje deleteFichaPersonajeById(UUID id);
 
     boolean actualizarFichaPersonaje(FichaPersonaje fichaPersonaje);
 

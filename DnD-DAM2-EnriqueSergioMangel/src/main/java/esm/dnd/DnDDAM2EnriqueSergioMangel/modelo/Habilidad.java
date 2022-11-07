@@ -21,11 +21,30 @@ public class Habilidad {
 	@NonNull
 	@EqualsAndHashCode.Include
 	private String idHabilidad;
-	
-	private String idFicha;
-	
+		
 	private String nombre;
 	
-	private String competencia;
+	private Boolean competencia;
+
+	//campo autoevaluado
+	private int mod;
+
+	//Las habilidades dependen de la caracteristica con la que escalen (Fue,Des...) 
+
+	//Usamos la funcion calcMod pasandole el bonifCompetencia del personaje, el mod de la habilidad y si es competente o no
+	public Habilidad(String nombre,Boolean competencia,Integer modCaracteristica,Integer bonif){
+		this.nombre=nombre;
+		this.competencia=competencia;
+		this.mod=calcMod(competencia,modCaracteristica,bonif);
+	}
+
+	public static Integer calcMod(Boolean competencia,Integer modCaracteristica,Integer bonif){
+		
+		if(competencia){
+			return modCaracteristica+bonif;
+		}else{
+			return modCaracteristica;
+		}
+	}
 
 }

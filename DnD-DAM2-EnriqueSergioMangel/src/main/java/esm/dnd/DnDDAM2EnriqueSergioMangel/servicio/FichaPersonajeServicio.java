@@ -1,6 +1,7 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,17 +55,17 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
     }
 
     @Override
-    public Optional<FichaPersonaje> findFichaPersonajeById(String idFichaPersonaje) {
+    public Optional<FichaPersonaje> findFichaPersonajeById(UUID idFichaPersonaje) {
         return fichaPersonajeDAO.findById(idFichaPersonaje);
     }
 
     @Override
-    public boolean existsByIdFichaPersonaje(String id) {
+    public boolean existsByIdFichaPersonaje(UUID id) {
         return fichaPersonajeDAO.existsById(id);
     }
 
     @Override
-    public FichaPersonaje deleteFichaPersonajeById(String id) {
+    public FichaPersonaje deleteFichaPersonajeById(UUID id) {
 
         FichaPersonaje f = FichaPersonaje.builder().idFichaPersonaje(id).build();
         
