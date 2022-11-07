@@ -94,7 +94,7 @@ public class FichaPersonaje {
 		this.nombre="";
 		this.nivel=1;
 		this.bonifCompetencia=calcBonifCompetencia(this.nivel);
-		this.usuario=new Usuario();
+		this.usuario=null;
 		this.caracteristicas=setCaracteristicasPorDefecto();
 		this.habilidades=setHabilidadesPorDefecto(this.caracteristicas,this.bonifCompetencia);
 		this.clase=Clase.SELECCIONAR;
@@ -153,7 +153,12 @@ public class FichaPersonaje {
 		}
 	}
 
-	public static List<Habilidad> setHabilidadesPorDefecto(Iterable<Caracteristica> car,Integer bonif){
+	public static void setHabilidades(String nombre,Boolean integer,Integer modCar,Integer bonif){
+
+		
+	}
+
+	public static List<Habilidad> setHabilidadesPorDefecto(List<Caracteristica> car,Integer bonif){
 		final int _numHabilidades = 18;
 		List<Habilidad> hab=new ArrayList<Habilidad>();
 		
@@ -238,6 +243,8 @@ public class FichaPersonaje {
 		}
 		return hab;
 	}
+
+	
 
 	public static List<Caracteristica> setCaracteristicasPorDefecto(){
 		final int _numCaracteristicas = 6;

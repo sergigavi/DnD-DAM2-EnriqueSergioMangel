@@ -1,5 +1,6 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
     @Autowired private FichaPersonajeRepository fichaPersonajeDAO;
 
     @Override
-    public boolean addAllFichasPersonaje(Iterable<FichaPersonaje> fichasPersonaje) {
+    public boolean addAllFichasPersonaje(List<FichaPersonaje> fichasPersonaje) {
         
         boolean exito = false;
         
@@ -32,7 +33,7 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
     }
 
     @Override
-    public boolean annadiFichaPersonaje(FichaPersonaje fichaPersonaje) {
+    public boolean addFichaPersonaje(FichaPersonaje fichaPersonaje) {
         
         boolean exito = false;
         
@@ -50,7 +51,7 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
     }
 
     @Override
-    public Iterable<FichaPersonaje> findAllFichasPersonaje() {
+    public List<FichaPersonaje> findAllFichasPersonaje() {
         return fichaPersonajeDAO.findAll();
     }
 

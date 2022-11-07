@@ -1,9 +1,8 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Alineamiento;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Caracteristica;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Clase;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
@@ -35,15 +37,90 @@ public class FichaPersonajeController {
 
     
     @GetMapping("/getAll")
-    public ResponseEntity<Iterable<FichaPersonaje>> obtenerTodasLasFichasDePersonaje()
+    public ResponseEntity<List<FichaPersonaje>> obtenerTodasLasFichasDePersonaje()
     {
-        ResponseEntity<Iterable<FichaPersonaje>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        ResponseEntity<List<FichaPersonaje>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
-        Iterable<FichaPersonaje> allFichasPersonaje = fichaPersonajeServicio.findAllFichasPersonaje();
+        List<FichaPersonaje> allFichasPersonaje = fichaPersonajeServicio.findAllFichasPersonaje();
         
-        res = new ResponseEntity<Iterable<FichaPersonaje>>(allFichasPersonaje, HttpStatus.OK);
+        res = new ResponseEntity<List<FichaPersonaje>>(allFichasPersonaje, HttpStatus.OK);
         
         return res;
+    }
+
+    @PostMapping("/addFicha")
+    public ResponseEntity<String> addFichaPersonaje(@RequestBody FichaPersonaje ficha){
+
+        ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        FichaPersonaje f=new FichaPersonaje();
+
+        if(fichaPersonajeServicio.existsByIdFichaPersonaje(ficha.getIdFichaPersonaje())){
+            return res;
+        }
+
+        f.setNivel(ficha.getNivel());
+
+        //bonif comp
+        f.setBonifCompetenciaPorNivel(ficha.getNivel());
+
+        //caracteristicas
+        List<Caracteristica> cars=new ArrayList<>();
+        ficha.getCaracteristicas().stream().forEach((c)->{
+            Caracteristica car = new Caracteristica(c.getNombre(),c.getValorTotal());
+            cars.add(car);
+        });
+        f.setCaracteristicas(cars);
+
+        /* 
+        List<Habilidad> comp=new ArrayList<>();
+        ficha.getHabilidades().stream().forEach((com)->{
+            comp.add(com.getCompetencia());
+        });
+        f.getHabilidades().stream().forEach((h)->{
+            
+        });
+        */
+
+        f.setAlineamiento(ficha.getAlineamiento());
+        f.setRaza(ficha.getRaza());
+        f.setClase(ficha.getClase());
+        f.setTransfondo(ficha.getTransfondo());
+        f.setCa(ficha.getCa());
+        f.setVelocidad(ficha.getVelocidad());
+        f.setPuntosVidaMax(ficha.getPuntosVidaMax());
+        //la ficha es nueva asi que empieza con toda la vida
+        f.setPuntosVidaAct(ficha.getPuntosVidaMax());
+        f.setRasgosPersonalidad(ficha.getRasgosPersonalidad());
+        f.setIdeales(ficha.getIdeales());
+        f.setVinculos(ficha.getVinculos());
+        f.setDefectos(ficha.getDefectos());
+        f.setRasgosAtt(ficha.getRasgosAtt());
+        f.setOtrasComp(ficha.getOtrasComp());
+        f.setApariencia(ficha.getApariencia());
+        f.setHistoriaPersonal(ficha.getHistoriaPersonal());
+        f.setRasgos(ficha.getRasgos());
+        f.setNotasAdd(ficha.getNotasAdd());
+
+        if(fichaPersonajeServicio.addFichaPersonaje(f)){
+        return new ResponseEntity<String>("Exito al cargar la ficha",HttpStatus.OK);
+        }else{
+            return res;
+        }
+
+    }
+
+    @PostMapping("/addFichaVacia")
+    public ResponseEntity<String> addFichaPersonajeVacia(){
+
+        ResponseEntity<String> res = new ResponseEntity<String>("Fallo al cargar la ficha",HttpStatus.BAD_REQUEST);
+
+        FichaPersonaje f=new FichaPersonaje();
+
+        if(fichaPersonajeServicio.addFichaPersonaje(f)){
+            return new ResponseEntity<String>("Ficha cargada",HttpStatus.OK);
+        }else{
+            return res;
+        }
     }
     
     @GetMapping("/cargarDatos")
@@ -66,9 +143,9 @@ public class FichaPersonajeController {
 
     private void cargarDatos() {
         
-        Set<FichaPersonaje> fichasPersonaje = new HashSet<>();
+        List<FichaPersonaje> fichasPersonaje = new ArrayList<>();
         
-        Set<Usuario> usuarios = new HashSet<>();
+        List<Usuario> usuarios = new ArrayList<>();
 
         Usuario u1= Usuario.builder()
                 .idUser(UUID.randomUUID())
@@ -125,11 +202,11 @@ public class FichaPersonajeController {
         
     }
 
-    private void cargarUsuarios(Set<Usuario> usuarios) {
+    private void cargarUsuarios(List<Usuario> usuarios) {
     	usuarioServicio.addAllUsuarios(usuarios);
 	}
 
-	private void cargarFichasPersonaje(Set<FichaPersonaje> fichasPersonaje) {
+	private void cargarFichasPersonaje(List<FichaPersonaje> fichasPersonaje) {
         fichaPersonajeServicio.addAllFichasPersonaje(fichasPersonaje);
     }
 }

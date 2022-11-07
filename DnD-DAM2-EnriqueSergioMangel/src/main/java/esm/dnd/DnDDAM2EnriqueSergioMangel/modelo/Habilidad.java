@@ -39,4 +39,7 @@ public class Habilidad {
 		}
 	}
 
+	public void setMod(Boolean competencia,Integer modCaracteristica,Integer bonif){
+		this.mod=calcMod(competencia, modCaracteristica, bonif);
+	}
 }

@@ -80,11 +80,34 @@ public class Caracteristica {
 		
 		int resto=valor%10;
 		int mod=0;
+
+		if(resto<10){
+			if(resto%2==0){
+				mod=resto/2;
+			}else{
+				mod=(resto-1)/2;
+			}
+			switch (mod) {
+				case 4:
+					return -1;
+				case 3:
+					return -2;
+				case 2:
+					return -3;
+				case 1:
+					return -4;
+				case 0:
+					return -5;
+				default:
+					return 0;
+			}
+		}
+
 		if(resto%2==0){
 			mod=resto/2;
 			return mod;
 		}else{
-			mod=(resto-1);
+			mod=resto-1;
 			return mod/2;
 		}
 	}
