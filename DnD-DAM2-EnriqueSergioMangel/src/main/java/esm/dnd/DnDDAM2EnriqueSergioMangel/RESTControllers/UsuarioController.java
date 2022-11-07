@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,6 +63,23 @@ public class UsuarioController {
     	return res;
     }
 
+	@DeleteMapping("/deleteById")
+	public ResponseEntity<Usuario> deleteById(@RequestParam String id)
+	{
+		Usuario u;
+		
+		ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		
+		if(usuarioServicio.existeUsuario(id))
+		{
+			u = usuarioServicio.findUsuarioById(id).get();
+			usuarioServicio.eliminarUsuario(id);
+			res = new ResponseEntity<Usuario>(u,HttpStatus.ACCEPTED);
+		}
+		
+		return res;
+		
+	}
     
     @PostMapping("/insertarPorParametro")
     public ResponseEntity<String> insertarPorParametros(@RequestParam String idUser, @RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
