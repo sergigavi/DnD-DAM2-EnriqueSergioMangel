@@ -48,13 +48,10 @@ public class UsuarioController {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	    	
     	try {
-			if (usuarioServicio.existeUsuario(usuario.getIdUser()))
-			{
-				usuario.setIdUser(generarIdUser());
-			}else {
-				usuarioServicio.insertarUsuario(usuario);
-				res = new ResponseEntity<>("Usuario insertado correctamente", HttpStatus.OK);
-			}
+			
+			usuarioServicio.insertarUsuario(usuario);
+			res = new ResponseEntity<>("Usuario insertado correctamente", HttpStatus.OK);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,7 +61,7 @@ public class UsuarioController {
     }
 
 	@DeleteMapping("/deleteById")
-	public ResponseEntity<Usuario> deleteById(@RequestParam String id)
+	public ResponseEntity<Usuario> deleteById(@RequestParam UUID id)
 	{
 		Usuario u;
 		
@@ -82,7 +79,7 @@ public class UsuarioController {
 	}
     
     @PostMapping("/insertarPorParametro")
-    public ResponseEntity<String> insertarPorParametros(@RequestParam String idUser, @RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
+    public ResponseEntity<String> insertarPorParametros(@RequestParam UUID idUser, @RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
     {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	
@@ -154,18 +151,5 @@ public class UsuarioController {
     }
 
 
-	private String generarIdUser() {
-
-		Set<Usuario> usuarios = (Set<Usuario>) usuarioServicio.findAllUsuarios();
-		
-		String lastId = usuarios.stream()
-		.sorted((u1, u2) -> u1.getIdUser().compareTo(u2.getIdUser()))
-		.map(u -> u.getIdUser())
-		.findFirst().get();
-		
-		//cojo todo el id ultimo menos el ultimo digito y se lo sumo al ultimo digito mas uno pasado a string
-		return lastId.substring(0,lastId.length()-1) + Integer.toString(Integer.parseInt(lastId.substring(lastId.length()-1)) + 1);		
-		
-	}
     
 }
