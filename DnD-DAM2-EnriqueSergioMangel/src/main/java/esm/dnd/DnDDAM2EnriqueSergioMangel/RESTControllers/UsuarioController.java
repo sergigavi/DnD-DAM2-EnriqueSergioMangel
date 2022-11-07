@@ -3,7 +3,7 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 //https://spring.io/guides/gs/securing-web/
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -128,7 +128,7 @@ public class UsuarioController {
 			Usuario u;
 
 			u = Usuario.builder()
-					.idUser(generarIdUser())	//	Genero un id nuevo
+					.idUser(UUID.randomUUID())	//	Genero un id nuevo
 					.nombre(nombre)
 					.apellidos(apellidos)
 					//.contrasenia(contrasenia)

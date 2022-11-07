@@ -1,6 +1,8 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
 
+import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 
 /*import javax.persistence.CascadeType;
@@ -28,7 +30,7 @@ public class Administrador {
 	@NonNull
 	@Id
 	@EqualsAndHashCode.Include
-	private String idAdmin;
+	private UUID idAdmin;
 	
 	private String nombre;
 	
