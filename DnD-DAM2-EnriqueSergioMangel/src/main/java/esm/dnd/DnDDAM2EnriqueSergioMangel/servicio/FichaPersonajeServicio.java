@@ -98,4 +98,12 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
         return exito;
     }
 
+	@Override
+	public Iterable<FichaPersonaje> deleteAllFichas() {
+
+		Iterable<FichaPersonaje> fichas = fichaPersonajeDAO.findAll();
+		fichaPersonajeDAO.deleteAll();
+		return fichas;
+	}
+
 }

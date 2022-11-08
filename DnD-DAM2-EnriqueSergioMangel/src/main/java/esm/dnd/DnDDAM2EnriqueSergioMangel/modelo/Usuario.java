@@ -45,7 +45,7 @@ public class Usuario {
 	private boolean activo;
 	
 	private String pais;
-	
+
 	
 
 }

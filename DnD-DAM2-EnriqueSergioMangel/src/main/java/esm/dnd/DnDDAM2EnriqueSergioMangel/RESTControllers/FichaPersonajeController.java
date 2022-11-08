@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Alineamiento;
@@ -122,6 +124,38 @@ public class FichaPersonajeController {
             return res;
         }
     }
+    
+    @DeleteMapping("/deleteById")
+	public ResponseEntity<FichaPersonaje> deleteFichaById(@RequestParam UUID id)
+	{
+		FichaPersonaje f;
+		
+		ResponseEntity<FichaPersonaje> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		
+		if(fichaPersonajeServicio.existsByIdFichaPersonaje(id))
+		{
+			f = fichaPersonajeServicio.findFichaPersonajeById(id).get();
+			fichaPersonajeServicio.deleteFichaPersonajeById(id);
+			res = new ResponseEntity<FichaPersonaje>(f,HttpStatus.ACCEPTED);
+		}
+		
+		return res;
+		
+	}
+    
+    @DeleteMapping("/deleteAll")
+	public ResponseEntity<Iterable<FichaPersonaje>> deleteAllFichas()
+	{
+				
+		ResponseEntity<Iterable<FichaPersonaje>> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		
+		Iterable<FichaPersonaje> fichas = fichaPersonajeServicio.deleteAllFichas();
+		
+		res = new ResponseEntity<Iterable<FichaPersonaje>>(fichas,HttpStatus.ACCEPTED);
+		
+		return res;
+		
+	}
     
     @GetMapping("/cargarDatos")
     public ResponseEntity<String> cargar_Datos() {

@@ -3,6 +3,9 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 //https://spring.io/guides/gs/securing-web/
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +22,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IFichaPersonajeServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/API/dndtools/usuarios")
+@RequestMapping("/api/dndtools/usuarios")
 public class UsuarioController {
 
 	@Autowired
     private IUsuarioServicio usuarioServicio;
+	
+	@Autowired
+    private IFichaPersonajeServicio fichaPersonajeServicio;
     
     @GetMapping("/dametodos")
     public ResponseEntity<Iterable<Usuario>> obtenerTodosLosUsuarios()
@@ -48,7 +56,7 @@ public class UsuarioController {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	    	
     	try {
-			
+			usuario.setIdUser(UUID.randomUUID());
 			usuarioServicio.insertarUsuario(usuario);
 			res = new ResponseEntity<>("Usuario insertado correctamente", HttpStatus.OK);
 			
@@ -77,36 +85,55 @@ public class UsuarioController {
 		return res;
 		
 	}
+	
+	@DeleteMapping("/clear")
+	public ResponseEntity<Iterable<Usuario>> deleteAll()
+	{
+		
+		ResponseEntity<Iterable<Usuario>> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		
+		Iterable<Usuario> users = usuarioServicio.eliminarTodos();
+		
+		//Elimino tambien los de dentro de las fichas
+		
+		List<FichaPersonaje> fichas =  (List<FichaPersonaje>) fichaPersonajeServicio.deleteAllFichas();
+		fichas.stream().forEach(f -> f.setUsuario(null));
+		
+		fichaPersonajeServicio.addAllFichasPersonaje(fichas);
+		
+		res = new ResponseEntity<Iterable<Usuario>>(users, HttpStatus.ACCEPTED);
+		
+		return res;
+		
+	}
     
     @PostMapping("/insertarPorParametro")
-    public ResponseEntity<String> insertarPorParametros(@RequestParam UUID idUser, @RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
+    public ResponseEntity<String> insertarPorParametros(@RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
     {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	
     	try {
 
 			Usuario u ;
-    		
-    		if (!usuarioServicio.existeUsuario(idUser))
-    		{
-    			u = Usuario.builder()
-    					.idUser(idUser)
-    					.nombre(nombre)
-    					.apellidos(apellidos)
-    					.contrasenia(contrasenia)
-    					.nickname(nickname)
-    					.biografia(biografia)
-    					.email(email)
-    					.fechaNacimiento(LocalDate.parse(fechaNac))
-    					.urlImage(urlImage)
-    					//.activo(activo)
-    					.pais(pais)
-    					.build();
-    			
-    			usuarioServicio.insertarUsuario(u);
-    			
-    			res = new ResponseEntity<>("Usuario insertado correctamente", HttpStatus.OK);
-    		}
+
+			u = Usuario.builder()
+					.idUser(UUID.randomUUID())
+					.nombre(nombre)
+					.apellidos(apellidos)
+					.contrasenia(contrasenia)
+					.nickname(nickname)
+					.biografia(biografia)
+					.email(email)
+					.fechaNacimiento(LocalDate.parse(fechaNac))
+					.urlImage(urlImage)
+					//.activo(activo)
+					.pais(pais)
+					.build();
+			
+			usuarioServicio.insertarUsuario(u);
+			
+			res = new ResponseEntity<>("Usuario insertado correctamente", HttpStatus.OK);
+		
 			
 		} catch (Exception e) {
 			e.printStackTrace();

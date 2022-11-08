@@ -22,4 +22,6 @@ public FichaPersonaje deleteFichaPersonajeById(UUID id);
 
 boolean actualizarFichaPersonaje(FichaPersonaje fichaPersonaje);
 
+public Iterable<FichaPersonaje> deleteAllFichas();
+
 }
