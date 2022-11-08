@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Caracteristica;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 
 public interface IFichaPersonajeServicio {
@@ -23,5 +24,7 @@ public FichaPersonaje deleteFichaPersonajeById(UUID id);
 boolean actualizarFichaPersonaje(FichaPersonaje fichaPersonaje);
 
 public Iterable<FichaPersonaje> deleteAllFichas();
+
+public List<Caracteristica> getListaCaracteristicasPorId(UUID id);
 
 }

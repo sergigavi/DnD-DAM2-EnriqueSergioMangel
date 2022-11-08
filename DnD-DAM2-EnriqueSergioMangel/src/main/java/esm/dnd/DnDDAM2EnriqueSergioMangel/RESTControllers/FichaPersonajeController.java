@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,39 @@ public class FichaPersonajeController {
         
         res = new ResponseEntity<List<FichaPersonaje>>(allFichasPersonaje, HttpStatus.OK);
         
+        return res;
+    }
+        
+    @GetMapping("/getCaracteristicasById/{id}")
+    public ResponseEntity<List<Caracteristica>> obtenerTodasLasFichasDePersonaje(@PathVariable UUID id)
+    {
+        ResponseEntity<List<Caracteristica>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
+        {
+            List<Caracteristica> caracteristicasDeLaFicha = fichaPersonajeServicio.getListaCaracteristicasPorId(id);
+            
+            res = new ResponseEntity<List<Caracteristica>>(caracteristicasDeLaFicha, HttpStatus.OK);
+        }
+
+        return res;
+    }
+    
+    @PostMapping("/AddCaracteristicaEnFichaByIdFicha/{id}")
+    public ResponseEntity<Caracteristica> addCaracteristicaByIdFicha(@PathVariable UUID id, @RequestBody Caracteristica caracteristica)
+    {
+        ResponseEntity<Caracteristica> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
+        {
+        	FichaPersonaje ficha = fichaPersonajeServicio.findFichaPersonajeById(id).get();
+        	
+        	ficha.getCaracteristicas().add(caracteristica);
+        	
+        	fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
+            
+            res = new ResponseEntity<Caracteristica>(caracteristica, HttpStatus.OK);
+        }
+
         return res;
     }
 

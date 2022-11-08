@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Caracteristica;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.FichaPersonajeRepository;
 
@@ -104,6 +105,12 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
 		Iterable<FichaPersonaje> fichas = fichaPersonajeDAO.findAll();
 		fichaPersonajeDAO.deleteAll();
 		return fichas;
+	}
+
+	@Override
+	public List<Caracteristica> getListaCaracteristicasPorId(UUID id) {
+
+		return fichaPersonajeDAO.findById(id).get().getCaracteristicas();
 	}
 
 }
