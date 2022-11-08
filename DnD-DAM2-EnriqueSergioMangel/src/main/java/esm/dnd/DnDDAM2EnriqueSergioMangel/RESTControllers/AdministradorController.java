@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +37,7 @@ public class AdministradorController {
         return res;
     }
 	
-	@GetMapping("/addAdmin")
+	@PostMapping("/addAdmin")
     public ResponseEntity<String> addAdmin(@RequestBody Administrador admin)
     {
         ResponseEntity<String> res = new ResponseEntity<>("Error insertando el admin",HttpStatus.BAD_REQUEST);
@@ -49,20 +51,19 @@ public class AdministradorController {
         return res;
     }
 	
-	@GetMapping("/deleteById")
+	@DeleteMapping("/deleteById")
     public ResponseEntity<Administrador> deleteAdminById(@RequestParam UUID id)
     {
-		Administrador admin = Administrador.builder().build();
+		Administrador admin;
 		
-        ResponseEntity<Administrador> res = new ResponseEntity<>(admin, HttpStatus.BAD_REQUEST);
+        ResponseEntity<Administrador> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
         if (administradorServicio.existeAdministrador(id)) {
         
         	admin = administradorServicio.findAdminByID(id).get();
-        }
-        
-        
-        res = new ResponseEntity<Administrador>(admin, HttpStatus.OK);
+        	administradorServicio.eliminarAdministrador(id);
+        	res = new ResponseEntity<Administrador>(admin, HttpStatus.OK);
+        }        
         
         return res;
     }
