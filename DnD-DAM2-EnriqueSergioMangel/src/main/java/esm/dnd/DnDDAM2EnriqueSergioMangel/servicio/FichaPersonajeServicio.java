@@ -1,6 +1,8 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,7 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
     @Autowired private FichaPersonajeRepository fichaPersonajeDAO;
 
     @Override
-    public boolean addAllFichasPersonaje(Iterable<FichaPersonaje> fichasPersonaje) {
+    public boolean addAllFichasPersonaje(List<FichaPersonaje> fichasPersonaje) {
         
         boolean exito = false;
         
@@ -31,7 +33,7 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
     }
 
     @Override
-    public boolean annadiFichaPersonaje(FichaPersonaje fichaPersonaje) {
+    public boolean addFichaPersonaje(FichaPersonaje fichaPersonaje) {
         
         boolean exito = false;
         
@@ -49,22 +51,22 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
     }
 
     @Override
-    public Iterable<FichaPersonaje> findAllFichasPersonaje() {
+    public List<FichaPersonaje> findAllFichasPersonaje() {
         return fichaPersonajeDAO.findAll();
     }
 
     @Override
-    public Optional<FichaPersonaje> findFichaPersonajeById(String idFichaPersonaje) {
+    public Optional<FichaPersonaje> findFichaPersonajeById(UUID idFichaPersonaje) {
         return fichaPersonajeDAO.findById(idFichaPersonaje);
     }
 
     @Override
-    public boolean existsByIdFichaPersonaje(String id) {
+    public boolean existsByIdFichaPersonaje(UUID id) {
         return fichaPersonajeDAO.existsById(id);
     }
 
     @Override
-    public FichaPersonaje deleteFichaPersonajeById(String id) {
+    public FichaPersonaje deleteFichaPersonajeById(UUID id) {
 
         FichaPersonaje f = FichaPersonaje.builder().idFichaPersonaje(id).build();
         

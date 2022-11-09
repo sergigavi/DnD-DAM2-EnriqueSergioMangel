@@ -1,5 +1,8 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +27,7 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
     @Override
-	public boolean eliminarUsuario(String idUser) {
+	public boolean eliminarUsuario(UUID idUser) {
 		boolean exito=false;
 		
 		if(usuarioDAO.existsById(idUser)) {
@@ -36,12 +39,12 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
     @Override
-	public boolean existeUsuario(String idUser) {
+	public boolean existeUsuario(UUID idUser) {
 		return usuarioDAO.existsById(idUser);
 	}
 
     @Override
-    public boolean cambiarContrasenia(String idUser, String contrasenia){
+    public boolean cambiarContrasenia(UUID idUser, String contrasenia){
         boolean exito=false;
         Usuario a;
 
@@ -67,4 +70,30 @@ public class UsuarioServicio implements IUsuarioServicio{
         
         return exito;
     }
+
+	@Override
+	public boolean addAllUsuarios(Iterable<Usuario> usuarios) {
+		boolean exito = false;
+        
+        try {
+            
+            usuarioDAO.saveAll(usuarios);
+            exito = true;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return exito;
+	}
+
+	@Override
+	public Iterable<Usuario> findAllUsuarios() {
+		return usuarioDAO.findAll();
+	}
+
+	@Override
+	public Optional<Usuario> findUsuarioById(UUID idUsuario) {
+		return usuarioDAO.findById(idUsuario);
+	}
 }
