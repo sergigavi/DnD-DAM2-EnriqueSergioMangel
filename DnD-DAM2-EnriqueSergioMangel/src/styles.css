@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+  height:100vh;
+  font-size: 13.5px;
+}
+
+.ng-sidebar
+{
+  background: rgb(26, 26, 33);
+  width: 15rem ;
+  /*margin-top:50px;
+  margin-bottom:50px;*/
+}
+
+.divSide{
+  padding: 10px;
+}
+
+.liSlide{
+  padding: 5px;
+}
+
+.ulSlide{
+  list-style-type: none;
+  padding: 0px;
+}
+
+.controlNavbar{
+  padding-right:10px;
+  display:block;
+  margin:auto;
+}
+
+.controlUl{
+ background: rgb(26, 26, 33);
+}
+
+.h1control{
+  color:#0d6efd;
+}
+
