@@ -83,6 +83,25 @@ public class FichaPersonajeController {
 
         return res;
     }
+    
+    @PostMapping("/AddHabilidadEnFichaByIdFicha/{id}")
+    public ResponseEntity<Habilidad> addHabilidadEnFichaByIdFicha(@PathVariable UUID id, @RequestBody Habilidad habilidad)
+    {
+        ResponseEntity<Habilidad> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
+        {
+        	FichaPersonaje ficha = fichaPersonajeServicio.findFichaPersonajeById(id).get();
+        	
+        	ficha.getHabilidades().add(habilidad);
+        	
+        	fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
+            
+            res = new ResponseEntity<Habilidad>(habilidad, HttpStatus.OK);
+        }
+
+        return res;
+    }
 
     @PostMapping("/addFicha")
     public ResponseEntity<String> addFichaPersonaje(@RequestBody FichaPersonaje ficha){
