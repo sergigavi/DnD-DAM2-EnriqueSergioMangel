@@ -96,6 +96,7 @@ public class FichaPersonaje {
 		this.bonifCompetencia=calcBonifCompetencia(this.nivel);
 		this.usuario=null;
 		this.caracteristicas=setCaracteristicasPorDefecto();
+		this.inventario = new ArrayList<Equipamiento>();//sergio
 		this.habilidades=setHabilidadesPorDefecto(this.caracteristicas,this.bonifCompetencia);
 		this.clase=Clase.SELECCIONAR;
 		this.raza=Raza.SELECCIONAR;
