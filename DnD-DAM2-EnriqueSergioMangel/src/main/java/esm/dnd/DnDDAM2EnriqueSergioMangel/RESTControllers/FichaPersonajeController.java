@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Alineamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Caracteristica;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Clase;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Equipamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Raza;
@@ -84,6 +85,7 @@ public class FichaPersonajeController {
         return res;
     }
     
+<<<<<<< Updated upstream
     @PostMapping("/AddHabilidadEnFichaByIdFicha/{id}")
     public ResponseEntity<Habilidad> addHabilidadEnFichaByIdFicha(@PathVariable UUID id, @RequestBody Habilidad habilidad)
     {
@@ -98,6 +100,23 @@ public class FichaPersonajeController {
         	fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
             
             res = new ResponseEntity<Habilidad>(habilidad, HttpStatus.OK);
+=======
+    @PostMapping("/AddEquipamientoEnFichaByIdFicha/{id}")
+    public ResponseEntity<Equipamiento> addEquipamientoByIdFicha(@PathVariable UUID id, @RequestBody Equipamiento equipamiento)
+    {
+        ResponseEntity<Equipamiento> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
+        {
+        	equipamiento.setIdEquipo(UUID.randomUUID().toString());
+        	FichaPersonaje ficha = fichaPersonajeServicio.findFichaPersonajeById(id).get();
+        	
+        	ficha.getInventario().add(equipamiento);
+        	
+        	fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
+            
+            res = new ResponseEntity<Equipamiento>(equipamiento, HttpStatus.OK);
+>>>>>>> Stashed changes
         }
 
         return res;
