@@ -85,7 +85,6 @@ public class FichaPersonajeController {
         return res;
     }
     
-<<<<<<< Updated upstream
     @PostMapping("/AddHabilidadEnFichaByIdFicha/{id}")
     public ResponseEntity<Habilidad> addHabilidadEnFichaByIdFicha(@PathVariable UUID id, @RequestBody Habilidad habilidad)
     {
@@ -100,7 +99,10 @@ public class FichaPersonajeController {
         	fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
             
             res = new ResponseEntity<Habilidad>(habilidad, HttpStatus.OK);
-=======
+        }
+        return res;
+    }
+
     @PostMapping("/AddEquipamientoEnFichaByIdFicha/{id}")
     public ResponseEntity<Equipamiento> addEquipamientoByIdFicha(@PathVariable UUID id, @RequestBody Equipamiento equipamiento)
     {
@@ -116,7 +118,6 @@ public class FichaPersonajeController {
         	fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
             
             res = new ResponseEntity<Equipamiento>(equipamiento, HttpStatus.OK);
->>>>>>> Stashed changes
         }
 
         return res;
