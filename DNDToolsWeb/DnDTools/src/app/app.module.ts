@@ -15,7 +15,8 @@ import { Usuario } from './modelo/usuario/usuario';
 @NgModule({
   declarations: [
     AppComponent,
-    UsuarioFormComponent
+    UsuarioFormComponent,
+
   ],
   imports: [
     BrowserModule,

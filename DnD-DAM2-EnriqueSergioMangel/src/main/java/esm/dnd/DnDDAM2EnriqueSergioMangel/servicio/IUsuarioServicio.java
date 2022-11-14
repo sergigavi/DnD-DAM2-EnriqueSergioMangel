@@ -1,7 +1,6 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 
@@ -9,11 +8,11 @@ public interface IUsuarioServicio {
     
     public boolean insertarUsuario(Usuario a);
     
-	public boolean eliminarUsuario(UUID idUser);
+	public boolean eliminarUsuario(String idUser);
 	
-	public boolean existeUsuario(UUID idUser);
+	public boolean existeUsuario(String idUser);
 	
-    public boolean cambiarContrasenia(UUID idUser, String contrasenia);
+    public boolean cambiarContrasenia(String idUser, String contrasenia);
     
     public boolean addAllUsuarios(Iterable<Usuario> usuarios);
     

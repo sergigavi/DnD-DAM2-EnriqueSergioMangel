@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,7 @@ import lombok.NonNull;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @Builder
+@Component
 @Document
 public class FichaPersonaje {
 	
@@ -96,7 +98,6 @@ public class FichaPersonaje {
 		this.bonifCompetencia=calcBonifCompetencia(this.nivel);
 		this.usuario=null;
 		this.caracteristicas=setCaracteristicasPorDefecto();
-		this.inventario = new ArrayList<Equipamiento>();//sergio
 		this.habilidades=setHabilidadesPorDefecto(this.caracteristicas,this.bonifCompetencia);
 		this.clase=Clase.SELECCIONAR;
 		this.raza=Raza.SELECCIONAR;

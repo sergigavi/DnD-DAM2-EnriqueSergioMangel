@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,7 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IFichaPersonajeServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
 
-@CrossOrigin
+@CrossOrigin(origins = {"*"},methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/api/dndtools/usuarios")
 public class UsuarioController {
@@ -150,7 +151,7 @@ public class UsuarioController {
 			Usuario u;
 
 			u = Usuario.builder()
-					.idUser(UUID.randomUUID())	//	Genero un id nuevo
+					.idUser(UUID.randomUUID().toString())	//	Genero un id nuevo
 					.nombre(nombre)
 					.apellidos(apellidos)
 					//.contrasenia(contrasenia)

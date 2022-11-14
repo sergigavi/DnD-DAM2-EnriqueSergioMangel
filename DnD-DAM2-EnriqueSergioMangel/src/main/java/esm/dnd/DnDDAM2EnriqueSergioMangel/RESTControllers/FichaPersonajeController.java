@@ -285,7 +285,7 @@ public class FichaPersonajeController {
         List<Usuario> usuarios = new ArrayList<>();
 
         Usuario u1= Usuario.builder()
-                .idUser(UUID.randomUUID())
+                .idUser(UUID.randomUUID().toString())
                 .nombre("Sergio")
                 .apellidos("GV")
                 .contrasenia("123abc")
