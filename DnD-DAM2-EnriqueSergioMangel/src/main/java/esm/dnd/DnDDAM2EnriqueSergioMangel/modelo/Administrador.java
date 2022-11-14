@@ -4,6 +4,7 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.stereotype.Component;
 
 /*import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -25,6 +26,7 @@ import lombok.NonNull;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 
+@Component
 public class Administrador {
 	
 	@NonNull

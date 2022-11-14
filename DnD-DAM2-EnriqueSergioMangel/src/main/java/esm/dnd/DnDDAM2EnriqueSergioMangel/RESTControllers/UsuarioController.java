@@ -11,15 +11,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
 
-@CrossOrigin
+@CrossOrigin(origins = {"*"},methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/API/dndtools/usuarios")
 public class UsuarioController {
@@ -39,9 +42,42 @@ public class UsuarioController {
         return res;
     }
 
+	
+	@PostMapping("/addUsuario")
+	public ResponseEntity<String> addUsuario(@RequestBody Usuario u){
+
+
+		ResponseEntity<String> res = new ResponseEntity<>("Error al insertar usuario",HttpStatus.BAD_REQUEST);
+
+		Usuario u1 = Usuario.builder().build();
+
+		try {
+			u1 = Usuario.builder()
+				.idUser(UUID.randomUUID().toString())
+				.nombre(u.getNombre())
+				.apellidos(u.getApellidos())
+				.contrasenia(u.getContrasenia())
+				.nickname(u.getNickname())
+				.biografia(u.getBiografia())
+				.email(u.getEmail())
+				.fechaNacimiento(u.getFechaNacimiento())
+				.urlImage(u.getUrlImage())
+				.pais(u.getPais())
+				.build();
+
+			usuarioServicio.insertarUsuario(u1);
+
+			return new ResponseEntity<String>("Inserccion correcta",HttpStatus.OK);
+			
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+		}
+		return res;
+	}
+
     
     @PutMapping("/insertarPorParametro")
-    public ResponseEntity<String> insertarPorParametros(@RequestParam UUID idUser, @RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
+    public ResponseEntity<String> insertarPorParametros(@RequestParam String idUser, @RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
     {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	
@@ -87,7 +123,7 @@ public class UsuarioController {
     	try {
     		
 			u = Usuario.builder()
-					.idUser(UUID.randomUUID())	//	Genero un id nuevo
+					.idUser(UUID.randomUUID().toString())	//	Genero un id nuevo
 					.nombre(nombre)
 					.apellidos(apellidos)
 					//.contrasenia(contrasenia)

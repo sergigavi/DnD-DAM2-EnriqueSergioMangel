@@ -9,20 +9,24 @@ import { FormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
+import { Usuario } from './modelo/usuario/usuario';
+import { HttpClientModule } from '@angular/common/http';
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsuarioFormComponent
+    UsuarioFormComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  //providers: [UsuarioServiceService],
+  providers: [Usuario],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
