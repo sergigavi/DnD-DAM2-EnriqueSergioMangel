@@ -1,5 +1,6 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Caracteristica;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Equipamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.FichaPersonajeRepository;
 
 @Service
@@ -111,6 +114,37 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
 	public List<Caracteristica> getListaCaracteristicasPorId(UUID id) {
 
 		return fichaPersonajeDAO.findById(id).get().getCaracteristicas();
+	}
+
+	@Override
+	public List<Equipamiento> getEquipamientoPorIdFicha(UUID idFicha) {
+		
+		FichaPersonaje ficha;
+		
+		List<Equipamiento> listaEquipamiento = new ArrayList<Equipamiento>();
+		
+		if (fichaPersonajeDAO.existsById(idFicha))
+		{
+			ficha = fichaPersonajeDAO.findById(idFicha).get();
+			listaEquipamiento = ficha.getInventario();
+		}
+		
+		return listaEquipamiento;
+	}
+
+	@Override
+	public List<Habilidad> getHabilidadesPorIdFicha(UUID idFicha) {
+
+		FichaPersonaje ficha;
+		List<Habilidad> habilidadesFicha = new ArrayList<>();
+		
+		if (fichaPersonajeDAO.existsById(idFicha))
+		{
+			ficha = fichaPersonajeDAO.findById(idFicha).get();
+			habilidadesFicha = ficha.getHabilidades();
+		}
+		
+		return habilidadesFicha;
 	}
 
 }

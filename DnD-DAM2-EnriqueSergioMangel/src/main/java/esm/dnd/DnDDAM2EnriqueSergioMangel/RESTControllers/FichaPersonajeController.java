@@ -102,6 +102,21 @@ public class FichaPersonajeController {
         }
         return res;
     }
+    
+    @GetMapping("/getHabilidadesById/{idFicha}")
+    public ResponseEntity<List<Habilidad>> obtenerTodasLasHabilidades(@PathVariable UUID idFicha)
+    {
+        ResponseEntity<List<Habilidad>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(idFicha))
+        {
+            List<Habilidad> habilidadesDeFicha = fichaPersonajeServicio.getHabilidadesPorIdFicha(idFicha);
+            
+            res = new ResponseEntity<List<Habilidad>>(habilidadesDeFicha, HttpStatus.OK);
+        }
+
+        return res;
+    }
 
     @PostMapping("/AddEquipamientoEnFichaByIdFicha/{id}")
     public ResponseEntity<Equipamiento> addEquipamientoByIdFicha(@PathVariable UUID id, @RequestBody Equipamiento equipamiento)
@@ -118,6 +133,21 @@ public class FichaPersonajeController {
         	fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
             
             res = new ResponseEntity<Equipamiento>(equipamiento, HttpStatus.OK);
+        }
+
+        return res;
+    }
+    
+    @GetMapping("/getEquipamientoById/{idFicha}")
+    public ResponseEntity<List<Equipamiento>> obtenerTodosLosEquipamientos(@PathVariable UUID idFicha)
+    {
+        ResponseEntity<List<Equipamiento>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(idFicha))
+        {
+            List<Equipamiento> equipamientoDeLaFicha = fichaPersonajeServicio.getEquipamientoPorIdFicha(idFicha);
+            
+            res = new ResponseEntity<List<Equipamiento>>(equipamientoDeLaFicha, HttpStatus.OK);
         }
 
         return res;

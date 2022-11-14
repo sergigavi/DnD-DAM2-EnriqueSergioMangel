@@ -5,7 +5,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Caracteristica;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Equipamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 
 public interface IFichaPersonajeServicio {
     
@@ -26,5 +28,9 @@ boolean actualizarFichaPersonaje(FichaPersonaje fichaPersonaje);
 public Iterable<FichaPersonaje> deleteAllFichas();
 
 public List<Caracteristica> getListaCaracteristicasPorId(UUID id);
+
+public List<Equipamiento> getEquipamientoPorIdFicha(UUID idFicha);
+
+public List<Habilidad> getHabilidadesPorIdFicha(UUID idFicha);
 
 }

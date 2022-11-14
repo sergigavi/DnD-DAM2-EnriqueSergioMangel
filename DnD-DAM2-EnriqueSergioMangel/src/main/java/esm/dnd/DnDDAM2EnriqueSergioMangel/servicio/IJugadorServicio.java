@@ -11,6 +11,8 @@ public interface IJugadorServicio {
 	public boolean addJugador(Jugador jugador);
     
 	public List<Jugador> findAllJugadores();
+	
+	public Jugador crearJugador(UUID idUsuario, UUID idFicha, Jugador jugador);
 
 	public Optional<Jugador> findJugadorById(UUID idJugador);
 
