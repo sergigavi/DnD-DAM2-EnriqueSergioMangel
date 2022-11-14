@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,7 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IFichaPersonajeServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
 
-@CrossOrigin    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
+@CrossOrigin(originPatterns = {"*"},methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.OPTIONS})    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
 @RestController
 @RequestMapping("/api/dndtools/personajes")
 public class FichaPersonajeController {
@@ -285,7 +286,7 @@ public class FichaPersonajeController {
         List<Usuario> usuarios = new ArrayList<>();
 
         Usuario u1= Usuario.builder()
-                .idUser(UUID.randomUUID().toString())
+                .idUser(UUID.randomUUID())
                 .nombre("Sergio")
                 .apellidos("GV")
                 .contrasenia("123abc")

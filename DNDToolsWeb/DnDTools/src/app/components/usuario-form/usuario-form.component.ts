@@ -8,18 +8,22 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./usuario-form.component.css']
 })
 export class UsuarioFormComponent implements OnInit {
+
+  nombre : String="";
+
   constructor(private usuarioService: UsuarioServiceService) {   //esto es la inyeccion propia
    }
 
   ngOnInit(): void {
-    
+
   }
 
   submitedFormUsuario(usuarioForm: NgForm)
   {
     this.usuarioService.annadirUsuario(usuarioForm.value).subscribe(
       (data:any) =>{
-        alert(`${data} ${usuarioForm.value}}`)
+        this.nombre=""
+        this.nombre = data.nombre;
       })
 
     console.log("Insertando el usuario: ", usuarioForm.value)

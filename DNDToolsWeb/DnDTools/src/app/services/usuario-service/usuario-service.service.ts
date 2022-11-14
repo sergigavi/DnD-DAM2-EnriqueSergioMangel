@@ -16,9 +16,9 @@ export class UsuarioServiceService {
 
   }
 
-  annadirUsuario(usuario: Usuario): Observable<String>
+  annadirUsuario(usuario: Usuario): Observable<any>
   {
-    return this.http.post(`${environment.URLBASE}/usuarios/addUsuario`, usuario,{responseType:"text"})
+    return this.http.post(`${environment.URLBASE}/usuarios/insertarUsuario`, usuario)
   };
 
   eliminarUsuario(usuario: Usuario)

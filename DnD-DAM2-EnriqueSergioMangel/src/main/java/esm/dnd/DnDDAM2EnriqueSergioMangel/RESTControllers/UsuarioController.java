@@ -50,14 +50,15 @@ public class UsuarioController {
     }
 
 	@PostMapping("/insertarUsuario")
-    public ResponseEntity<String> insertarUsuario(@RequestBody Usuario usuario)
+    public ResponseEntity<Usuario> insertarUsuario(@RequestBody Usuario usuario)
     {
-    	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
+    	ResponseEntity<Usuario> res = new ResponseEntity<>(new Usuario(),HttpStatus.BAD_REQUEST);
     	    	
     	try {
 			usuario.setIdUser(UUID.randomUUID());
 			usuarioServicio.insertarUsuario(usuario);
-			res = new ResponseEntity<>("Usuario insertado correctamente", HttpStatus.OK);
+			Usuario u=usuarioServicio.findUsuarioById(usuario.getIdUser()).get();
+			res = new ResponseEntity<Usuario>(u, HttpStatus.OK);
 			
 			
 		} catch (Exception e) {
@@ -151,7 +152,7 @@ public class UsuarioController {
 			Usuario u;
 
 			u = Usuario.builder()
-					.idUser(UUID.randomUUID().toString())	//	Genero un id nuevo
+					.idUser(UUID.randomUUID())	//	Genero un id nuevo
 					.nombre(nombre)
 					.apellidos(apellidos)
 					//.contrasenia(contrasenia)
