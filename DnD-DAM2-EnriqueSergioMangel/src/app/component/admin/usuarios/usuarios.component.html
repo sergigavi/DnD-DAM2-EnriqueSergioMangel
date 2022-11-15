@@ -1,20 +1,20 @@
 <ng-sidebar-container>
   <ng-sidebar [(opened)]="opened" position="left">
     <div class="text-justify mt-2 ml-4 divSide">
-      <button closeSidebar type="button" class="btn btn-primary">Cerrar SideBar</button>
+      <button closesidebar type="button" class="btn btn-primary">Cerrar SideBar</button>
     </div>
     <ul class="ulSlide">
       <li class="nav-item liSlide">
-        <a class="nav-link" href="panelControl-admin"><h5 class="h5control">Panel de Control</h5></a>
+        <a class="nav-link" href="panelControl-admin"><h5>Panel de Control</h5></a>
       </li>
       <li class="nav-item liSlide">
-        <a class="nav-link" href="usuarios-admin"><h5 class="h5control">Usuarios</h5></a>
+        <a class="nav-link" href="usuarios-admin"><h5>Usuarios</h5></a>
       </li>
       <li class="nav-item liSlide">
-        <a class="nav-link" href="partidas-admin"><h5 class="h5control">Partidas</h5></a>
+        <a class="nav-link" href="partidas-admin"><h5>Partidas</h5></a>
       </li>
       <li class="nav-item liSlide">
-        <a class="nav-link" href="equipamiento-admin"><h5 class="h5control">Equipamiento</h5></a>
+        <a class="nav-link" href="equipamiento-admin"><h5>Equipamiento</h5></a>
       </li>
     </ul>
   </ng-sidebar>
@@ -30,20 +30,20 @@
         <a class="nav-link" href="#">Enlace</a>
       </li>
       <li class="nav-item controlNavbar">
-        <a class="nav-link" href="#">Enlace</a>
+        <a class="nav-link" href="home">Salir Admin</a>
       </li>
       <li>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">
             <ul class="navbar-nav">
               <!-- Avatar -->
-              <li mdbDropdown class="nav-item dropdown">
+              <li mdbdropdown class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle d-flex align-items-center"
                   href="#"
                   id="navbarDropdownMenuLink"
                   role="button"
-                  mdbDropdownToggle
+                  mdbdropdowntoggle
                   aria-expanded="false"
                 >
                   <img
@@ -54,7 +54,7 @@
                     loading="lazy"
                   />
                 </a>
-                <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <ul mdbdropdownmenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <li>
                     <a class="dropdown-item" href="#">My profile</a>
                   </li>
