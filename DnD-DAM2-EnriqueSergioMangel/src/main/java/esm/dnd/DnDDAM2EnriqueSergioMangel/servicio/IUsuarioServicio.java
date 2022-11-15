@@ -20,4 +20,6 @@ public interface IUsuarioServicio {
     public Iterable<Usuario> findAllUsuarios();
     
     public Optional<Usuario> findUsuarioById(UUID idUsuario);
+
+	public Iterable<Usuario> eliminarTodos();
 }

@@ -96,4 +96,15 @@ public class UsuarioServicio implements IUsuarioServicio{
 	public Optional<Usuario> findUsuarioById(UUID idUsuario) {
 		return usuarioDAO.findById(idUsuario);
 	}
+
+	@Override
+	public Iterable<Usuario> eliminarTodos() {
+		
+		Iterable<Usuario> users =  usuarioDAO.findAll();
+
+		usuarioDAO.deleteAll();
+		
+		return users;
+		
+	}
 }

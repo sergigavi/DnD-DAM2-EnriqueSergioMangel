@@ -39,9 +39,7 @@ public class Equipamiento {
 	private double precio;
 	
 	private double peso;
-	
-	private String ca;
-	
+		
 	private String descripcion;
 	
 	

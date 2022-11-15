@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../modelo/usuario/usuario';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,9 @@ export class UsuarioServiceService {
 
   }
 
-  annadirUsuario(usuario: Usuario)
+  annadirUsuario(usuario: Usuario): Observable<any>
   {
-    this.http.post(`${environment.URLBASE}/usuarios/insertarUser`, usuario)
-    .subscribe((data:any) => {
-      console.log(data)
-    })
-
+    return this.http.post(`${environment.URLBASE}/usuarios/insertarUsuario`, usuario)
   };
 
   eliminarUsuario(usuario: Usuario)

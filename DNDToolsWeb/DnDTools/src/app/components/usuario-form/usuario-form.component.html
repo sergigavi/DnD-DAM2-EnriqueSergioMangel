@@ -1,31 +1,32 @@
-
-a
-
 <p>Insertar usuario:</p>
 
 <br>
 
-<form #usuarioForm="ngForm" (ngSubmit)="submitedFormUsuario()">
+<form #usuarioForm="ngForm" (ngSubmit)="submitedFormUsuario(usuarioForm)">
   Nombre:
-	<input type="text" name="nombre" placeholder="nombre" [(ngModel)]="nombre">
+	<input type="text" ngModel name="nombre" placeholder="nombre" required>
 	Apellidos:
-	<input type="text" name="apellidos" placeholder="apellidos" [(ngModel)]="apellidos">
+	<input type="text"ngModel name="apellidos" placeholder="apellidos"required>
 	Contraseña:
-	<input type="password" name="contrasenia" placeholder="contrasenia" [(ngModel)]="contrasenia">
+	<input type="password" ngModel name="contrasenia" placeholder="contrasenia"required>
 	<br>Nickname:
-  <input type="text" name="nickname" placeholder="nickname" [(ngModel)]="nickname">
+  <input type="text" ngModel name="nickname" placeholder="nickname">
 	Biografia:
-  <input type="text" name="biografia" placeholder="biografia" [(ngModel)]="biografia">
+  <input type="text" ngModel name="biografia" placeholder="biografia">
 	E-mail:
-  <input type="text" name="e-mail" placeholder="E-MAIL" [(ngModel)]="email">
+  <input type="text" ngModel name="e-mail" placeholder="E-MAIL"required>
 	<br>Fecha de nacimiento:
-  <input type="text" name="fechaNac" placeholder="fecha de nacimiento" [(ngModel)]="fechaNac">
+  <input type="datetime" ngModel name="fechaNac" placeholder="fecha de nacimiento" required>
 	URL de la imagen de usuario:
-  <input type="text" name="urlImage" placeholder="URL de la imagen" [(ngModel)]="urlImage">
+  <input type="text" ngModel name="urlImage" placeholder="URL de la imagen">
 	Pais:
-  <input type="text" name="pais" placeholder="pais" [(ngModel)]="pais">
+  <input type="text" ngModel name="pais" placeholder="pais">
 
   <br>
-	<button type="submit">Guardar</button>
+	<button [disabled]="usuarioForm.invalid" type="submit">Guardar</button>
 
+
+  {{nombre}}
+
+  <br>
 </form>

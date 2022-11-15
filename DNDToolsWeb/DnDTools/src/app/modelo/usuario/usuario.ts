@@ -10,7 +10,7 @@ export class Usuario {
   public nickname:String;
   public biografia:String;
   public email:String;
-  public fechaNac:String;
+  public fechaNacimiento:String;
   public urlImage:String;
   public activo:boolean;
   public pais:String;
@@ -24,7 +24,7 @@ export class Usuario {
     this.nickname = "";
     this.biografia = "";
     this.email = "";
-    this.fechaNac = "";
+    this.fechaNacimiento = "";
     this.urlImage = "";
     this.activo = false;
     this.pais = "";
@@ -61,7 +61,7 @@ export class Usuario {
   }
 
   public getFechaNac() : String{
-    return this.fechaNac;
+    return this.fechaNacimiento;
   }
 
   public getUrlImage() : String{
@@ -107,7 +107,7 @@ export class Usuario {
   }
 
   public setFechaNac(fechaNac:String){
-    this.fechaNac = fechaNac;
+    this.fechaNacimiento = fechaNac;
   }
 
   public setUrlImage(urlImage:String){
