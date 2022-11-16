@@ -9,8 +9,13 @@ import { FormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
-import { Usuario } from './modelo/usuario/usuario';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider'
+import { MatMenuModule } from '@angular/material/menu'
+import { MatButtonModule } from '@angular/material/button'
+import { MatTableModule}  from '@angular/material/table'
+import { MatPaginatorModule } from '@angular/material/paginator'
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 
@@ -24,9 +29,16 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
-  providers: [Usuario],
+  entryComponents: [UsuarioFormComponent],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

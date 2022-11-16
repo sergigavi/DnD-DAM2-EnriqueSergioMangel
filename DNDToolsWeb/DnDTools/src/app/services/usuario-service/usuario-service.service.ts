@@ -1,8 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from '../../modelo/usuario/usuario';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+
+export interface Usuario {
+
+  idUser:String;
+  nombre:String;
+  apellidos:String;
+  contrasenia:String;
+  nickname:String;
+  biografia:String;
+  email:String;
+  fechaNacimiento:String;
+  urlImage:String;
+  activo:boolean;
+  pais:String;
+
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,14 +42,9 @@ export class UsuarioServiceService {
 
   };
 
-  getUsuarios()
+  getUsuarios() : Observable<Usuario[]>
   {
-
-    this.http.get(`${environment.URLBASE}/usuarios/dametodos`)
-    .subscribe(data => {  //  el subscribe es como las promesas de javascript (fetch)
-    console.log(data);
-
-  });
+    return this.http.get<Usuario[]>(`${environment.URLBASE}/usuarios/dametodos`)
   }
 
 }

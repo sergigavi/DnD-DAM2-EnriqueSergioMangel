@@ -3,6 +3,7 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 //https://spring.io/guides/gs/securing-web/
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,13 @@ public class UsuarioController {
     private IUsuarioServicio usuarioServicio;
     
     @GetMapping("/dametodos")
-    public ResponseEntity<Iterable<Usuario>> obtenerTodosLosUsuarios()
+    public ResponseEntity<List<Usuario>> obtenerTodosLosUsuarios()
     {
-        ResponseEntity<Iterable<Usuario>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        ResponseEntity<List<Usuario>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
-        Iterable<Usuario> allUsuarios = usuarioServicio.findAllUsuarios();
+        List<Usuario> allUsuarios = usuarioServicio.findAllUsuarios();
         
-        res = new ResponseEntity<Iterable<Usuario>>(allUsuarios, HttpStatus.OK);
+        res = new ResponseEntity<List<Usuario>>(allUsuarios, HttpStatus.OK);
         
         return res;
     }
