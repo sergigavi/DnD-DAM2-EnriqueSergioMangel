@@ -27,7 +27,6 @@ import { NpcJugadorComponent } from './component/usuario/npc/jugador/npcJugador.
 
 const routes: Routes = [
   //invitados
-  {path:'',component: HomeComponent},
   {path:'home',component: HomeComponent},
   //admins
   {path:'partidas-admin',component: PartidasComponent},
