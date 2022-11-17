@@ -2,14 +2,20 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider'
+import { MatMenuModule } from '@angular/material/menu'
+import { MatButtonModule } from '@angular/material/button'
+import { MatTableModule}  from '@angular/material/table'
+import { MatPaginatorModule } from '@angular/material/paginator'
+//import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
+//import { Usuario } from './modelo/usuario/usuario';
 
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
-import { MatSidenavModule } from '@angular/material/sidenav';
 //import {MatBadgeModule} from '@angular/material/badge';
 
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
-<<<<<<< HEAD
 import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 
 import { HomeComponent } from './component/home/home.component';
@@ -55,16 +61,7 @@ const routes: Routes = [
 
 
 ];
-=======
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider'
-import { MatMenuModule } from '@angular/material/menu'
-import { MatButtonModule } from '@angular/material/button'
-import { MatTableModule}  from '@angular/material/table'
-import { MatPaginatorModule } from '@angular/material/paginator'
-//import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
-//import { Usuario } from './modelo/usuario/usuario';
->>>>>>> origin/EnriqueBranch
+
 
 @NgModule({
   declarations: [
@@ -93,16 +90,13 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     RouterModule.forRoot(routes),
     FormsModule,
     HttpClientModule,
-<<<<<<< HEAD
     //MatSidenavModule,
-=======
     BrowserAnimationsModule,
     MatSliderModule,
     MatMenuModule,
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule
->>>>>>> origin/EnriqueBranch
   ],
   entryComponents: [UsuarioFormComponent],
   providers: [],
