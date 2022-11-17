@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { SidebarModule } from 'ng-sidebar';
 import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
@@ -11,7 +10,6 @@ import { HttpClientModule } from "@angular/common/http";  //  Para las peticione
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
-import { Usuario } from './modelo/usuario/usuario';
 
 import { HomeComponent } from './component/home/home.component';
 import { PartidasComponent } from './component/admin/partidas/partidas.component';
@@ -78,7 +76,6 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    SidebarModule.forRoot(),
     RouterModule.forRoot(routes),
     FormsModule,
     HttpClientModule
