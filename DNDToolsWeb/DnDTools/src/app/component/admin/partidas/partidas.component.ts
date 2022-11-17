@@ -1,7 +1,4 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import { PartidasService } from 'src/app/services/partidas.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
 
 /**
  * @title Data table with sorting, pagination, and filtering.

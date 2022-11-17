@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
-//import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 //import {MatBadgeModule} from '@angular/material/badge';
 
 import { AppComponent } from './app.component';
@@ -27,17 +27,20 @@ import { HeroesGMComponent } from './component/usuario/heroes/gameMaster/herores
 import { HeroesJugadorComponent } from './component/usuario/heroes/jugador/heroesJugador.component';
 import { NpcGMComponent } from './component/usuario/npc/gameMaster/npcGM.component';
 import { NpcJugadorComponent } from './component/usuario/npc/jugador/npcJugador.component';
+PartidasUsuarioComponent
 
 const routes: Routes = [
   //invitados
-  {path:'home',component: HomeComponent},
+  {path:'',component: HomeComponent},
+  //ambos
+  {path:'usuario-partidasUsuario',component: PartidasUsuarioComponent},
   //admins
   {path:'partidas-admin',component: PartidasComponent},
   {path:'equipamiento-admin',component: EquipamientoComponent},
   {path:'panelControl-admin',component: PanelControlComponent},
   {path:'usuarios-admin',component: UsuariosComponent},
   //usuarios
-  {path:'usuario-partidasUsuario',component: PartidasUsuarioComponent},
+
   {path:'usuario-inicioJugador',component:InicioJugadorComponent},
   {path:'usuario-inicioGM',component: InicioGMComponent},
   {path:'usuario-mapasJugador',component: MapasJugadorComponent},
@@ -78,7 +81,8 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    //MatSidenavModule,
   ],
   providers: [UsuarioServiceService],
   bootstrap: [AppComponent]
