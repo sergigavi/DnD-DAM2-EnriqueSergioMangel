@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.bson.types.ObjectId;
+
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Caracteristica;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Equipamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
@@ -32,5 +34,7 @@ public List<Caracteristica> getListaCaracteristicasPorId(UUID id);
 public List<Equipamiento> getEquipamientoPorIdFicha(UUID idFicha);
 
 public List<Habilidad> getHabilidadesPorIdFicha(UUID idFicha);
+
+public Boolean deleteEquipamientoByIdEquipamiento(ObjectId idEquipamiento);
 
 }

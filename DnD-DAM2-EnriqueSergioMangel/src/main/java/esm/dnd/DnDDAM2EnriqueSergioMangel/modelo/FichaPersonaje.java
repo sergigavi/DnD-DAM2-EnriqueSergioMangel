@@ -3,12 +3,13 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.OptionalInt;
 import java.util.UUID;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.stereotype.Component;
+
+import com.mongodb.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,16 +25,18 @@ import lombok.NonNull;
 @Document
 public class FichaPersonaje {
 	
-	@Id
+	@MongoId
 	@NonNull
 	@EqualsAndHashCode.Include
 	private UUID idFichaPersonaje;
 	
+	@Nullable
 	private Usuario usuario;
 	
 	private String nombre;
 
 	//	Estos 3 se guardan embebidos ya que mongo lo permite
+	@Nullable
 	private List<Equipamiento> inventario;
 
 	private List<Caracteristica> caracteristicas;
@@ -51,6 +54,7 @@ public class FichaPersonaje {
 	//campo autoevaluado
 	private int bonifCompetencia;
 	
+	@Nullable
 	private String transfondo;
 		
 	private int ca;
@@ -60,26 +64,37 @@ public class FichaPersonaje {
 	private int puntosVidaMax;
 	
 	//posible para quitar
+	@Nullable
 	private int puntosVidaAct;
 
+	@Nullable
 	private String rasgosPersonalidad;
 	
+	@Nullable
 	private String ideales;
 	
+	@Nullable
 	private String vinculos;
 	
+	@Nullable
 	private String defectos;
 	
+	@Nullable
 	private String rasgosAtt;
 	
+	@Nullable
 	private String otrasComp;
 	
+	@Nullable
 	private String apariencia;
 	
+	@Nullable
 	private String historiaPersonal;
 	
+	@Nullable
 	private String rasgos;
 	
+	@Nullable
 	private String notasAdd;
 
 	public FichaPersonaje(Integer nivel){
@@ -91,6 +106,13 @@ public class FichaPersonaje {
 		this.bonifCompetencia=calcBonifCompetencia(nivel);
 	}
 
+	/*
+	public void deleteEquipamiento(Equipamiento equipamiento){
+		this.inventario.stream()
+			.filter(i->i.getIdEquipo().equals(equipamiento.getIdEquipo()))
+			.forEach(e->e.);
+	}
+	 */
 	public FichaPersonaje(){
 
 		this.idFichaPersonaje=UUID.randomUUID();
@@ -118,28 +140,39 @@ public class FichaPersonaje {
 		this.notasAdd="";
 		this.defectos="";
 		this.rasgosPersonalidad="";
+		this.inventario=null;
 	}
+	
+	public FichaPersonaje(FichaPersonaje ficha){
 
-	//estaba probando cosas con el constructor AllArgs
-	/* 
-	public FichaPersonaje(UUID id,Usuario usuario,String nombre,List<Equipamiento> inventario,
-								List<Caracteristica> caracteristicas,
-								List<Habilidad> habilidades,
-								Clase clase,Raza raza,Alineamiento alineamiento,
-								Integer nivel,Integer bonifCompetencia,String transfondo,Integer ca,Integer velocidad,
-								Integer puntosVidaMax,Integer puntosVidaAct,String vinculos,
-								String rasgos,String rasgosAtt,String apariencia,
-								String ideales,String otrasComp,String historiaPersonal,String notasAdd,String defectos,
-								String rasgosPersonalidad){
-
-		this.idFichaPersonaje=id;
-		this.usuario = usuario;
-		this.inventario=inventario;
-		this.caracteristicas=caracteristicas;
-		
-
+		this.idFichaPersonaje=ficha.getIdFichaPersonaje();
+		this.usuario = ficha.getUsuario();
+		this.inventario=ficha.getInventario();
+		this.caracteristicas=ficha.getCaracteristicas();
+		this.nivel=ficha.getNivel();
+		this.nombre=ficha.getNombre();
+		this.bonifCompetencia=calcBonifCompetencia(this.nivel);
+		this.habilidades=setHabilidades(this.caracteristicas, ficha.getHabilidades(), null);
+		this.clase=ficha.getClase();
+		this.raza=ficha.getRaza();
+		this.alineamiento=getAlineamiento();
+		this.transfondo=ficha.getTransfondo();
+		this.ca=ficha.getCa();
+		this.velocidad=ficha.getVelocidad();
+		this.puntosVidaMax=ficha.getPuntosVidaMax();
+		this.puntosVidaAct=ficha.getPuntosVidaAct();
+		this.vinculos=ficha.getVinculos();
+		this.rasgos=ficha.getRasgos();
+		this.rasgosAtt=ficha.getRasgosAtt();
+		this.apariencia=ficha.getApariencia();
+		this.ideales=ficha.getIdeales();
+		this.otrasComp=ficha.getOtrasComp();
+		this.historiaPersonal=ficha.getHistoriaPersonal();
+		this.notasAdd=ficha.getNotasAdd();
+		this.defectos=ficha.getDefectos();
+		this.rasgosPersonalidad=ficha.getRasgosPersonalidad();
 	}
-	*/
+	
 
 	public static Integer calcBonifCompetencia(Integer nivel){
 
@@ -156,7 +189,7 @@ public class FichaPersonaje {
 		}
 	}
 
-	public static void setHabilidades(List<Caracteristica> caracteristicas,List<Habilidad> habilidades,Integer bonif){
+	public static List<Habilidad> setHabilidades(List<Caracteristica> caracteristicas,List<Habilidad> habilidades,Integer bonif){
 
 		int fueCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Fue"))
 			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
@@ -173,66 +206,87 @@ public class FichaPersonaje {
 		int carCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Fue"))
 			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
 
+		List<Habilidad> hs=new ArrayList<>();
+
 		habilidades.stream().forEach((hab)->{
 			switch (hab.getNombre()) {
 				case "Acrobacias":
 					hab.setMod(hab.getCompetencia(),desCaract, bonif);
+					hs.add(hab);
 					break;
 				case "C.Arcanos":
 					hab.setMod(hab.getCompetencia(), intCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Enganiar":
 					hab.setMod(hab.getCompetencia(), carCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Historia":
 					hab.setMod(hab.getCompetencia(), intCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Interpretacion":
 					hab.setMod(hab.getCompetencia(), carCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Intimidar":
 					hab.setMod(hab.getCompetencia(), carCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Investigar":
 					hab.setMod(hab.getCompetencia(), intCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Juego de manos":
 					hab.setMod(hab.getCompetencia(), desCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Atletismo":
 					hab.setMod(hab.getCompetencia(), fueCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Medicina":
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Naturaleza":
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Percepcion":
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Perpicacia":
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Persuasion":
 					hab.setMod(hab.getCompetencia(), carCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Religion":
 					hab.setMod(hab.getCompetencia(), intCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Sigilo":
 					hab.setMod(hab.getCompetencia(), desCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Supervivencia":
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					hs.add(hab);
 					break;
 				case "Trato con animales":
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					hs.add(hab);
 					break;
 				default:
 					break;
 			}
 		});
+		return hs;
 	}
 
 	public static List<Habilidad> setHabilidadesPorDefecto(List<Caracteristica> car,Integer bonif){

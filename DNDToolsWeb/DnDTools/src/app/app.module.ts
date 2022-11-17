@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
-//import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSidenavModule} from '@angular/material/sidenav';
 //import {MatBadgeModule} from '@angular/material/badge';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -34,7 +34,8 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     MatMenuModule,
     MatButtonModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSidenavModule
   ],
   entryComponents: [UsuarioFormComponent],
   providers: [],

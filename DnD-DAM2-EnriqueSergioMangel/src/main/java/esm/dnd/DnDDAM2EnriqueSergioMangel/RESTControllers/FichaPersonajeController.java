@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.bson.types.ObjectId;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -126,7 +127,7 @@ public class FichaPersonajeController {
         
         if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
         {
-        	equipamiento.setIdEquipo(UUID.randomUUID().toString());
+        	equipamiento.setIdEquipo(ObjectId.get());
         	FichaPersonaje ficha = fichaPersonajeServicio.findFichaPersonajeById(id).get();
         	
         	ficha.getInventario().add(equipamiento);
