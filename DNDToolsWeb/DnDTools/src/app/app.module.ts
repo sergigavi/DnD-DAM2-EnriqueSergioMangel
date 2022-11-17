@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,9 +14,7 @@ import { MatTableModule}  from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
-
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
-//import {MatBadgeModule} from '@angular/material/badge';
 
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
@@ -90,13 +92,16 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     HttpClientModule,
-    //MatSidenavModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MatMenuModule,
     MatButtonModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgbModule
   ],
   entryComponents: [UsuarioFormComponent],
   providers: [],

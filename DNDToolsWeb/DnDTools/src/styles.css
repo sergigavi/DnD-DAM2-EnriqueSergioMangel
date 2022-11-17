@@ -1,13 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-<<<<<<< HEAD
 body{
   height:100vh;
   font-size: 13.5px;
+  margin: 0;
 }
 
 .ng-sidebar
 {
-  background: rgb(26, 26, 33);
   width: 15rem ;
   /*margin-top:50px;
   margin-bottom:50px;*/
@@ -20,6 +19,25 @@ body{
 .liSlide{
   padding: 5px;
   color:#0d6efd;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-container {
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  height: 100%;
+}
+
+.example-sidenav {
+  padding-bottom: 10px;
+  width:15%;
+  margin:0;
 }
 
 td{
@@ -38,19 +56,12 @@ td{
 
 .controlNavbar{
   padding-right:10px;
+  padding-bottom:10px;
   display:block;
   margin:auto;
-}
-
-.controlUl{
- background: rgb(26, 26, 33);
 }
 
 .h1control{
   color:#0d6efd;
 }
-=======
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
->>>>>>> origin/EnriqueBranch

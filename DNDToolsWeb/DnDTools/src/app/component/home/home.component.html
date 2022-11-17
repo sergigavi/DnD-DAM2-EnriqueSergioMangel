@@ -1,29 +1,82 @@
-<div>
-  <ul class="nav justify-content-center controlUl">
-    <li class="nav-item controlNavbar">
-      <h1 class="h1control">{{title}}</h1>
-    </li>
-    <li class="nav-item controlNavbar">
-      <a class="nav-link" href="">Inicio</a>
-    </li>
-    <li class="nav-item controlNavbar">
-      <a class="nav-link" href="#">Mas Información</a>
-    </li>
-    <li class="nav-item controlNavbar">
-      <a class="nav-link" href="#">Mas sobre nosotros</a>
-    </li>
-    <li class="nav-item controlNavbar">
-      <a class="nav-link" href="#">Contactanos</a>
-    </li>
-    <li class="nav-item controlNavbar">
-      <a class="nav-link" href="panelControl-admin">Acceso temporal Admin</a>
-    </li>
-    <li class="nav-item controlNavbar">
-      <a class="nav-link" href="usuario-partidasUsuario">Acceso temporal Usuario</a>
-    </li>
-    <li class="nav-item controlNavbar">
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+      <!--SideBar-->
+      <div>
+        <ul class="nav justify-content-center controlUl">
+          <li class="nav-item controlNavbar">
+            <h1 class="h1control"></h1>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="">Inicio</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="#">Mas Información</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="#">Mas sobre nosotros</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="#">Contactanos</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="panelControl-admin">Acceso temporal Admin</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="usuario-partidasUsuario">Acceso temporal Usuario</a>
+          </li>
+        </ul>
+      </div>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <!--Menu-->
+    <mat-toolbar color="primary">
+      <button type="button" mat-icon-button mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{title}}</span>
+      <span class="example-spacer"></span>
       <button class="button">Perfil</button>
-    </li>
-  </ul>
-</div>
+    </mat-toolbar>
+  </div>
+
+</mat-drawer-container>
+
+
+
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>
+    <!--SideBar-->
+    <div >
+      <ul class="nav justify-content-center controlUl">
+        <li class="nav-item controlNavbar">
+          <h1 class="h1control"></h1>
+        </li>
+        <li class="nav-item controlNavbar">
+          <a class="nav-link" href="">Inicio</a>
+        </li>
+        <li class="nav-item controlNavbar">
+          <a class="nav-link" href="#">Mas Información</a>
+        </li>
+        <li class="nav-item controlNavbar">
+          <a class="nav-link" href="#">Mas sobre nosotros</a>
+        </li>
+        <li class="nav-item controlNavbar">
+          <a class="nav-link" href="#">Contactanos</a>
+        </li>
+        <li class="nav-item controlNavbar">
+          <a class="nav-link" href="panelControl-admin">Acceso temporal Admin</a>
+        </li>
+        <li class="nav-item controlNavbar">
+          <a class="nav-link" href="usuario-partidasUsuario">Acceso temporal Usuario</a>
+        </li>
+      </ul>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
 
