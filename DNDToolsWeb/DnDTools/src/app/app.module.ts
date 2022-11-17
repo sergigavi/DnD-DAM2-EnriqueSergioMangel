@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { SidebarModule } from 'ng-sidebar';
 import { FormsModule } from '@angular/forms';
-import { MatMenuModule } from '@angular/material/menu';
 
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
 //import {MatSidenavModule} from '@angular/material/sidenav';
@@ -82,8 +81,7 @@ const routes: Routes = [
     SidebarModule.forRoot(),
     RouterModule.forRoot(routes),
     FormsModule,
-    HttpClientModule,
-    MatMenuModule,
+    HttpClientModule
   ],
   providers: [UsuarioServiceService],
   bootstrap: [AppComponent]
