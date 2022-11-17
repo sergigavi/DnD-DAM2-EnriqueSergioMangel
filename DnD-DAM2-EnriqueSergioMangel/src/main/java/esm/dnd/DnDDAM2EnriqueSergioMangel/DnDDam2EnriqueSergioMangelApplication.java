@@ -11,6 +11,8 @@ public class DnDDam2EnriqueSergioMangelApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DnDDam2EnriqueSergioMangelApplication.class, args);
+		
+		
 	}
 
 }

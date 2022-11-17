@@ -1,9 +1,11 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 //import javax.persistence.Entity;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
@@ -18,12 +20,13 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 
+@Document
 @Component
 public class Usuario {
 	
 	@Id
 	@EqualsAndHashCode.Include
-	private String idUser;
+	private UUID idUser;
 	
 	private String nombre;
 	
@@ -44,7 +47,7 @@ public class Usuario {
 	private boolean activo;
 	
 	private String pais;
-	
+
 	
 
 }

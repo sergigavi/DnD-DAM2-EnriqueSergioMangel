@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,16 +21,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IFichaPersonajeServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
 
 @CrossOrigin(origins = {"*"},methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.OPTIONS})
 @RestController
-@RequestMapping("/API/dndtools/usuarios")
+@RequestMapping("/api/dndtools/usuarios")
 public class UsuarioController {
 
 	@Autowired
     private IUsuarioServicio usuarioServicio;
+	
+	@Autowired
+    private IFichaPersonajeServicio fichaPersonajeServicio;
     
     @GetMapping("/dametodos")
     public ResponseEntity<List<Usuario>> obtenerTodosLosUsuarios()
@@ -43,69 +49,91 @@ public class UsuarioController {
         return res;
     }
 
-	
-	@PostMapping("/addUsuario")
-	public ResponseEntity<String> addUsuario(@RequestBody Usuario u){
-
-
-		ResponseEntity<String> res = new ResponseEntity<>("Error al insertar usuario",HttpStatus.BAD_REQUEST);
-
-		Usuario u1 = Usuario.builder().build();
-
-		try {
-			u1 = Usuario.builder()
-				.idUser(UUID.randomUUID().toString())
-				.nombre(u.getNombre())
-				.apellidos(u.getApellidos())
-				.contrasenia(u.getContrasenia())
-				.nickname(u.getNickname())
-				.biografia(u.getBiografia())
-				.email(u.getEmail())
-				.fechaNacimiento(u.getFechaNacimiento())
-				.urlImage(u.getUrlImage())
-				.pais(u.getPais())
-				.build();
-
-			usuarioServicio.insertarUsuario(u1);
-
-			return new ResponseEntity<String>("Inserccion correcta",HttpStatus.OK);
+	@PostMapping("/insertarUsuario")
+    public ResponseEntity<Usuario> insertarUsuario(@RequestBody Usuario usuario)
+    {
+    	ResponseEntity<Usuario> res = new ResponseEntity<>(new Usuario(),HttpStatus.BAD_REQUEST);
+    	    	
+    	try {
+			usuario.setIdUser(UUID.randomUUID());
+			usuarioServicio.insertarUsuario(usuario);
+			Usuario u=usuarioServicio.findUsuarioById(usuario.getIdUser()).get();
+			res = new ResponseEntity<Usuario>(u, HttpStatus.OK);
+			
 			
 		} catch (Exception e) {
-			System.out.println(e.getStackTrace());
+			e.printStackTrace();
 		}
-		return res;
-	}
+    	
+    	return res;
+    }
 
+	@DeleteMapping("/deleteById")
+	public ResponseEntity<Usuario> deleteById(@RequestParam UUID id)
+	{
+		Usuario u;
+		
+		ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		
+		if(usuarioServicio.existeUsuario(id))
+		{
+			u = usuarioServicio.findUsuarioById(id).get();
+			usuarioServicio.eliminarUsuario(id);
+			res = new ResponseEntity<Usuario>(u,HttpStatus.ACCEPTED);
+		}
+		
+		return res;
+		
+	}
+	
+	@DeleteMapping("/clear")
+	public ResponseEntity<Iterable<Usuario>> deleteAll()
+	{
+		
+		ResponseEntity<Iterable<Usuario>> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		
+		Iterable<Usuario> users = usuarioServicio.eliminarTodos();
+		
+		//Elimino tambien los de dentro de las fichas
+		
+		List<FichaPersonaje> fichas =  (List<FichaPersonaje>) fichaPersonajeServicio.deleteAllFichas();
+		fichas.stream().forEach(f -> f.setUsuario(null));
+		
+		fichaPersonajeServicio.addAllFichasPersonaje(fichas);
+		
+		res = new ResponseEntity<Iterable<Usuario>>(users, HttpStatus.ACCEPTED);
+		
+		return res;
+		
+	}
     
-    @PutMapping("/insertarPorParametro")
-    public ResponseEntity<String> insertarPorParametros(@RequestParam String idUser, @RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
+    @PostMapping("/insertarPorParametro")
+    public ResponseEntity<String> insertarPorParametros(@RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
     {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	
-    	Usuario u = Usuario.builder().build();
-    	
     	try {
-    		
-    		if (!usuarioServicio.existeUsuario(idUser))
-    		{
-    			u = Usuario.builder()
-    					.idUser(idUser)
-    					.nombre(nombre)
-    					.apellidos(apellidos)
-    					.contrasenia(contrasenia)
-    					.nickname(nickname)
-    					.biografia(biografia)
-    					.email(email)
-    					.fechaNacimiento(LocalDate.parse(fechaNac))
-    					.urlImage(urlImage)
-    					//.activo(activo)
-    					.pais(pais)
-    					.build();
-    			
-    			usuarioServicio.insertarUsuario(u);
-    			
-    			res = new ResponseEntity<>("Usuario insertado correctamente", HttpStatus.OK);
-    		}
+
+			Usuario u ;
+
+			u = Usuario.builder()
+					.idUser(UUID.randomUUID())
+					.nombre(nombre)
+					.apellidos(apellidos)
+					.contrasenia(contrasenia)
+					.nickname(nickname)
+					.biografia(biografia)
+					.email(email)
+					.fechaNacimiento(LocalDate.parse(fechaNac))
+					.urlImage(urlImage)
+					//.activo(activo)
+					.pais(pais)
+					.build();
+			
+			usuarioServicio.insertarUsuario(u);
+			
+			res = new ResponseEntity<>("Usuario insertado correctamente", HttpStatus.OK);
+		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,12 +147,12 @@ public class UsuarioController {
     {
     	ResponseEntity<String> res = new ResponseEntity<>("Error insertando usuario",HttpStatus.BAD_REQUEST);
     	
-    	Usuario u = Usuario.builder().build();
-    	
     	try {
     		
+			Usuario u;
+
 			u = Usuario.builder()
-					.idUser(UUID.randomUUID().toString())	//	Genero un id nuevo
+					.idUser(UUID.randomUUID())	//	Genero un id nuevo
 					.nombre(nombre)
 					.apellidos(apellidos)
 					//.contrasenia(contrasenia)
@@ -148,4 +176,7 @@ public class UsuarioController {
     	
     	return res;
     }
+
+
+    
 }

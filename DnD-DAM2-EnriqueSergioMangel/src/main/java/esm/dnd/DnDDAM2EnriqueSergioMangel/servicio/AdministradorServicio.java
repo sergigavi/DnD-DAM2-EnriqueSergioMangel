@@ -1,5 +1,6 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,16 @@ public class AdministradorServicio implements IAdministradorServicio{
 	public boolean existeAdministrador(UUID idAdmin) {
 		return administradorDAO.existsById(idAdmin);
 	}
+    
+    @Override
+	public Iterable<Administrador> findAllAdmins() {
+		return administradorDAO.findAll();
+	}
+
+	@Override
+	public Optional<Administrador> findAdminByID(UUID id) {
+		return administradorDAO.findById(id);
+	}
+    
+    
 }

@@ -9,15 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Alineamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Caracteristica;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Clase;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Equipamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Raza;
@@ -25,7 +30,7 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IFichaPersonajeServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
 
-@CrossOrigin    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
+@CrossOrigin(originPatterns = {"*"},methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.OPTIONS})    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
 @RestController
 @RequestMapping("/api/dndtools/personajes")
 public class FichaPersonajeController {
@@ -45,6 +50,107 @@ public class FichaPersonajeController {
         
         res = new ResponseEntity<List<FichaPersonaje>>(allFichasPersonaje, HttpStatus.OK);
         
+        return res;
+    }
+        
+    @GetMapping("/getCaracteristicasById/{id}")
+    public ResponseEntity<List<Caracteristica>> obtenerTodasLasFichasDePersonaje(@PathVariable UUID id)
+    {
+        ResponseEntity<List<Caracteristica>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
+        {
+            List<Caracteristica> caracteristicasDeLaFicha = fichaPersonajeServicio.getListaCaracteristicasPorId(id);
+            
+            res = new ResponseEntity<List<Caracteristica>>(caracteristicasDeLaFicha, HttpStatus.OK);
+        }
+
+        return res;
+    }
+    
+    @PostMapping("/AddCaracteristicaEnFichaByIdFicha/{id}")
+    public ResponseEntity<Caracteristica> addCaracteristicaByIdFicha(@PathVariable UUID id, @RequestBody Caracteristica caracteristica)
+    {
+        ResponseEntity<Caracteristica> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
+        {
+        	FichaPersonaje ficha = fichaPersonajeServicio.findFichaPersonajeById(id).get();
+        	
+        	ficha.getCaracteristicas().add(caracteristica);
+        	
+        	fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
+            
+            res = new ResponseEntity<Caracteristica>(caracteristica, HttpStatus.OK);
+        }
+
+        return res;
+    }
+    
+    @PostMapping("/AddHabilidadEnFichaByIdFicha/{id}")
+    public ResponseEntity<Habilidad> addHabilidadEnFichaByIdFicha(@PathVariable UUID id, @RequestBody Habilidad habilidad)
+    {
+        ResponseEntity<Habilidad> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
+        {
+        	FichaPersonaje ficha = fichaPersonajeServicio.findFichaPersonajeById(id).get();
+        	
+        	ficha.getHabilidades().add(habilidad);
+        	
+        	fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
+            
+            res = new ResponseEntity<Habilidad>(habilidad, HttpStatus.OK);
+        }
+        return res;
+    }
+    
+    @GetMapping("/getHabilidadesById/{idFicha}")
+    public ResponseEntity<List<Habilidad>> obtenerTodasLasHabilidades(@PathVariable UUID idFicha)
+    {
+        ResponseEntity<List<Habilidad>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(idFicha))
+        {
+            List<Habilidad> habilidadesDeFicha = fichaPersonajeServicio.getHabilidadesPorIdFicha(idFicha);
+            
+            res = new ResponseEntity<List<Habilidad>>(habilidadesDeFicha, HttpStatus.OK);
+        }
+
+        return res;
+    }
+
+    @PostMapping("/AddEquipamientoEnFichaByIdFicha/{id}")
+    public ResponseEntity<Equipamiento> addEquipamientoByIdFicha(@PathVariable UUID id, @RequestBody Equipamiento equipamiento)
+    {
+        ResponseEntity<Equipamiento> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
+        {
+        	equipamiento.setIdEquipo(UUID.randomUUID().toString());
+        	FichaPersonaje ficha = fichaPersonajeServicio.findFichaPersonajeById(id).get();
+        	
+        	ficha.getInventario().add(equipamiento);
+        	
+        	fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
+            
+            res = new ResponseEntity<Equipamiento>(equipamiento, HttpStatus.OK);
+        }
+
+        return res;
+    }
+    
+    @GetMapping("/getEquipamientoById/{idFicha}")
+    public ResponseEntity<List<Equipamiento>> obtenerTodosLosEquipamientos(@PathVariable UUID idFicha)
+    {
+        ResponseEntity<List<Equipamiento>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        
+        if (fichaPersonajeServicio.existsByIdFichaPersonaje(idFicha))
+        {
+            List<Equipamiento> equipamientoDeLaFicha = fichaPersonajeServicio.getEquipamientoPorIdFicha(idFicha);
+            
+            res = new ResponseEntity<List<Equipamiento>>(equipamientoDeLaFicha, HttpStatus.OK);
+        }
+
         return res;
     }
 
@@ -123,6 +229,38 @@ public class FichaPersonajeController {
         }
     }
     
+    @DeleteMapping("/deleteById")
+	public ResponseEntity<FichaPersonaje> deleteFichaById(@RequestParam UUID id)
+	{
+		FichaPersonaje f;
+		
+		ResponseEntity<FichaPersonaje> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		
+		if(fichaPersonajeServicio.existsByIdFichaPersonaje(id))
+		{
+			f = fichaPersonajeServicio.findFichaPersonajeById(id).get();
+			fichaPersonajeServicio.deleteFichaPersonajeById(id);
+			res = new ResponseEntity<FichaPersonaje>(f,HttpStatus.ACCEPTED);
+		}
+		
+		return res;
+		
+	}
+    
+    @DeleteMapping("/deleteAll")
+	public ResponseEntity<Iterable<FichaPersonaje>> deleteAllFichas()
+	{
+				
+		ResponseEntity<Iterable<FichaPersonaje>> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		
+		Iterable<FichaPersonaje> fichas = fichaPersonajeServicio.deleteAllFichas();
+		
+		res = new ResponseEntity<Iterable<FichaPersonaje>>(fichas,HttpStatus.ACCEPTED);
+		
+		return res;
+		
+	}
+    
     @GetMapping("/cargarDatos")
     public ResponseEntity<String> cargar_Datos() {
         
@@ -148,7 +286,7 @@ public class FichaPersonajeController {
         List<Usuario> usuarios = new ArrayList<>();
 
         Usuario u1= Usuario.builder()
-                .idUser(UUID.randomUUID().toString())
+                .idUser(UUID.randomUUID())
                 .nombre("Sergio")
                 .apellidos("GV")
                 .contrasenia("123abc")
