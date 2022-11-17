@@ -3,6 +3,7 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -155,9 +156,83 @@ public class FichaPersonaje {
 		}
 	}
 
-	public static void setHabilidades(String nombre,Boolean integer,Integer modCar,Integer bonif){
+	public static void setHabilidades(List<Caracteristica> caracteristicas,List<Habilidad> habilidades,Integer bonif){
 
+		int fueCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Fue"))
+			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
+
+		int desCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Des"))
+			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
 		
+		int intCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Int"))
+			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
+
+		int sabCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Sab"))
+			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
+
+		int carCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Fue"))
+			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
+
+		habilidades.stream().forEach((hab)->{
+			switch (hab.getNombre()) {
+				case "Acrobacias":
+					hab.setMod(hab.getCompetencia(),desCaract, bonif);
+					break;
+				case "C.Arcanos":
+					hab.setMod(hab.getCompetencia(), intCaract, bonif);
+					break;
+				case "Enganiar":
+					hab.setMod(hab.getCompetencia(), carCaract, bonif);
+					break;
+				case "Historia":
+					hab.setMod(hab.getCompetencia(), intCaract, bonif);
+					break;
+				case "Interpretacion":
+					hab.setMod(hab.getCompetencia(), carCaract, bonif);
+					break;
+				case "Intimidar":
+					hab.setMod(hab.getCompetencia(), carCaract, bonif);
+					break;
+				case "Investigar":
+					hab.setMod(hab.getCompetencia(), intCaract, bonif);
+					break;
+				case "Juego de manos":
+					hab.setMod(hab.getCompetencia(), desCaract, bonif);
+					break;
+				case "Atletismo":
+					hab.setMod(hab.getCompetencia(), fueCaract, bonif);
+					break;
+				case "Medicina":
+					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					break;
+				case "Naturaleza":
+					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					break;
+				case "Percepcion":
+					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					break;
+				case "Perpicacia":
+					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					break;
+				case "Persuasion":
+					hab.setMod(hab.getCompetencia(), carCaract, bonif);
+					break;
+				case "Religion":
+					hab.setMod(hab.getCompetencia(), intCaract, bonif);
+					break;
+				case "Sigilo":
+					hab.setMod(hab.getCompetencia(), desCaract, bonif);
+					break;
+				case "Supervivencia":
+					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					break;
+				case "Trato con animales":
+					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
+					break;
+				default:
+					break;
+			}
+		});
 	}
 
 	public static List<Habilidad> setHabilidadesPorDefecto(List<Caracteristica> car,Integer bonif){

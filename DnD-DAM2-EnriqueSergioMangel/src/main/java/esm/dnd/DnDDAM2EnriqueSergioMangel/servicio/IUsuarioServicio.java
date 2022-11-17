@@ -1,5 +1,6 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,9 +16,9 @@ public interface IUsuarioServicio {
 	
     public boolean cambiarContrasenia(UUID idUser, String contrasenia);
     
-    public boolean addAllUsuarios(Iterable<Usuario> usuarios);
+    public boolean addAllUsuarios(List<Usuario> usuarios);
     
-    public Iterable<Usuario> findAllUsuarios();
+    public List<Usuario> findAllUsuarios();
     
     public Optional<Usuario> findUsuarioById(UUID idUsuario);
 
