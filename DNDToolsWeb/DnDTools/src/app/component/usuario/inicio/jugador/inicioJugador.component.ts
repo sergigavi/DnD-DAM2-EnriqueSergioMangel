@@ -9,16 +9,11 @@ import {Component, OnInit} from '@angular/core';
 
 
 export class InicioJugadorComponent implements OnInit  {
-  title = 'Inicio Jugador';
-  opened = false;
+  title = 'Inicio Jugador'
 
   constructor(){}
 
   ngOnInit(): void {
-  }
-
-  toggleSidebar() {
-    this.opened = !this.opened;
   }
 
 }

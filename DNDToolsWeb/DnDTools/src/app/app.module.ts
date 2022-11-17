@@ -12,6 +12,8 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatButtonModule } from '@angular/material/button'
 import { MatTableModule}  from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
@@ -36,7 +38,8 @@ import { HeroesGMComponent } from './component/usuario/heroes/gameMaster/herores
 import { HeroesJugadorComponent } from './component/usuario/heroes/jugador/heroesJugador.component';
 import { NpcGMComponent } from './component/usuario/npc/gameMaster/npcGM.component';
 import { NpcJugadorComponent } from './component/usuario/npc/jugador/npcJugador.component';
-PartidasUsuarioComponent
+import { MenuUsuarioJugadorComponent } from './component/plantillas/menuUsuarioJugador/menuUsuarioJugador.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 const routes: Routes = [
   //invitados
@@ -84,7 +87,8 @@ const routes: Routes = [
     HeroesJugadorComponent,
     HeroesGMComponent,
     NpcJugadorComponent,
-    NpcGMComponent
+    NpcGMComponent,
+    MenuUsuarioJugadorComponent
 
   ],
   imports: [
@@ -101,10 +105,12 @@ const routes: Routes = [
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    NgbModule
+    NgbModule,
+    MatSortModule,
+    MatFormFieldModule
   ],
   entryComponents: [UsuarioFormComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

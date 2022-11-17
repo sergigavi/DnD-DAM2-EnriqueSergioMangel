@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-partidas',
@@ -12,9 +14,12 @@ export class PartidasUsuarioComponent implements OnInit  {
   title = 'Partidas';
   opened = false;
 
+  @ViewChild('matPaginator',{static:true}) paginator!:MatPaginator
+  @ViewChild('sort',{static:true}) sort!:MatSort
+
   constructor(){}
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   toggleSidebar() {
@@ -22,4 +27,5 @@ export class PartidasUsuarioComponent implements OnInit  {
   }
 
 }
+
 
