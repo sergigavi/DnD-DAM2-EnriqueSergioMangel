@@ -26,7 +26,15 @@
       <span>{{title}}</span>
       <a class="nav-link" href="">Salir Admin</a>
       <span class="example-spacer"></span>
-      <button class="button">Perfil</button>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a href="perfil">
+          <button mat-menu-item>Perfil</button>
+        </a>
+        <button mat-menu-item>Cerrar Sesion</button>
+      </mat-menu>
     </mat-toolbar>
   </div>
 </mat-drawer-container>

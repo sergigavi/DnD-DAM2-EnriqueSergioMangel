@@ -14,6 +14,9 @@ import { MatTableModule}  from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
@@ -40,6 +43,7 @@ import { NpcGMComponent } from './component/usuario/npc/gameMaster/npcGM.compone
 import { NpcJugadorComponent } from './component/usuario/npc/jugador/npcJugador.component';
 import { MenuUsuarioJugadorComponent } from './component/plantillas/menuUsuarioJugador/menuUsuarioJugador.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { PerfilComponent } from './component/perfil/perfil.component';
 
 const routes: Routes = [
   //invitados
@@ -63,7 +67,8 @@ const routes: Routes = [
   {path:'usuario-heroesGM',component: HeroesGMComponent},
   {path:'usuario-npcJugador',component: NpcJugadorComponent},
   {path:'usuario-npcGM',component: NpcGMComponent},
-
+  //perfil
+  {path:'perfil',component: PerfilComponent},
 
 ];
 
@@ -88,7 +93,8 @@ const routes: Routes = [
     HeroesGMComponent,
     NpcJugadorComponent,
     NpcGMComponent,
-    MenuUsuarioJugadorComponent
+    MenuUsuarioJugadorComponent,
+    PerfilComponent
 
   ],
   imports: [
@@ -107,7 +113,10 @@ const routes: Routes = [
     MatPaginatorModule,
     NgbModule,
     MatSortModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCardModule,
+    MatGridListModule,
+    MatInputModule
   ],
   entryComponents: [UsuarioFormComponent],
   providers: [],
