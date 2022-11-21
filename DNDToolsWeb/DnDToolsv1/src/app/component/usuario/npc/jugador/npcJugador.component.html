@@ -3,19 +3,19 @@
       <!--SideBar-->
       <ul class="ulSlide">
         <li class="nav-item liSlide">
-          <a class="nav-link" href="usuario-inicioGM"><h5>Inicio</h5></a>
+          <a class="nav-link" href="usuario-inicioJugador"><h5>Inicio</h5></a>
         </li>
         <li class="nav-item liSlide">
-          <a class="nav-link" href="usuario-heroesGM"><h5>Participantes</h5></a>
+          <a class="nav-link" href="usuario-mapasJugador"><h5>Mapas/Localizaciones</h5></a>
         </li>
         <li class="nav-item liSlide">
-          <a class="nav-link" href="usuario-mapasGM"><h5>Mapas/Localizaciones</h5></a>
+          <a class="nav-link" href="usuario-historiaJugador"><h5>Historia</h5></a>
         </li>
         <li class="nav-item liSlide">
-          <a class="nav-link" href="usuario-historiaGM"><h5>Historia</h5></a>
+          <a class="nav-link" href="usuario-heroesJugador"><h5>Fichas Heroes</h5></a>
         </li>
         <li class="nav-item liSlide">
-          <a class="nav-link" href="usuario-npcGM"><h5>Fichas NPCs</h5></a>
+          <a class="nav-link" href="usuario-npcJugador"><h5>Fichas NPCs</h5></a>
         </li>
       </ul>
   </mat-drawer>
@@ -44,23 +44,17 @@
 
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
-        
-      <!-- Nombre Column -->
-      <ng-container matColumnDef="nombreUbicacion">
-        <th mat-header-cell *matHeaderCellDef> Nombre Ubicación </th>
-        <td mat-cell *matCellDef="let element"> {{element.nombreUbicacion}} </td>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="nombreNpc">
+        <th mat-header-cell *matHeaderCellDef> Nombre Npc </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombreNpc}} </td>
       </ng-container>
 
-      <!-- Mas info Column -->
+      <!-- Name Column -->
       <ng-container matColumnDef="acceder">
         <th mat-header-cell *matHeaderCellDef> Más Información </th>
         <td mat-cell *matCellDef="let element"><button mat-button (click)="openDialog()">Acceder</button> </td>
-      </ng-container>
-
-      <!-- Mas info Column -->
-      <ng-container matColumnDef="editar">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let element"><button mat-button (click)="openDialog2()">Editar</button> </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

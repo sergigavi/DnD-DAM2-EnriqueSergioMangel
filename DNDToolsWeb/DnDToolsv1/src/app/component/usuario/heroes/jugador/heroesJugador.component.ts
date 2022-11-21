@@ -21,23 +21,23 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 @Component({
-  selector: 'app-heroesGM',
-  templateUrl: './heroesGM.component.html',
-  styleUrls: ['./heroesGM.component.css']
+  selector: 'app-heroesJugador',
+  templateUrl: './heroesJugador.component.html',
+  styleUrls: ['./heroesJugador.component.css']
 })
 
 
-export class HeroesGMComponent implements OnInit  {
-  title = 'Heroes GM';
+export class HeroesJugadorComponent implements OnInit  {
+  title = 'Heroes Jugador';
   opened = false;
 
-  displayedColumns: string[] = ['nombreHeroes','acceder','editar'];
+  displayedColumns: string[] = ['nombreHeroes','acceder'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   constructor(public dialog: MatDialog){}
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogHeroesGM);
+    const dialogRef = this.dialog.open(DialogHeroesJugador);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -45,7 +45,7 @@ export class HeroesGMComponent implements OnInit  {
   }
 
   openDialog2() {
-    const dialogRef = this.dialog.open(Dialog2HeroesGM);
+    const dialogRef = this.dialog.open(Dialog2HeroesJugador);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -64,16 +64,15 @@ export class HeroesGMComponent implements OnInit  {
 }
 
 @Component({
-  selector: 'heroesGMDialog',
-  templateUrl: 'heroesGMDialog.html'
+  selector: 'heroesJugadorDialog',
+  templateUrl: 'heroesJugadorDialog.html'
 })
 
-export class DialogHeroesGM {}
+export class DialogHeroesJugador {}
 
 @Component({
-  selector: 'heroesGMDialog2',
-  templateUrl: 'heroesGMDialog2.html'
+  selector: 'heroesJugadorDialog2',
+  templateUrl: 'heroesJugadorDialog2.html'
 })
 
-export class Dialog2HeroesGM {}
-
+export class Dialog2HeroesJugador {}
