@@ -3,8 +3,8 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.stereotype.Component;
@@ -28,7 +28,7 @@ public class FichaPersonaje {
 	@MongoId
 	@NonNull
 	@EqualsAndHashCode.Include
-	private UUID idFichaPersonaje;
+	private ObjectId idFichaPersonaje;
 	
 	@Nullable
 	private Usuario usuario;
@@ -115,7 +115,7 @@ public class FichaPersonaje {
 	 */
 	public FichaPersonaje(){
 
-		this.idFichaPersonaje=UUID.randomUUID();
+		this.idFichaPersonaje=ObjectId.get();
 		this.nombre="";
 		this.nivel=1;
 		this.bonifCompetencia=calcBonifCompetencia(this.nivel);
