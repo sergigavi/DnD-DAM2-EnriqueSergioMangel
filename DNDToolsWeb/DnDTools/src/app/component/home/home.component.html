@@ -1,0 +1,53 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+      <!--SideBar-->
+      <div>
+        <ul class="nav justify-content-center controlUl">
+          <li class="nav-item controlNavbar">
+            <h1 class="h1control"></h1>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="">Inicio</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="#">Mas Información</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="#">Mas sobre nosotros</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="#">Contactanos</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="panelControl-admin">Acceso temporal Admin</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="usuario-partidasUsuario">Acceso temporal Usuario</a>
+          </li>
+        </ul>
+      </div>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <!--Menu-->
+    <mat-toolbar color="primary">
+      <button type="button" mat-icon-button mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{title}}</span>
+      <span class="example-spacer"></span>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a href="perfil">
+          <button mat-menu-item>Perfil</button>
+        </a>
+        <button mat-menu-item>Cerrar Sesion</button>
+      </mat-menu>
+    </mat-toolbar>
+  </div>
+</mat-drawer-container>
+
+
+

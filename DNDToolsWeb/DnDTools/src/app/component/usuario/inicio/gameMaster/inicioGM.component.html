@@ -1,0 +1,80 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+      <!--SideBar-->
+      <ul class="ulSlide">
+        <li class="nav-item liSlide">
+          <a class="nav-link" href="usuario-inicioGM"><h5>Inicio</h5></a>
+        </li>
+        <li class="nav-item liSlide">
+          <a class="nav-link" href="usuario-heroesGM"><h5>Participantes</h5></a>
+        </li>
+        <li class="nav-item liSlide">
+          <a class="nav-link" href="usuario-mapasGM"><h5>Mapas/Localizaciones</h5></a>
+        </li>
+        <li class="nav-item liSlide">
+          <a class="nav-link" href="usuario-historiaGM"><h5>Historia</h5></a>
+        </li>
+        <li class="nav-item liSlide">
+          <a class="nav-link" href="usuario-npcGM"><h5>Fichas NPCs</h5></a>
+        </li>
+      </ul>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <!--Menu-->
+    <mat-toolbar color="primary">
+      <button type="button" mat-icon-button mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{title}}</span>
+      <span class="example-spacer"></span>
+      <a href="usuario-partidasUsuario">Salir Partida</a>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a href="perfil">
+          <button mat-menu-item>Perfil</button>
+        </a>
+        <button mat-menu-item>Cerrar Sesion</button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <!--Datos-->
+    <mat-card class="example-card">
+      <mat-card-content>
+        <form class="inicio-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Nombre Mapa</mat-label>
+          <input matInput matInput value="Eredor" placeholder="Nombre del Mapa">
+        </mat-form-field>
+        <div style="margin-left: auto; margin-right: auto;">
+          <div style="width: 1%; margin:auto;">
+            <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
+              <mat-icon>create</mat-icon>
+            </button>
+          </div>
+          <img class="image-perfil" src="https://blog.contemplarol.com/wp-content/uploads/2020/01/Iv%C3%A1n_Tierras-de-Nirm-1024x768.jpg" alt="Img of map">
+        </div>
+          <mat-form-field class="example-full-width" >
+            <mat-label>Descripción de la situación actual</mat-label>
+            <textarea matInput value="Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.
+               Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T
+               . persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró
+               hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en
+                documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación delas
+                hojas Letraset, las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por
+                ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum." placeholder="Descripción corta de la historia">
+            </textarea>
+          </mat-form-field>
+        </form>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <a href="usuario-partidasUsuario">
+          <button mat-button>Salir Partida</button>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</mat-drawer-container>
