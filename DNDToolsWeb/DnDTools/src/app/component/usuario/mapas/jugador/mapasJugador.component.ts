@@ -1,4 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+
+export interface PeriodicElement {
+  nombreUbicacion: string;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {nombreUbicacion: 'Doragol'},
+  {nombreUbicacion: 'PuebloMaromar'},
+  {nombreUbicacion: 'Castillo Orisia'},
+  {nombreUbicacion: 'Mar Muerto'},
+  {nombreUbicacion: 'Isla Calavera'},
+  {nombreUbicacion: 'Mapa del tesero'},
+  {nombreUbicacion: 'Raìdps del Ferri'},
+  {nombreUbicacion: 'Fuerte Donbass'},
+  {nombreUbicacion: 'Frontera Orizonea'},
+  {nombreUbicacion: 'Dragon Home'},
+];
 
 
 @Component({
@@ -8,13 +28,32 @@ import {Component, OnInit} from '@angular/core';
 })
 
 
-export class MapasJugadorComponent implements OnInit  {
+export class MapasJugadorComponent implements OnInit   {
   title = 'Mapas Jugador';
   opened = false;
 
-  constructor(){}
+  displayedColumns: string[] = ['nombreUbicacion','acceder'];
+  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+
+
+  constructor(public dialog: MatDialog){}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogMapasJugador);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  @ViewChild('matPaginator',{static:true}) paginator!:MatPaginator
 
   ngOnInit(): void {
+    this.dataSource.paginator=this.paginator;
+  }
+
+  ngAfterViewInit(){
+    this.dataSource.paginator=this.paginator;
   }
 
   toggleSidebar() {
@@ -22,4 +61,11 @@ export class MapasJugadorComponent implements OnInit  {
   }
 
 }
+
+@Component({
+  selector: 'mapasJugadorDialog',
+  templateUrl: 'mapasJugadorDialog.html'
+})
+
+export class DialogMapasJugador {}
 

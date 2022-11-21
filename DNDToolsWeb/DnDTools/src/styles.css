@@ -5,6 +5,10 @@ body{
   margin: 0;
 }
 
+table {
+  width: 100%;
+}
+
 .ng-sidebar
 {
   width: 15rem ;
@@ -106,5 +110,16 @@ td{
 
 .example-full-width {
   width: 100%;
+}
+/*inicio*/
+.form-inicio{
+  width: 99%;
+}
+
+/*hisotira*/
+.form-historia{
+  width: 99%;
+  padding: 1%;
+  margin-right: 10%;
 }
 

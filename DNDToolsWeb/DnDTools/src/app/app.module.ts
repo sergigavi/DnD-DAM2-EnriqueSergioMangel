@@ -17,6 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
@@ -33,8 +34,8 @@ import { UsuariosComponent } from './component/admin/usuarios/usuarios.component
 import { PartidasUsuarioComponent } from './component/usuario/partidas/partidas.component';
 import { InicioGMComponent } from './component/usuario/inicio/gameMaster/inicioGM.component';
 import { InicioJugadorComponent } from './component/usuario/inicio/jugador/inicioJugador.component';
-import { MapasGMComponent } from './component/usuario/mapas/gameMaster/mapasGM.component';
-import { MapasJugadorComponent } from './component/usuario/mapas/jugador/mapasJugador.component';
+import { DialogMapasGM, MapasGMComponent } from './component/usuario/mapas/gameMaster/mapasGM.component';
+import { DialogMapasJugador, MapasJugadorComponent } from './component/usuario/mapas/jugador/mapasJugador.component';
 import { HistoriaGMComponent } from './component/usuario/historia/gameMaster/historiaGM.component';
 import { HistoriaJugadorComponent } from './component/usuario/historia/jugador/historiaJugador.component';
 import { HeroesGMComponent } from './component/usuario/heroes/gameMaster/heroresGM.component';
@@ -94,7 +95,9 @@ const routes: Routes = [
     NpcJugadorComponent,
     NpcGMComponent,
     MenuUsuarioJugadorComponent,
-    PerfilComponent
+    PerfilComponent,
+    DialogMapasJugador,
+    DialogMapasGM
 
   ],
   imports: [
@@ -116,7 +119,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatCardModule,
     MatGridListModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ],
   entryComponents: [UsuarioFormComponent],
   providers: [],
