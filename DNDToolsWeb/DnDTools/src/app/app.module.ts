@@ -30,7 +30,7 @@ import { HomeComponent } from './component/home/home.component';
 import { PartidasComponent } from './component/admin/partidas/partidas.component';
 import { EquipamientoComponent } from './component/admin/equipamiento/equipamiento.component';
 import { PanelControlComponent } from './component/admin/panelControl/panelControl.component';
-import { UsuariosComponent } from './component/admin/usuarios/usuarios.component';
+import { Dialog2Usuarios, DialogUsuarios, UsuariosComponent } from './component/admin/usuarios/usuarios.component';
 import { PartidasUsuarioComponent } from './component/usuario/partidas/partidas.component';
 import { InicioGMComponent } from './component/usuario/inicio/gameMaster/inicioGM.component';
 import { InicioJugadorComponent } from './component/usuario/inicio/jugador/inicioJugador.component';
@@ -40,12 +40,11 @@ import { HistoriaGMComponent } from './component/usuario/historia/gameMaster/his
 import { HistoriaJugadorComponent } from './component/usuario/historia/jugador/historiaJugador.component';
 import { Dialog2HeroesGM, DialogHeroesGM, HeroesGMComponent } from './component/usuario/heroes/gameMaster/heroresGM.component';
 import { Dialog2HeroesJugador, DialogHeroesJugador, HeroesJugadorComponent } from './component/usuario/heroes/jugador/heroesJugador.component';
-import { NpcGMComponent } from './component/usuario/npc/gameMaster/npcGM.component';
+import { Dialog2NpcGM, DialogNpcGM, NpcGMComponent } from './component/usuario/npc/gameMaster/npcGM.component';
 import { DialogNpcJugador, NpcJugadorComponent } from './component/usuario/npc/jugador/npcJugador.component';
 import { MenuUsuarioJugadorComponent } from './component/plantillas/menuUsuarioJugador/menuUsuarioJugador.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PerfilComponent } from './component/perfil/perfil.component';
-
 
 const routes: Routes = [
   //invitados
@@ -105,6 +104,10 @@ const routes: Routes = [
     DialogNpcJugador,
     DialogHeroesGM,
     Dialog2HeroesGM,
+    DialogNpcGM,
+    Dialog2NpcGM,
+    DialogUsuarios,
+    Dialog2Usuarios,
 
   ],
   imports: [
