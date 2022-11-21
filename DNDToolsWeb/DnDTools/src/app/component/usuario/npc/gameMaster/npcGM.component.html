@@ -39,5 +39,40 @@
         <button mat-menu-item>Cerrar Sesion</button>
       </mat-menu>
     </mat-toolbar>
+<<<<<<< HEAD
+=======
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombreNpc">
+        <th mat-header-cell *matHeaderCellDef> Nombre Npc </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombreNpc}} </td>
+      </ng-container>
+
+      <!-- Mas info Column -->
+      <ng-container matColumnDef="acceder">
+        <th mat-header-cell *matHeaderCellDef> Más Información </th>
+        <td mat-cell *matCellDef="let element"><button mat-button (click)="openDialog()">Acceder</button> </td>
+      </ng-container>
+
+      <!-- Mas info Column -->
+      <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element"><button mat-button (click)="openDialog2()">Editar</button> </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+    </mat-paginator>
+
+>>>>>>> main
   </div>
 </mat-drawer-container>

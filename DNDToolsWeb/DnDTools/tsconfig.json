@@ -22,9 +22,12 @@
       "es2020",
       "dom"
     ],
+<<<<<<< HEAD
     "types": [
       "@angular/localize"
     ],
+=======
+>>>>>>> main
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
