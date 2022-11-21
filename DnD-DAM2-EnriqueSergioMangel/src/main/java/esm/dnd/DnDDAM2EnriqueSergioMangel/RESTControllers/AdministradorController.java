@@ -2,6 +2,7 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 
 import java.util.UUID;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,7 @@ public class AdministradorController {
     {
         ResponseEntity<String> res = new ResponseEntity<>("Error insertando el admin",HttpStatus.BAD_REQUEST);
         
-        admin.setIdAdmin(UUID.randomUUID());
+        admin.setIdAdmin(ObjectId.get());
         
         if (administradorServicio.insertarAdministrador(admin)) {
         	res = new ResponseEntity<String>("Administrador insertado correctamente", HttpStatus.OK);
@@ -52,7 +53,7 @@ public class AdministradorController {
     }
 	
 	@DeleteMapping("/deleteById")
-    public ResponseEntity<Administrador> deleteAdminById(@RequestParam UUID id)
+    public ResponseEntity<Administrador> deleteAdminById(@RequestParam ObjectId id)
     {
 		Administrador admin;
 		
