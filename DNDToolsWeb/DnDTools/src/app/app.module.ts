@@ -38,7 +38,7 @@ import { DialogMapasGM, DialogMapasGM2, MapasGMComponent } from './component/usu
 import { DialogMapasJugador, MapasJugadorComponent } from './component/usuario/mapas/jugador/mapasJugador.component';
 import { HistoriaGMComponent } from './component/usuario/historia/gameMaster/historiaGM.component';
 import { HistoriaJugadorComponent } from './component/usuario/historia/jugador/historiaJugador.component';
-import { HeroesGMComponent } from './component/usuario/heroes/gameMaster/heroresGM.component';
+import { Dialog2HeroesGM, DialogHeroesGM, HeroesGMComponent } from './component/usuario/heroes/gameMaster/heroresGM.component';
 import { Dialog2HeroesJugador, DialogHeroesJugador, HeroesJugadorComponent } from './component/usuario/heroes/jugador/heroesJugador.component';
 import { NpcGMComponent } from './component/usuario/npc/gameMaster/npcGM.component';
 import { DialogNpcJugador, NpcJugadorComponent } from './component/usuario/npc/jugador/npcJugador.component';
@@ -102,7 +102,9 @@ const routes: Routes = [
     DialogMapasGM2,
     DialogHeroesJugador,
     Dialog2HeroesJugador,
-    DialogNpcJugador
+    DialogNpcJugador,
+    DialogHeroesGM,
+    Dialog2HeroesGM,
 
   ],
   imports: [
