@@ -1,0 +1,75 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+      <!--SideBar-->
+      <ul class="ulSlide">
+        <li class="nav-item liSlide">
+          <a class="nav-link" href="usuario-inicioGM"><h5>Inicio</h5></a>
+        </li>
+        <li class="nav-item liSlide">
+          <a class="nav-link" href="usuario-heroesGM"><h5>Participantes</h5></a>
+        </li>
+        <li class="nav-item liSlide">
+          <a class="nav-link" href="usuario-mapasGM"><h5>Mapas/Localizaciones</h5></a>
+        </li>
+        <li class="nav-item liSlide">
+          <a class="nav-link" href="usuario-historiaGM"><h5>Historia</h5></a>
+        </li>
+        <li class="nav-item liSlide">
+          <a class="nav-link" href="usuario-npcGM"><h5>Fichas NPCs</h5></a>
+        </li>
+      </ul>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <!--Menu-->
+    <mat-toolbar color="primary">
+      <button type="button" mat-icon-button mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{title}}</span>
+      <span class="example-spacer"></span>
+      <a href="usuario-partidasUsuario">Salir Partida</a>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a href="perfil">
+          <button mat-menu-item>Perfil</button>
+        </a>
+        <button mat-menu-item>Cerrar Sesion</button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombreNpc">
+        <th mat-header-cell *matHeaderCellDef> Nombre Npc </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombreNpc}} </td>
+      </ng-container>
+
+      <!-- Mas info Column -->
+      <ng-container matColumnDef="acceder">
+        <th mat-header-cell *matHeaderCellDef> Más Información </th>
+        <td mat-cell *matCellDef="let element"><button mat-button (click)="openDialog()">Acceder</button> </td>
+      </ng-container>
+
+      <!-- Mas info Column -->
+      <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element"><button mat-button (click)="openDialog2()">Editar</button> </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+    </mat-paginator>
+
+  </div>
+</mat-drawer-container>
