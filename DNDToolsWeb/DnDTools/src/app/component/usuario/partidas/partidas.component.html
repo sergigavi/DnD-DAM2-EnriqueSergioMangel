@@ -1,23 +1,25 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
       <!--SideBar-->
-      <ul class="ulSlide">
-        <li class="nav-item liSlide">
-          <a class="nav-link" href="usuario-inicioJugador"><h5>Inicio</h5></a>
-        </li>
-        <li class="nav-item liSlide">
-          <a class="nav-link" href="usuario-mapasJugador"><h5>Mapas/Localizaciones</h5></a>
-        </li>
-        <li class="nav-item liSlide">
-          <a class="nav-link" href="usuario-historiaJugador"><h5>Historia</h5></a>
-        </li>
-        <li class="nav-item liSlide">
-          <a class="nav-link" href="usuario-heroesJugador"><h5>Fichas Heroes</h5></a>
-        </li>
-        <li class="nav-item liSlide">
-          <a class="nav-link" href="usuario-npcJugador"><h5>Fichas NPCs</h5></a>
-        </li>
+      <div>
+        <ul class="nav justify-content-center controlUl">
+          <li class="nav-item controlNavbar">
+            <h1 class="h1control"></h1>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="">Inicio</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="#">Mas Información</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="#">Mas sobre nosotros</a>
+          </li>
+          <li class="nav-item controlNavbar">
+            <a class="nav-link" href="#">Contactanos</a>
+          </li>
       </ul>
+      </div>
   </mat-drawer>
 
   <div class="example-sidenav-content">
@@ -28,7 +30,6 @@
         </button>
         <span>{{title}}</span>
         <span class="example-spacer"></span>
-        <a href="">Volver Inicio</a>
         <button mat-button [matMenuTriggerFor]="menu">
           <mat-icon>account_circle</mat-icon>
         </button>
@@ -40,6 +41,7 @@
         </mat-menu>
       </mat-toolbar>
   </div>
+  
   <!--Tabla-->
   <div>
     <table class="default">

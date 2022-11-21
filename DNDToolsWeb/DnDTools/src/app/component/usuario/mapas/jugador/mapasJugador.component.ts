@@ -20,7 +20,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {nombreUbicacion: 'Dragon Home'},
 ];
 
-
 @Component({
   selector: 'app-mapasJugador',
   templateUrl: './mapasJugador.component.html',

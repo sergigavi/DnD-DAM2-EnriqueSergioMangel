@@ -45,7 +45,7 @@ export class MapasGMComponent implements OnInit  {
   }
 
   openDialog2() {
-    const dialogRef = this.dialog.open(DialogMapasGM);
+    const dialogRef = this.dialog.open(DialogMapasGM2);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -73,5 +73,15 @@ export class MapasGMComponent implements OnInit  {
   templateUrl: 'mapasGMDialog.html'
 })
 
-export class DialogMapasGM {}
+export class DialogMapasGM {
 
+}
+
+@Component({
+  selector: 'mapasGMDialog2',
+  templateUrl: 'mapasGMDialog2.html'
+})
+
+export class DialogMapasGM2 {
+
+}
