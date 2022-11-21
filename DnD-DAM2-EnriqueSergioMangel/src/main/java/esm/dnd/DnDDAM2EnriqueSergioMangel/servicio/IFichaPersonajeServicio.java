@@ -2,7 +2,6 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.bson.types.ObjectId;
 
@@ -19,21 +18,21 @@ public boolean addFichaPersonaje(FichaPersonaje fichaPersonaje);
 
 public List<FichaPersonaje> findAllFichasPersonaje();
 
-public Optional<FichaPersonaje> findFichaPersonajeById(UUID idFichaPersonaje);
+public Optional<FichaPersonaje> findFichaPersonajeById(ObjectId idFichaPersonaje);
 
-public boolean existsByIdFichaPersonaje(UUID id);
+public boolean existsByIdFichaPersonaje(ObjectId id);
 
-public FichaPersonaje deleteFichaPersonajeById(UUID id);
+public FichaPersonaje deleteFichaPersonajeById(ObjectId id);
 
 boolean actualizarFichaPersonaje(FichaPersonaje fichaPersonaje);
 
 public Iterable<FichaPersonaje> deleteAllFichas();
 
-public List<Caracteristica> getListaCaracteristicasPorId(UUID id);
+public List<Caracteristica> getListaCaracteristicasPorId(ObjectId id);
 
-public List<Equipamiento> getEquipamientoPorIdFicha(UUID idFicha);
+public List<Equipamiento> getEquipamientoPorIdFicha(ObjectId idFicha);
 
-public List<Habilidad> getHabilidadesPorIdFicha(UUID idFicha);
+public List<Habilidad> getHabilidadesPorIdFicha(ObjectId idFicha);
 
 public Boolean deleteEquipamientoByIdEquipamiento(ObjectId idEquipamiento);
 

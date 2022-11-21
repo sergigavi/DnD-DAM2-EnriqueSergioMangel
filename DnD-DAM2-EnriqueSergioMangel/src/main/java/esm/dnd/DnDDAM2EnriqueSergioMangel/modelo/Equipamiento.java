@@ -1,7 +1,9 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +18,8 @@ import lombok.NonNull;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 
+@Component
+@Document
 public class Equipamiento {
 
 	@MongoId

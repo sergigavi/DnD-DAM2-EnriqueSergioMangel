@@ -3,7 +3,6 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import org.bson.types.ObjectId;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,8 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Raza;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
-import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IFichaPersonajeServicio;
-import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.FichaPersonajeServicio;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.UsuarioServicio;
 
 @CrossOrigin(originPatterns = {"*"},methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.OPTIONS})    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
 @RestController
@@ -37,9 +36,9 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IUsuarioServicio;
 public class FichaPersonajeController {
     
     //Le inyecto otros servicios ya que aqui cargo los datos de todo    
-    @Autowired private IFichaPersonajeServicio fichaPersonajeServicio;
+    @Autowired private FichaPersonajeServicio fichaPersonajeServicio;
     
-    @Autowired private IUsuarioServicio usuarioServicio;
+    @Autowired private UsuarioServicio usuarioServicio;
 
     
     @GetMapping("/getAll")
@@ -55,7 +54,7 @@ public class FichaPersonajeController {
     }
         
     @GetMapping("/getCaracteristicasById/{id}")
-    public ResponseEntity<List<Caracteristica>> obtenerTodasLasFichasDePersonaje(@PathVariable UUID id)
+    public ResponseEntity<List<Caracteristica>> obtenerTodasLasFichasDePersonaje(@PathVariable ObjectId id)
     {
         ResponseEntity<List<Caracteristica>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
@@ -69,7 +68,7 @@ public class FichaPersonajeController {
     }
     
     @PostMapping("/AddCaracteristicaEnFichaByIdFicha/{id}")
-    public ResponseEntity<Caracteristica> addCaracteristicaByIdFicha(@PathVariable UUID id, @RequestBody Caracteristica caracteristica)
+    public ResponseEntity<Caracteristica> addCaracteristicaByIdFicha(@PathVariable ObjectId id, @RequestBody Caracteristica caracteristica)
     {
         ResponseEntity<Caracteristica> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -88,7 +87,7 @@ public class FichaPersonajeController {
     }
     
     @PostMapping("/AddHabilidadEnFichaByIdFicha/{id}")
-    public ResponseEntity<Habilidad> addHabilidadEnFichaByIdFicha(@PathVariable UUID id, @RequestBody Habilidad habilidad)
+    public ResponseEntity<Habilidad> addHabilidadEnFichaByIdFicha(@PathVariable ObjectId id, @RequestBody Habilidad habilidad)
     {
         ResponseEntity<Habilidad> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -106,7 +105,7 @@ public class FichaPersonajeController {
     }
     
     @GetMapping("/getHabilidadesById/{idFicha}")
-    public ResponseEntity<List<Habilidad>> obtenerTodasLasHabilidades(@PathVariable UUID idFicha)
+    public ResponseEntity<List<Habilidad>> obtenerTodasLasHabilidades(@PathVariable ObjectId idFicha)
     {
         ResponseEntity<List<Habilidad>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -121,7 +120,7 @@ public class FichaPersonajeController {
     }
 
     @PostMapping("/AddEquipamientoEnFichaByIdFicha/{id}")
-    public ResponseEntity<Equipamiento> addEquipamientoByIdFicha(@PathVariable UUID id, @RequestBody Equipamiento equipamiento)
+    public ResponseEntity<Equipamiento> addEquipamientoByIdFicha(@PathVariable ObjectId id, @RequestBody Equipamiento equipamiento)
     {
         ResponseEntity<Equipamiento> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -141,7 +140,7 @@ public class FichaPersonajeController {
     }
     
     @GetMapping("/getEquipamientoById/{idFicha}")
-    public ResponseEntity<List<Equipamiento>> obtenerTodosLosEquipamientos(@PathVariable UUID idFicha)
+    public ResponseEntity<List<Equipamiento>> obtenerTodosLosEquipamientos(@PathVariable ObjectId idFicha)
     {
         ResponseEntity<List<Equipamiento>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -231,7 +230,7 @@ public class FichaPersonajeController {
     }
     
     @DeleteMapping("/deleteById")
-	public ResponseEntity<FichaPersonaje> deleteFichaById(@RequestParam UUID id)
+	public ResponseEntity<FichaPersonaje> deleteFichaById(@RequestParam ObjectId id)
 	{
 		FichaPersonaje f;
 		
@@ -287,7 +286,7 @@ public class FichaPersonajeController {
         List<Usuario> usuarios = new ArrayList<>();
 
         Usuario u1= Usuario.builder()
-                .idUser(UUID.randomUUID())
+                .idUser(ObjectId.get())
                 .nombre("Sergio")
                 .apellidos("GV")
                 .contrasenia("123abc")
@@ -303,7 +302,7 @@ public class FichaPersonajeController {
         usuarios.add(u1);
 
         fichasPersonaje.add(FichaPersonaje.builder()
-                .idFichaPersonaje(UUID.randomUUID())
+                .idFichaPersonaje(ObjectId.get())
                 .usuario(u1)
                 .nombre("Ganker el Escapante")
                 .habilidades(List.of(

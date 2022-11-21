@@ -4,8 +4,8 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +55,7 @@ public class UsuarioController {
     	ResponseEntity<Usuario> res = new ResponseEntity<>(new Usuario(),HttpStatus.BAD_REQUEST);
     	    	
     	try {
-			usuario.setIdUser(UUID.randomUUID());
+			usuario.setIdUser(ObjectId.get());
 			usuarioServicio.insertarUsuario(usuario);
 			Usuario u=usuarioServicio.findUsuarioById(usuario.getIdUser()).get();
 			res = new ResponseEntity<Usuario>(u, HttpStatus.OK);
@@ -69,7 +69,7 @@ public class UsuarioController {
     }
 
 	@DeleteMapping("/deleteById")
-	public ResponseEntity<Usuario> deleteById(@RequestParam UUID id)
+	public ResponseEntity<Usuario> deleteById(@RequestParam ObjectId id)
 	{
 		Usuario u;
 		
@@ -117,7 +117,7 @@ public class UsuarioController {
 			Usuario u ;
 
 			u = Usuario.builder()
-					.idUser(UUID.randomUUID())
+					.idUser(ObjectId.get())
 					.nombre(nombre)
 					.apellidos(apellidos)
 					.contrasenia(contrasenia)
@@ -152,7 +152,7 @@ public class UsuarioController {
 			Usuario u;
 
 			u = Usuario.builder()
-					.idUser(UUID.randomUUID())	//	Genero un id nuevo
+					.idUser(ObjectId.get())	//	Genero un id nuevo
 					.nombre(nombre)
 					.apellidos(apellidos)
 					//.contrasenia(contrasenia)
