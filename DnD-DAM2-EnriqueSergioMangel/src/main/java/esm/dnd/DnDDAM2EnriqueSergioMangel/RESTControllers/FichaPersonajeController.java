@@ -208,7 +208,7 @@ public class FichaPersonajeController {
         f.setNotasAdd(ficha.getNotasAdd());
 
         if(fichaPersonajeServicio.addFichaPersonaje(f)){
-        return new ResponseEntity<String>("Exito al cargar la ficha",HttpStatus.OK);
+            return new ResponseEntity<String>("Exito al cargar la ficha",HttpStatus.OK);
         }else{
             return res;
         }

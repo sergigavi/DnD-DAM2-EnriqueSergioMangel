@@ -17,6 +17,7 @@
       </ul>
   </mat-drawer>
 
+
   <div class="example-sidenav-content">
     <!--Menu-->
     <mat-toolbar color="primary">
@@ -36,5 +37,24 @@
         <button mat-menu-item>Cerrar Sesion</button>
       </mat-menu>
     </mat-toolbar>
+
+
   </div>
+
+
 </mat-drawer-container>
+
+<div class="mat-elevation-z8">
+  <table mat-table  [dataSource]="dataSource">
+    <ng-container matColumnDef="Nombre">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let equipo">{{equipo.nombre}}</td>
+    </ng-container>
+    <ng-container matColumnDef="Descrpcion">
+      <th mat-header-cell *matHeaderCellDef>Descrpcion/th>
+      <td mat-cell *matCellDef="let equipo">{{equipo.descrpcion}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row;columns:columnas"></tr>
+  </table>
+</div>
