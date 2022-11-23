@@ -1,9 +1,13 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+import com.mongodb.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,29 +26,39 @@ import lombok.NonNull;
 @Document
 public class Equipamiento {
 
-	@MongoId
+	@Id
 	@NonNull
 	@EqualsAndHashCode.Include
 	private ObjectId idEquipo;
 	
+	@Nullable
 	private String nombre;
 	
+	@Nullable
 	private TipoEquipo tipo;
 	
+	@Nullable
 	private CatEquipo categoria;
 	
-	private PropiedadEquipo propiedad;
+	@Nullable
+	private List<PropiedadEquipo> propiedad;
 	
+	@Nullable
 	private String modificador;
 	
+	@Nullable
 	private String danio;
 	
+	@Nullable
 	private Integer alcance;
 	
+	@Nullable
 	private Integer precio;
 	
+	@Nullable
 	private Float peso;
 		
+	@Nullable
 	private String descripcion;
 	
 	public void deleteById(ObjectId id){

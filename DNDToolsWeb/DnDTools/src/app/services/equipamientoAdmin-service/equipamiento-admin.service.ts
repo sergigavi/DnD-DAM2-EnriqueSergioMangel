@@ -27,6 +27,6 @@ export class EquipamientoAdminService {
 
 
   getAll() :Observable<EquipamientoAdmin[]>{
-    return this.http.get<EquipamientoAdmin[]>(`${environment.URLBASE}/equipamiento`)
+    return this.http.get<EquipamientoAdmin[]>(`${environment.URLBASE}/equipamiento/getAll`)
   }
 }

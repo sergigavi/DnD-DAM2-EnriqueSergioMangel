@@ -1,1 +1,12 @@
+.ulSlide{
 
+  position: absolute;
+  margin: 10%;
+}
+
+.ulSlide button{
+
+  width: 100%;
+  margin: 5%;
+  scale: 115%;
+}

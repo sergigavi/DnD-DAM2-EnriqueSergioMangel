@@ -189,7 +189,7 @@ public class FichaPersonaje {
 		}
 	}
 
-	public static List<Habilidad> setHabilidades(List<Caracteristica> caracteristicas,List<Habilidad> habilidades,Integer bonif){
+	public List<Habilidad> setHabilidades(List<Caracteristica> caracteristicas,List<Habilidad> habilidades,Integer bonif){
 
 		int fueCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Fue"))
 			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
