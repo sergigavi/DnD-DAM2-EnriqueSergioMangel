@@ -2,18 +2,19 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LPloginComponent } from 'src/app/component/login/lplogin/lplogin.component';
 import { Usuario } from '../usuario-service/usuario-service.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient)
+  constructor(private http: HttpClient, private router:Router)
   {
 
   }
 
-  async trylogin(usuario:Usuario){
+  trylogin(usuario:Usuario){
 
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -36,10 +37,12 @@ export class LoginService {
 
     //debugger;
     //hago la llamada a la api
-    return await this.http.post('http://127.0.0.1:5189/api/dndtools/usuarios/trylogin', usuario, {headers:headers, responseType:'json', withCredentials:false})
+    return this.http.post('http://127.0.0.1:5189/api/dndtools/usuarios/trylogin', usuario, {headers:headers, responseType:'json', withCredentials:false})
     .subscribe(data => {  //data es la respuesta que me devuelve la api
       console.log(data);
-
+      if (data != null){
+        this.router.navigate(['/'])
+      }
 
 
       //TODO fixear esto
