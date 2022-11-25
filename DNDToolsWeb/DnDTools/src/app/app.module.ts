@@ -45,6 +45,7 @@ import { DialogNpcJugador, NpcJugadorComponent } from './component/usuario/npc/j
 import { MenuUsuarioJugadorComponent } from './component/plantillas/menuUsuarioJugador/menuUsuarioJugador.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PerfilComponent } from './component/perfil/perfil.component';
+import { LPloginComponent } from './component/login/lplogin/lplogin.component';
 
 const routes: Routes = [
   //invitados
@@ -108,7 +109,8 @@ const routes: Routes = [
     Dialog2NpcGM,
     DialogUsuarios,
     Dialog2Usuarios,
-    DialogCrearEquipo
+    DialogCrearEquipo,
+    LPloginComponent
   ],
   imports: [
     BrowserModule,
