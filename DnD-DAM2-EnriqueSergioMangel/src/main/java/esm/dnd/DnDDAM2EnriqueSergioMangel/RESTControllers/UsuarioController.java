@@ -86,7 +86,7 @@ public class UsuarioController {
 		
 	}
 	
-    @GetMapping("/trylogin")
+	@GetMapping("/trylogin")
     public ResponseEntity<Boolean> loguearse(@RequestBody Usuario u)
     {
     	Boolean exito = false;
@@ -97,6 +97,27 @@ public class UsuarioController {
         	Usuario user = usuarioServicio.findUsuarioByNickname(u.getNickname()).get();
         	
         	if (user.getContrasenia().equals(u.getContrasenia()))
+        	{
+        		exito=true;
+        		res = new ResponseEntity<Boolean>(exito, HttpStatus.OK);
+        	}
+        			
+        }
+        
+        return res;
+    }
+	
+	@GetMapping("/tryloginParams")
+    public ResponseEntity<Boolean> loguearsePorParametros(@RequestParam String nickname, @RequestParam String contrasenia)
+    {
+    	Boolean exito = false;
+        ResponseEntity<Boolean> res = new ResponseEntity<>(exito, HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        
+        if (usuarioServicio.existsByNickname(nickname)) {
+        	
+        	Usuario user = usuarioServicio.findUsuarioByNickname(nickname).get();
+        	
+        	if (user.getContrasenia().equals(contrasenia))
         	{
         		exito=true;
         		res = new ResponseEntity<Boolean>(exito, HttpStatus.OK);

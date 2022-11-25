@@ -1,1 +1,20 @@
-<p>lplogin works!</p>
+<div class="login">
+  <form class="custom-form" method="get">
+    <h1>Login</h1>
+    <input
+      type="nickname"
+      [(ngModel)]="nickname"
+      name="nickname"
+      placeholder="Nickname"
+      required="required"
+    />
+    <input
+      type="password"
+      [(ngModel)]="contrasenia"
+      name="contraseña"
+      placeholder="contraseña"
+      required="required"
+    />
+    <button type="submit" (click)="trylogin()">Entrar</button>
+  </form>
+</div>

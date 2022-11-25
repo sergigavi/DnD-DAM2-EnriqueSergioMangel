@@ -10,8 +10,22 @@ import { LoginService } from 'src/app/services/login-service/login.service';
 
 export class LPloginComponent {
 
+  nickname: string;
+  contrasenia: string;
+
   constructor(private loginService: LoginService)
   {
+    this.nickname = "";
+    this.contrasenia = "";
+  }
 
+  trylogin()
+  {
+    //  Esto llama a la api
+    this.loginService.trylogin(this.nickname, this.contrasenia)
+  }
+
+  ngOnInit(){
+    //this.loginService.trylogin()
   }
 }
