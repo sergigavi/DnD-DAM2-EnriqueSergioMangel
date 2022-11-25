@@ -12,8 +12,10 @@ export class LoginService {
   }
 
   trylogin(){
-    this.http.get('https://127.0.0.1/api/').subscribe(data => {
+    this.http.get('https://127.0.0.1:5189/api/dndtools/usuarios/trylogin').subscribe(data => {
       console.log(data);
     });
+
+  }
 
 }

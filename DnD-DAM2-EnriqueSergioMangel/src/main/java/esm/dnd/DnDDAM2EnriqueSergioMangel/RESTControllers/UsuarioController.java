@@ -101,12 +101,8 @@ public class UsuarioController {
         		exito=true;
         		res = new ResponseEntity<Boolean>(exito, HttpStatus.OK);
         	}
-        	
-        	
         			
         }
-        
-        
         
         return res;
     }
