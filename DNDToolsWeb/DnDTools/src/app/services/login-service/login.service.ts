@@ -42,9 +42,9 @@ export class LoginService {
        console.log('Error, credenciales incorrectas')
       }
 
-
+      //TODO fixear esto
       let lplogin = document.getElementById('mensajelogin')
-      lplogin.innerHTML = 'aaaaaaa'
+      //lplogin.innerHTML = 'aaaaaaa'
 
 
     });
