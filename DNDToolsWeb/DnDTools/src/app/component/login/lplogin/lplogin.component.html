@@ -1,5 +1,5 @@
 <div class="login">
-  <form class="custom-form" method="get">
+  <form class="custom-form" method="post">
     <h1>Login</h1>
     <input
       type="nickname"
@@ -8,6 +8,7 @@
       placeholder="Nickname"
       required="required"
     />
+    <br>
     <input
       type="password"
       [(ngModel)]="contrasenia"
@@ -17,4 +18,9 @@
     />
     <button type="submit" (click)="trylogin()">Entrar</button>
   </form>
+
+  <div id="mensajelogin" class="mensajelogin">
+
+  </div>
+
 </div>

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LPloginComponent } from 'src/app/component/login/lplogin/lplogin.component';
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +31,22 @@ export class LoginService {
       //withCredentials: false
     }*/
 
+    //hago la llamada a la api
     this.http.get('http://127.0.0.1:5189/api/dndtools/usuarios/tryloginParams', {params:params, headers:headers, responseType:'json', withCredentials:false})
-    .subscribe(data => {
+    .subscribe(data => {  //data es la respuesta que me devuelve la api
       console.log(data);
+
+      if (data == true) {
+        console.log('SE HA AUTENTIFICADO CORRECTAMENTE')
+      }else{
+       console.log('Error, credenciales incorrectas')
+      }
+
+
+      let lplogin = document.getElementById('mensajelogin')
+      lplogin.innerHTML = 'aaaaaaa'
+
+
     });
 
   }
