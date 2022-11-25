@@ -78,37 +78,46 @@ public class Caracteristica {
 
 	public static Integer calcValorMod(Integer valor){
 		
-		int resto=valor%10;
-		int mod=0;
-
-		if(resto<10){
-			if(resto%2==0){
-				mod=resto/2;
-			}else{
-				mod=(resto-1)/2;
+		if(valor<10){
+			if(valor%2!=0){
+				valor=valor-1;
 			}
-			switch (mod) {
-				case 4:
+			switch (valor) {
+				case 8:
 					return -1;
-				case 3:
+				case 6:
 					return -2;
-				case 2:
+				case 4:
 					return -3;
-				case 1:
+				case 2:
 					return -4;
 				case 0:
 					return -5;
 				default:
 					return 0;
 			}
-		}
-
-		if(resto%2==0){
-			mod=resto/2;
-			return mod;
+		}else if(valor>=10){
+			if(valor%2!=0){
+				valor=valor-1;
+			}
+			switch (valor) {
+				case 10:
+					return 0;
+				case 12:
+					return 1;
+				case 14:
+					return 2;
+				case 16:
+					return 3;
+				case 18:
+					return 4;
+				case 20:
+					return 5;
+				default:
+					return 0;
+			}
 		}else{
-			mod=resto-1;
-			return mod/2;
+			return 0;
 		}
 	}
 }

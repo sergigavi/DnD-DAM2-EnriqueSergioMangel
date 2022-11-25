@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import {Component, OnInit} from '@angular/core';
-=======
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -22,7 +19,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {nombreNpc: 'Troll de las Nieves'},
   {nombreNpc: 'Dragon Negro'},
 ];
->>>>>>> main
 
 @Component({
   selector: 'app-npcGM',
@@ -35,9 +31,6 @@ export class NpcGMComponent implements OnInit  {
   title = 'Npc GM';
   opened = false;
 
-<<<<<<< HEAD
-  constructor(){}
-=======
   displayedColumns: string[] = ['nombreNpc','acceder','editar'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -60,7 +53,6 @@ export class NpcGMComponent implements OnInit  {
   }
 
   @ViewChild('matPaginator',{static:true}) paginator!:MatPaginator
->>>>>>> main
 
   ngOnInit(): void {
   }
@@ -71,8 +63,6 @@ export class NpcGMComponent implements OnInit  {
 
 }
 
-<<<<<<< HEAD
-=======
 @Component({
   selector: 'npcGMDialog',
   templateUrl: 'npcGMDialog.html'
@@ -87,4 +77,3 @@ export class DialogNpcGM {}
 
 export class Dialog2NpcGM {}
 
->>>>>>> main

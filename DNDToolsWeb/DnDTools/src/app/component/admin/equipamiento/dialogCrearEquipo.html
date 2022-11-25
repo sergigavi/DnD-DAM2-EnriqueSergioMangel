@@ -1,0 +1,19 @@
+<div class="">
+  <form #formEquipoAdmin="ngForm" (ngSubmit)="onSubmit(formEquipoAdmin)">
+    <p>Crear nuevo equipamiento:</p>
+    <div class="formInputs">
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo de equipamiento</mat-label>
+        <mat-select [(ngModel)]="tipoElegido" name="tipo" required>
+          <mat-option *ngFor="let tipo in tipos" [value]="tipo">
+            {{tipo}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button mat-flat-button color="accent" type="submit">Enviar</button>
+  </form>
+  <br>
+  <button mat-flat-button color="accent" type="button" (click)="onNoClick()">Cerrar</button>
+</div>

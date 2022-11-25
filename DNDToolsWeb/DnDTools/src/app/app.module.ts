@@ -1,8 +1,4 @@
 import { NgModule } from '@angular/core';
-<<<<<<< HEAD
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-=======
->>>>>>> main
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,7 +12,6 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatTableModule}  from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
@@ -24,20 +19,18 @@ import { MatDialogModule } from '@angular/material/dialog';
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 
+import { DialogCrearEquipo } from './component/admin/equipamiento/DialogCrearEquipo';
 import { HomeComponent } from './component/home/home.component';
 import { PartidasComponent } from './component/admin/partidas/partidas.component';
 import { EquipamientoComponent } from './component/admin/equipamiento/equipamiento.component';
 import { PanelControlComponent } from './component/admin/panelControl/panelControl.component';
-<<<<<<< HEAD
-import { UsuariosComponent } from './component/admin/usuarios/usuarios.component';
-=======
 import { Dialog2Usuarios, DialogUsuarios, UsuariosComponent } from './component/admin/usuarios/usuarios.component';
->>>>>>> main
 import { PartidasUsuarioComponent } from './component/usuario/partidas/partidas.component';
 import { InicioGMComponent } from './component/usuario/inicio/gameMaster/inicioGM.component';
 import { InicioJugadorComponent } from './component/usuario/inicio/jugador/inicioJugador.component';
@@ -47,20 +40,12 @@ import { HistoriaGMComponent } from './component/usuario/historia/gameMaster/his
 import { HistoriaJugadorComponent } from './component/usuario/historia/jugador/historiaJugador.component';
 import { Dialog2HeroesGM, DialogHeroesGM, HeroesGMComponent } from './component/usuario/heroes/gameMaster/heroresGM.component';
 import { Dialog2HeroesJugador, DialogHeroesJugador, HeroesJugadorComponent } from './component/usuario/heroes/jugador/heroesJugador.component';
-<<<<<<< HEAD
-import { NpcGMComponent } from './component/usuario/npc/gameMaster/npcGM.component';
-=======
 import { Dialog2NpcGM, DialogNpcGM, NpcGMComponent } from './component/usuario/npc/gameMaster/npcGM.component';
->>>>>>> main
 import { DialogNpcJugador, NpcJugadorComponent } from './component/usuario/npc/jugador/npcJugador.component';
 import { MenuUsuarioJugadorComponent } from './component/plantillas/menuUsuarioJugador/menuUsuarioJugador.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PerfilComponent } from './component/perfil/perfil.component';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 const routes: Routes = [
   //invitados
   {path:'',component: HomeComponent},
@@ -119,14 +104,11 @@ const routes: Routes = [
     DialogNpcJugador,
     DialogHeroesGM,
     Dialog2HeroesGM,
-<<<<<<< HEAD
-=======
     DialogNpcGM,
     Dialog2NpcGM,
     DialogUsuarios,
     Dialog2Usuarios,
->>>>>>> main
-
+    DialogCrearEquipo
   ],
   imports: [
     BrowserModule,
@@ -142,16 +124,14 @@ const routes: Routes = [
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-<<<<<<< HEAD
-    NgbModule,
-=======
->>>>>>> main
     MatSortModule,
     MatFormFieldModule,
     MatCardModule,
     MatGridListModule,
     MatInputModule,
     MatDialogModule,
+    MatSelectModule
+
   ],
   entryComponents: [UsuarioFormComponent],
   providers: [],

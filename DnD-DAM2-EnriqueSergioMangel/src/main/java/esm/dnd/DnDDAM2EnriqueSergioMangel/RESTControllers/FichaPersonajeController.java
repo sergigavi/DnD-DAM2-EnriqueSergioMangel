@@ -177,15 +177,7 @@ public class FichaPersonajeController {
         });
         f.setCaracteristicas(cars);
 
-        /* 
-        List<Habilidad> comp=new ArrayList<>();
-        ficha.getHabilidades().stream().forEach((com)->{
-            comp.add(com.getCompetencia());
-        });
-        f.getHabilidades().stream().forEach((h)->{
-            
-        });
-        */
+        f.setHabilidades(f.getCaracteristicas(),ficha.getHabilidades(),f.getBonifCompetencia());
 
         f.setAlineamiento(ficha.getAlineamiento());
         f.setRaza(ficha.getRaza());
@@ -206,13 +198,16 @@ public class FichaPersonajeController {
         f.setHistoriaPersonal(ficha.getHistoriaPersonal());
         f.setRasgos(ficha.getRasgos());
         f.setNotasAdd(ficha.getNotasAdd());
+        f.setNombre(ficha.getNombre());
+        f.setInventario(ficha.getInventario());
 
-        if(fichaPersonajeServicio.addFichaPersonaje(f)){
-        return new ResponseEntity<String>("Exito al cargar la ficha",HttpStatus.OK);
-        }else{
-            return res;
+        try {
+            fichaPersonajeServicio.addFichaPersonaje(f);
+            res = new ResponseEntity<String>("Exito al cargar la ficha",HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
+        return res;
     }
 
     @PostMapping("/addFichaVacia")

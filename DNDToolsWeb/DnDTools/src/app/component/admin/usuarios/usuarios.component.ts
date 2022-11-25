@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import {Component, OnInit} from '@angular/core';
-=======
 import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -23,7 +20,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {nombreCuenta: 'Irefciuas',correo:'ferodgidoso@gmail.com'},
   {nombreCuenta: 'Samuner',correo:'samonDelon@gmail.com'},
 ];
->>>>>>> main
 
 @Component({
   selector: 'app-usuarios',
@@ -31,17 +27,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./usuarios.component.css']
 })
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 export class UsuariosComponent implements OnInit  {
   title = 'Usuarios';
   opened = false;
 
-<<<<<<< HEAD
-  ngOnInit(): void {
-=======
   displayedColumns: string[] = ['nombreCuenta','correo','acceder','editar'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -71,17 +60,12 @@ export class UsuariosComponent implements OnInit  {
 
   ngAfterViewInit(){
     this.dataSource.paginator=this.paginator;
->>>>>>> main
   }
 
   toggleSidebar() {
     this.opened = !this.opened;
   }
 
-<<<<<<< HEAD
-
-}
-=======
 }
 
 @Component({
@@ -97,4 +81,3 @@ export class DialogUsuarios {}
 })
 
 export class Dialog2Usuarios {}
->>>>>>> main

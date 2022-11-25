@@ -54,4 +54,21 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 		
 		return exito;
 	}
+
+	@Override
+	public List<Equipamiento> getAll() {
+
+		return equipamientoDAO.findAll();
+	}
+
+	@Override
+	public boolean eliminarEquipamientoTemp(ObjectId idEquipo) {
+		
+		if(equipamientoDAO.existsById(idEquipo)){
+			equipamientoDAO.deleteById(idEquipo);
+		return true;
+		}else{
+			return false;
+		}
+	}
 }
