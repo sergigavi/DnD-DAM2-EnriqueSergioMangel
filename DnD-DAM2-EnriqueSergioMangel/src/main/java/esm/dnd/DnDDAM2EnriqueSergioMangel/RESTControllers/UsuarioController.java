@@ -86,20 +86,19 @@ public class UsuarioController {
 		
 	}
 	
-	@GetMapping("/trylogin")
-    public ResponseEntity<Boolean> loguearse(@RequestBody Usuario u)
+	@PostMapping("/trylogin")
+    public ResponseEntity<Usuario> loguearse(@RequestBody Usuario u)
     {
-    	Boolean exito = false;
-        ResponseEntity<Boolean> res = new ResponseEntity<>(exito, HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        Usuario user;
         
         if (usuarioServicio.existsByNickname(u.getNickname())) {
         	
-        	Usuario user = usuarioServicio.findUsuarioByNickname(u.getNickname()).get();
+        	user = usuarioServicio.findUsuarioByNickname(u.getNickname()).get();
         	
         	if (user.getContrasenia().equals(u.getContrasenia()))
         	{
-        		exito=true;
-        		res = new ResponseEntity<Boolean>(exito, HttpStatus.OK);
+        		res = new ResponseEntity<Usuario>(user, HttpStatus.OK);
         	}
         			
         }
@@ -107,11 +106,10 @@ public class UsuarioController {
         return res;
     }
 	
-	@GetMapping("/tryloginParams")
-    public ResponseEntity<Boolean> loguearsePorParametros(@RequestParam String nickname, @RequestParam String contrasenia)
+	@PostMapping("/tryloginParams")
+    public ResponseEntity<Usuario> loguearsePorParametros(@RequestParam String nickname, @RequestParam String contrasenia)
     {
-    	Boolean exito = false;
-        ResponseEntity<Boolean> res = new ResponseEntity<>(exito, HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NON_AUTHORITATIVE_INFORMATION);
         
         if (usuarioServicio.existsByNickname(nickname)) {
         	
@@ -119,8 +117,7 @@ public class UsuarioController {
         	
         	if (user.getContrasenia().equals(contrasenia))
         	{
-        		exito=true;
-        		res = new ResponseEntity<Boolean>(exito, HttpStatus.OK);
+        		res = new ResponseEntity<Usuario>(user, HttpStatus.OK);
         	}
         			
         }
