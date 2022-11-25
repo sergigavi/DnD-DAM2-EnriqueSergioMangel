@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,14 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
 
-  constructor() { }
+  constructor(private http: HttpClient)
+  {
+
+  }
+
+  trylogin(){
+    this.http.get('https://127.0.0.1/api/').subscribe(data => {
+      console.log(data);
+    });
+
 }

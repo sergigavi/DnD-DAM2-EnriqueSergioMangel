@@ -24,4 +24,8 @@ public interface IUsuarioServicio {
     public Optional<Usuario> findUsuarioById(ObjectId idUsuario);
 
 	public Iterable<Usuario> eliminarTodos();
+
+	public boolean existsByNickname(String nickname);
+
+	public Optional<Usuario> findUsuarioByNickname(String nickname);
 }

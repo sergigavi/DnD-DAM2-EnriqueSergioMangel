@@ -86,6 +86,31 @@ public class UsuarioController {
 		
 	}
 	
+    @GetMapping("/trylogin")
+    public ResponseEntity<Boolean> loguearse(@RequestBody Usuario u)
+    {
+    	Boolean exito = false;
+        ResponseEntity<Boolean> res = new ResponseEntity<>(exito, HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        
+        if (usuarioServicio.existsByNickname(u.getNickname())) {
+        	
+        	Usuario user = usuarioServicio.findUsuarioByNickname(u.getNickname()).get();
+        	
+        	if (user.getContrasenia().equals(u.getContrasenia()))
+        	{
+        		exito=true;
+        		res = new ResponseEntity<Boolean>(exito, HttpStatus.OK);
+        	}
+        	
+        	
+        			
+        }
+        
+        
+        
+        return res;
+    }
+	
 	@DeleteMapping("/clear")
 	public ResponseEntity<Iterable<Usuario>> deleteAll()
 	{

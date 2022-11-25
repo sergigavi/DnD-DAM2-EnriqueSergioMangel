@@ -72,6 +72,9 @@ const routes: Routes = [
   //perfil
   {path:'perfil',component: PerfilComponent},
 
+  //landing page, login register
+  {path:'login',component: LPloginComponent},
+
 ];
 
 
