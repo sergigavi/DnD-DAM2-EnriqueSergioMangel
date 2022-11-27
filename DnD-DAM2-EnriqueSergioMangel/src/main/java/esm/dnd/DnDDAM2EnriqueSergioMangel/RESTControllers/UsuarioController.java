@@ -86,6 +86,45 @@ public class UsuarioController {
 		
 	}
 	
+	@PostMapping("/trylogin")
+    public ResponseEntity<Usuario> loguearse(@RequestBody Usuario u)
+    {
+        ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        Usuario user;
+        
+        if (usuarioServicio.existsByNickname(u.getNickname())) {
+        	
+        	user = usuarioServicio.findUsuarioByNickname(u.getNickname()).get();
+        	
+        	if (user.getContrasenia().equals(u.getContrasenia()))
+        	{
+        		res = new ResponseEntity<Usuario>(user, HttpStatus.OK);
+        	}
+        			
+        }
+        
+        return res;
+    }
+	
+	@PostMapping("/tryloginParams")
+    public ResponseEntity<Usuario> loguearsePorParametros(@RequestParam String nickname, @RequestParam String contrasenia)
+    {
+        ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        
+        if (usuarioServicio.existsByNickname(nickname)) {
+        	
+        	Usuario user = usuarioServicio.findUsuarioByNickname(nickname).get();
+        	
+        	if (user.getContrasenia().equals(contrasenia))
+        	{
+        		res = new ResponseEntity<Usuario>(user, HttpStatus.OK);
+        	}
+        			
+        }
+        
+        return res;
+    }
+	
 	@DeleteMapping("/clear")
 	public ResponseEntity<Iterable<Usuario>> deleteAll()
 	{

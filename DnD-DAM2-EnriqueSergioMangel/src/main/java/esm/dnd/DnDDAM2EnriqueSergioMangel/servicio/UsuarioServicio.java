@@ -107,4 +107,14 @@ public class UsuarioServicio implements IUsuarioServicio{
 		return users;
 		
 	}
+
+	@Override
+	public boolean existsByNickname(String nickname) {
+		return usuarioDAO.existsByNickname(nickname);
+	}
+
+	@Override
+	public Optional<Usuario> findUsuarioByNickname(String nickname) {
+		return usuarioDAO.findByNickname(nickname);
+	}
 }

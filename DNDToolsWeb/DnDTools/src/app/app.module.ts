@@ -12,7 +12,6 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatTableModule}  from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
@@ -46,6 +45,7 @@ import { DialogNpcJugador, NpcJugadorComponent } from './component/usuario/npc/j
 import { MenuUsuarioJugadorComponent } from './component/plantillas/menuUsuarioJugador/menuUsuarioJugador.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PerfilComponent } from './component/perfil/perfil.component';
+import { LPloginComponent } from './component/login/lplogin/lplogin.component';
 
 const routes: Routes = [
   //invitados
@@ -71,6 +71,9 @@ const routes: Routes = [
   {path:'usuario-npcGM',component: NpcGMComponent},
   //perfil
   {path:'perfil',component: PerfilComponent},
+
+  //landing page, login register
+  {path:'login',component: LPloginComponent},
 
 ];
 
@@ -109,7 +112,12 @@ const routes: Routes = [
     Dialog2NpcGM,
     DialogUsuarios,
     Dialog2Usuarios,
+<<<<<<< HEAD
     DialogCrearEquipo
+=======
+    DialogCrearEquipo,
+    LPloginComponent
+>>>>>>> main
   ],
   imports: [
     BrowserModule,

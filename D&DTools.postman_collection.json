@@ -1,0 +1,825 @@
+{
+	"info": {
+		"_postman_id": "8f901698-3bfc-439b-ad9a-7cd74e348a38",
+		"name": "D&DTools",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FichaPersonaje",
+			"item": [
+				{
+					"name": "cargarDatos",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/personajes/cargarDatos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"personajes",
+								"cargarDatos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dameTodos (Fichas personaje)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/personajes/getAll",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"personajes",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/personajes/deleteById?id=071f9ed3-429a-43d1-905c-49917ad35113",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"personajes",
+								"deleteById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "071f9ed3-429a-43d1-905c-49917ad35113"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/personajes/deleteAll",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"personajes",
+								"deleteAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCaracteristicasByIdFicha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/personajes/getCaracteristicasById/637b9cb20d32f0417cb74e81",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"personajes",
+								"getCaracteristicasById",
+								"637b9cb20d32f0417cb74e81"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddCaracteristicaEnFichaByIdFicha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nombre\": \"FUEEEERRZZAAA\",\r\n        \"nombreIniciales\": \"FUFU\",\r\n        \"valorTotal\": 10,\r\n        \"valorMod\": -5\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/personajes/AddCaracteristicaEnFichaByIdFicha/d418588b-920a-466c-b01f-d26c6e0c6285",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"personajes",
+								"AddCaracteristicaEnFichaByIdFicha",
+								"d418588b-920a-466c-b01f-d26c6e0c6285"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEquipamientoByIdFicha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/personajes/getEquipamientoById/ea9bbe4a-4dfa-4c9e-8e3f-fb5a42f24474",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"personajes",
+								"getEquipamientoById",
+								"ea9bbe4a-4dfa-4c9e-8e3f-fb5a42f24474"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddEquipamientoEnFichaByIdFicha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Daga de la muerte\",\r\n    \"tipo\":\"ARMA\",\r\n    \"categoria\":\"ARMA_SENCILLA\",\r\n    \"propiedad\":\"ARROJADIZO\",\r\n    \"modificador\":\"chetao\",\r\n    \"danio\":9999.0,\r\n    \"alcance\":99.0,\r\n    \"precio\":31.0,\r\n    \"peso\":0.5,\r\n    \"ca\":\"sa\",\r\n    \"descripcion\":\"mucha muerte\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/personajes/AddEquipamientoEnFichaByIdFicha/ea9bbe4a-4dfa-4c9e-8e3f-fb5a42f24474",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"personajes",
+								"AddEquipamientoEnFichaByIdFicha",
+								"ea9bbe4a-4dfa-4c9e-8e3f-fb5a42f24474"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHabilidadesByIdFicha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/personajes/getHabilidadesById/ea9bbe4a-4dfa-4c9e-8e3f-fb5a42f24474",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"personajes",
+								"getHabilidadesById",
+								"ea9bbe4a-4dfa-4c9e-8e3f-fb5a42f24474"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddHabilidadEnFichaByIdFicha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Habilidad de la muerte\",\r\n    \"competencia\": null,\r\n    \"mod\": 0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/personajes/AddHabilidadEnFichaByIdFicha/ea9bbe4a-4dfa-4c9e-8e3f-fb5a42f24474",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"personajes",
+								"AddHabilidadEnFichaByIdFicha",
+								"ea9bbe4a-4dfa-4c9e-8e3f-fb5a42f24474"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Caracteristica",
+			"item": [
+				{
+					"name": "getAllCaracteristicas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/caracteristicas/getAll",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"caracteristicas",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Equipamiento",
+			"item": []
+		},
+		{
+			"name": "EquipoPersonaje",
+			"item": []
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "InsertarPorParametro (usuario)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123abc",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/usuarios/insertarPorParametro?nombre=Manolito&apellidos=Camela Gonzales&contrasenia=123abc&nickname=manomela&biografia=biografia de manolito&email=manomela@correo.es&fechaNac=2000-04-23&urlImage=https://unacosatrasotra.files.wordpress.com/2015/11/manolito-gafotas.png&pais=España",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"usuarios",
+								"insertarPorParametro"
+							],
+							"query": [
+								{
+									"key": "idUser",
+									"value": "C_U_001",
+									"disabled": true
+								},
+								{
+									"key": "nombre",
+									"value": "Manolito"
+								},
+								{
+									"key": "apellidos",
+									"value": "Camela Gonzales"
+								},
+								{
+									"key": "contrasenia",
+									"value": "123abc"
+								},
+								{
+									"key": "nickname",
+									"value": "manomela"
+								},
+								{
+									"key": "biografia",
+									"value": "biografia de manolito"
+								},
+								{
+									"key": "email",
+									"value": "manomela@correo.es"
+								},
+								{
+									"key": "fechaNac",
+									"value": "2000-04-23"
+								},
+								{
+									"key": "urlImage",
+									"value": "https://unacosatrasotra.files.wordpress.com/2015/11/manolito-gafotas.png"
+								},
+								{
+									"key": "activo",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "pais",
+									"value": "España"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dameTodos (usuarios)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123abc",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/usuarios/dametodos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"usuarios",
+								"dametodos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insertarPorURL",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/usuarios/insertarPorURL/riqui/rubi rubio/elRiqui/riqui@riqui",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"usuarios",
+								"insertarPorURL",
+								"riqui",
+								"rubi rubio",
+								"elRiqui",
+								"riqui@riqui"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InsertarUsuario",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123abc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Enrique\",\r\n    \"apellidos\": \"Candil Botello\",\r\n    \"contrasenia\": \"123\",\r\n    \"nickname\": \"Kynito\",\r\n    \"biografia\": \"De la familia de los kynitos\",\r\n    \"email\": \"enrique@enrique.es\",\r\n    \"fechaNacimiento\": \"2000-10-29\",\r\n    \"urlImage\": \"https://i.pinimg.com/736x/12/ed/5a/12ed5af107550e3a0e24792b41c47a56.jpg\",\r\n    \"activo\": false,\r\n    \"pais\": \"Espana\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/usuarios/insertarUsuario",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"usuarios",
+								"insertarUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/usuarios/deleteById?id=933fe097-59c9-4e9c-b67e-f4ad047de1fb",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"usuarios",
+								"deleteById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "933fe097-59c9-4e9c-b67e-f4ad047de1fb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/usuarios/clear",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"usuarios",
+								"clear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tryLogin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickname\": \"GoSergus4\",\r\n    \"contrasenia\": \"123abc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/usuarios/trylogin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"usuarios",
+								"trylogin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tryLoginParams",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/usuarios/tryloginParams?nickname=GoSergus4&contrasenia=123abc",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"usuarios",
+								"tryloginParams"
+							],
+							"query": [
+								{
+									"key": "nickname",
+									"value": "GoSergus4"
+								},
+								{
+									"key": "contrasenia",
+									"value": "123abc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Administrador",
+			"item": [
+				{
+					"name": "getAll (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/admins/getAll",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"admins",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"SergioAdmin\",\r\n    \"email\": \"sergio@sergio.admin\",\r\n    \"contrasenia\":\"123abc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/admins/addAdmin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"admins",
+								"addAdmin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5189/api/dndtools/admins/deleteById?id=a9950e03-2d59-4c35-b3af-f65f36323bea",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5189",
+							"path": [
+								"api",
+								"dndtools",
+								"admins",
+								"deleteById"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "a9950e03-2d59-4c35-b3af-f65f36323bea"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "123abc",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

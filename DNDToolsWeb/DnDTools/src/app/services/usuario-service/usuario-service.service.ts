@@ -5,17 +5,17 @@ import { Observable } from 'rxjs';
 
 export interface Usuario {
 
-  idUser:String;
-  nombre:String;
-  apellidos:String;
+  idUser?:String;
+  nombre?:String;
+  apellidos?:String;
   contrasenia:String;
   nickname:String;
-  biografia:String;
-  email:String;
-  fechaNacimiento:String;
-  urlImage:String;
-  activo:boolean;
-  pais:String;
+  biografia?:String;
+  email?:String;
+  fechaNacimiento?:String;
+  urlImage?:String;
+  activo?:boolean;
+  pais?:String;
 
 }
 
