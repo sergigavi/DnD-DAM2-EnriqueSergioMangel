@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-import {Component, OnInit} from '@angular/core';
-=======
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -22,7 +19,6 @@ export interface EquipamientoAdmin{
   descripcion:String;
 }
 
->>>>>>> EnriqueBranch
 
 @Component({
   selector: 'app-equipamiento',
@@ -35,9 +31,6 @@ export class EquipamientoComponent implements OnInit  {
   title = 'Equipamiento';
   opened = false;
 
-<<<<<<< HEAD
-  ngOnInit(): void {
-=======
   columnas:String[] = ["nombre","descripcion"]
 
   @ViewChild('paginator',{static:true}) paginator!:MatPaginator
@@ -50,14 +43,11 @@ export class EquipamientoComponent implements OnInit  {
 
   ngOnInit(): void {
     this.showEquipo()
->>>>>>> EnriqueBranch
   }
 
   toggleSidebar() {
     this.opened = !this.opened;
   }
-<<<<<<< HEAD
-=======
 
 
   public showEquipo(){
@@ -82,5 +72,4 @@ export class EquipamientoComponent implements OnInit  {
 
     })
   }
->>>>>>> EnriqueBranch
 }
