@@ -1,10 +1,10 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
 
-import java.util.UUID;
 
-import org.springframework.data.annotation.Id;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.stereotype.Component;
 
 /*import javax.persistence.CascadeType;
@@ -32,9 +32,9 @@ import lombok.NonNull;
 public class Administrador {
 	
 	@NonNull
-	@Id
+	@MongoId
 	@EqualsAndHashCode.Include
-	private UUID idAdmin;
+	private ObjectId idAdmin;
 	
 	private String nombre;
 	

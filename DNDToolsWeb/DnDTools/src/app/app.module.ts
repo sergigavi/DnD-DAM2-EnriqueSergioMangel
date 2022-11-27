@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,11 +20,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 
+import { DialogCrearEquipo } from './component/admin/equipamiento/DialogCrearEquipo';
 import { HomeComponent } from './component/home/home.component';
 import { PartidasComponent } from './component/admin/partidas/partidas.component';
 import { EquipamientoComponent } from './component/admin/equipamiento/equipamiento.component';
@@ -108,7 +109,7 @@ const routes: Routes = [
     Dialog2NpcGM,
     DialogUsuarios,
     Dialog2Usuarios,
-
+    DialogCrearEquipo
   ],
   imports: [
     BrowserModule,
@@ -124,13 +125,14 @@ const routes: Routes = [
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    NgbModule,
     MatSortModule,
     MatFormFieldModule,
     MatCardModule,
     MatGridListModule,
     MatInputModule,
     MatDialogModule,
+    MatSelectModule
+
   ],
   entryComponents: [UsuarioFormComponent],
   providers: [],

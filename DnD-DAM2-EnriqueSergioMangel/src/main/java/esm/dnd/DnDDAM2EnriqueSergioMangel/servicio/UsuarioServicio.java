@@ -3,6 +3,7 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
     @Override
-	public boolean eliminarUsuario(UUID idUser) {
+	public boolean eliminarUsuario(ObjectId idUser) {
 		boolean exito=false;
 		
 		if(usuarioDAO.existsById(idUser)) {
@@ -39,12 +40,12 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
     @Override
-	public boolean existeUsuario(UUID idUser) {
+	public boolean existeUsuario(ObjectId idUser) {
 		return usuarioDAO.existsById(idUser);
 	}
 
     @Override
-    public boolean cambiarContrasenia(UUID idUser, String contrasenia){
+    public boolean cambiarContrasenia(ObjectId idUser, String contrasenia){
         boolean exito=false;
         Usuario a;
 
@@ -92,7 +93,7 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
 	@Override
-	public Optional<Usuario> findUsuarioById(UUID idUsuario) {
+	public Optional<Usuario> findUsuarioById(ObjectId idUsuario) {
 		return usuarioDAO.findById(idUsuario);
 	}
 

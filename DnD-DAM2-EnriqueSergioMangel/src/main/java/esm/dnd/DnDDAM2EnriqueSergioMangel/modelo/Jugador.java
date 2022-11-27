@@ -1,7 +1,7 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
-import java.util.UUID;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
@@ -22,11 +22,11 @@ public class Jugador {
     
     @Id
     @EqualsAndHashCode.Include
-    private UUID idJugador;
+    private ObjectId idJugador;
 
-    private UUID idUsuario;
+    private ObjectId idUsuario;
 
-    private UUID idFicha;
+    private ObjectId idFicha;
 
     private String notas;
 }
