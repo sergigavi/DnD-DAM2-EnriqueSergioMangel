@@ -112,12 +112,8 @@ const routes: Routes = [
     Dialog2NpcGM,
     DialogUsuarios,
     Dialog2Usuarios,
-<<<<<<< HEAD
-    DialogCrearEquipo
-=======
     DialogCrearEquipo,
     LPloginComponent
->>>>>>> main
   ],
   imports: [
     BrowserModule,
