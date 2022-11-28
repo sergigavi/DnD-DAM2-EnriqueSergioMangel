@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import { HeroesJugadorComponent } from '../../usuario/heroes/jugador/heroesJugador.component';
 
 
 @Component({
@@ -8,16 +9,19 @@ import {Component, OnInit} from '@angular/core';
 })
 
 
-export class MenuUsuarioJugadorComponent implements OnInit  {
+export class MenuUsuarioJugadorComponent implements AfterViewInit  {
 
-  title="";
+  @ViewChild(HeroesJugadorComponent) child: any;
+
   showFiller = false;
 
-  public setTitle(value: string):void{
-    this.title=value;
-  }
-
   constructor(){}
+
+  title:string="title";
+
+  ngAfterViewInit(): void {
+      this.title=this.child.message;
+  }
 
   ngOnInit(): void {
   }

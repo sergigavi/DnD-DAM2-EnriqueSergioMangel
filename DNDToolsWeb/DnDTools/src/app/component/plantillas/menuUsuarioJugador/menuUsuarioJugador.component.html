@@ -1,4 +1,3 @@
-<mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
       <!--SideBar-->
       <ul class="ulSlide">
@@ -27,9 +26,16 @@
         <mat-icon>menu</mat-icon>
       </button>
       <span>{{title}}</span>
-      <a class="nav-link" href="usuario-partidasUsuario">Salir Partidas</a>
       <span class="example-spacer"></span>
-      <button class="button">Perfil</button>
+      <a href="usuario-partidasUsuario">Salir Partida</a>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a href="perfil">
+          <button mat-menu-item>Perfil</button>
+        </a>
+        <button mat-menu-item>Cerrar Sesion</button>
+      </mat-menu>
     </mat-toolbar>
   </div>
-</mat-drawer-container>

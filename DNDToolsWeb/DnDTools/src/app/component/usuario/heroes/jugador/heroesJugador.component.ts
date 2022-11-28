@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, EventEmitter, Output} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -28,6 +28,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 export class HeroesJugadorComponent implements OnInit  {
+
+  message: string = "Heroes Jugador";
+
+  @Output() messageEvent = new EventEmitter<string>();
+
   title = 'Heroes Jugador';
   opened = false;
 
