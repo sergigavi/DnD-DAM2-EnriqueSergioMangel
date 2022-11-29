@@ -11,7 +11,7 @@ import { HeroesJugadorComponent } from '../../usuario/heroes/jugador/heroesJugad
 
 export class MenuUsuarioJugadorComponent implements AfterViewInit  {
 
-  @ViewChild(HeroesJugadorComponent) child: any;
+  @ViewChild('heroesJugadorComponent',{static:true}) child!:HeroesJugadorComponent;
 
   showFiller = false;
 

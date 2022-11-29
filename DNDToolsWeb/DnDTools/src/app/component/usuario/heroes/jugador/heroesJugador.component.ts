@@ -33,6 +33,10 @@ export class HeroesJugadorComponent implements OnInit  {
 
   @Output() messageEvent = new EventEmitter<string>();
 
+  ngOnInit(): void {
+    this.messageEvent.emit(this.message);
+  }
+
   title = 'Heroes Jugador';
   opened = false;
 
@@ -58,9 +62,6 @@ export class HeroesJugadorComponent implements OnInit  {
   }
 
   @ViewChild('matPaginator',{static:true}) paginator!:MatPaginator
-
-  ngOnInit(): void {
-  }
 
   toggleSidebar() {
     this.opened = !this.opened;
