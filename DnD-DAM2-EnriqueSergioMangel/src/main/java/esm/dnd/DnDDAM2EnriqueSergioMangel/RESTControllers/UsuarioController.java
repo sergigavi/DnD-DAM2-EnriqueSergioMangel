@@ -89,7 +89,7 @@ public class UsuarioController {
 	@PostMapping("/trylogin")
     public ResponseEntity<Usuario> loguearse(@RequestBody Usuario u)
     {
-        ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         Usuario user;
         
         if (usuarioServicio.existsByNickname(u.getNickname())) {
@@ -109,7 +109,7 @@ public class UsuarioController {
 	@PostMapping("/tryloginParams")
     public ResponseEntity<Usuario> loguearsePorParametros(@RequestParam String nickname, @RequestParam String contrasenia)
     {
-        ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         
         if (usuarioServicio.existsByNickname(nickname)) {
         	
