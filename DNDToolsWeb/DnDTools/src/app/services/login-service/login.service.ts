@@ -40,8 +40,6 @@ export class LoginService {
     .subscribe(data => {  //data es la respuesta que me devuelve la api
       console.log(data);
 
-
-
       //TODO fixear esto
       //let lplogin = document.getElementById('mensajelogin')
       //lplogin.innerHTML = 'aaaaaaa'
