@@ -46,5 +46,4 @@ export class UsuarioServiceService {
   {
     return this.http.get<Usuario[]>(`${environment.URLBASE}/usuarios/dametodos`)
   }
-
 }

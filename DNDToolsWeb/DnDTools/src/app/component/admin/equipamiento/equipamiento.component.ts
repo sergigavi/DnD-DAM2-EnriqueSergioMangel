@@ -31,6 +31,8 @@ export class EquipamientoComponent implements OnInit  {
   title = 'Equipamiento';
   opened = false;
 
+  //data nombrado aqui
+  data:EquipamientoAdmin[]=[];
   columnas:String[] = ["nombre","descripcion"]
 
   @ViewChild('paginator',{static:true}) paginator!:MatPaginator
@@ -38,7 +40,11 @@ export class EquipamientoComponent implements OnInit  {
   dataSource = new MatTableDataSource<EquipamientoAdmin>([])
 
   constructor(private dialog : MatDialog,private equipamientoService: EquipamientoAdminService,private router:Router){
-
+    //esto hace que se envie directamente a la tabla
+    this.equipamientoService.getAll().subscribe(x=>{
+      this.data = x;
+      console.log(this.data);
+    })
   }
 
   ngOnInit(): void {
@@ -48,7 +54,6 @@ export class EquipamientoComponent implements OnInit  {
   toggleSidebar() {
     this.opened = !this.opened;
   }
-
 
   public showEquipo(){
     this.equipamientoService.getAll().subscribe((data:any)=>{

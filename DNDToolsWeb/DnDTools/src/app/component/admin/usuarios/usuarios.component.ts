@@ -2,24 +2,7 @@ import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface PeriodicElement {
-  nombreCuenta: string;
-  correo: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {nombreCuenta: 'Pepe',correo:'pepe@gmail.com'},
-  {nombreCuenta: 'MarioGLd',correo:'marioGl@gmail.com'},
-  {nombreCuenta: 'PanFande',correo:'Pan@gmail.com'},
-  {nombreCuenta: 'lloritos',correo:'lloritos@gmail.com'},
-  {nombreCuenta: 'WolfHunter',correo:'Federico@gmail.com'},
-  {nombreCuenta: 'Ferianos',correo:'ferunacos@gmail.com'},
-  {nombreCuenta: 'ArcpFilicos',correo:'frediculos@gmail.com'},
-  {nombreCuenta: 'prediches',correo:'ferivolisas@gmail.com'},
-  {nombreCuenta: 'Irefciuas',correo:'ferodgidoso@gmail.com'},
-  {nombreCuenta: 'Samuner',correo:'samonDelon@gmail.com'},
-];
+import { Usuario, UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -31,10 +14,18 @@ export class UsuariosComponent implements OnInit  {
   title = 'Usuarios';
   opened = false;
 
+  //data nombrado aqui
+  data:Usuario[]=[];
   displayedColumns: string[] = ['nombreCuenta','correo','acceder','editar'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Usuario>([])
 
-  constructor(public dialog: MatDialog){}
+  constructor(public dialog: MatDialog,private usuarioService: UsuarioServiceService){
+    //esto hace que se envie directamente a la tabla
+    this.usuarioService.getUsuarios().subscribe(x=>{
+      this.data = x;
+      console.log(this.data);
+    });
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogUsuarios);
