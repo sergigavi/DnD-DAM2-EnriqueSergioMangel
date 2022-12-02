@@ -203,7 +203,7 @@ public class FichaPersonaje {
 		int sabCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Sab"))
 			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
 
-		int carCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Fue"))
+		int carCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Car"))
 			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
 
 		List<Habilidad> hs=new ArrayList<>();
