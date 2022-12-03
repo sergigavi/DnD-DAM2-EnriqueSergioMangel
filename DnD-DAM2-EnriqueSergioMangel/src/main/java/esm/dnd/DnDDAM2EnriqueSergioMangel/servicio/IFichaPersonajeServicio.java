@@ -33,7 +33,4 @@ public List<Caracteristica> getListaCaracteristicasPorId(ObjectId id);
 public List<Equipamiento> getEquipamientoPorIdFicha(ObjectId idFicha);
 
 public List<Habilidad> getHabilidadesPorIdFicha(ObjectId idFicha);
-
-public Boolean deleteEquipamientoByIdEquipamiento(ObjectId idEquipamiento);
-
 }

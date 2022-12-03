@@ -1,6 +1,7 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 
@@ -13,4 +14,7 @@ public interface IEquipamientoServicio {
 	public boolean existeEquipamiento(ObjectId idEquipo);
 	public List<Equipamiento> getAll();
 	public boolean eliminarEquipamientoTemp(ObjectId idEquipo);
+	public Optional<Equipamiento> editarEquipo(Equipamiento equipamiento);
+	public Optional<Equipamiento> findEquipoById(ObjectId idEquipo);
+	public List<Equipamiento> findAll();
 }

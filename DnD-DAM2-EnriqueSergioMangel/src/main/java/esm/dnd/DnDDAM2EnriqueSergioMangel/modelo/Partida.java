@@ -1,6 +1,7 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -40,5 +41,17 @@ public class Partida {
     private List<Npc> npcsPartida;
     @Nullable
     private List<Monstruo> monstruosPartida;
+    @Nullable
+    private List<FichaPersonaje> fichasPartida;
 
+    public Partida(Usuario creador){
+        this.creador=creador;
+        //se crea un codigo de partida mediante un UUID aleatorio
+        this.codigoPartida=UUID.randomUUID().toString();
+        this.usuariosPartida=null;
+        this.equipoPartida=null;
+        this.npcsPartida=null;
+        this.monstruosPartida=null;
+        this.fichasPartida=null;
+    }
 }
