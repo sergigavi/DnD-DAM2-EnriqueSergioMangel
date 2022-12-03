@@ -1,195 +1,95 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.stereotype.Component;
 
+import com.mongodb.lang.NonNull;
 import com.mongodb.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
 @Component
 @Document
-public class FichaPersonaje {
-	
-	@MongoId
-	@NonNull
-	@EqualsAndHashCode.Include
-	private ObjectId idFichaPersonaje;
-	
-	@Nullable
-	private Usuario usuario;
-	
-	private String nombre;
+public class Monstruo {
+    
+    @Id
+    @NonNull
+    @EqualsAndHashCode.Include
+    private ObjectId idMonstruo;
 
-	//	Estos 3 se guardan embebidos ya que mongo lo permite
-	@Nullable
-	private List<Equipamiento> inventario;
+    @Nullable
+    private String nombre;
+    @Nullable
+    private List<Caracteristica> caracteristicas;
+    @Nullable
+    private int ca;
+    @Nullable
+    private Clase clase;
+    @Nullable
+    private Raza raza;
+    @Nullable
+    private Alineamiento alineamiento;
+    @Nullable
+    private int nivel;
+    @Nullable
+    private int bonifCompetencia;
+    @Nullable
+    private int puntosVidaMax;
+    @Nullable
+    private int velocidad;
+    @Nullable
+    private String rasgos;
+    @Nullable
+    private List<Habilidad> habilidades;
+    @Nullable
+    private int desafio;
 
-	private List<Caracteristica> caracteristicas;
-	
-	private List<Habilidad> habilidades;
+    public Monstruo(){
+        this.idMonstruo=ObjectId.get();
+        this.nombre="";
+        this.nivel=1;
+        this.bonifCompetencia=calcBonifCompetencia(this.nivel);
+        this.caracteristicas=setCaracteristicasPorDefecto();
+        this.habilidades=setHabilidadesPorDefecto(caracteristicas, this.bonifCompetencia);
+        this.desafio=1;
+        this.rasgos="";
+        this.puntosVidaMax=0;
+        this.velocidad=30;
+        this.ca=10;
+        this.clase=Clase.SELECCIONAR;
+        this.raza=Raza.SELECCIONAR;
+    }
+    public Monstruo(Monstruo monstruo){
+        this.idMonstruo=ObjectId.get();
+        this.nivel=monstruo.nivel;
+        this.nombre=monstruo.nombre;
+        this.bonifCompetencia=calcBonifCompetencia(this.nivel);
+        this.caracteristicas=monstruo.getCaracteristicas();
+        this.habilidades=setHabilidades(caracteristicas, habilidades, this.bonifCompetencia);
+        this.rasgos=monstruo.rasgos;
+        this.alineamiento=monstruo.alineamiento;
+        this.puntosVidaMax=monstruo.puntosVidaMax;
+        this.ca=monstruo.ca;
+        this.desafio=monstruo.desafio;
+        this.velocidad=monstruo.velocidad;
+        this.raza=monstruo.raza;
+        this.clase=monstruo.clase;
+    }
 
-	private Clase clase;
-	
-	private Raza raza;
-	
-	private Alineamiento alineamiento;
-	
-	private int nivel;
-	
-	//campo autoevaluado
-	private int bonifCompetencia;
-	
-	@Nullable
-	private String transfondo;
-		
-	private int ca;
-	
-	private int velocidad;
-	
-	private int puntosVidaMax;
-	
-	//posible para quitar
-	@Nullable
-	private int puntosVidaAct;
-
-	@Nullable
-	private String rasgosPersonalidad;
-	
-	@Nullable
-	private String ideales;
-	
-	@Nullable
-	private String vinculos;
-	
-	@Nullable
-	private String defectos;
-	
-	@Nullable
-	private String rasgosAtt;
-	
-	@Nullable
-	private String otrasComp;
-	
-	@Nullable
-	private String apariencia;
-	
-	@Nullable
-	private String historiaPersonal;
-	
-	@Nullable
-	private String rasgos;
-	
-	@Nullable
-	private String notasAdd;
-
-	public FichaPersonaje(Integer nivel){
-		this.bonifCompetencia=calcBonifCompetencia(nivel);
-	}
-	
-	public void setBonifCompetenciaPorNivel(Integer nivel){
-
-		this.bonifCompetencia=calcBonifCompetencia(nivel);
-	}
-
-	/*
-	public void deleteEquipamiento(Equipamiento equipamiento){
-		this.inventario.stream()
-			.filter(i->i.getIdEquipo().equals(equipamiento.getIdEquipo()))
-			.forEach(e->e.);
-	}
-	 */
-	public FichaPersonaje(){
-
-		this.idFichaPersonaje=ObjectId.get();
-		this.nombre="";
-		this.nivel=1;
-		this.bonifCompetencia=calcBonifCompetencia(this.nivel);
-		this.usuario=null;
-		this.caracteristicas=setCaracteristicasPorDefecto();
-		this.habilidades=setHabilidadesPorDefecto(this.caracteristicas,this.bonifCompetencia);
-		this.clase=Clase.SELECCIONAR;
-		this.raza=Raza.SELECCIONAR;
-		this.alineamiento=Alineamiento.SELECCIONAR;
-		this.transfondo="";
-		this.ca=10;
-		this.velocidad=30;
-		this.puntosVidaMax=0;
-		this.puntosVidaAct=0;
-		this.vinculos="";
-		this.rasgos="";
-		this.rasgosAtt="";
-		this.apariencia="";
-		this.ideales="";
-		this.otrasComp="";
-		this.historiaPersonal="";
-		this.notasAdd="";
-		this.defectos="";
-		this.rasgosPersonalidad="";
-		this.inventario=null;
-	}
-	
-	public FichaPersonaje(FichaPersonaje ficha){
-
-		this.idFichaPersonaje=ficha.getIdFichaPersonaje();
-		this.usuario = ficha.getUsuario();
-		this.inventario=ficha.getInventario();
-		this.caracteristicas=ficha.getCaracteristicas();
-		this.nivel=ficha.getNivel();
-		this.nombre=ficha.getNombre();
-		this.bonifCompetencia=calcBonifCompetencia(this.nivel);
-		this.habilidades=setHabilidades(this.caracteristicas, ficha.getHabilidades(), null);
-		this.clase=ficha.getClase();
-		this.raza=ficha.getRaza();
-		this.alineamiento=getAlineamiento();
-		this.transfondo=ficha.getTransfondo();
-		this.ca=ficha.getCa();
-		this.velocidad=ficha.getVelocidad();
-		this.puntosVidaMax=ficha.getPuntosVidaMax();
-		this.puntosVidaAct=ficha.getPuntosVidaAct();
-		this.vinculos=ficha.getVinculos();
-		this.rasgos=ficha.getRasgos();
-		this.rasgosAtt=ficha.getRasgosAtt();
-		this.apariencia=ficha.getApariencia();
-		this.ideales=ficha.getIdeales();
-		this.otrasComp=ficha.getOtrasComp();
-		this.historiaPersonal=ficha.getHistoriaPersonal();
-		this.notasAdd=ficha.getNotasAdd();
-		this.defectos=ficha.getDefectos();
-		this.rasgosPersonalidad=ficha.getRasgosPersonalidad();
-	}
-	
-
-	public static Integer calcBonifCompetencia(Integer nivel){
-
-		if(nivel>=17){
-			return 6;
-		}else if(nivel>=13){
-			return 5;
-		}else if(nivel>=9){
-			return 4;
-		}else if(nivel>=5){
-			return 3;
-		}else {
-			return 2;
-		}
-	}
-
-	public List<Habilidad> setHabilidades(List<Caracteristica> caracteristicas,List<Habilidad> habilidades,Integer bonif){
+    public List<Habilidad> setHabilidades(List<Caracteristica> caracteristicas,List<Habilidad> habilidades,Integer bonif){
 
 		int fueCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Fue"))
 			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
@@ -289,7 +189,60 @@ public class FichaPersonaje {
 		return hs;
 	}
 
-	public static List<Habilidad> setHabilidadesPorDefecto(List<Caracteristica> car,Integer bonif){
+    public static Integer calcBonifCompetencia(Integer nivel){
+
+		if(nivel>=17){
+			return 6;
+		}else if(nivel>=13){
+			return 5;
+		}else if(nivel>=9){
+			return 4;
+		}else if(nivel>=5){
+			return 3;
+		}else {
+			return 2;
+		}
+	}
+    public static List<Caracteristica> setCaracteristicasPorDefecto(){
+		final int _numCaracteristicas = 6;
+		List<Caracteristica> car=new ArrayList<Caracteristica>();
+		
+		for(int i=0;i<_numCaracteristicas;i++){
+			Caracteristica c=new Caracteristica();
+			switch (i) {
+				case 0:
+					c=new Caracteristica("Fuerza");
+					car.add(c);
+					break;
+				case 1:
+					c=new Caracteristica("Destreza");
+					car.add(c);
+					break;
+				case 2:
+					c=new Caracteristica("Constitucion");
+					car.add(c);
+					break;
+				case 3:
+					c=new Caracteristica("Inteligencia");
+					car.add(c);
+					break;
+				case 4:
+					c=new Caracteristica("Sabiduria");
+					car.add(c);
+					break;
+				case 5:
+					c=new Caracteristica("Carisma");
+					car.add(c);
+					break;
+				default:
+					c=new Caracteristica("???");
+					car.add(c);
+					break;
+			}
+		}
+		return car;
+	}
+    public static List<Habilidad> setHabilidadesPorDefecto(List<Caracteristica> car,Integer bonif){
 		final int _numHabilidades = 18;
 		List<Habilidad> hab=new ArrayList<Habilidad>();
 		
@@ -374,50 +327,4 @@ public class FichaPersonaje {
 		}
 		return hab;
 	}
-
-	
-
-	public static List<Caracteristica> setCaracteristicasPorDefecto(){
-		final int _numCaracteristicas = 6;
-		List<Caracteristica> car=new ArrayList<Caracteristica>();
-		
-		for(int i=0;i<_numCaracteristicas;i++){
-			Caracteristica c=new Caracteristica();
-			switch (i) {
-				case 0:
-					c=new Caracteristica("Fuerza");
-					car.add(c);
-					break;
-				case 1:
-					c=new Caracteristica("Destreza");
-					car.add(c);
-					break;
-				case 2:
-					c=new Caracteristica("Constitucion");
-					car.add(c);
-					break;
-				case 3:
-					c=new Caracteristica("Inteligencia");
-					car.add(c);
-					break;
-				case 4:
-					c=new Caracteristica("Sabiduria");
-					car.add(c);
-					break;
-				case 5:
-					c=new Caracteristica("Carisma");
-					car.add(c);
-					break;
-				default:
-					c=new Caracteristica("???");
-					car.add(c);
-					break;
-			}
-		}
-		return car;
-	}
 }
-	
-
-
-
