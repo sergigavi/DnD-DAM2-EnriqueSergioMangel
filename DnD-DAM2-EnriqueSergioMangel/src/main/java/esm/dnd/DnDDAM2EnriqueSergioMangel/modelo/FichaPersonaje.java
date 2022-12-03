@@ -15,7 +15,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -26,7 +25,6 @@ import lombok.NonNull;
 public class FichaPersonaje {
 	
 	@MongoId
-	@NonNull
 	@EqualsAndHashCode.Include
 	private ObjectId idFichaPersonaje;
 	
@@ -38,29 +36,29 @@ public class FichaPersonaje {
 	//	Estos 3 se guardan embebidos ya que mongo lo permite
 	@Nullable
 	private List<Equipamiento> inventario;
-
+	@Nullable
 	private List<Caracteristica> caracteristicas;
-	
+	@Nullable
 	private List<Habilidad> habilidades;
-
+	@Nullable
 	private Clase clase;
-	
+	@Nullable
 	private Raza raza;
-	
+	@Nullable
 	private Alineamiento alineamiento;
-	
+	@Nullable
 	private int nivel;
-	
+	@Nullable
 	//campo autoevaluado
 	private int bonifCompetencia;
 	
 	@Nullable
 	private String transfondo;
-		
+	@Nullable
 	private int ca;
-	
+	@Nullable
 	private int velocidad;
-	
+	@Nullable
 	private int puntosVidaMax;
 	
 	//posible para quitar
@@ -203,7 +201,7 @@ public class FichaPersonaje {
 		int sabCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Sab"))
 			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
 
-		int carCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Fue"))
+		int carCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Car"))
 			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
 
 		List<Habilidad> hs=new ArrayList<>();
