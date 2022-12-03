@@ -15,7 +15,8 @@ export class UsuariosComponent implements OnInit  {
   opened = false;
 
   //data nombrado aqui
-  data:Usuario[]=[];
+  public data:Usuario[]=[];
+  public data2:Usuario[]=[];
   displayedColumns: string[] = ['nombreCuenta','correo','acceder','editar'];
   dataSource = new MatTableDataSource<Usuario>([])
 
@@ -27,8 +28,10 @@ export class UsuariosComponent implements OnInit  {
     });
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogUsuarios);
+  openDialog(usuario:Usuario) {
+    const dialogRef = this.dialog.open(DialogUsuarios)
+
+    console.log(usuario);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

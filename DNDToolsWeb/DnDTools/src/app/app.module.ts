@@ -4,7 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider'
 import { MatMenuModule } from '@angular/material/menu'
@@ -135,7 +135,8 @@ const routes: Routes = [
     MatGridListModule,
     MatInputModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule
 
   ],
   entryComponents: [UsuarioFormComponent],
