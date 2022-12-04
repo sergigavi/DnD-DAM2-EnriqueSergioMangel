@@ -6,6 +6,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.UnwindOperation.UnwindOperationBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,15 +20,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Administrador;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Alineamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Caracteristica;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.CatEquipo;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Clase;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Equipamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Jugador;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.PropiedadEquipo;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Raza;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.TipoEquipo;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.AdministradorServicio;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.EquipamientoServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.FichaPersonajeServicio;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.JugadorServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.UsuarioServicio;
 
 @CrossOrigin(originPatterns = {"*"},methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.OPTIONS})    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
@@ -39,6 +48,10 @@ public class FichaPersonajeController {
     @Autowired private FichaPersonajeServicio fichaPersonajeServicio;
     
     @Autowired private UsuarioServicio usuarioServicio;
+    @Autowired private AdministradorServicio administradorServicio;
+    @Autowired private EquipamientoServicio equipamientoServicio;
+    @Autowired private JugadorServicio jugadorServicio;
+    
 
     
     @GetMapping("/getAll")
@@ -275,6 +288,49 @@ public class FichaPersonajeController {
     }
 
     private void cargarDatos() {
+    	
+    	List<Administrador> administradores = new ArrayList<>();
+    	
+    	administradores.add(Administrador.builder()
+    			.idAdmin(ObjectId.get())
+    			.nombre("Enrique")
+    			.email("enenriquerique@enri.que")
+    			.contrasenia("contrajiji")
+    			.build());
+    	
+    	administradores.add(Administrador.builder()
+    			.idAdmin(ObjectId.get())
+    			.nombre("Sergio")
+    			.email("sergio@sergi.o")
+    			.contrasenia("123abc")
+    			.build());
+    	
+    	administradores.add(Administrador.builder()
+    			.idAdmin(ObjectId.get())
+    			.nombre("Mangel")
+    			.email("miguel@angel.es")
+    			.contrasenia("contrajiji")
+    			.build());
+    	
+    	administradorServicio.insertarAdministradores(administradores);
+    	
+    	List<Equipamiento> equipamientos = new ArrayList<>();
+    	
+    	equipamientos.add(Equipamiento.builder()
+    			.idEquipo(ObjectId.get())
+    			.nombre("Ballesta de fropendruo")
+    			.tipo(TipoEquipo.ARMA)
+    			.categoria(CatEquipo.ARMA_SENCILLA)
+    			.propiedad(List.of(PropiedadEquipo.ALCANCE, PropiedadEquipo.DISTANCIA))
+    			.modificador("")
+    			.danio("10")
+    			.alcance(7)
+    			.precio(90)
+    			.peso(23.8f)
+    			.descripcion("Ballesta capaz de matar a cualquiera")
+    			.build());
+    	
+    	equipamientoServicio.insertarEquipamientos(equipamientos);
         
         List<FichaPersonaje> fichasPersonaje = new ArrayList<>();
         
@@ -326,6 +382,20 @@ public class FichaPersonajeController {
                 .rasgos("rasgos")
                 .notasAdd("")                
                 .build());
+        
+        //
+        
+    	
+    	List<Jugador> jugadores = new ArrayList<>();
+    	
+    	jugadores.add(Jugador.builder()
+    			.idJugador(ObjectId.get())
+    			.idUsuario(u1.getIdUser())
+    			.idFicha(fichasPersonaje.get(0).getIdFichaPersonaje())
+    			.notas("notas del jugador")
+    			.build());
+    	
+    	jugadorServicio.addJugadores(jugadores);
         
         //
         

@@ -1,5 +1,6 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
@@ -21,6 +22,20 @@ public class AdministradorServicio implements IAdministradorServicio{
 		if(!administradorDAO.existsById(a.getIdAdmin())) {
 			administradorDAO.save(a);
 			exito=true;
+		}
+		
+		return exito;
+	}
+    
+    @Override
+	public boolean insertarAdministradores(List<Administrador> admins) {
+		boolean exito=false;
+
+		try {
+			administradorDAO.saveAll(admins);
+			exito = true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		return exito;

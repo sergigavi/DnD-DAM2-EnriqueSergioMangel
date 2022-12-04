@@ -15,5 +15,7 @@ public class JugadorController {
 	@Autowired
 	private IJugadorServicio jugadorServicio;
 	
+	//aqui en el delete poner que se elimine tambien de la fichapersonaje el id
+	
 	
 }

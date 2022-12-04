@@ -93,4 +93,18 @@ public class JugadorServicio implements IJugadorServicio {
 		return jugadoresEliminados;
 	}
 
+	@Override
+	public boolean addJugadores(List<Jugador> jugadores) {
+		boolean exito = false;
+		
+		try {
+			jugadorDAO.saveAll(jugadores);
+			exito = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return exito;
+	}
+
 }
