@@ -14,7 +14,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @AllArgsConstructor
@@ -27,7 +26,6 @@ import lombok.NonNull;
 public class Equipamiento {
 
 	@Id
-	@NonNull
 	@EqualsAndHashCode.Include
 	private ObjectId idEquipo;
 	
@@ -53,7 +51,7 @@ public class Equipamiento {
 	private Integer alcance;
 	
 	@Nullable
-	private Integer precio;
+	private String precio;
 	
 	@Nullable
 	private Float peso;

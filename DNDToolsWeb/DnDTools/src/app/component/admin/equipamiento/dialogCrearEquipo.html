@@ -1,19 +1,65 @@
-<div class="">
-  <form #formEquipoAdmin="ngForm" (ngSubmit)="onSubmit(formEquipoAdmin)">
-    <p>Crear nuevo equipamiento:</p>
-    <div class="formInputs">
-      <mat-form-field appearance="fill">
-        <mat-label>Tipo de equipamiento</mat-label>
-        <mat-select [(ngModel)]="tipoElegido" name="tipo" required>
-          <mat-option *ngFor="let tipo in tipos" [value]="tipo">
-            {{tipo}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+<mat-grid-list cols="3" rowHeight="4:1">
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>Tipo de equipamiento</mat-label>
+      <mat-select [(ngModel)]="tipoElegido" name="tipo" required>
+        <mat-option name="tipo" *ngFor="let tipo of tipos" [value]="tipo">
+          {{tipo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field appearance="fill" class="formField">
+      <mat-label>Categoría</mat-label>
+      <mat-select [(ngModel)]="categoriaElegida" name="categoria" required>
+        <mat-option name="categoria" *ngFor="let categoria of categorias" [value]="categoria">
+          {{categoria}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field appearance="fill">
+      <mat-label>Propiedades</mat-label>
+    <mat-select [(ngModel)]="propiedadElegida" name="propiedad" required>
+      <mat-option name="propiedad" *ngFor="let propiedad of propiedades" [value]="propiedad">
+        {{propiedad}}
+      </mat-option>
+    </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field appearance="outline" class="formField">
+      <mat-label>Nombre:</mat-label>
+      <input ngModel matInput name="nombre" required>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field appearance="outline" class="formField">
+      <mat-label>Daño:</mat-label>
+      <input ngModel matInput name="danio">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field appearance="outline" class="formField">
+      <mat-label>Alcance:</mat-label>
+      <input ngModel matInput name="alcance" type="number">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field appearance="outline" class="formField">
+      <mat-label>Descripción:</mat-label>
+      <textarea ngModel matInput name="descripcion"></textarea>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field appearance="outline" class="formField">
+      <mat-label>Peso:</mat-label>
+      <input ngModel matInput name="peso" type="number">
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
 
-    <button mat-flat-button color="accent" type="submit">Enviar</button>
-  </form>
-  <br>
-  <button mat-flat-button color="accent" type="button" (click)="onNoClick()">Cerrar</button>
-</div>
+
+

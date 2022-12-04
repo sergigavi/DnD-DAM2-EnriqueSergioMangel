@@ -2,8 +2,24 @@ import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Usuario, UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
+import {  UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
 import { Inject } from '@angular/core';
+
+export interface Usuario {
+
+  idUser?:any;
+  nombre?:String;
+  apellidos?:String;
+  contrasenia?:String;
+  nickname?:String;
+  biografia?:String;
+  email?:String;
+  fechaNacimiento?:String;
+  urlImage?:String;
+  activo?:boolean;
+  pais?:String;
+
+}
 
 @Component({
   selector: 'app-usuarios',
@@ -29,9 +45,9 @@ export class UsuariosComponent implements OnInit  {
     });
   }
 
-  openDialog(nombre:String,correo:String) {
+  openDialog(usuario:Usuario) {
     const dialogRef = this.dialog.open(DialogUsuarios,{
-      data:{name:nombre,mail:correo}
+      data:{usuario:usuario}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -39,9 +55,9 @@ export class UsuariosComponent implements OnInit  {
     });
   }
 
-  openDialog2(nombre:String,correo:String) {
+  openDialog2(usuario:Usuario) {
     const dialogRef = this.dialog.open(Dialog2Usuarios,{
-      data:{name:nombre,mail:correo}
+      data:{usuario:usuario}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -71,16 +87,13 @@ export class UsuariosComponent implements OnInit  {
 })
 
 export class DialogUsuarios {
-  nombre: any;
-  correo: any;
 
-  constructor(
-    public dialogRef: MatDialogRef<UsuariosComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UsuariosComponent) {}
+  usuario:any;
+  constructor(public dialogRef: MatDialogRef<UsuariosComponent>,@Inject(MAT_DIALOG_DATA) public data: UsuariosComponent) {}
 
     ngOnInit() {
-      this.nombre = this.data['name'];
-      this.correo = this.data['mail'];
+      this.usuario=this.data['usuario'];
+      console.log(this.usuario)
     }
 }
 
@@ -90,15 +103,13 @@ export class DialogUsuarios {
 })
 
 export class Dialog2Usuarios {
-  nombre: any;
-  correo: any;
+  usuario: any;
 
   constructor(
     public dialogRef: MatDialogRef<UsuariosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UsuariosComponent) {}
 
   ngOnInit() {
-    this.nombre = this.data['name'];
-    this.correo = this.data['mail'];
+    this.usuario = this.data['usuario'];
   }
 }
