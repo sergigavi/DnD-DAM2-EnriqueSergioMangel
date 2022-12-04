@@ -115,4 +115,19 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 	public List<Equipamiento> findAll() {
 		return equipamientoDAO.findAll();
 	}
+
+	@Override
+	public boolean insertarEquipamientos(List<Equipamiento> equipamientos) {
+
+		boolean exito = false;
+		
+		try {
+			equipamientoDAO.saveAll(equipamientos);
+			exito = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return exito;
+	}
 }

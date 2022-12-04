@@ -1,5 +1,6 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
@@ -13,5 +14,6 @@ public interface IAdministradorServicio {
 	public boolean existeAdministrador(ObjectId idAdmin);
 	public Iterable<Administrador> findAllAdmins();
 	public Optional<Administrador> findAdminByID(ObjectId id);
+	boolean insertarAdministradores(List<Administrador> admins);
 
 }

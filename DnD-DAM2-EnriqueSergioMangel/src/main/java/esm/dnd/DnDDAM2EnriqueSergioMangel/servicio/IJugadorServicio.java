@@ -23,5 +23,7 @@ public interface IJugadorServicio {
 
 	public Iterable<Jugador> deleteAllJugadores();
 
+	public boolean addJugadores(List<Jugador> jugadores);
+
 
 }

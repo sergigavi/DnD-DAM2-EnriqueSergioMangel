@@ -28,7 +28,7 @@ export class LPloginComponent {
       contrasenia:this.contrasenia
     }
 
-    console.log(usuario)
+    //console.log(usuario)
     //  Esto llama a la api
     this.loginService.trylogin(usuario)
   }

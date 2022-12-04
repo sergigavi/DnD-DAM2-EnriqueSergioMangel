@@ -17,4 +17,5 @@ public interface IEquipamientoServicio {
 	public Optional<Equipamiento> editarEquipo(Equipamiento equipamiento);
 	public Optional<Equipamiento> findEquipoById(ObjectId idEquipo);
 	public List<Equipamiento> findAll();
+	boolean insertarEquipamientos(List<Equipamiento> equipamientos);
 }
