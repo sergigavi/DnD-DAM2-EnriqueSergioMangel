@@ -21,7 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
 import { MatSelectModule } from '@angular/material/select';
 
-import { CookieService } from 'ngx-cookie-service';
+//import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
@@ -142,7 +142,7 @@ const routes: Routes = [
 
   ],
   entryComponents: [UsuarioFormComponent],
-  providers: [CookieService],
+  providers: [/*CookieService*/],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
