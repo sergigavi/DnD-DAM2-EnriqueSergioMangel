@@ -136,7 +136,7 @@ const routes: Routes = [
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
   ],
   entryComponents: [UsuarioFormComponent],
