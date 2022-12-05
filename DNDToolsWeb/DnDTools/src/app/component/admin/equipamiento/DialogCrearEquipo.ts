@@ -1,7 +1,21 @@
 import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { EquipamientoComponent } from "./equipamiento.component";
-import { NgForm } from '@angular/forms';
+import {  NgForm } from '@angular/forms';
+import { EquipamientoAdminService } from "src/app/services/equipamientoAdmin-service/equipamiento-admin.service";
+
+export interface EquipamientoAdmin{
+  nombre:String;
+  tipo:Tipo;
+  categoria:CatEquipo;
+  propiedad:PropiedadEquipo[];
+  modificador:String;
+  danio:String;
+  alcance:number;
+  precio:String;
+  peso:String;
+  descripcion:String;
+}
 
 export enum Tipo{
   ARMADURA="ARMADURA",
@@ -49,22 +63,33 @@ export enum PropiedadEquipo{
   VERSATIL="VERSATIL"
 }
 
+export enum Modificador{
+  FUE="FUE",
+  DES="DES",
+  INT="INT",
+  SAB="SAB",
+  CAR="CAR"
+}
 
 @Component({
   selector: 'dialogCrearEquipo',
-  templateUrl: 'dialogCrearEquipo.html',
+  templateUrl: './dialogCrearEquipo.html',
   styleUrls: ['./dialogCrearEquipo.css']
 })
 export class DialogCrearEquipo{
-  constructor(public dialogRef:MatDialogRef<EquipamientoComponent>){}
+  constructor(public dialogRef:MatDialogRef<EquipamientoComponent>,private equipamientoServicio:EquipamientoAdminService){}
 
   tipos=Object.values(Tipo)
   categorias=Object.values(CatEquipo)
   propiedades=Object.values(PropiedadEquipo)
+  modificadores=Object.values(Modificador)
+
+  equipamiento!: EquipamientoAdmin;
 
   tipoElegido:string="";
   categoriaElegida:string="";
-  propiedadElegida:string="";
+  propiedadElegida:string[]=[]
+  modificadorElegido:string="";
 
   onNoClick(){
     this.dialogRef.close()
@@ -75,8 +100,13 @@ export class DialogCrearEquipo{
   }
 
   onSubmit(equipo:NgForm){
-    console.log(equipo.value)
-    this.dialogRef.close()
-
+    this.equipamiento=equipo.value
+    if(this.equipamiento.propiedad.length<1){
+      this.equipamiento.propiedad=[]
+    }
+    this.equipamientoServicio.addEquipo(equipo.value).subscribe((data:any)=>{
+      console.log(data)
+      this.dialogRef.close()
+    })
   }
 }

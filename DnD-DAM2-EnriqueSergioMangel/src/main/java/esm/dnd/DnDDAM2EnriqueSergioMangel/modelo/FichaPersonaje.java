@@ -25,9 +25,12 @@ import lombok.EqualsAndHashCode;
 public class FichaPersonaje {
 	
 	@MongoId
-	@EqualsAndHashCode.Include
 	private ObjectId idFichaPersonaje;
 	
+	@EqualsAndHashCode.Include
+	@Nullable
+	private String idFichaPersonajeString;
+
 	@Nullable
 	private Usuario usuario;
 	
@@ -114,6 +117,7 @@ public class FichaPersonaje {
 	public FichaPersonaje(){
 
 		this.idFichaPersonaje=ObjectId.get();
+		this.idFichaPersonajeString=this.idFichaPersonaje.toString();
 		this.nombre="";
 		this.nivel=1;
 		this.bonifCompetencia=calcBonifCompetencia(this.nivel);
@@ -144,6 +148,7 @@ public class FichaPersonaje {
 	public FichaPersonaje(FichaPersonaje ficha){
 
 		this.idFichaPersonaje=ficha.getIdFichaPersonaje();
+		this.idFichaPersonajeString=ficha.getIdFichaPersonajeString();
 		this.usuario = ficha.getUsuario();
 		this.inventario=ficha.getInventario();
 		this.caracteristicas=ficha.getCaracteristicas();

@@ -3,7 +3,6 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 import java.util.List;
 import java.util.Optional;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +15,12 @@ public class PartidaServicio implements IPartidaServicio {
     @Autowired private PartidaRepository partidaDAO;
 
     @Override
-    public boolean existePartida(ObjectId idPartida) {
+    public boolean existePartida(String idPartida) {
         return partidaDAO.existsById(idPartida);
     }
 
     @Override
-    public Optional<Partida> findPartidaById(ObjectId idPartida) {
+    public Optional<Partida> findPartidaById(String idPartida) {
         return partidaDAO.findById(idPartida);
     }
 
@@ -31,7 +30,7 @@ public class PartidaServicio implements IPartidaServicio {
     }
 
     @Override
-    public Optional<Partida> deletePartidaById(ObjectId idPartida) {
+    public Optional<Partida> deletePartidaById(String idPartida) {
         if(partidaDAO.existsById(idPartida)){
             Optional<Partida> p=partidaDAO.findById(idPartida);
             partidaDAO.deleteById(idPartida);
@@ -42,7 +41,7 @@ public class PartidaServicio implements IPartidaServicio {
 
     @Override
     public boolean addPartida(Partida partida) {
-        if(!partidaDAO.existsById(partida.getIdPartida())){
+        if(!partidaDAO.existsById(partida.getIdStringPartida())){
             partidaDAO.save(partida);
             return true;
         }else
@@ -58,9 +57,9 @@ public class PartidaServicio implements IPartidaServicio {
 
     @Override
     public Optional<Partida> editarPartida(Partida partida) {
-        if(partidaDAO.existsById(partida.getIdPartida())){
+        if(partidaDAO.existsById(partida.getIdStringPartida())){
             partidaDAO.save(partida);
-            Optional<Partida> p=partidaDAO.findById(partida.getIdPartida());
+            Optional<Partida> p=partidaDAO.findById(partida.getIdStringPartida());
             return p;
         }else
             return Optional.empty();

@@ -48,9 +48,13 @@ public class EquipamientoController {
 
         System.out.println(equipamiento.toString());
 
+        ObjectId id = ObjectId.get();
+        String idString = id.toString();
+
         Equipamiento eq= Equipamiento.builder()
             .alcance(equipamiento.getAlcance())
-            .idEquipo(ObjectId.get())
+            .idEquipo(id)
+            .idString(idString)
             .categoria(equipamiento.getCategoria())
             .danio(equipamiento.getDanio())
             .descripcion(equipamiento.getDescripcion())
@@ -77,7 +81,7 @@ public class EquipamientoController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteEquipamiento(@RequestBody ObjectId id){
+    public ResponseEntity<String> deleteEquipamiento(@RequestBody String id){
 
         ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
@@ -91,10 +95,10 @@ public class EquipamientoController {
     @PutMapping("/update")
     public ResponseEntity<String> updateEquipamiento(@RequestBody Equipamiento equipamiento){
         ResponseEntity<String> res = new ResponseEntity<String>("Fallo al actualizar la ficha",HttpStatus.OK);
-
-        if(equipamientoServicio.existeEquipamiento(equipamiento.getIdEquipo())){
+        System.out.println(equipamiento.toString());
+        if(equipamientoServicio.existeEquipamiento(equipamiento.getIdString())){
             try {
-                equipamientoServicio.insertarEquipamiento(equipamiento);
+                equipamientoServicio.editarEquipo(equipamiento);
                 res = new ResponseEntity<>("Exito al actualizar la ficha",HttpStatus.OK);
                 return res;
             } catch (Exception e) {

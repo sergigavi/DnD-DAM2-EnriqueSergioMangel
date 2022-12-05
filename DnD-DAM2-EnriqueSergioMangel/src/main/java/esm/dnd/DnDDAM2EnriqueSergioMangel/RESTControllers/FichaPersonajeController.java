@@ -6,7 +6,6 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.UnwindOperation.UnwindOperationBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,7 +27,6 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Clase;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Equipamiento;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.FichaPersonaje;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Habilidad;
-import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Jugador;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.PropiedadEquipo;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Raza;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.TipoEquipo;
@@ -36,7 +34,6 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.AdministradorServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.EquipamientoServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.FichaPersonajeServicio;
-import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.JugadorServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.UsuarioServicio;
 
 @CrossOrigin(originPatterns = {"*"},methods = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.OPTIONS})    //Con esta anotacion se salta el protocolo para poder acceder a la API desde el fetch de javascript etcetc
@@ -49,9 +46,7 @@ public class FichaPersonajeController {
     
     @Autowired private UsuarioServicio usuarioServicio;
     @Autowired private AdministradorServicio administradorServicio;
-    @Autowired private EquipamientoServicio equipamientoServicio;
-    @Autowired private JugadorServicio jugadorServicio;
-    
+    @Autowired private EquipamientoServicio equipamientoServicio;    
 
     
     @GetMapping("/getAll")
@@ -67,7 +62,7 @@ public class FichaPersonajeController {
     }
         
     @GetMapping("/getCaracteristicasById/{id}")
-    public ResponseEntity<List<Caracteristica>> obtenerTodasLasFichasDePersonaje(@PathVariable ObjectId id)
+    public ResponseEntity<List<Caracteristica>> obtenerTodasLasFichasDePersonaje(@PathVariable String id)
     {
         ResponseEntity<List<Caracteristica>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         if (fichaPersonajeServicio.existsByIdFichaPersonaje(id))
@@ -81,7 +76,7 @@ public class FichaPersonajeController {
     }
     
     @PostMapping("/AddCaracteristicaEnFichaByIdFicha/{id}")
-    public ResponseEntity<Caracteristica> addCaracteristicaByIdFicha(@PathVariable ObjectId id, @RequestBody Caracteristica caracteristica)
+    public ResponseEntity<Caracteristica> addCaracteristicaByIdFicha(@PathVariable String id, @RequestBody Caracteristica caracteristica)
     {
         ResponseEntity<Caracteristica> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -100,7 +95,7 @@ public class FichaPersonajeController {
     }
     
     @PostMapping("/AddHabilidadEnFichaByIdFicha/{id}")
-    public ResponseEntity<Habilidad> addHabilidadEnFichaByIdFicha(@PathVariable ObjectId id, @RequestBody Habilidad habilidad)
+    public ResponseEntity<Habilidad> addHabilidadEnFichaByIdFicha(@PathVariable String id, @RequestBody Habilidad habilidad)
     {
         ResponseEntity<Habilidad> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -118,7 +113,7 @@ public class FichaPersonajeController {
     }
     
     @GetMapping("/getHabilidadesById/{idFicha}")
-    public ResponseEntity<List<Habilidad>> obtenerTodasLasHabilidades(@PathVariable ObjectId idFicha)
+    public ResponseEntity<List<Habilidad>> obtenerTodasLasHabilidades(@PathVariable String idFicha)
     {
         ResponseEntity<List<Habilidad>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -133,7 +128,7 @@ public class FichaPersonajeController {
     }
 
     @PostMapping("/AddEquipamientoEnFichaByIdFicha/{id}")
-    public ResponseEntity<Equipamiento> addEquipamientoByIdFicha(@PathVariable ObjectId id, @RequestBody Equipamiento equipamiento)
+    public ResponseEntity<Equipamiento> addEquipamientoByIdFicha(@PathVariable String id, @RequestBody Equipamiento equipamiento)
     {
         ResponseEntity<Equipamiento> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -153,7 +148,7 @@ public class FichaPersonajeController {
     }
     
     @GetMapping("/getEquipamientoById/{idFicha}")
-    public ResponseEntity<List<Equipamiento>> obtenerTodosLosEquipamientos(@PathVariable ObjectId idFicha)
+    public ResponseEntity<List<Equipamiento>> obtenerTodosLosEquipamientos(@PathVariable String idFicha)
     {
         ResponseEntity<List<Equipamiento>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         
@@ -173,7 +168,7 @@ public class FichaPersonajeController {
         ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         FichaPersonaje f=new FichaPersonaje();
 
-        if(fichaPersonajeServicio.existsByIdFichaPersonaje(ficha.getIdFichaPersonaje())){
+        if(fichaPersonajeServicio.existsByIdFichaPersonaje(ficha.getIdFichaPersonajeString())){
             return res;
         }
 
@@ -238,7 +233,7 @@ public class FichaPersonajeController {
     }
     
     @DeleteMapping("/deleteById")
-	public ResponseEntity<FichaPersonaje> deleteFichaById(@RequestParam ObjectId id)
+	public ResponseEntity<FichaPersonaje> deleteFichaById(@RequestParam String id)
 	{
 		FichaPersonaje f;
 		
@@ -291,22 +286,32 @@ public class FichaPersonajeController {
     	
     	List<Administrador> administradores = new ArrayList<>();
     	
+        ObjectId idAdmin1=ObjectId.get();
+        ObjectId idAdmin2=ObjectId.get();
+        ObjectId idAdmin3=ObjectId.get();
+        String idAdminString1=idAdmin1.toString();
+        String idAdminString2=idAdmin2.toString();
+        String idAdminString3=idAdmin3.toString();
+
     	administradores.add(Administrador.builder()
-    			.idAdmin(ObjectId.get())
+    			.idAdmin(idAdmin1)
+                .idAdminString(idAdminString1)
     			.nombre("Enrique")
     			.email("enenriquerique@enri.que")
     			.contrasenia("contrajiji")
     			.build());
     	
     	administradores.add(Administrador.builder()
-    			.idAdmin(ObjectId.get())
+    			.idAdmin(idAdmin2)
+                .idAdminString(idAdminString2)
     			.nombre("Sergio")
     			.email("sergio@sergi.o")
     			.contrasenia("123abc")
     			.build());
     	
     	administradores.add(Administrador.builder()
-    			.idAdmin(ObjectId.get())
+    			.idAdmin(idAdmin3)
+                .idAdminString(idAdminString3)
     			.nombre("Mangel")
     			.email("miguel@angel.es")
     			.contrasenia("contrajiji")
@@ -316,8 +321,12 @@ public class FichaPersonajeController {
     	
     	List<Equipamiento> equipamientos = new ArrayList<>();
     	
+        ObjectId idEquipo = ObjectId.get();
+        String idEquipoString = idEquipo.toString();
+
     	equipamientos.add(Equipamiento.builder()
-    			.idEquipo(ObjectId.get())
+    			.idEquipo(idEquipo)
+                .idString(idEquipoString)
     			.nombre("Ballesta de fropendruo")
     			.tipo(TipoEquipo.ARMA)
     			.categoria(CatEquipo.ARMA_SENCILLA)
@@ -325,7 +334,7 @@ public class FichaPersonajeController {
     			.modificador("")
     			.danio("10")
     			.alcance(7)
-    			.precio(90)
+    			.precio("2mo")
     			.peso(23.8f)
     			.descripcion("Ballesta capaz de matar a cualquiera")
     			.build());
@@ -336,8 +345,12 @@ public class FichaPersonajeController {
         
         List<Usuario> usuarios = new ArrayList<>();
 
+        ObjectId idUser = ObjectId.get();
+        String idUserString = idUser.toString();
+
         Usuario u1= Usuario.builder()
-                .idUser(ObjectId.get())
+                .idUser(idUser)
+                .idUserString(idUserString)
                 .nombre("Sergio")
                 .apellidos("GV")
                 .contrasenia("123abc")
@@ -352,8 +365,12 @@ public class FichaPersonajeController {
 
         usuarios.add(u1);
 
+        ObjectId id = ObjectId.get();
+        String idString = id.toString();
+
         fichasPersonaje.add(FichaPersonaje.builder()
-                .idFichaPersonaje(ObjectId.get())
+                .idFichaPersonaje(id)
+                .idFichaPersonajeString(idString)
                 .usuario(u1)
                 .nombre("Ganker el Escapante")
                 .habilidades(List.of(
@@ -383,21 +400,6 @@ public class FichaPersonajeController {
                 .notasAdd("")                
                 .build());
         
-        //
-        
-    	
-    	List<Jugador> jugadores = new ArrayList<>();
-    	
-    	jugadores.add(Jugador.builder()
-    			.idJugador(ObjectId.get())
-    			.idUsuario(u1.getIdUser())
-    			.idFicha(fichasPersonaje.get(0).getIdFichaPersonaje())
-    			.notas("notas del jugador")
-    			.build());
-    	
-    	jugadorServicio.addJugadores(jugadores);
-        
-        //
         
         cargarFichasPersonaje(fichasPersonaje);
         

@@ -56,8 +56,9 @@ public class UsuarioController {
     	    	
     	try {
 			usuario.setIdUser(ObjectId.get());
+			usuario.setIdUserString(usuario.getIdUser().toString());
 			usuarioServicio.insertarUsuario(usuario);
-			Usuario u=usuarioServicio.findUsuarioById(usuario.getIdUser()).get();
+			Usuario u=usuarioServicio.findUsuarioById(usuario.getIdUserString()).get();
 			res = new ResponseEntity<Usuario>(u, HttpStatus.OK);
 			
 			
@@ -69,7 +70,7 @@ public class UsuarioController {
     }
 
 	@DeleteMapping("/deleteById")
-	public ResponseEntity<Usuario> deleteById(@RequestParam ObjectId id)
+	public ResponseEntity<Usuario> deleteById(@RequestParam String id)
 	{
 		Usuario u;
 		

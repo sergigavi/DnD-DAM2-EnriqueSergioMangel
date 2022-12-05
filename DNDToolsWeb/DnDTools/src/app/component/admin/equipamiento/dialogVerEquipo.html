@@ -1,0 +1,39 @@
+<div>
+  <p>Datos del equipo:</p>
+  <mat-grid-list cols="3" rowHeight="3:1">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p> <strong> Nombre:</strong> {{equipo.nombre}}</p>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p><strong>Tipo: </strong>{{equipo.tipo}}</p>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p><strong>Categoría: </strong>{{equipo.categoria}}</p>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p><strong>Propiedades: </strong>{{equipo.propiedad}}</p>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p><strong>Modificador: </strong>{{equipo.modificador}}</p>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p><strong>Daño: </strong>{{equipo.danio}}</p>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p><strong>Alcance: </strong>{{equipo.alcance}}</p>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p><strong>Precio: </strong>{{equipo.precio}}</p>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p><strong>Peso: </strong>{{equipo.peso}}</p>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <strong>Descripción:</strong>
+      <textarea>{{equipo.descripcion}}</textarea>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-flat-button color="accent" (click)="onNoClick()">Cerrar</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

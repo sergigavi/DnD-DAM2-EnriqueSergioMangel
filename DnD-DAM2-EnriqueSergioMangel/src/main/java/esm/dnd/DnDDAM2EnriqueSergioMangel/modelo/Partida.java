@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.stereotype.Component;
 
 import com.mongodb.lang.Nullable;
@@ -24,9 +24,11 @@ import lombok.NoArgsConstructor;
 @Document
 public class Partida {
     
-    @Id
-    @EqualsAndHashCode.Include
+    @MongoId
     private ObjectId idPartida;
+    @Nullable
+    @EqualsAndHashCode.Include
+    private String idStringPartida;
     @Nullable
     private String codigoPartida;
     @Nullable
@@ -38,10 +40,6 @@ public class Partida {
     @Nullable
     private List<Equipamiento> equipoPartida;
     @Nullable
-    private List<Npc> npcsPartida;
-    @Nullable
-    private List<Monstruo> monstruosPartida;
-    @Nullable
     private List<FichaPersonaje> fichasPartida;
 
     public Partida(Usuario creador){
@@ -50,8 +48,6 @@ public class Partida {
         this.codigoPartida=UUID.randomUUID().toString();
         this.usuariosPartida=null;
         this.equipoPartida=null;
-        this.npcsPartida=null;
-        this.monstruosPartida=null;
         this.fichasPartida=null;
     }
 }

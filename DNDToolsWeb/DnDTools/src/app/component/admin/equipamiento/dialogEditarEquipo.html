@@ -1,12 +1,13 @@
 <div class="matGridListClass">
   <form #equipoForm="ngForm" (ngSubmit)="onSubmit(equipoForm)">
-    <p>Crear Equipamiento:</p>
+    <p>Editar Equipamiento:</p>
+    <button mat-flat-button color="accent">Borrar</button>
     <mat-grid-list cols="3" rowHeight="3:1">
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="fill" class="formField">
           <mat-label>Tipo de equipamiento</mat-label>
-          <mat-select [(ngModel)]="tipoElegido" name="tipo" required>
-            <mat-option ngModel name="tipo" *ngFor="let tipo of tipos" [value]="tipo">
+          <mat-select [(ngModel)]="equipo.tipo" name="tipo" required >
+            <mat-option  name="tipo" *ngFor="let tipo of tipos" [value]="tipo">
               {{tipo}}
             </mat-option>
           </mat-select>
@@ -15,8 +16,8 @@
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="fill" class="formField">
           <mat-label>Categoría</mat-label>
-          <mat-select [(ngModel)]="categoriaElegida" name="categoria" required>
-            <mat-option ngModel name="categoria" *ngFor="let categoria of categorias" [value]="categoria">
+          <mat-select [(ngModel)]="equipo.categoria" name="categoria" required>
+            <mat-option  name="categoria" *ngFor="let categoria of categorias" [value]="categoria">
               {{categoria}}
             </mat-option>
           </mat-select>
@@ -25,8 +26,8 @@
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="fill">
           <mat-label>Propiedades</mat-label>
-          <mat-select [(ngModel)]="propiedadElegida" name="propiedad" multiple>
-            <mat-option ngModel name="propiedad" *ngFor="let propiedad of propiedades" [value]="propiedad">
+          <mat-select [(ngModel)]="equipo.propiedad" name="propiedad" multiple>
+            <mat-option name="propiedad" *ngFor="let propiedad of propiedades" [value]="propiedad">
               {{propiedad}}
             </mat-option>
           </mat-select>
@@ -34,19 +35,19 @@
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="outline" class="formField">
-          <mat-label>Nombre:</mat-label>
-          <input ngModel matInput name="nombre" required>
+          <mat-label>Nombre: </mat-label>
+          <input [(ngModel)]="equipo.nombre" matInput name="nombre" value={{equipo.nombre}}>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="outline" class="formField">
           <mat-label>Daño:</mat-label>
-          <input ngModel matInput name="danio">
+          <input [(ngModel)]="equipo.danio" matInput name="danio" value={{equipo.danio}}>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="fill">
-          <mat-label>Modificador</mat-label>
+          <mat-label>Modificador:</mat-label>
           <mat-select [(ngModel)]="modificadorElegido" name="modificador">
             <mat-option ngModel name="modificador" *ngFor="let modificador of modificadores" [value]="modificador">
               {{modificador}}
@@ -57,28 +58,28 @@
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="outline" class="formField">
           <mat-label>Descripción:</mat-label>
-          <textarea ngModel matInput name="descripcion"></textarea>
+          <textarea [(ngModel)]="equipo.descripcion" matInput name="descripcion" value={{equipo.descripcion}}></textarea>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="outline" class="formField">
           <mat-label>Peso:</mat-label>
-          <input ngModel matInput name="peso" type="number">
+          <input [(ngModel)]="equipo.peso" matInput name="peso" type="number" value={{equipo.peso}}>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="outline" class="formField">
           <mat-label>Alcance:</mat-label>
-          <input ngModel matInput name="alcance" type="number">
+          <input [(ngModel)]="equipo.alcance" matInput name="alcance" type="number" value={{equipo.alcance}}>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1"[rowspan]="1">
-        <button mat-flat-button color="accent" (click)="onNoClick()">Cerrar</button>
+        <button mat-flat-button color="accent" type="button" (click)="onNoClick()">Cerrar</button>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1"[rowspan]="1">
         <mat-form-field appearance="outline" class="formField">
           <mat-label>Precio:</mat-label>
-          <input ngModel matInput name="precio">
+          <input [(ngModel)]="equipo.precio" matInput name="precio" value={{equipo.precio}}>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">

@@ -44,4 +44,18 @@ export class EquipamientoAdminService {
   getAll() :Observable<EquipamientoAdmin[]>{
     return this.http.get<EquipamientoAdmin[]>(`${environment.URLBASE}/equipamiento/getAll`)
   }
+
+  addEquipo(equipo:EquipamientoAdmin):Observable<String>{
+    const requestOptions:Object = {
+      responseType:'text'
+    }
+    return this.http.post<String>(`${environment.URLBASE}/equipamiento/add`,equipo,requestOptions)
+  }
+
+  updateEquipo(equipo:EquipamientoAdmin):Observable<any>{
+    const requestOptions:Object = {
+      responseType:'text'
+    }
+    return this.http.put<any>(`${environment.URLBASE}/equipamiento/update`,equipo,requestOptions);
+  }
 }
