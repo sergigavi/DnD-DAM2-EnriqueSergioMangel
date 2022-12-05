@@ -87,9 +87,11 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 		Optional<Equipamiento> eq = Optional.empty();
 		if(equipamientoDAO.existsById(equipamiento.getIdString())){
 			List<FichaPersonaje> personajes=fichaPersonajeDAO.findAll();
+
+			//comentado hasta hacer la vista de los personajes correctamente
+
 			/* 
 			if(!personajes.isEmpty()){
-				System.out.println("porq");
 				personajes.stream()
 					.flatMap(p->p.getInventario().stream()).forEach(e->{
 						if(e.getIdEquipo().equals(equipamiento.getIdEquipo())){
@@ -99,9 +101,7 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 				fichaPersonajeDAO.saveAll(personajes);
 			}
 			*/
-			System.out.println("Casi");
 			Equipamiento e = equipamientoDAO.findById(equipamiento.getIdString()).get();
-			System.out.println("Encontradox2");
 			e.setNombre(equipamiento.getNombre());
 			e.setDanio(equipamiento.getDanio());
 			e.setAlcance(equipamiento.getAlcance());
