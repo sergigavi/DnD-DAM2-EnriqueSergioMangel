@@ -1,18 +1,19 @@
 <h2 style="text-align: center;" mat-dialog-title>Usuario</h2>
 <mat-dialog-content class="mat-typography">
-  <form class="inicio-form">
+  <form #infoForm="ngForm" class="inicio-form">
     <mat-form-field class="example-full-width">
       <mat-label>Nombre Cuenta</mat-label>
-      <input matInput matInput value={{nombre}} placeholder="Nombre Cuenta">
+      <input matInput matInput value={{user.nombre}} placeholder="Nombre Cuenta">
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-label>Correo</mat-label>
-      <input matInput matInput value={{correo}} placeholder="Correo">
+      <input matInput matInput value={{user.email}} placeholder="Correo">
     </mat-form-field>
 
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
+  <button mat-button (click)="guardar(infoForm)">Guardar</button>
   <button mat-button mat-dialog-close>Volver</button>
 </mat-dialog-actions>

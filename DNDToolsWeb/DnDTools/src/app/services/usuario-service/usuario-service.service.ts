@@ -42,6 +42,11 @@ export class UsuarioServiceService {
 
   };
 
+  updateUsuario(usuario:Usuario): Observable<Usuario>
+  {
+    return this.http.put<Usuario>(`${environment.URLBASE}/usuarios/updateUsuario`, usuario)
+  }
+
   getUsuarios() : Observable<Usuario[]>
   {
     return this.http.get<Usuario[]>(`${environment.URLBASE}/usuarios/dametodos`)

@@ -1,6 +1,7 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
@@ -28,4 +29,6 @@ public interface IUsuarioServicio {
 	public boolean existsByNickname(String nickname);
 
 	public Optional<Usuario> findUsuarioByNickname(String nickname);
+
+    public boolean actualizarUsuario(Usuario a);
 }

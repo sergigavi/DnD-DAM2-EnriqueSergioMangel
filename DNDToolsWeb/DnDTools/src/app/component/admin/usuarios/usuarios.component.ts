@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Usuario, UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
 import { Inject } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-usuarios',
@@ -29,9 +30,9 @@ export class UsuariosComponent implements OnInit  {
     });
   }
 
-  openDialog(nombre:String,correo:String) {
+  openDialog(usuario:Usuario) {
     const dialogRef = this.dialog.open(DialogUsuarios,{
-      data:{name:nombre,mail:correo}
+      data:{user:usuario}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -39,9 +40,9 @@ export class UsuariosComponent implements OnInit  {
     });
   }
 
-  openDialog2(nombre:String,correo:String) {
+  openDialog2(usuario:Usuario) {
     const dialogRef = this.dialog.open(Dialog2Usuarios,{
-      data:{name:nombre,mail:correo}
+      data:{user:usuario}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -71,16 +72,14 @@ export class UsuariosComponent implements OnInit  {
 })
 
 export class DialogUsuarios {
-  nombre: any;
-  correo: any;
+  user: any;
 
   constructor(
     public dialogRef: MatDialogRef<UsuariosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UsuariosComponent) {}
 
     ngOnInit() {
-      this.nombre = this.data['name'];
-      this.correo = this.data['mail'];
+      this.user = this.data['user'];
     }
 }
 
@@ -90,15 +89,20 @@ export class DialogUsuarios {
 })
 
 export class Dialog2Usuarios {
-  nombre: any;
-  correo: any;
+  user: any;
 
   constructor(
     public dialogRef: MatDialogRef<UsuariosComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UsuariosComponent) {}
+    @Inject(MAT_DIALOG_DATA) public data: UsuariosComponent,private usuarioService: UsuarioServiceService) {}
 
-  ngOnInit() {
-    this.nombre = this.data['name'];
-    this.correo = this.data['mail'];
-  }
+    ngOnInit() {
+      this.user = this.data['user'];
+    }
+
+    guardar(info:NgForm) {
+
+      this.usuarioService.updateUsuario(this.user).subscribe(()=>{
+        this.user = this.data['user'];
+      });
+    }
 }

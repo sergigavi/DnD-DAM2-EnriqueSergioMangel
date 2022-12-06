@@ -1,6 +1,7 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
@@ -43,6 +44,18 @@ public class UsuarioServicio implements IUsuarioServicio{
 	public boolean existeUsuario(ObjectId idUser) {
 		return usuarioDAO.existsById(idUser);
 	}
+
+	@Override
+    public boolean actualizarUsuario(Usuario a){
+        boolean exito=false;
+
+        if(usuarioDAO.existsById(a.getIdUser())) {
+            usuarioDAO.save(a);
+            exito=true;
+        }
+        
+        return exito;
+    }
 
     @Override
     public boolean cambiarContrasenia(ObjectId idUser, String contrasenia){

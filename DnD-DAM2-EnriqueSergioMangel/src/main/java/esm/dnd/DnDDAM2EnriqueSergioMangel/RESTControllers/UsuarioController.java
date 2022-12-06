@@ -4,6 +4,7 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,25 @@ public class UsuarioController {
 		return res;
 		
 	}
+
+	@PutMapping("/updateUsuario")
+    public ResponseEntity<String> actualizarUsuario(@RequestBody Usuario userUpdateData){
+		ResponseEntity<String> res = new ResponseEntity<String>("Fallo al actualizar el usuario",HttpStatus.OK);
+        //En primer lugar, buscamos el Usuario
+        Optional<Usuario> findUser = usuarioServicio.findUsuarioById(userUpdateData.getIdUser());
+        //Si está presente lo devolvemos
+        if(findUser.isPresent()){
+            //Usuario encontrado para realizar update sobre él.
+            Usuario userToUpdate = findUser.get();         
+            //Copiamos los nuevos datos al usuario
+            userToUpdate.setNombre(userUpdateData.getNombre());
+			userToUpdate.setEmail(userUpdateData.getEmail());        
+            //Guadramos en la DB
+            usuarioServicio.actualizarUsuario(userToUpdate);            
+            res = new ResponseEntity<>("Exito al actualizar el usuario",HttpStatus.OK);
+        }
+		return res;
+    }
 	
 	@PostMapping("/trylogin")
     public ResponseEntity<Usuario> loguearse(@RequestBody Usuario u)
