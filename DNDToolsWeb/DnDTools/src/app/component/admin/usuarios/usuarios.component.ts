@@ -11,11 +11,11 @@ export interface Usuario {
   idUser?:any;
   nombre?:String;
   apellidos?:String;
-  contrasenia?:String;
-  nickname?:String;
+  contrasenia:String;
+  nickname:String;
   biografia?:String;
   email?:String;
-  fechaNacimiento?:LocalDate;
+  fechaNacimiento?:String;
   urlImage?:String;
   activo?:boolean;
   pais?:String;
