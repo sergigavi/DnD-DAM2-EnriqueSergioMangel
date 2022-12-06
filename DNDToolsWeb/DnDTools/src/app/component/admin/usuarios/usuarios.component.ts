@@ -3,24 +3,10 @@ import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import {  UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
-
-export interface Usuario {
-
-  idUser?:any;
-  nombre?:String;
-  apellidos?:String;
-  contrasenia:String;
-  nickname:String;
-  biografia?:String;
-  email?:String;
-  fechaNacimiento?:String;
-  urlImage?:String;
-  activo?:boolean;
-  pais?:String;
-
-}
+import { IUsuario } from 'src/modelo/IUsuario';
 
 @Component({
   selector: 'app-usuarios',
@@ -31,23 +17,17 @@ export interface Usuario {
 export class UsuariosComponent implements OnInit  {
   title = 'Usuarios';
   opened = false;
-  usuario!:Usuario
+  usuario!:IUsuario
 
   @ViewChild(MatPaginator,{static:true}) paginator! :MatPaginator
   @ViewChild(MatSort,{static:true}) sort!:MatSort
 
   //data nombrado aqui
-  data2:Usuario[]=[];
+  data2:IUsuario[]=[];
   columnas: string[] = ['nombreCuenta','correo','acceder','editar'];
-  dataSource = new MatTableDataSource<Usuario>([])
+  dataSource = new MatTableDataSource<IUsuario>([])
 
-  constructor(public dialog: MatDialog,private usuarioService: UsuarioServiceService){
-    //esto hace que se envie directamente a la tabla
-    this.usuarioService.getUsuarios().subscribe(x=>{
-      this.data2 = x;
-      console.log(this.data2);
-    });
-  }
+  constructor(public dialog: MatDialog,private usuarioService: UsuarioServiceService,private router:Router){}
 
   ngOnInit(): void {
     this.dataSource.paginator=this.paginator
@@ -74,12 +54,17 @@ export class UsuariosComponent implements OnInit  {
   }
 
   public showUsuario(){
-    this.usuarioService['getAll']().subscribe((data:any)=>{
-      this.dataSource.data=data
+    this.usuarioService.getAll().subscribe((data:any)=>{
+      this.dataSource.data=data,
+      console.log(data);
     })
   }
 
-  openDialog(usuario:Usuario) {
+  public navegar(ruta:String){
+    this.router.navigate([`${ruta}`])
+  }
+
+  openDialog(usuario:IUsuario) {
     this.usuario=usuario;
     const dialogRef = this.dialog.open(DialogUsuarios,{
       data:{usuario:this.usuario},
@@ -91,7 +76,7 @@ export class UsuariosComponent implements OnInit  {
     });
   }
 
-  editarUsuario(usuario:Usuario) {
+  editarUsuario(usuario:IUsuario) {
     this.usuario=usuario;
     const dialogRef = this.dialog.open(Dialog2Usuarios,{
       data:{usuario:this.usuario},
@@ -135,12 +120,13 @@ export class Dialog2Usuarios {
     public dialogRef: MatDialogRef<UsuariosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UsuariosComponent,private usuarioService: UsuarioServiceService) {}
 
-  usuarioData!:Usuario
+  usuarioData!:IUsuario
 
   onSubmit(infoForm:NgForm){
     this.usuarioData=infoForm.value
     this.usuarioData.nombre=this.usuario.nombre
     this.usuarioData.email=this.usuario.email
+    console.log(this.usuarioData)
     this.usuarioService.updateUsuario(this.usuarioData).subscribe((data:any)=>{
       this.dialogRef.close()
     })
@@ -149,6 +135,7 @@ export class Dialog2Usuarios {
   ngOnInit() {
     this.usuario = this.data['usuario'];
     this.usuarioData = this.usuario;
+    console.log(this.usuario)
   }
 
   onNoClick(){

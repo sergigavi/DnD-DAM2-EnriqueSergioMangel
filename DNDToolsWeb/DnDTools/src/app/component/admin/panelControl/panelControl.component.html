@@ -2,17 +2,17 @@
   <mat-drawer #drawer class="example-sidenav" mode="side">
       <!--SideBar-->
       <ul class="ulSlide">
-        <li class="nav-item liSlide">
-          <a class="nav-link" href="panelControl-admin"><h5>Panel de Control</h5></a>
+        <li class="nav-item">
+          <button mat-flat-button color="accent" (click)="navegar('panelControl-admin')"><mat-icon fontIcon="home" class=""></mat-icon>Panel de Control</button>
         </li>
-        <li class="nav-item liSlide">
-          <a class="nav-link" href="usuarios-admin"><h5>Usuarios</h5></a>
+        <li class="nav-item">
+          <button mat-flat-button color="accent" (click)="navegar('usuarios-admin')">Usuarios</button>
         </li>
-        <li class="nav-item liSlide">
-          <a class="nav-link" href="partidas-admin"><h5>Partidas</h5></a>
+        <li class="nav-item">
+          <button mat-flat-button color="accent" (click)="navegar('fichas-admin')">Fichas de Personaje</button>
         </li>
-        <li class="nav-item liSlide">
-          <a class="nav-link" href="equipamiento-admin"><h5>Equipamiento</h5></a>
+        <li class="nav-item">
+          <button mat-flat-button color="accent" (click)="navegar('equipamiento-admin')">Equipamiento</button>
         </li>
       </ul>
   </mat-drawer>

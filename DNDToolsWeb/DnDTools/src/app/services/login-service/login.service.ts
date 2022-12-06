@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LPloginComponent } from 'src/app/component/login/lplogin/lplogin.component';
-import { Usuario } from '../usuario-service/usuario-service.service';
+import { IUsuario } from 'src/modelo/IUsuario';
 import {Router} from '@angular/router';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class LoginService {
 
   }
 
-  trylogin(usuario:Usuario){
+  trylogin(usuario:IUsuario){
 
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');

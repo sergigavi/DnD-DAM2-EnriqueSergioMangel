@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-panelControl',
@@ -12,13 +12,17 @@ export class PanelControlComponent implements OnInit  {
   title = 'PanelControl';
   opened = false;
 
-  constructor(){}
+  constructor(private router:Router){}
 
   ngOnInit(): void {
   }
 
   toggleSidebar() {
     this.opened = !this.opened;
+  }
+
+  public navegar(ruta:String){
+    this.router.navigate([`${ruta}`])
   }
 
 }

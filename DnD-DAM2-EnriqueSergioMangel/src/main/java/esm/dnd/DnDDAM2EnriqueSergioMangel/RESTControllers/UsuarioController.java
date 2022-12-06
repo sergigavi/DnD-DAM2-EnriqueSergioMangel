@@ -234,6 +234,19 @@ public class UsuarioController {
     	return res;
     }
 
+	@GetMapping("/getAll")
+    public ResponseEntity<List<Usuario>> getAll(){
+        
+        ResponseEntity<List<Usuario>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        List<Usuario> usuarios= usuarioServicio.getAll();
+
+        if(usuarios.isEmpty()){
+            return res;
+        }else{
+            return new ResponseEntity<List<Usuario>>(usuarios,HttpStatus.OK);
+        }
+    }
 
     
 }
