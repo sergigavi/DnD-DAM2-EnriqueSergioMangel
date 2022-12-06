@@ -21,7 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
 import { MatSelectModule } from '@angular/material/select';
 
-import { CookieService } from 'ngx-cookie-service';
+//import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
@@ -48,6 +48,7 @@ import { MenuUsuarioJugadorComponent } from './component/plantillas/menuUsuarioJ
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PerfilComponent } from './component/perfil/perfil.component';
 import { LPloginComponent } from './component/login/lplogin/lplogin.component';
+import { RegisterComponent } from './component/register/register/register.component';
 
 const routes: Routes = [
   //invitados
@@ -76,6 +77,7 @@ const routes: Routes = [
 
   //landing page, login register
   {path:'login',component: LPloginComponent},
+  {path:'register',component: RegisterComponent},
 
 ];
 
@@ -117,7 +119,8 @@ const routes: Routes = [
     DialogCrearEquipo,
     LPloginComponent,
     DialogVerEquipo,
-    DialogEditarEquipo
+    DialogEditarEquipo,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -144,7 +147,7 @@ const routes: Routes = [
 
   ],
   entryComponents: [UsuarioFormComponent],
-  providers: [CookieService],
+  providers: [/*CookieService*/],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

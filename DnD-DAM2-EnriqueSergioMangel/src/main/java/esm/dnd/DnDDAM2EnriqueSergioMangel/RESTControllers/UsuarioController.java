@@ -53,20 +53,24 @@ public class UsuarioController {
     public ResponseEntity<Usuario> insertarUsuario(@RequestBody Usuario usuario)
     {
     	ResponseEntity<Usuario> res = new ResponseEntity<>(new Usuario(),HttpStatus.BAD_REQUEST);
-    	    	
-    	try {
-			usuario.setIdUser(ObjectId.get());
-			usuario.setIdUserString(usuario.getIdUser().toString());
-			usuarioServicio.insertarUsuario(usuario);
-			Usuario u=usuarioServicio.findUsuarioById(usuario.getIdUserString()).get();
-			res = new ResponseEntity<Usuario>(u, HttpStatus.OK);
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
     	
+    	if (!usuarioServicio.existsByNickname(usuario.getNickname()))
+    	{
+        	try {
+    			usuario.setIdUser(ObjectId.get());
+    			usuario.setIdUserString(usuario.getIdUser().toString());
+    			usuarioServicio.insertarUsuario(usuario);
+    			Usuario u=usuarioServicio.findUsuarioById(usuario.getIdUserString()).get();
+    			res = new ResponseEntity<Usuario>(u, HttpStatus.OK);
+    			
+    			
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+        	
+    	}
     	return res;
+    	
     }
 
 	@DeleteMapping("/deleteById")
