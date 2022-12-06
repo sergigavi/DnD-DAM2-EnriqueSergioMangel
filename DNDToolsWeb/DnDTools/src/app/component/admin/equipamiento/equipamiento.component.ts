@@ -1,5 +1,4 @@
-import { ComponentPortal } from '@angular/cdk/portal';
-import { AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -7,77 +6,12 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EquipamientoAdminService } from 'src/app/services/equipamientoAdmin-service/equipamiento-admin.service';
+import { EnumCatEquipo } from 'src/modelo/EnumCatEquipo';
+import { EnumModificador } from 'src/modelo/EnumModificador';
+import { EnumPropiedadEquipo } from 'src/modelo/EnumPropiedadEquipo';
+import { EnumTipo } from 'src/modelo/EnumTipo';
+import { IEquipo } from 'src/modelo/IEquipo';
 import { DialogCrearEquipo } from './DialogCrearEquipo';
-
-export interface EquipamientoAdmin{
-  idEquipo:any
-  idString:String;
-  nombre:String;
-  tipo:Tipo;
-  categoria:CatEquipo;
-  propiedad:PropiedadEquipo[];
-  modificador:String;
-  danio:String;
-  alcance:number;
-  precio:String;
-  peso:String;
-  descripcion:String;
-}
-
-export enum Tipo{
-  ARMADURA="ARMADURA",
-  ARMA="ARMA",
-  EQUIPO_DE_AVENTURAS="EQUIPO_DE_AVENTURAS"
-}
-export enum CatEquipo{
-  ARMADURA_INTERMEDIA="ARMADURA_INTERMEDIA",
-  ARMADURA_LIGERA="ARMADURA_LIGERA",
-  ARMADURA_PESADA="ARMADURA_PESADA",
-	ARMA_MARCIAL="ARMA_MARCIAL",
-  ARMA_SENCILLA="ARMA_SENCILLA",
-  ESCUDO="ESCUDO",
-  HERRAMIENTA="HERRAMIENTA",
-  INSTRUMENTO_MUSICAL="INSTRUMENTO_MUSICAL",
-	JUEGO="JUEGO",
-  KIT="KIT",
-  MONTURA="MONTURA",
-  MUNICION="MUNICION",
-  OTROS="OTROS",
-  PAQUETE_DE_EQUIPO="PAQUETE_DE_EQUIPO",
-  VEHICULO="VEHICULO"
-}
-
-export enum PropiedadEquipo{
-  ALCANCE="ALCANCE",
-  ARROJADIZO="ARROJADIZO",
-  CARGADOR="CARGADOR",
-  DE_CARGA="DE_CARGA",
-  DESVENTAJA="DESVENTAJA",
-  DISTANCIA="DISTANCIA",
-  DOS_MANOS="DOS_MANOS",
-  ESPECIAL="ESPECIAL",
-  FOCO_ARCANO="FOCO_ARCANO",
-  FOCO_DUIDRICO="FOCO_DUIDRICO",
-	FUERZA="FUERZA",
-  LIGERO="LIGERO",
-  MUNICION="MUNICION",
-  MUNICION_ESPECIAL="MUNICION_ESPECIAL",
-  PESADO="PESADO",
-  RAFAGA="RAFAGA",
-  SIMBOLO_SAGRADO="SIMBOLO_SAGRADO",
-  SINTONIZADO="SINTONIZADO",
-  SUTIL="SUTIL",
-  VERSATIL="VERSATIL"
-}
-
-export enum Modificador{
-  FUE="FUE",
-  DES="DES",
-  INT="INT",
-  SAB="SAB",
-  CAR="CAR"
-}
-
 
 @Component({
   selector: 'app-equipamiento',
@@ -89,17 +23,16 @@ export enum Modificador{
 export class EquipamientoComponent implements OnInit,AfterViewInit   {
   title = 'Equipamiento';
   opened = false;
-  equipo!:EquipamientoAdmin
+  equipo!:IEquipo
 
   //data nombrado aqui
-  data:EquipamientoAdmin[]=[];
   columnas:String[] = ["nombre","tipo","categoria","acceder","editar"]
 
 
   @ViewChild(MatPaginator,{static:true}) paginator! :MatPaginator
   @ViewChild(MatSort,{static:true}) sort!:MatSort
 
-  dataSource = new MatTableDataSource<EquipamientoAdmin>([]);
+  dataSource = new MatTableDataSource<IEquipo>([]);
 
   constructor(private dialog : MatDialog,private equipamientoService: EquipamientoAdminService,private router:Router){
   }
@@ -142,7 +75,6 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
   public showEquipo(){
     this.equipamientoService.getAll().subscribe((data:any)=>{
       this.dataSource.data=data
-      console.log(data)
     })
   }
 
@@ -151,18 +83,16 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
   }
 
   public crearEquipo(){
-
     const dialogRef=this.dialog.open(DialogCrearEquipo,{
       width: '100%',
     });
 
     dialogRef.afterClosed().subscribe((data:any)=>{
-      console.log("cerrado")
       this.showEquipo();
     });
   }
 
-  public verEquipo(equipo:EquipamientoAdmin){
+  public verEquipo(equipo:IEquipo){
     this.equipo=equipo
     const dialogRef=this.dialog.open(DialogVerEquipo,{
       data:{equipo:this.equipo},
@@ -174,7 +104,7 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
     });
   }
 
-  public editarEquipo(equipo:EquipamientoAdmin){
+  public editarEquipo(equipo:IEquipo){
     this.equipo=equipo;
     const dialogRef=this.dialog.open(DialogEditarEquipo,{
       data:{equipo:this.equipo},
@@ -213,16 +143,16 @@ export class DialogEditarEquipo{
   constructor(public dialogRef:MatDialogRef<EquipamientoComponent>,private equipamientoServicio:EquipamientoAdminService,
     @Inject(MAT_DIALOG_DATA) public data:EquipamientoComponent){}
 
-    tipos=Object.values(Tipo)
-    categorias=Object.values(CatEquipo)
-    propiedades=Object.values(PropiedadEquipo)
-    modificadores=Object.values(Modificador)
+    tipos=Object.values(EnumTipo)
+    categorias=Object.values(EnumCatEquipo)
+    propiedades=Object.values(EnumPropiedadEquipo)
+    modificadores=Object.values(EnumModificador)
 
     tipoElegido:string="";
     categoriaElegida:string="";
     propiedadElegida:string[]=[]
     modificadorElegido:string="";
-    equipamiento!:EquipamientoAdmin
+    equipamiento!:IEquipo
     modificador:string=""
 
 

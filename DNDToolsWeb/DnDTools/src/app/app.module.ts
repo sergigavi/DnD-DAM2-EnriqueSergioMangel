@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatButtonModule } from '@angular/material/button'
 import { MatTableModule}  from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
+import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -29,7 +30,6 @@ import { UsuarioServiceService } from './services/usuario-service/usuario-servic
 
 import { DialogCrearEquipo } from './component/admin/equipamiento/DialogCrearEquipo';
 import { HomeComponent } from './component/home/home.component';
-import { PartidasComponent } from './component/admin/partidas/partidas.component';
 import { DialogEditarEquipo, DialogVerEquipo, EquipamientoComponent } from './component/admin/equipamiento/equipamiento.component';
 import { PanelControlComponent } from './component/admin/panelControl/panelControl.component';
 import { Dialog2Usuarios, DialogUsuarios, UsuariosComponent } from './component/admin/usuarios/usuarios.component';
@@ -48,6 +48,8 @@ import { MenuUsuarioJugadorComponent } from './component/plantillas/menuUsuarioJ
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PerfilComponent } from './component/perfil/perfil.component';
 import { LPloginComponent } from './component/login/lplogin/lplogin.component';
+import { EnumCatEquipo } from 'src/modelo/EnumCatEquipo';
+import { DialogCrearFicha, FichasAdmin } from './component/admin/fichas/fichasAdmin.component';
 
 const routes: Routes = [
   //invitados
@@ -55,7 +57,7 @@ const routes: Routes = [
   //ambos
   {path:'usuario-partidasUsuario',component: PartidasUsuarioComponent},
   //admins
-  {path:'partidas-admin',component: PartidasComponent},
+  {path:'fichas-admin',component: FichasAdmin},
   {path:'equipamiento-admin',component: EquipamientoComponent},
   {path:'panelControl-admin',component: PanelControlComponent},
   {path:'usuarios-admin',component: UsuariosComponent},
@@ -85,7 +87,6 @@ const routes: Routes = [
     AppComponent,
     UsuarioFormComponent,
     HomeComponent,
-    PartidasComponent,
     EquipamientoComponent,
     PanelControlComponent,
     UsuariosComponent,
@@ -117,7 +118,9 @@ const routes: Routes = [
     DialogCrearEquipo,
     LPloginComponent,
     DialogVerEquipo,
-    DialogEditarEquipo
+    DialogEditarEquipo,
+    FichasAdmin,
+    DialogCrearFicha
   ],
   imports: [
     BrowserModule,
@@ -140,7 +143,8 @@ const routes: Routes = [
     MatDialogModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatExpansionModule
 
   ],
   entryComponents: [UsuarioFormComponent],

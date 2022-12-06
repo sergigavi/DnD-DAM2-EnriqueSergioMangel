@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+}
+.ulSlide{
+
+  position: absolute;
+  margin: 10%;
+}
+
+.ulSlide button{
+
+  width: 100%;
+  margin: 5%;
+  scale: 115%;
+}
+.mat-filter{
+  width: 100%;
+  font-size: 14px;
+}

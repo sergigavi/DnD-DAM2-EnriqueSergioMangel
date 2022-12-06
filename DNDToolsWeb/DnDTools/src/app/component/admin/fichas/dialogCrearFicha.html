@@ -1,0 +1,78 @@
+<div class="mat-dialog">
+  <form #fichaForm="ngForm" (onSubmit)="ngOnSubmit(fichaForm)">
+    <p>Crear una ficha de personaje:</p>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="step===0" (opened)="setStep(0)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Datos1</mat-panel-title>
+          <mat-panel-description>Rellene Datos1</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input ngModel matInput name="nombre" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Personalidad</mat-label>
+          <input ngModel matInput name="rasgosPersonalidad">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ideales</mat-label>
+          <input ngModel matInput name="ideales">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Vínculos</mat-label>
+          <input ngModel matInput name="vinculos">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Defectos</mat-label>
+          <input ngModel matInput name="defectos">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Atributos</mat-label>
+          <input ngModel matInput name="rasgosAtt">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Otras competencias</mat-label>
+          <input ngModel matInput name="otrasComp">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apariencia</mat-label>
+          <input ngModel matInput name="apariencia">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Historia personal</mat-label>
+          <input ngModel matInput name="historiaPersonal">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Rasgos</mat-label>
+          <input ngModel matInput name="rasgos">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Notas adicionales</mat-label>
+          <input ngModel matInput name="notasAdd">
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-flat-button color="accent" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+</div>
+
+
+
+
