@@ -29,5 +29,5 @@ public interface IUsuarioServicio {
 
 	public Optional<Usuario> findUsuarioByNickname(String nickname);
 
-    public boolean actualizarUsuario(Usuario a);
+    public Optional<Usuario> editarUsuario(Usuario usuario);
 }

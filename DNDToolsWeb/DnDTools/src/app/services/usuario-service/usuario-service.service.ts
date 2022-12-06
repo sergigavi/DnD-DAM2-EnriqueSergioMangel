@@ -34,7 +34,7 @@ export class UsuarioServiceService {
 
   annadirUsuario(usuario: Usuario): Observable<any>
   {
-    return this.http.post(`${environment.URLBASE}/usuarios/insertarUsuario`, usuario)
+    return this.http.post(`${environment.URLBASE}/usuarios/insertarUsuario`,usuario)
   };
 
   eliminarUsuario(usuario: Usuario)
@@ -44,7 +44,10 @@ export class UsuarioServiceService {
 
   updateUsuario(usuario:Usuario): Observable<Usuario>
   {
-    return this.http.put<Usuario>(`${environment.URLBASE}/usuarios/updateUsuario`, usuario)
+    const requestOptions:Object = {
+      responseType:'text'
+    }
+    return this.http.put<Usuario>(`${environment.URLBASE}/usuarios/update`,usuario,requestOptions)
   }
 
   getUsuarios() : Observable<Usuario[]>
