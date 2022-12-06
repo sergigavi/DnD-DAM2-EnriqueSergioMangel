@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +39,7 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
         
         boolean exito = false;
         
-        if(!fichaPersonajeDAO.existsById(fichaPersonaje.getIdFichaPersonaje()))
+        if(!fichaPersonajeDAO.existsById(fichaPersonaje.getIdFichaPersonajeString()))
         {
             try {
                 fichaPersonajeDAO.save(fichaPersonaje);
@@ -59,19 +58,21 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
     }
 
     @Override
-    public Optional<FichaPersonaje> findFichaPersonajeById(ObjectId idFichaPersonaje) {
+    public Optional<FichaPersonaje> findFichaPersonajeById(String idFichaPersonaje) {
         return fichaPersonajeDAO.findById(idFichaPersonaje);
     }
 
     @Override
-    public boolean existsByIdFichaPersonaje(ObjectId id) {
+    public boolean existsByIdFichaPersonaje(String id) {
         return fichaPersonajeDAO.existsById(id);
     }
 
     @Override
-    public FichaPersonaje deleteFichaPersonajeById(ObjectId id) {
+    public FichaPersonaje deleteFichaPersonajeById(String id) {
 
-        FichaPersonaje f = FichaPersonaje.builder().idFichaPersonaje(id).build();
+        FichaPersonaje f = FichaPersonaje.builder()
+        .idFichaPersonajeString(id)
+        .build();
         
         if (fichaPersonajeDAO.existsById(id)) {
             f = fichaPersonajeDAO.findById(id).get();
@@ -86,7 +87,7 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
         
         Boolean exito = false;
         
-        if (fichaPersonajeDAO.existsById(fichaPersonaje.getIdFichaPersonaje()))
+        if (fichaPersonajeDAO.existsById(fichaPersonaje.getIdFichaPersonajeString()))
         {
             try {
                 
@@ -110,13 +111,13 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
 	}
 
 	@Override
-	public List<Caracteristica> getListaCaracteristicasPorId(ObjectId id) {
+	public List<Caracteristica> getListaCaracteristicasPorId(String id) {
 
 		return fichaPersonajeDAO.findById(id).get().getCaracteristicas();
 	}
 
 	@Override
-	public List<Equipamiento> getEquipamientoPorIdFicha(ObjectId idFicha) {
+	public List<Equipamiento> getEquipamientoPorIdFicha(String idFicha) {
 		
 		FichaPersonaje ficha;
 		
@@ -132,7 +133,7 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
 	}
 
 	@Override
-	public List<Habilidad> getHabilidadesPorIdFicha(ObjectId idFicha) {
+	public List<Habilidad> getHabilidadesPorIdFicha(String idFicha) {
 
 		FichaPersonaje ficha;
 		List<Habilidad> habilidadesFicha = new ArrayList<>();

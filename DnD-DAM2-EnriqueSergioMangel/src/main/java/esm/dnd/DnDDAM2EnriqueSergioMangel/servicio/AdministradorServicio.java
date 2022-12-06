@@ -3,7 +3,6 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 import java.util.List;
 import java.util.Optional;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class AdministradorServicio implements IAdministradorServicio{
 	public boolean insertarAdministrador(Administrador a) {
 		boolean exito=false;
 		
-		if(!administradorDAO.existsById(a.getIdAdmin())) {
+		if(!administradorDAO.existsById(a.getIdAdminString())) {
 			administradorDAO.save(a);
 			exito=true;
 		}
@@ -42,7 +41,7 @@ public class AdministradorServicio implements IAdministradorServicio{
 	}
 
     @Override
-	public boolean eliminarAdministrador(ObjectId idAdmin) {
+	public boolean eliminarAdministrador(String idAdmin) {
 		boolean exito=false;
 		
 		if(administradorDAO.existsById(idAdmin)) {
@@ -54,7 +53,7 @@ public class AdministradorServicio implements IAdministradorServicio{
 	}
 
     @Override
-	public boolean existeAdministrador(ObjectId idAdmin) {
+	public boolean existeAdministrador(String idAdmin) {
 		return administradorDAO.existsById(idAdmin);
 	}
     
@@ -64,7 +63,7 @@ public class AdministradorServicio implements IAdministradorServicio{
 	}
 
 	@Override
-	public Optional<Administrador> findAdminByID(ObjectId id) {
+	public Optional<Administrador> findAdminByID(String id) {
 		return administradorDAO.findById(id);
 	}
     

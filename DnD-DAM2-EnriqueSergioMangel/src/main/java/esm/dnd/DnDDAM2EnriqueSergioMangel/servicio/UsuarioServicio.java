@@ -20,7 +20,7 @@ public class UsuarioServicio implements IUsuarioServicio{
 	public boolean insertarUsuario(Usuario a) {
 		boolean exito=false;
 		
-		if(!usuarioDAO.existsById(a.getIdUser())) {
+		if(!usuarioDAO.existsById(a.getIdUserString())) {
 			usuarioDAO.save(a);
 			exito=true;
 		}
@@ -29,7 +29,7 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
     @Override
-	public boolean eliminarUsuario(ObjectId idUser) {
+	public boolean eliminarUsuario(String idUser) {
 		boolean exito=false;
 		
 		if(usuarioDAO.existsById(idUser)) {
@@ -41,7 +41,7 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
     @Override
-	public boolean existeUsuario(ObjectId idUser) {
+	public boolean existeUsuario(String idUser) {
 		return usuarioDAO.existsById(idUser);
 	}
 
@@ -58,14 +58,15 @@ public class UsuarioServicio implements IUsuarioServicio{
     }
 
     @Override
-    public boolean cambiarContrasenia(ObjectId idUser, String contrasenia){
+    public boolean cambiarContrasenia(String idUser, String contrasenia){
         boolean exito=false;
         Usuario a;
 
         if(usuarioDAO.existsById(idUser)) {
             a=usuarioDAO.findById(idUser).get();
             Usuario user=Usuario.builder()
-                .idUser(idUser)
+				.idUser(new ObjectId(idUser))
+                .idUserString(idUser)
                 .nombre(a.getNombre())
                 .apellidos(a.getApellidos())
                 .contrasenia(contrasenia)
@@ -106,7 +107,7 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
 	@Override
-	public Optional<Usuario> findUsuarioById(ObjectId idUsuario) {
+	public Optional<Usuario> findUsuarioById(String idUsuario) {
 		return usuarioDAO.findById(idUsuario);
 	}
 

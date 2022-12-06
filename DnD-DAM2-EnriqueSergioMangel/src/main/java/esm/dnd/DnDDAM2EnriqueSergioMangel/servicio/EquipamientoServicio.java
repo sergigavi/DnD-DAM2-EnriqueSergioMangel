@@ -3,7 +3,6 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 import java.util.List;
 import java.util.Optional;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 	@Autowired PartidaRepository partidaDAO;
 
     @Override
-	public boolean eliminarEquipamiento(ObjectId idEquipo) {
+	public boolean eliminarEquipamiento(String idEquipo) {
 		boolean exito=false;
 		
 		if(equipamientoDAO.existsById(idEquipo)) {
@@ -51,7 +50,7 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 	}
 
     @Override
-	public boolean existeEquipamiento(ObjectId idEquipo) {
+	public boolean existeEquipamiento(String idEquipo) {
 		return equipamientoDAO.existsById(idEquipo);
 	}
 
@@ -59,7 +58,7 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 	public boolean insertarEquipamiento(Equipamiento a) {
 		boolean exito=false;
 		
-		if(!equipamientoDAO.existsById(a.getIdEquipo())) {
+		if(!equipamientoDAO.existsById(a.getIdString())) {
 			equipamientoDAO.save(a);
 			exito=true;
 		}
@@ -73,7 +72,7 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 	}
 
 	@Override
-	public boolean eliminarEquipamientoTemp(ObjectId idEquipo) {
+	public boolean eliminarEquipamientoTemp(String idEquipo) {
 		
 		if(equipamientoDAO.existsById(idEquipo)){
 			equipamientoDAO.deleteById(idEquipo);
@@ -86,8 +85,12 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 	@Override
 	public Optional<Equipamiento> editarEquipo(Equipamiento equipamiento) {
 		Optional<Equipamiento> eq = Optional.empty();
-		if(equipamientoDAO.existsById(equipamiento.getIdEquipo())){
+		if(equipamientoDAO.existsById(equipamiento.getIdString())){
 			List<FichaPersonaje> personajes=fichaPersonajeDAO.findAll();
+
+			//comentado hasta hacer la vista de los personajes correctamente
+
+			/* 
 			if(!personajes.isEmpty()){
 				personajes.stream()
 					.flatMap(p->p.getInventario().stream()).forEach(e->{
@@ -97,17 +100,28 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 					});
 				fichaPersonajeDAO.saveAll(personajes);
 			}
-			equipamientoDAO.save(equipamiento);
+			*/
+			Equipamiento e = equipamientoDAO.findById(equipamiento.getIdString()).get();
+			e.setNombre(equipamiento.getNombre());
+			e.setDanio(equipamiento.getDanio());
+			e.setAlcance(equipamiento.getAlcance());
+			e.setCategoria(equipamiento.getCategoria());
+			e.setDescripcion(equipamiento.getDescripcion());
+			e.setModificador(equipamiento.getModificador());
+			e.setPeso(equipamiento.getPeso());
+			e.setPropiedad(equipamiento.getPropiedad());
+			e.setTipo(equipamiento.getTipo());
+			equipamientoDAO.save(e);
 			//Esta linea es redundante, pero con ella sacamos el objeto acualizado de la base de datos
 			//por si queremos hacer algo con el
-			eq=equipamientoDAO.findById(equipamiento.getIdEquipo());
+			eq=equipamientoDAO.findById(e.getIdString());
 			return eq;
 		}
 		return eq;
 	}
 
 	@Override
-	public Optional<Equipamiento> findEquipoById(ObjectId idEquipo) {
+	public Optional<Equipamiento> findEquipoById(String idEquipo) {
 		return equipamientoDAO.findById(idEquipo);
 	}
 
@@ -128,6 +142,18 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 			e.printStackTrace();
 		}
 		
+		return exito;
+	}
+
+	@Override
+	public boolean deleteAll() {
+		boolean exito=false;
+		try {
+			equipamientoDAO.deleteAll();
+			exito=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return exito;
 	}
 }

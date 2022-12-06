@@ -2,9 +2,25 @@ import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Usuario, UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
+import {  UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
 import { Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
+
+export interface Usuario {
+
+  idUser?:any;
+  nombre?:String;
+  apellidos?:String;
+  contrasenia?:String;
+  nickname?:String;
+  biografia?:String;
+  email?:String;
+  fechaNacimiento?:String;
+  urlImage?:String;
+  activo?:boolean;
+  pais?:String;
+
+}
 
 @Component({
   selector: 'app-usuarios',
@@ -32,7 +48,7 @@ export class UsuariosComponent implements OnInit  {
 
   openDialog(usuario:Usuario) {
     const dialogRef = this.dialog.open(DialogUsuarios,{
-      data:{user:usuario}
+      data:{usuario:usuario}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -42,7 +58,7 @@ export class UsuariosComponent implements OnInit  {
 
   openDialog2(usuario:Usuario) {
     const dialogRef = this.dialog.open(Dialog2Usuarios,{
-      data:{user:usuario}
+      data:{usuario:usuario}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -72,14 +88,12 @@ export class UsuariosComponent implements OnInit  {
 })
 
 export class DialogUsuarios {
-  user: any;
 
-  constructor(
-    public dialogRef: MatDialogRef<UsuariosComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UsuariosComponent) {}
+  usuario:any;
+  constructor(public dialogRef: MatDialogRef<UsuariosComponent>,@Inject(MAT_DIALOG_DATA) public data: UsuariosComponent) {}
 
     ngOnInit() {
-      this.user = this.data['user'];
+      this.usuario=this.data['usuario'];
     }
 }
 
@@ -89,20 +103,17 @@ export class DialogUsuarios {
 })
 
 export class Dialog2Usuarios {
-  user: any;
+
+guardar(_t21: NgForm) {
+
+}
+  usuario: any;
 
   constructor(
     public dialogRef: MatDialogRef<UsuariosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UsuariosComponent,private usuarioService: UsuarioServiceService) {}
 
-    ngOnInit() {
-      this.user = this.data['user'];
-    }
-
-    guardar(info:NgForm) {
-
-      this.usuarioService.updateUsuario(this.user).subscribe(()=>{
-        this.user = this.data['user'];
-      });
-    }
+  ngOnInit() {
+    this.usuario = this.data['usuario'];
+  }
 }

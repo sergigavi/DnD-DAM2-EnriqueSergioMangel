@@ -3,9 +3,11 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.modelo;
 import java.time.LocalDate;
 
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.stereotype.Component;
+
+import com.mongodb.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,9 +25,12 @@ import lombok.NoArgsConstructor;
 @Component
 public class Usuario {
 	
-	@Id
-	@EqualsAndHashCode.Include
+	@MongoId
 	private ObjectId idUser;
+
+	@Nullable
+	@EqualsAndHashCode.Include
+	private String idUserString;
 	
 	private String nombre;
 	

@@ -30,7 +30,7 @@ import { UsuarioServiceService } from './services/usuario-service/usuario-servic
 import { DialogCrearEquipo } from './component/admin/equipamiento/DialogCrearEquipo';
 import { HomeComponent } from './component/home/home.component';
 import { PartidasComponent } from './component/admin/partidas/partidas.component';
-import { EquipamientoComponent } from './component/admin/equipamiento/equipamiento.component';
+import { DialogEditarEquipo, DialogVerEquipo, EquipamientoComponent } from './component/admin/equipamiento/equipamiento.component';
 import { PanelControlComponent } from './component/admin/panelControl/panelControl.component';
 import { Dialog2Usuarios, DialogUsuarios, UsuariosComponent } from './component/admin/usuarios/usuarios.component';
 import { PartidasUsuarioComponent } from './component/usuario/partidas/partidas.component';
@@ -115,7 +115,9 @@ const routes: Routes = [
     DialogUsuarios,
     Dialog2Usuarios,
     DialogCrearEquipo,
-    LPloginComponent
+    LPloginComponent,
+    DialogVerEquipo,
+    DialogEditarEquipo
   ],
   imports: [
     BrowserModule,
@@ -134,11 +136,11 @@ const routes: Routes = [
     MatSortModule,
     MatFormFieldModule,
     MatCardModule,
-    MatGridListModule,
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatGridListModule
 
   ],
   entryComponents: [UsuarioFormComponent],

@@ -40,7 +40,7 @@ public class PartidaController {
     }
 
     @GetMapping("/findPartidaById")
-    public ResponseEntity<Partida> findPartidaById(@RequestBody ObjectId id){
+    public ResponseEntity<Partida> findPartidaById(@RequestBody String id){
         ResponseEntity<Partida> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         try {
@@ -59,8 +59,8 @@ public class PartidaController {
         ResponseEntity<Partida> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         try {
-            if(partidaServicio.existePartida(partida.getIdPartida())){
-                Partida p= partidaServicio.findPartidaById(partida.getIdPartida()).get();
+            if(partidaServicio.existePartida(partida.getIdStringPartida())){
+                Partida p= partidaServicio.findPartidaById(partida.getIdStringPartida()).get();
                 res = new ResponseEntity<>(p,HttpStatus.OK);
             }
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class PartidaController {
     }
 
     @DeleteMapping("/deletePartidaById")
-    public ResponseEntity<Partida> deletePartidaById(@RequestBody ObjectId id){
+    public ResponseEntity<Partida> deletePartidaById(@RequestBody String id){
         ResponseEntity<Partida> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         try {
@@ -90,9 +90,9 @@ public class PartidaController {
         ResponseEntity<Partida> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         try {
-            if(partidaServicio.existePartida(partida.getIdPartida())){
-                Partida p = partidaServicio.findPartidaById(partida.getIdPartida()).get();
-                partidaServicio.deletePartidaById(partida.getIdPartida());
+            if(partidaServicio.existePartida(partida.getIdStringPartida())){
+                Partida p = partidaServicio.findPartidaById(partida.getIdStringPartida()).get();
+                partidaServicio.deletePartidaById(partida.getIdStringPartida());
                 res = new ResponseEntity<>(p,HttpStatus.OK);
             }
         } catch (Exception e) {
@@ -106,9 +106,11 @@ public class PartidaController {
         ResponseEntity<Partida> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         try {
-            if(!partidaServicio.existePartida(partida.getIdPartida())){
+            if(!partidaServicio.existePartida(partida.getIdStringPartida())){
+                partida.setIdPartida(ObjectId.get());
+                partida.setIdStringPartida(partida.getIdPartida().toString());
                 partidaServicio.addPartida(partida);
-                res = new ResponseEntity<>(partidaServicio.findPartidaById(partida.getIdPartida()).get(),HttpStatus.OK);
+                res = new ResponseEntity<>(partidaServicio.findPartidaById(partida.getIdStringPartida()).get(),HttpStatus.OK);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,7 +133,7 @@ public class PartidaController {
     }
 
     @GetMapping("/findPartidasByIdUser")
-    public ResponseEntity<List<Partida>> findPartidasByIdUser(@RequestBody ObjectId id){
+    public ResponseEntity<List<Partida>> findPartidasByIdUser(@RequestBody String id){
         ResponseEntity<List<Partida>> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         try {
@@ -173,10 +175,10 @@ public class PartidaController {
         ResponseEntity<Partida> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         try {
-            if(partidaServicio.existePartida(partida.getIdPartida())){
+            if(partidaServicio.existePartida(partida.getIdStringPartida())){
                 partidaServicio.addPartida(partida);
                 //Esta linea es redundante pero se usa para verificar que la partida ha sido modificada
-                Partida p = partidaServicio.findPartidaById(partida.getIdPartida()).get();
+                Partida p = partidaServicio.findPartidaById(partida.getIdStringPartida()).get();
                 res = new ResponseEntity<>(p,HttpStatus.OK);
             }
         } catch (Exception e) {

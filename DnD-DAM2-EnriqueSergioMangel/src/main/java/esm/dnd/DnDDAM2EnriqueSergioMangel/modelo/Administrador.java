@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.stereotype.Component;
 
+import com.mongodb.lang.Nullable;
+
 /*import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +21,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @AllArgsConstructor
@@ -31,10 +32,12 @@ import lombok.NonNull;
 @Component
 public class Administrador {
 	
-	@NonNull
 	@MongoId
-	@EqualsAndHashCode.Include
 	private ObjectId idAdmin;
+
+	@EqualsAndHashCode.Include
+	@Nullable
+	private String idAdminString;
 	
 	private String nombre;
 	

@@ -1,21 +1,15 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.Configuration;
 
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.lang.Nullable;
+import org.springframework.data.convert.ReadingConverter;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.TipoEquipo;
 
+@ReadingConverter
 public class StringToEnumConverterTipoEquipo implements Converter<String,TipoEquipo> {
 
     @Override
-    @Nullable
     public TipoEquipo convert(String source) {
-        
-        try {
-        return TipoEquipo.valueOf(source.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
+        return TipoEquipo.getTipo(source);
     }
-    
 }

@@ -43,6 +43,7 @@ public class AdministradorController {
         ResponseEntity<String> res = new ResponseEntity<>("Error insertando el admin",HttpStatus.BAD_REQUEST);
         
         admin.setIdAdmin(ObjectId.get());
+        admin.setIdAdminString(admin.getIdAdmin().toString());
         
         if (administradorServicio.insertarAdministrador(admin)) {
         	res = new ResponseEntity<String>("Administrador insertado correctamente", HttpStatus.OK);
@@ -52,7 +53,7 @@ public class AdministradorController {
     }
 	
 	@DeleteMapping("/deleteById")
-    public ResponseEntity<Administrador> deleteAdminById(@RequestParam ObjectId id)
+    public ResponseEntity<Administrador> deleteAdminById(@RequestParam String id)
     {
 		Administrador admin;
 		

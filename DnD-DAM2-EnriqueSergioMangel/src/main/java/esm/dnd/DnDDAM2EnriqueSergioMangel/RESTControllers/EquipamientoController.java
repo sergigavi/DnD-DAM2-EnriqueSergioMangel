@@ -10,6 +10,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,9 +49,13 @@ public class EquipamientoController {
 
         System.out.println(equipamiento.toString());
 
+        ObjectId id = ObjectId.get();
+        String idString = id.toString();
+
         Equipamiento eq= Equipamiento.builder()
             .alcance(equipamiento.getAlcance())
-            .idEquipo(ObjectId.get())
+            .idEquipo(id)
+            .idString(idString)
             .categoria(equipamiento.getCategoria())
             .danio(equipamiento.getDanio())
             .descripcion(equipamiento.getDescripcion())
@@ -76,8 +81,8 @@ public class EquipamientoController {
         return res;
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteEquipamiento(@RequestBody ObjectId id){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteEquipamientoById(@PathVariable String id){
 
         ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
@@ -91,10 +96,9 @@ public class EquipamientoController {
     @PutMapping("/update")
     public ResponseEntity<String> updateEquipamiento(@RequestBody Equipamiento equipamiento){
         ResponseEntity<String> res = new ResponseEntity<String>("Fallo al actualizar la ficha",HttpStatus.OK);
-
-        if(equipamientoServicio.existeEquipamiento(equipamiento.getIdEquipo())){
+        if(equipamientoServicio.existeEquipamiento(equipamiento.getIdString())){
             try {
-                equipamientoServicio.insertarEquipamiento(equipamiento);
+                equipamientoServicio.editarEquipo(equipamiento);
                 res = new ResponseEntity<>("Exito al actualizar la ficha",HttpStatus.OK);
                 return res;
             } catch (Exception e) {
@@ -103,5 +107,18 @@ public class EquipamientoController {
         }else{
             return res;
         }
+    }
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<Boolean> deleteAll(){
+        ResponseEntity<Boolean> res = new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
+        try {
+            equipamientoServicio.deleteAll();
+            res = new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return res;
+        }
+        return res;
     }
 }
