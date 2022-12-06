@@ -8,7 +8,7 @@ public enum CatEquipo {
 	ARMADURA_LIGERA{public String toString(){return "ARMADURA_LIGERA";}}, 
 	ARMADURA_PESADA{public String toString(){return "ARMADURA_PESADA";}},
 	ARMA_MARCIAL{public String toString(){return "ARMA_MARCIAL";}}, 
-	ARMA_SENCILLA{public String toString(){return "ARMA_SENCIALLA";}}, 
+	ARMA_SENCILLA{public String toString(){return "ARMA_SENCILLA";}}, 
 	ESCUDO{public String toString(){return "ESCUDO";}}, 
 	HERRAMIENTA{public String toString(){return "HERRAMIENTA";}}, 
 	INSTRUMENTO_MUSICAL{public String toString(){return "INSTRUMENTO_MUSICAL";}},

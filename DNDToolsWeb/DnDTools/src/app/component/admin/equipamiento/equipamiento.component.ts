@@ -3,6 +3,7 @@ import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EquipamientoAdminService } from 'src/app/services/equipamientoAdmin-service/equipamiento-admin.service';
@@ -96,6 +97,7 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
 
 
   @ViewChild(MatPaginator,{static:true}) paginator! :MatPaginator
+  @ViewChild(MatSort,{static:true}) sort!:MatSort
 
   dataSource = new MatTableDataSource<EquipamientoAdmin>([]);
 
@@ -104,15 +106,37 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
 
   ngOnInit(): void {
     this.dataSource.paginator=this.paginator
+    this.dataSource.sort=this.sort
     this.showEquipo()
   }
 
   ngAfterViewInit(){
     this.dataSource.paginator=this.paginator
+    this.dataSource.sort=this.sort
   }
 
   toggleSidebar() {
     this.opened = !this.opened;
+  }
+
+  applyFilter(event:Event){
+    const filterValue = (event.target as HTMLInputElement).value
+    this.dataSource.filter = filterValue.trim().toLowerCase()
+
+    if(this.dataSource.paginator){
+      this.dataSource.paginator.firstPage()
+    }
+  }
+
+  onDeleteAll(){
+    if(confirm("¿Borrar todos los elementos?")){
+      this.equipamientoService.deleteAllEquipo().subscribe((data:any)=>{
+        if(data==true){
+          alert("Datos borrados")
+          this.showEquipo()
+        }
+      })
+    }
   }
 
   public showEquipo(){
@@ -223,5 +247,13 @@ export class DialogEditarEquipo{
     }
     onNoClick(){
       this.dialogRef.close()
+    }
+
+    onDelete(){
+      if(confirm("¿Borrar este equipo?")){
+        this.equipamientoServicio.deleteEquipoById(this.equipamiento.idString).subscribe((data:any)=>{
+          this.dialogRef.close()
+        })
+      }
     }
 }

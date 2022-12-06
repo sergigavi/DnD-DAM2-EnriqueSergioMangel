@@ -16,5 +16,6 @@ public interface IEquipamientoServicio {
 	public Optional<Equipamiento> editarEquipo(Equipamiento equipamiento);
 	public Optional<Equipamiento> findEquipoById(String idEquipo);
 	public List<Equipamiento> findAll();
-	boolean insertarEquipamientos(List<Equipamiento> equipamientos);
+	public boolean insertarEquipamientos(List<Equipamiento> equipamientos);
+	public boolean deleteAll();
 }

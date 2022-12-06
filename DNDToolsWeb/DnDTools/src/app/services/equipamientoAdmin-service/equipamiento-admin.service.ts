@@ -58,4 +58,15 @@ export class EquipamientoAdminService {
     }
     return this.http.put<any>(`${environment.URLBASE}/equipamiento/update`,equipo,requestOptions);
   }
+
+  deleteEquipoById(id:String):Observable<String>{
+    const requestOptions:Object = {
+      responseType:'text'
+    }
+    return this.http.delete<String>(`${environment.URLBASE}/equipamiento/delete/${id}`,requestOptions);
+  }
+
+  deleteAllEquipo():Observable<boolean>{
+    return this.http.delete<any>(`${environment.URLBASE}/equipamiento/deleteAll`)
+  }
 }

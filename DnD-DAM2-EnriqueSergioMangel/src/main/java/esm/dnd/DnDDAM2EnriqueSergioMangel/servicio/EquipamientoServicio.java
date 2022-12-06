@@ -144,4 +144,16 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 		
 		return exito;
 	}
+
+	@Override
+	public boolean deleteAll() {
+		boolean exito=false;
+		try {
+			equipamientoDAO.deleteAll();
+			exito=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return exito;
+	}
 }

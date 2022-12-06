@@ -1,7 +1,7 @@
 <div class="matGridListClass">
   <form #equipoForm="ngForm" (ngSubmit)="onSubmit(equipoForm)">
     <p>Editar Equipamiento:</p>
-    <button mat-flat-button color="accent">Borrar</button>
+    <button mat-flat-button color="accent" type="button" (click)="onDelete()">Borrar</button>
     <mat-grid-list cols="3" rowHeight="3:1">
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="fill" class="formField">
@@ -48,8 +48,8 @@
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="fill">
           <mat-label>Modificador:</mat-label>
-          <mat-select [(ngModel)]="modificadorElegido" name="modificador">
-            <mat-option ngModel name="modificador" *ngFor="let modificador of modificadores" [value]="modificador">
+          <mat-select [(ngModel)]="equipo.modificador" name="modificador">
+            <mat-option  name="modificador" *ngFor="let modificador of modificadores" [value]="modificador">
               {{modificador}}
             </mat-option>
           </mat-select>
