@@ -1,7 +1,6 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 
@@ -30,4 +29,6 @@ public interface IUsuarioServicio {
 	public Optional<Usuario> findUsuarioByNickname(String nickname);
 
     public Optional<Usuario> editarUsuario(Usuario usuario);
+
+    public List<Usuario> getAll();
 }

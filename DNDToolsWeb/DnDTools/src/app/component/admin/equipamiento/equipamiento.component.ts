@@ -1,5 +1,5 @@
 import { ComponentPortal } from '@angular/cdk/portal';
-import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';

@@ -1,7 +1,6 @@
 package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
@@ -46,24 +45,16 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
 	@Override
+	public List<Usuario> getAll() {
+		return usuarioDAO.findAll();
+	}
+
+	@Override
 	public Optional<Usuario> editarUsuario(Usuario usuario) {
 		Optional<Usuario> us = Optional.empty();
 		if(usuarioDAO.existsById(usuario.getIdUserString())){
 			List<Usuario> usuarios=usuarioDAO.findAll();
 
-			//comentado hasta hacer la vista de los personajes correctamente
-
-			/* 
-			if(!personajes.isEmpty()){
-				personajes.stream()
-					.flatMap(p->p.getInventario().stream()).forEach(e->{
-						if(e.getIdEquipo().equals(equipamiento.getIdEquipo())){
-							e=equipamiento;
-						}
-					});
-				fichaPersonajeDAO.saveAll(personajes);
-			}
-			*/
 			Usuario e = usuarioDAO.findById(usuario.getIdUserString()).get();
                 e.setNombre(e.getNombre());
                 e.setApellidos(e.getApellidos());

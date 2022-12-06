@@ -25,6 +25,7 @@ export interface Usuario {
 })
 
 export class UsuarioServiceService {
+  [x: string]: any;
 
 
   constructor(private http: HttpClient)
@@ -42,12 +43,12 @@ export class UsuarioServiceService {
 
   };
 
-  updateUsuario(usuario:Usuario): Observable<Usuario>
+  updateUsuario(usuario:Usuario): Observable<any>
   {
     const requestOptions:Object = {
       responseType:'text'
     }
-    return this.http.put<Usuario>(`${environment.URLBASE}/usuarios/update`,usuario,requestOptions)
+    return this.http.put<any>(`${environment.URLBASE}/usuarios/update`,usuario,requestOptions)
   }
 
   getUsuarios() : Observable<Usuario[]>
