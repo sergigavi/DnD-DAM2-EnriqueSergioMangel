@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,11 @@ import {Component, OnInit} from '@angular/core';
 export class InicioJugadorComponent implements OnInit  {
   title = 'Inicio Jugador'
 
-  constructor(){}
+  constructor(private router:Router){}
+
+  public navegar(ruta:String){
+    this.router.navigate([`${ruta}`])
+  }
 
   ngOnInit(): void {
   }

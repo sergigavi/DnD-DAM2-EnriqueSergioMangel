@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,11 @@ export class HistoriaJugadorComponent implements OnInit  {
   title = 'Historia Jugador';
   opened = false;
 
-  constructor(){}
+  constructor(private router:Router){}
+
+  public navegar(ruta:String){
+    this.router.navigate([`${ruta}`])
+  }
 
   ngOnInit(): void {
   }

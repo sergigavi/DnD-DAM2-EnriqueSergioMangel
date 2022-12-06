@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   nombreUbicacion: string;
@@ -34,7 +35,11 @@ export class MapasGMComponent implements OnInit  {
   displayedColumns: string[] = ['nombreUbicacion','acceder', 'editar'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
-  constructor(public dialog: MatDialog){}
+  constructor(public dialog: MatDialog,private router:Router){}
+
+  public navegar(ruta:String){
+    this.router.navigate([`${ruta}`])
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogMapasGM);

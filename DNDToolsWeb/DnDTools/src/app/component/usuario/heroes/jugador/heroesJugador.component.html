@@ -2,20 +2,17 @@
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <!--SideBar-->
     <ul class="ulSlide">
-      <li class="nav-item liSlide">
-        <a class="nav-link" href="usuario-inicioJugador"><h5>Inicio</h5></a>
+      <li class="nav-item">
+        <button mat-flat-button color="accent" (click)="navegar('usuario-inicioJugador')"><mat-icon fontIcon="home" class=""></mat-icon>Inicio</button>
       </li>
-      <li class="nav-item liSlide">
-        <a class="nav-link" href="usuario-mapasJugador"><h5>Mapas/Localizaciones</h5></a>
+      <li class="nav-item">
+        <button mat-flat-button color="accent" (click)="navegar('usuario-mapasJugador')">Mapas/Localizaciones</button>
       </li>
-      <li class="nav-item liSlide">
-        <a class="nav-link" href="usuario-historiaJugador"><h5>Historia</h5></a>
+      <li class="nav-item">
+        <button mat-flat-button color="accent" (click)="navegar('usuario-historiaJugador')">Historia</button>
       </li>
-      <li class="nav-item liSlide">
-        <a class="nav-link" href="usuario-heroesJugador"><h5>Fichas Heroes</h5></a>
-      </li>
-      <li class="nav-item liSlide">
-        <a class="nav-link" href="usuario-npcJugador"><h5>Fichas NPCs</h5></a>
+      <li class="nav-item">
+        <button mat-flat-button color="accent" (click)="navegar('usuario-heroesJugador')">Fichas Heroes</button>
       </li>
     </ul>
 </mat-drawer>
