@@ -217,7 +217,7 @@ public class FichaPersonaje {
 					hab.setMod(hab.getCompetencia(),desCaract, bonif);
 					hs.add(hab);
 					break;
-				case "C.Arcanos":
+				case "C_Arcanos":
 					hab.setMod(hab.getCompetencia(), intCaract, bonif);
 					hs.add(hab);
 					break;
@@ -241,7 +241,7 @@ public class FichaPersonaje {
 					hab.setMod(hab.getCompetencia(), intCaract, bonif);
 					hs.add(hab);
 					break;
-				case "Juego de manos":
+				case "Juego_de_manos":
 					hab.setMod(hab.getCompetencia(), desCaract, bonif);
 					hs.add(hab);
 					break;
@@ -281,7 +281,7 @@ public class FichaPersonaje {
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
 					hs.add(hab);
 					break;
-				case "Trato con animales":
+				case "Trato_con_animales":
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
 					hs.add(hab);
 					break;

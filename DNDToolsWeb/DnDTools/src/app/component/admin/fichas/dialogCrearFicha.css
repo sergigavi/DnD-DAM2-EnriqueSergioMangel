@@ -6,4 +6,11 @@
 .example-headers-align .mat-form-field + .mat-form-field {
   justify-content: space-between;
 }
+.mat-form-field{
+  margin: 2px;
+}
+.mat-checkbox{
+  margin: 3px;
+  margin-bottom:10px;
+}
 

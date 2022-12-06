@@ -39,6 +39,7 @@ export class DialogCrearEquipo{
 
   onSubmit(equipo:NgForm){
     this.equipamiento=equipo.value
+    console.log(equipo.value)
     if(this.equipamiento.propiedad.length<1){
       this.equipamiento.propiedad=[]
     }

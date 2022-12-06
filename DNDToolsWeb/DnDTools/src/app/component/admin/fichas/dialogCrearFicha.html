@@ -1,5 +1,5 @@
 <div class="mat-dialog">
-  <form #fichaForm="ngForm" (onSubmit)="ngOnSubmit(fichaForm)">
+  <form #fichaForm="ngForm" (ngSubmit)="ngOnSubmit(fichaForm)">
     <p>Crear una ficha de personaje:</p>
     <mat-accordion class="example-headers-align">
       <mat-expansion-panel [expanded]="step===0" (opened)="setStep(0)" hideToggle>
@@ -12,16 +12,6 @@
         <mat-form-field appearance="outline">
           <mat-label>Nombre</mat-label>
           <input ngModel matInput name="nombre" required>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Personalidad</mat-label>
-          <input ngModel matInput name="rasgosPersonalidad">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Ideales</mat-label>
-          <input ngModel matInput name="ideales">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -45,16 +35,6 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Apariencia</mat-label>
-          <input ngModel matInput name="apariencia">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Historia personal</mat-label>
-          <input ngModel matInput name="historiaPersonal">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
           <mat-label>Rasgos</mat-label>
           <input ngModel matInput name="rasgos">
         </mat-form-field>
@@ -65,11 +45,141 @@
         </mat-form-field>
 
         <mat-action-row>
-          <button mat-flat-button color="accent" (click)="nextStep()">Next</button>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel >
+
+      <mat-expansion-panel [expanded]="step===1" (opened)="setStep(1)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Datos2</mat-panel-title>
+          <mat-panel-description>Rellene Datos2</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Personalidad</mat-label>
+          <textarea ngModel matInput name="rasgosPersonalidad"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ideales</mat-label>
+          <textarea ngModel matInput name="ideales"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Historia personal</mat-label>
+          <textarea ngModel matInput name="historiaPersonal"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apariencia</mat-label>
+          <textarea ngModel matInput name="apariencia"></textarea>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
         </mat-action-row>
 
       </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step===2" (opened)="setStep(2)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Características</mat-panel-title>
+          <mat-panel-description>Las características de su personaje</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Fuerza</mat-label>
+          <input [(ngModel)]="fueElegida" matInput name="fuerza" type="number" [formControl]="numberControlFue" min="3" max="20">
+          <mat-error *ngIf="numberControlFue.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Destreza</mat-label>
+          <input [(ngModel)]="desElegida"  matInput name="destreza" type="number" [formControl]="numberControlDes" min="3" max="20">
+          <mat-error *ngIf="numberControlDes.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Constitución</mat-label>
+          <input [(ngModel)]="conElegida"  matInput name="constitucion" type="number" [formControl]="numberControlCon" min="3" max="20">
+          <mat-error *ngIf="numberControlCon.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Inteligencia</mat-label>
+          <input [(ngModel)]="intElegida"  matInput name="inteligencia" type="number" [formControl]="numberControlInt" min="3" max="20">
+          <mat-error *ngIf="numberControlInt.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Sabiduría</mat-label>
+          <input [(ngModel)]="sabElegida"  matInput name="sabiduria" type="number" [formControl]="numberControlSab" min="3" max="20">
+          <mat-error *ngIf="numberControlSab.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Carisma</mat-label>
+          <input [(ngModel)]="carElegida"  matInput name="carisma" type="number" [formControl]="numberControlCar" min="3" max="20">
+          <mat-error *ngIf="numberControlCar.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step===3" (opened)="setStep(3)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Habilidades</mat-panel-title>
+          <mat-panel-description>Las habilidades con las que tu personaje es competente</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-checkbox [(ngModel)]="acrobacias.competencia" [ngModelOptions]="{standalone:true}">Acrobacias</mat-checkbox>
+        <mat-checkbox [(ngModel)]="cArcano.competencia" [ngModelOptions]="{standalone:true}">C.Arcanos</mat-checkbox>
+        <mat-checkbox [(ngModel)]="enganiar.competencia" [ngModelOptions]="{standalone:true}">Engañar</mat-checkbox>
+        <mat-checkbox [(ngModel)]="historia.competencia" [ngModelOptions]="{standalone:true}">Historia</mat-checkbox>
+        <mat-checkbox [(ngModel)]="interpretacion.competencia" [ngModelOptions]="{standalone:true}">Interpretacion</mat-checkbox>
+        <mat-checkbox [(ngModel)]="intimidar.competencia" [ngModelOptions]="{standalone:true}">Intimidar</mat-checkbox>
+        <mat-checkbox [(ngModel)]="investigar.competencia" [ngModelOptions]="{standalone:true}">Investigar</mat-checkbox>
+        <mat-checkbox [(ngModel)]="juegoDeManos.competencia" [ngModelOptions]="{standalone:true}">Juego de manos</mat-checkbox>
+        <mat-checkbox [(ngModel)]="atletismo.competencia" [ngModelOptions]="{standalone:true}">Atletismo</mat-checkbox>
+        <mat-checkbox [(ngModel)]="medicina.competencia" [ngModelOptions]="{standalone:true}">Medicina</mat-checkbox>
+        <mat-checkbox [(ngModel)]="naturaleza.competencia" [ngModelOptions]="{standalone:true}">Naturaleza</mat-checkbox>
+        <mat-checkbox [(ngModel)]="percepcion.competencia" [ngModelOptions]="{standalone:true}">Percepción</mat-checkbox>
+        <mat-checkbox [(ngModel)]="perspicacia.competencia" [ngModelOptions]="{standalone:true}">Perspicacia</mat-checkbox>
+        <mat-checkbox [(ngModel)]="persuasion.competencia" [ngModelOptions]="{standalone:true}">Persuasion</mat-checkbox>
+        <mat-checkbox [(ngModel)]="religion.competencia" [ngModelOptions]="{standalone:true}">Religión</mat-checkbox>
+        <mat-checkbox [(ngModel)]="sigilo.competencia" [ngModelOptions]="{standalone:true}">Sigilo</mat-checkbox>
+        <mat-checkbox [(ngModel)]="supervivencia.competencia" [ngModelOptions]="{standalone:true}">Supervivencia</mat-checkbox>
+        <mat-checkbox [(ngModel)]="tratoConAnimales.competencia" [ngModelOptions]="{standalone:true}">Trato con animales</mat-checkbox>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step===4" (opened)="setStep(4)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Equipamiento</mat-panel-title>
+          <mat-panel-description>El equipamiento del personaje</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        
+
+      </mat-expansion-panel>
+
     </mat-accordion>
+    <button class="mat-button" mat-flat-button color="accent" [disabled]="fichaForm.invalid" type="submit">Enviar</button>
   </form>
 </div>
 

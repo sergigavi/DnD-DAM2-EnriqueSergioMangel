@@ -49,6 +49,13 @@ public class Caracteristica {
 
 	public Caracteristica(String nombre,Integer valorTotal){
 
+		if(valorTotal>20){
+			valorTotal=20;
+		}
+		if(valorTotal<3){
+			valorTotal=3;
+		}
+
 		this.nombre=nombre;
 		this.valorTotal=valorTotal;
 		this.nombreIniciales=setNombreIniciales(nombre);
