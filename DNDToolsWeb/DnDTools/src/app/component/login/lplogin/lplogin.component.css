@@ -9,6 +9,13 @@ h1 {
   margin: 0;
   padding: 0;
 }
+
+img {
+  margin-left: 40%;
+  width: 110pt;
+  height: auto;
+}
+
 .custom-form {
   min-width: 300px;
   max-width: 60%;

@@ -38,13 +38,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         return http.build();
     }
     
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // Creamos una cuenta de usuario por default
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password("123abc")
-                .roles("ADMIN");
-    }
 
     /*
     @Bean
