@@ -22,8 +22,8 @@ export class LPloginComponent {
 
   trylogin()
   {
-    /*ERROR CON IUSUARIO
-    const usuario :IUsuario = {
+
+    const usuario :any = {
       nickname:this.nickname,
       contrasenia:this.contrasenia
     }
@@ -31,7 +31,7 @@ export class LPloginComponent {
     //console.log(usuario)
     //  Esto llama a la api
     this.loginService.trylogin(usuario)
-    */
+
   }
 
   ngOnInit(){
