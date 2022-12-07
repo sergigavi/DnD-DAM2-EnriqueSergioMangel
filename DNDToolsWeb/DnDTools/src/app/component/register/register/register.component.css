@@ -15,7 +15,6 @@ img {
   width: 110pt;
   height: auto;
 }
-
 .custom-form {
   min-width: 300px;
   max-width: 60%;
@@ -48,7 +47,7 @@ img {
   font-size: 0.875rem;
   color: #ffffff;
   font-weight: bold;
-  background-color: #bccfd8; /*#bcd8c1*/
+  background-color: #640662;
   width: 100%;
   display: block;
   padding: 0.875rem 1rem;
