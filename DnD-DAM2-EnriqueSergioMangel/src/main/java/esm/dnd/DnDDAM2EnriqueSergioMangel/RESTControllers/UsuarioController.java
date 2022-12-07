@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,6 +69,45 @@ public class UsuarioController {
 		}
     	
     	return res;
+    }
+
+	@PostMapping("/add")
+    public ResponseEntity<String> addUsuario(@RequestBody Usuario usuario){
+
+        ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        System.out.println(usuario.toString());
+
+        ObjectId id = ObjectId.get();
+        String idString = id.toString();
+
+        Usuario us= usuario.builder()
+            .idUser(id)
+            .idUserString(idString)
+            .nombre(usuario.getNombre())
+			.apellidos(usuario.getApellidos())
+			.contrasenia(usuario.getContrasenia())
+			.nickname(usuario.getNickname())
+			.biografia(usuario.getBiografia())
+			.email(usuario.getEmail())
+			.fechaNacimiento(usuario.getFechaNacimiento())
+			.urlImage("")
+			.activo(true)
+			.pais(usuario.getPais())
+            .build();
+
+            try {
+                usuarioServicio.insertarUsuario(us);
+                res = new ResponseEntity<String>("Exito",HttpStatus.OK);
+            } catch (HttpMessageNotReadableException e) {
+                res = new ResponseEntity<String>("Fallo al leer",HttpStatus.BAD_REQUEST);
+                e.printStackTrace();
+            } catch(Exception e){
+                res = new ResponseEntity<String>("Fallo al leer",HttpStatus.BAD_REQUEST);
+                e.printStackTrace();
+            }
+
+        return res;
     }
 
 	@DeleteMapping("/deleteById")

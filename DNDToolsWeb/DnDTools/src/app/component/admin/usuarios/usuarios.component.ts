@@ -5,8 +5,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
-import {  UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
+import { UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
 import { IUsuario } from 'src/modelo/IUsuario';
+import { DialogCrearUsuario } from './dialogCrearUsuarios';
 
 @Component({
   selector: 'app-usuarios',
@@ -62,6 +63,16 @@ export class UsuariosComponent implements OnInit  {
 
   public navegar(ruta:String){
     this.router.navigate([`${ruta}`])
+  }
+
+  public crearUsuario(){
+    const dialogRef=this.dialog.open(DialogCrearUsuario,{
+      width: '100%',
+    });
+
+    dialogRef.afterClosed().subscribe((data:any)=>{
+      this.showUsuario();
+    });
   }
 
   openDialog(usuario:IUsuario) {
@@ -124,8 +135,8 @@ export class Dialog2Usuarios {
 
   onSubmit(infoForm:NgForm){
     this.usuarioData=infoForm.value
-    this.usuarioData.nombre=this.usuario.nombre
-    this.usuarioData.email=this.usuario.email
+    this.usuarioData.idUser=this.usuario.idUser
+    this.usuarioData.idUserString=this.usuario.idUserString
     console.log(this.usuarioData)
     this.usuarioService.updateUsuario(this.usuarioData).subscribe((data:any)=>{
       this.dialogRef.close()

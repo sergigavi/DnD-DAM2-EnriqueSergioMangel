@@ -56,12 +56,12 @@ public class UsuarioServicio implements IUsuarioServicio{
 			List<Usuario> usuarios=usuarioDAO.findAll();
 
 			Usuario e = usuarioDAO.findById(usuario.getIdUserString()).get();
-                e.setNombre(e.getNombre());
+                e.setNombre(usuario.getNombre());
                 e.setApellidos(e.getApellidos());
                 e.setContrasenia(e.getContrasenia());
                 e.setNickname(e.getNickname());
                 e.setBiografia(e.getBiografia());
-                e.setEmail(e.getEmail());
+                e.setEmail(usuario.getEmail());
                 e.setFechaNacimiento(e.getFechaNacimiento());
                 e.setUrlImage(e.getUrlImage());
                 e.setActivo(e.isActivo());

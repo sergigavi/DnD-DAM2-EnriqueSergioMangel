@@ -30,6 +30,13 @@ export class UsuarioServiceService {
 
   };
 
+  addUsuario(usuario:IUsuario):Observable<String>{
+    const requestOptions:Object = {
+      responseType:'text'
+    }
+    return this.http.post<String>(`${environment.URLBASE}/usuarios/add`,usuario,requestOptions)
+  }
+
   updateUsuario(usuario:IUsuario): Observable<any>
   {
     const requestOptions:Object = {

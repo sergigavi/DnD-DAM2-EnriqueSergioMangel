@@ -1,0 +1,72 @@
+<div class="matGridListClass">
+  <form #usuarioForm="ngForm" (ngSubmit)="onSubmit(usuarioForm)">
+    <p>Crear Usuario:</p>
+    <mat-grid-list cols="3" rowHeight="4:1">
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Nombre:</mat-label>
+          <input ngModel matInput name="nombre" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Apellidos:</mat-label>
+          <input ngModel matInput name="apellidos" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Contraseña:</mat-label>
+          <input type="password" ngModel matInput name="contrasenia" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Nickname:</mat-label>
+          <input ngModel matInput name="nickname">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Biografía:</mat-label>
+          <textarea ngModel matInput name="biografia"></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Emial:</mat-label>
+          <input ngModel matInput name="email" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Elige una fecha</mat-label>
+          <input ngModel matInput [matDatepicker]="datepicker" name="fechaNacimiento" required>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancelar</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Aplicar</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Url Imagen:</mat-label>
+          <input disabled="disabled" ngModel matInput name="urlImage">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1"[rowspan]="1">
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Pais:</mat-label>
+          <input ngModel matInput name="pais">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button mat-flat-button color="accent" [disabled]="usuarioForm.invalid" type="submit">Enviar</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>

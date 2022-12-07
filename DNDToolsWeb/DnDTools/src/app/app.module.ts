@@ -17,10 +17,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
 import { MatSelectModule } from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 //import { CookieService } from 'ngx-cookie-service';
 
@@ -29,6 +32,7 @@ import { UsuarioFormComponent } from './components/usuario-form/usuario-form.com
 import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 
 import { DialogCrearEquipo } from './component/admin/equipamiento/DialogCrearEquipo';
+import { DialogCrearUsuario } from './component/admin/usuarios/dialogCrearUsuarios';
 import { HomeComponent } from './component/home/home.component';
 import { DialogEditarEquipo, DialogVerEquipo, EquipamientoComponent } from './component/admin/equipamiento/equipamiento.component';
 import { PanelControlComponent } from './component/admin/panelControl/panelControl.component';
@@ -47,6 +51,9 @@ import { PerfilComponent } from './component/perfil/perfil.component';
 import { LPloginComponent } from './component/login/lplogin/lplogin.component';
 import { EnumCatEquipo } from 'src/modelo/EnumCatEquipo';
 import { DialogCrearFicha, FichasAdmin } from './component/admin/fichas/fichasAdmin.component';
+
+
+
 
 const routes: Routes = [
   //invitados
@@ -109,7 +116,8 @@ const routes: Routes = [
     DialogVerEquipo,
     DialogEditarEquipo,
     FichasAdmin,
-    DialogCrearFicha
+    DialogCrearFicha,
+    DialogCrearUsuario
   ],
   imports: [
     BrowserModule,
@@ -133,11 +141,13 @@ const routes: Routes = [
     MatSelectModule,
     ReactiveFormsModule,
     MatGridListModule,
-    MatExpansionModule
-
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule
   ],
   entryComponents: [UsuarioFormComponent],
-  providers: [/*CookieService*/],
+  providers: [MatDatepickerModule,/*CookieService*/],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

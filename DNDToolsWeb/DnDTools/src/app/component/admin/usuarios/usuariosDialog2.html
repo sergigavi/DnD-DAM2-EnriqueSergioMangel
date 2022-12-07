@@ -10,10 +10,7 @@
       <mat-label>Correo</mat-label>
       <input [(ngModel)]="usuario.email" name="email" matInput matInput value={{usuario.email}} placeholder="Correo">
     </mat-form-field>
-
+    <button style="margin:1%;" mat-raised-button color="accent" [disabled]="infoForm.invalid" type="submit">Guardar</button>
+    <button mat-raised-button color="accent" mat-dialog-close>Volver</button>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-raised-button color="accent" [disabled]="infoForm.invalid" type="submit">Guardar</button>
-  <button mat-raised-button color="accent" mat-dialog-close>Volver</button>
-</mat-dialog-actions>
