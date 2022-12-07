@@ -57,8 +57,9 @@ import { DialogCrearFicha, FichasAdmin } from './component/admin/fichas/fichasAd
 
 const routes: Routes = [
   //invitados
-  {path:'',component: HomeComponent},
+  {path:'',component: LPloginComponent},
   //ambos
+  {path:'inicio',component: HomeComponent},
   {path:'usuario-partidasUsuario',component: PartidasUsuarioComponent},
   //admins
   {path:'fichas-admin',component: FichasAdmin},

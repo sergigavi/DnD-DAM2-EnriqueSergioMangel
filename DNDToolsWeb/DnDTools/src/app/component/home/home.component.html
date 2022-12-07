@@ -4,7 +4,7 @@
       <div>
         <ul class="ulSlide">
           <li class="nav-item">
-            <button mat-flat-button color="accent" (click)="navegar('')"><mat-icon fontIcon="home" class=""></mat-icon>Inicio</button>
+            <button mat-flat-button color="accent" (click)="navegar('inicio')"><mat-icon fontIcon="home" class=""></mat-icon>Inicio</button>
           </li>
           <li class="nav-item">
             <button mat-flat-button color="accent" (click)="navegar('#')">Mas Información</button>
@@ -40,7 +40,9 @@
         <a href="perfil">
           <button mat-menu-item>Perfil</button>
         </a>
-        <button mat-menu-item>Cerrar Sesion</button>
+        <a href="">
+          <button mat-menu-item>Cerrar Sesion</button>
+        </a>
       </mat-menu>
     </mat-toolbar>
   </div>
