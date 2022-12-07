@@ -1,0 +1,343 @@
+<div class="mat-dialog" mat-dialog-content>
+    <p>Datos de la ficha</p>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="step===0" (opened)="setStep(0)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Datos princpipales</mat-panel-title>
+          <mat-panel-description>Nombre,nivel,clase...</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input [(ngModel)]="ficha.nombre" value={{ficha.nombre}} matInput name="nombre" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nivel</mat-label>
+          <input [(ngModel)]="ficha.nivel" value={{ficha.nivel}} matInput name="nivel" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Bonif. Competencia</mat-label>
+          <input [(ngModel)]="ficha.bonifCompetencia" value={{ficha.bonifCompetencia}} matInput name="bonifCompetencia" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Clase</mat-label>
+          <input matInput name="clase" value={{ficha.clase}} disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Raza</mat-label>
+          <input matInput name="raza" value={{ficha.raza}} disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Alineamiento</mat-label>
+          <input matInput name="alineamiento" value={{ficha.alineamiento}} disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Clase de Armadura</mat-label>
+          <input [(ngModel)]="ficha.ca" value={{ficha.ca}} matInput name="ca" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Velocidad</mat-label>
+          <input [(ngModel)]="ficha.velocidad" value={{ficha.velocidad}} matInput name="velocidad" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Puntos de vida</mat-label>
+          <input [(ngModel)]="ficha.puntosVidaMax" value={{ficha.puntosVidaMax}} matInput name="puntosVidaMax" disabled>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel >
+
+
+      <mat-expansion-panel [expanded]="step===1" (opened)="setStep(1)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Datos personales</mat-panel-title>
+          <mat-panel-description>Vínculos,defectos,rasgos...</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Vínculos</mat-label>
+          <textarea value={{ficha.vinculos}} matInput name="vinculos" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Defectos</mat-label>
+          <textarea value={{ficha.defectos}} matInput name="defectos" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Atributos</mat-label>
+          <textarea value={{ficha.atributos}} matInput name="rasgosAtt" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Otras competencias</mat-label>
+          <textarea value={{ficha.otrasComp}} matInput name="otrasComp" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Rasgos</mat-label>
+          <textarea value={{ficha.rasgos}} matInput name="rasgos" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Notas adicionales</mat-label>
+          <textarea value={{ficha.notasAdd}} matInput name="notasAdd" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Personalidad</mat-label>
+          <textarea value={{ficha.rasgosPersonalidad}} matInput name="rasgosPersonalidad" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ideales</mat-label>
+          <textarea value={{ficha.ideales}} matInput name="ideales" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Historia personal</mat-label>
+          <textarea value={{ficha.historiaPersonal}} matInput name="historiaPersonal" disabled></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apariencia</mat-label>
+          <textarea value={{ficha.apariencia}} matInput name="apariencia" disabled></textarea>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step===2" (opened)="setStep(2)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Características</mat-panel-title>
+          <mat-panel-description>Las características de su personaje</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Fuerza</mat-label>
+          <input value={{ficha.caracteristicas[0].valorTotal}} matInput name="fuerza" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Destreza</mat-label>
+          <input value={{ficha.caracteristicas[1].valorTotal}} matInput name="destreza" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Constitución</mat-label>
+          <input value={{ficha.caracteristicas[2].valorTotal}} matInput name="constitucion" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Inteligencia</mat-label>
+          <input value={{ficha.caracteristicas[3].valorTotal}} matInput name="inteligencia" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Sabiduría</mat-label>
+          <input value={{ficha.caracteristicas[4].valorTotal}} matInput name="sabiduria" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Carisma</mat-label>
+          <input value={{ficha.caracteristicas[5].valorTotal}} matInput name="carisma" type="number" disabled>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+
+      <mat-expansion-panel [expanded]="step===3" (opened)="setStep(3)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Habilidades</mat-panel-title>
+          <mat-panel-description>Las habilidades con las que tu personaje es competente</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Acrobacias Mod</mat-label>
+          <input value={{ficha.habilidades[0].mod}} matInput name="acrobacias" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>C.Arcanos Mod</mat-label>
+          <input value={{ficha.habilidades[1].mod}} matInput name="C.Arcanos" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Engañar Mod</mat-label>
+          <input value={{ficha.habilidades[2].mod}} matInput name="enganiar" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Historia Mod</mat-label>
+          <input value={{ficha.habilidades[3].mod}} matInput name="historia" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Interpretación Mod</mat-label>
+          <input value={{ficha.habilidades[4].mod}} matInput name="interpretacion" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Intimidar Mod</mat-label>
+          <input value={{ficha.habilidades[5].mod}} matInput name="intimidar" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Investigar Mod</mat-label>
+          <input value={{ficha.habilidades[6].mod}} matInput name="investigar" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Juego de manos Mod</mat-label>
+          <input value={{ficha.habilidades[7].mod}} matInput name="juego_de_manos" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Atletismo Mod</mat-label>
+          <input value={{ficha.habilidades[8].mod}} matInput name="atletismo" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Medicina Mod</mat-label>
+          <input value={{ficha.habilidades[9].mod}} matInput name="medicina" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Naturaleza Mod</mat-label>
+          <input value={{ficha.habilidades[10].mod}} matInput name="naturaleza" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Percepción Mod</mat-label>
+          <input value={{ficha.habilidades[11].mod}} matInput name="percepcion" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Perspicacia Mod</mat-label>
+          <input value={{ficha.habilidades[12].mod}} matInput name="perspicacia" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Persuasión Mod</mat-label>
+          <input value={{ficha.habilidades[13].mod}} matInput name="persuasion" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Religión Mod</mat-label>
+          <input value={{ficha.habilidades[14].mod}} matInput name="religion" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Sigilo Mod</mat-label>
+          <input value={{ficha.habilidades[15].mod}} matInput name="sigilo" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Supervivencia Mod</mat-label>
+          <input value={{ficha.habilidades[16].mod}} matInput name="supervivencia" type="number" disabled>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="formField">
+          <mat-label>Trato con animales Mod</mat-label>
+          <input value={{ficha.habilidades[17].mod}} matInput name="trato_con_animales" type="number" disabled>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step===4" (opened)="setStep(4)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Inventario</mat-panel-title>
+          <mat-panel-description>El equipamiento del personaje</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-expansion-panel *ngFor="let equipo of inventario">
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{equipo.nombre}}</mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Tipo</mat-label>
+            <input matInput disabled value={{equipo.tipo}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Categoría</mat-label>
+            <input matInput disabled value={{equipo.categoria}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Propiedad</mat-label>
+            <textarea matInput disabled value={{equipo.propiedad}}></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Modificador</mat-label>
+            <input matInput disabled value={{equipo.modificador}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Daño</mat-label>
+            <input matInput disabled value={{equipo.danio}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Alcance</mat-label>
+            <input matInput disabled value={{equipo.alcance}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Precio</mat-label>
+            <input matInput disabled value={{equipo.precio}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Peso</mat-label>
+            <input matInput disabled value={{equipo.peso}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput disabled value={{equipo.descripcion}}></textarea>
+          </mat-form-field>
+
+        </mat-expansion-panel>
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+</div>
+
+
+
+

@@ -160,7 +160,6 @@ export class DialogEditarEquipo{
       this.equipamiento=equipoForm.value
       this.equipamiento.idEquipo=this.equipo.idEquipo
       this.equipamiento.idString=this.equipo.idString
-      console.log(this.equipamiento)
       if(this.equipamiento.propiedad.length<1){
         this.equipamiento.propiedad=[]
       }
@@ -173,7 +172,6 @@ export class DialogEditarEquipo{
       this.equipo=this.data['equipo']
       this.equipamiento=this.equipo
       this.modificador=this.equipamiento.modificador.toString()
-      console.log(this.equipo)
     }
     onNoClick(){
       this.dialogRef.close()

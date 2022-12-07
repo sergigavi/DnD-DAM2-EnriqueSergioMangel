@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Administrador;
@@ -185,8 +185,9 @@ public class FichaPersonajeController {
         });
         f.setCaracteristicas(cars);
 
-        f.setHabilidades(f.getCaracteristicas(),ficha.getHabilidades(),f.getBonifCompetencia());
-
+        List<Habilidad> habs = f.setHabilidadesNuevas(f.getCaracteristicas(),ficha.getHabilidades(),f.getBonifCompetencia());
+        f.setHabilidades(habs);
+        
         f.setAlineamiento(ficha.getAlineamiento());
         f.setRaza(ficha.getRaza());
         f.setClase(ficha.getClase());
@@ -209,11 +210,27 @@ public class FichaPersonajeController {
         f.setNombre(ficha.getNombre());
         f.setInventario(ficha.getInventario());
 
+
         try {
             fichaPersonajeServicio.addFichaPersonaje(f);
             res = new ResponseEntity<String>("Exito al cargar la ficha",HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return res;
+    }
+    
+    @PutMapping("/update")
+    public ResponseEntity<String> updateFicha(@RequestBody FichaPersonaje ficha){
+        ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        if(fichaPersonajeServicio.existsByIdFichaPersonaje(ficha.getIdFichaPersonajeString())){
+            try {
+                fichaPersonajeServicio.actualizarFichaPersonaje(ficha);
+                res = new ResponseEntity<>("Exito",HttpStatus.OK);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return res;
     }
@@ -232,18 +249,18 @@ public class FichaPersonajeController {
         }
     }
     
-    @DeleteMapping("/deleteById")
-	public ResponseEntity<FichaPersonaje> deleteFichaById(@RequestParam String id)
+    @DeleteMapping("/deleteById/{id}")
+	public ResponseEntity<String> deleteFichaById(@PathVariable String id)
 	{
 		FichaPersonaje f;
 		
-		ResponseEntity<FichaPersonaje> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		
 		if(fichaPersonajeServicio.existsByIdFichaPersonaje(id))
 		{
 			f = fichaPersonajeServicio.findFichaPersonajeById(id).get();
 			fichaPersonajeServicio.deleteFichaPersonajeById(id);
-			res = new ResponseEntity<FichaPersonaje>(f,HttpStatus.ACCEPTED);
+			res = new ResponseEntity<String>("Exito",HttpStatus.ACCEPTED);
 		}
 		
 		return res;
@@ -251,17 +268,18 @@ public class FichaPersonajeController {
 	}
     
     @DeleteMapping("/deleteAll")
-	public ResponseEntity<Iterable<FichaPersonaje>> deleteAllFichas()
+	public ResponseEntity<String> deleteAllFichas()
 	{
-				
-		ResponseEntity<Iterable<FichaPersonaje>> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		
-		Iterable<FichaPersonaje> fichas = fichaPersonajeServicio.deleteAllFichas();
-		
-		res = new ResponseEntity<Iterable<FichaPersonaje>>(fichas,HttpStatus.ACCEPTED);
-		
+
+        ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+
+        try {
+            fichaPersonajeServicio.deleteAllFichas();
+            res = new ResponseEntity<String>("Exito",HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 		return res;
-		
 	}
     
     @GetMapping("/cargarDatos")

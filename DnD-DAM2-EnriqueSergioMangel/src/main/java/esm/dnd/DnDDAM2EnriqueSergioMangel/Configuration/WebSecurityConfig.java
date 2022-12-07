@@ -25,6 +25,9 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         converterList.add(new StringToEnumConverterCatEquipo());
         converterList.add(new StringToEnumConverterPropiedadEquipo());
         converterList.add(new StringToEnumConverterTipoEquipo());
+        converterList.add(new StringToEnumConverterAlineamiento());
+        converterList.add(new StringToEnumConverterClase());
+        converterList.add(new StringToEnumConverterRaza());
         return new MongoCustomConversions(converterList);
     }
 

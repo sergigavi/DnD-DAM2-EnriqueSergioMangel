@@ -89,8 +89,6 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 			List<FichaPersonaje> personajes=fichaPersonajeDAO.findAll();
 
 			//comentado hasta hacer la vista de los personajes correctamente
-
-			/* 
 			if(!personajes.isEmpty()){
 				personajes.stream()
 					.flatMap(p->p.getInventario().stream()).forEach(e->{
@@ -100,7 +98,7 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 					});
 				fichaPersonajeDAO.saveAll(personajes);
 			}
-			*/
+			
 			Equipamiento e = equipamientoDAO.findById(equipamiento.getIdString()).get();
 			e.setNombre(equipamiento.getNombre());
 			e.setDanio(equipamiento.getDanio());

@@ -1,0 +1,295 @@
+<div class="mat-dialog" mat-dialog-content>
+  <form #fichaForm="ngForm" (ngSubmit)="ngOnSubmit(fichaForm)">
+    <p>Crear una ficha de personaje:</p>
+    <mat-accordion class="example-headers-align">
+
+      <mat-expansion-panel [expanded]="step===0" (opened)="setStep(0)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Datos princpipales</mat-panel-title>
+          <mat-panel-description>Nombre,nivel,clase...</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input [(ngModel)]="ficha.nombre" matInput name="nombre" value={{ficha.nombre}}>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nivel</mat-label>
+          <input [(ngModel)]="ficha.nivel" value={{ficha.nivel}} matInput name="nivel" type="number" max="20">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Clase</mat-label>
+          <mat-select [(ngModel)]="ficha.clase" name="clase" required>
+            <mat-option  name="clase" *ngFor="let clase of clases" [value]="clase">
+              {{clase}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Raza</mat-label>
+          <mat-select [(ngModel)]="ficha.raza" name="raza" required>
+            <mat-option  name="raza" *ngFor="let raza of razas" [value]="raza">
+              {{raza}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Alineamiento</mat-label>
+          <mat-select [(ngModel)]="ficha.alineamiento" name="alineamiento" required>
+            <mat-option  name="alineamiento" *ngFor="let alineamiento of alineamientos" [value]="alineamiento">
+              {{alineamiento}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Clase de Armadura</mat-label>
+          <input [(ngModel)]="ficha.ca" value={{ficha.ca}} matInput name="ca" type="number">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Velocidad</mat-label>
+          <input [(ngModel)]="ficha.velocidad" value={{ficha.velocidad}} matInput name="velocidad" type="number">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Puntos de vida</mat-label>
+          <input [(ngModel)]="ficha.puntosVidaMax" value={{ficha.puntosVidaMax}} matInput name="puntosVidaMax" type="number">
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel >
+
+      <mat-expansion-panel [expanded]="step===1" (opened)="setStep(1)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Datos personales</mat-panel-title>
+          <mat-panel-description>Vínculos,defectos,rasgos...</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Vínculos</mat-label>
+          <textarea [(ngModel)]="ficha.vinculos" value={{ficha.vinculos}} matInput name="vinculos"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Defectos</mat-label>
+          <textarea [(ngModel)]="ficha.defectos" value={{ficha.defectos}} matInput name="defectos"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Atributos</mat-label>
+          <textarea [(ngModel)]="ficha.reasgosAtt" value={{ficha.rasgosAtt}} matInput name="rasgosAtt"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Otras competencias</mat-label>
+          <textarea [(ngModel)]="ficha.otrasComp" value={{ficha.otrasComp}} matInput name="otrasComp"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Rasgos</mat-label>
+          <textarea [(ngModel)]="ficha.rasgos" value={{ficha.rasgos}} matInput name="rasgos"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Notas adicionales</mat-label>
+          <textarea [(ngModel)]="ficha.notasAdd" matInput value={{ficha.notasAdd}} name="notasAdd"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Personalidad</mat-label>
+          <textarea [(ngModel)]="ficha.rasgosPersonalidad" matInput value={{ficha.rasgosPersonalidad}} name="rasgosPersonalidad"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ideales</mat-label>
+          <textarea [(ngModel)]="ficha.ideales" value={{ficha.ideales}} matInput name="ideales"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Historia personal</mat-label>
+          <textarea [(ngModel)]="ficha.historiaPersonal" value={{ficha.historiaPersonal}} matInput name="historiaPersonal"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apariencia</mat-label>
+          <textarea [(ngModel)]="ficha.apariencia" value={{ficha.apariencia}} matInput name="apariencia"></textarea>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step===2" (opened)="setStep(2)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Características</mat-panel-title>
+          <mat-panel-description>Las características de su personaje</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Fuerza</mat-label>
+          <input [(ngModel)]="ficha.caracteristicas[0].valorTotal" matInput name="fuerza" type="number" [formControl]="numberControlFue" min="3" max="20">
+          <mat-error *ngIf="numberControlFue.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Destreza</mat-label>
+          <input [(ngModel)]="ficha.caracteristicas[1].valorTotal"   matInput name="destreza" type="number" [formControl]="numberControlDes" min="3" max="20">
+          <mat-error *ngIf="numberControlDes.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Constitución</mat-label>
+          <input [(ngModel)]="ficha.caracteristicas[2].valorTotal"  matInput name="constitucion" type="number" [formControl]="numberControlCon" min="3" max="20">
+          <mat-error *ngIf="numberControlCon.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Inteligencia</mat-label>
+          <input [(ngModel)]="ficha.caracteristicas[3].valorTotal"   matInput name="inteligencia" type="number" [formControl]="numberControlInt" min="3" max="20">
+          <mat-error *ngIf="numberControlInt.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Sabiduría</mat-label>
+          <input [(ngModel)]="ficha.caracteristicas[4].valorTotal"   matInput name="sabiduria" type="number" [formControl]="numberControlSab" min="3" max="20">
+          <mat-error *ngIf="numberControlSab.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Carisma</mat-label>
+          <input [(ngModel)]="ficha.caracteristicas[5].valorTotal"   matInput name="carisma" type="number" [formControl]="numberControlCar" min="3" max="20">
+          <mat-error *ngIf="numberControlCar.invalid">¡Solo valores entre el 3 y 20!</mat-error>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+
+      <mat-expansion-panel [expanded]="step===3" (opened)="setStep(3)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Habilidades</mat-panel-title>
+          <mat-panel-description>Las habilidades con las que tu personaje es competente</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-checkbox [(ngModel)]="ficha.habilidades[0].competencia" [ngModelOptions]="{standalone:true}">Acrobacias</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[1].competencia" [ngModelOptions]="{standalone:true}">C.Arcanos</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[2].competencia" [ngModelOptions]="{standalone:true}">Engañar</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[3].competencia" [ngModelOptions]="{standalone:true}">Historia</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[4].competencia" [ngModelOptions]="{standalone:true}">Interpretacion</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[5].competencia" [ngModelOptions]="{standalone:true}">Intimidar</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[6].competencia" [ngModelOptions]="{standalone:true}">Investigar</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[7].competencia" [ngModelOptions]="{standalone:true}">Juego de manos</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[8].competencia" [ngModelOptions]="{standalone:true}">Atletismo</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[9].competencia" [ngModelOptions]="{standalone:true}">Medicina</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[10].competencia" [ngModelOptions]="{standalone:true}">Naturaleza</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[11].competencia" [ngModelOptions]="{standalone:true}">Percepción</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[12].competencia" [ngModelOptions]="{standalone:true}">Perspicacia</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[13].competencia" [ngModelOptions]="{standalone:true}">Persuasion</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[14].competencia" [ngModelOptions]="{standalone:true}">Religión</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[15].competencia" [ngModelOptions]="{standalone:true}">Sigilo</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[16].competencia" [ngModelOptions]="{standalone:true}">Supervivencia</mat-checkbox>
+        <mat-checkbox [(ngModel)]="ficha.habilidades[17].competencia" [ngModelOptions]="{standalone:true}">Trato con animales</mat-checkbox>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step===4" (opened)="setStep(4)" hideToggle>
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>Inventario</mat-panel-title>
+          <mat-panel-description>El equipamiento del personaje</mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-expansion-panel *ngFor="let equipo of inventario">
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{equipo.nombre}}</mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Tipo</mat-label>
+            <input matInput disabled value={{equipo.tipo}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Categoría</mat-label>
+            <input matInput disabled value={{equipo.categoria}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Propiedad</mat-label>
+            <textarea matInput disabled value={{equipo.propiedad}}></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Modificador</mat-label>
+            <input matInput disabled value={{equipo.modificador}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Daño</mat-label>
+            <input matInput disabled value={{equipo.danio}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Alcance</mat-label>
+            <input matInput disabled value={{equipo.alcance}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Precio</mat-label>
+            <input matInput disabled value={{equipo.precio}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Peso</mat-label>
+            <input matInput disabled value={{equipo.peso}}>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="formField">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput disabled value={{equipo.descripcion}}></textarea>
+          </mat-form-field>
+
+        </mat-expansion-panel>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" [disabled]="fichaForm.invalid">Finish</button>
+        </mat-action-row>
+
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+  <div class="mat-button">
+    <button mat-flat-button type="button" color="accent" (click)="onDelete()">Borrar</button>
+  </div>
+</div>
+
+
+
+

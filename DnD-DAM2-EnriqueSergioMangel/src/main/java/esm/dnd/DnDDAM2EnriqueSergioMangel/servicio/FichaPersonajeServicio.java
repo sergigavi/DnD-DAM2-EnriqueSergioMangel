@@ -90,8 +90,51 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
         if (fichaPersonajeDAO.existsById(fichaPersonaje.getIdFichaPersonajeString()))
         {
             try {
+
+                FichaPersonaje f= new FichaPersonaje();
+
+                FichaPersonaje fi = fichaPersonajeDAO.findById(fichaPersonaje.getIdFichaPersonajeString()).get();
+
+                f.setIdFichaPersonaje(fi.getIdFichaPersonaje());
+                f.setIdFichaPersonajeString(fichaPersonaje.getIdFichaPersonajeString());
+                f.setNombre(fichaPersonaje.getNombre());
+                f.setNivel(fichaPersonaje.getNivel());
+                f.setBonifCompetencia(f.getNivel());
+
+                List<Caracteristica> cars=new ArrayList<>();
+                fichaPersonaje.getCaracteristicas().stream().forEach((c)->{
+                    Caracteristica car = new Caracteristica(c.getNombre(),c.getValorTotal());
+                    cars.add(car);
+                });
                 
-                fichaPersonajeDAO.save(fichaPersonaje);
+                f.setCaracteristicas(cars);
+
+                List<Habilidad> habs = f.setHabilidadesNuevas(f.getCaracteristicas(),fichaPersonaje.getHabilidades(),f.getBonifCompetencia());
+                f.setHabilidades(habs);
+
+                f.setAlineamiento(fichaPersonaje.getAlineamiento());
+                f.setRaza(fichaPersonaje.getRaza());
+                f.setClase(fichaPersonaje.getClase());
+                f.setTransfondo(fichaPersonaje.getTransfondo());
+                f.setCa(fichaPersonaje.getCa());
+                f.setVelocidad(fichaPersonaje.getVelocidad());
+                f.setPuntosVidaMax(fichaPersonaje.getPuntosVidaMax());
+                //la ficha es nueva asi que empieza con toda la vida
+                f.setPuntosVidaAct(fichaPersonaje.getPuntosVidaMax());
+                f.setRasgosPersonalidad(fichaPersonaje.getRasgosPersonalidad());
+                f.setIdeales(fichaPersonaje.getIdeales());
+                f.setVinculos(fichaPersonaje.getVinculos());
+                f.setDefectos(fichaPersonaje.getDefectos());
+                f.setRasgosAtt(fichaPersonaje.getRasgosAtt());
+                f.setOtrasComp(fichaPersonaje.getOtrasComp());
+                f.setApariencia(fichaPersonaje.getApariencia());
+                f.setHistoriaPersonal(fichaPersonaje.getHistoriaPersonal());
+                f.setRasgos(fichaPersonaje.getRasgos());
+                f.setNotasAdd(fichaPersonaje.getNotasAdd());
+                f.setNombre(fichaPersonaje.getNombre());
+                f.setInventario(fichaPersonaje.getInventario());
+                
+                fichaPersonajeDAO.save(f);
                 exito = true;
                 
             } catch (Exception e) {

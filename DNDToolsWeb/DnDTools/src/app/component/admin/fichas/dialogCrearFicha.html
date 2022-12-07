@@ -1,47 +1,64 @@
-<div class="mat-dialog">
+<div class="mat-dialog" mat-dialog-content>
   <form #fichaForm="ngForm" (ngSubmit)="ngOnSubmit(fichaForm)">
     <p>Crear una ficha de personaje:</p>
     <mat-accordion class="example-headers-align">
       <mat-expansion-panel [expanded]="step===0" (opened)="setStep(0)" hideToggle>
 
         <mat-expansion-panel-header>
-          <mat-panel-title>Datos1</mat-panel-title>
-          <mat-panel-description>Rellene Datos1</mat-panel-description>
+          <mat-panel-title>Datos princpipales</mat-panel-title>
+          <mat-panel-description>Nombre,nivel,clase...</mat-panel-description>
         </mat-expansion-panel-header>
 
         <mat-form-field appearance="outline">
           <mat-label>Nombre</mat-label>
-          <input ngModel matInput name="nombre" required>
+          <input ngModel matInput name="nombre">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Vínculos</mat-label>
-          <input ngModel matInput name="vinculos">
+          <mat-label>Nivel</mat-label>
+          <input ngModel matInput name="nivel" type="number" max="20">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Clase</mat-label>
+          <mat-select [(ngModel)]="claseElegida" name="clase" required>
+            <mat-option ngModel name="clase" *ngFor="let clase of clases" [value]="clase">
+              {{clase}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Raza</mat-label>
+          <mat-select [(ngModel)]="razaElegida" name="raza" required>
+            <mat-option ngModel name="raza" *ngFor="let raza of razas" [value]="raza">
+              {{raza}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Alineamiento</mat-label>
+          <mat-select [(ngModel)]="alineamientoElegido" name="alineamiento" required>
+            <mat-option ngModel name="alineamiento" *ngFor="let alineamiento of alineamientos" [value]="alineamiento">
+              {{alineamiento}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Defectos</mat-label>
-          <input ngModel matInput name="defectos">
+          <mat-label>Clase de Armadura</mat-label>
+          <input ngModel matInput name="ca" type="number">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Atributos</mat-label>
-          <input ngModel matInput name="rasgosAtt">
+          <mat-label>Velocidad</mat-label>
+          <input ngModel matInput name="velocidad" type="number">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Otras competencias</mat-label>
-          <input ngModel matInput name="otrasComp">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Rasgos</mat-label>
-          <input ngModel matInput name="rasgos">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Notas adicionales</mat-label>
-          <input ngModel matInput name="notasAdd">
+          <mat-label>Puntos de vida</mat-label>
+          <input ngModel matInput name="puntosVidaMax" type="number">
         </mat-form-field>
 
         <mat-action-row>
@@ -53,9 +70,39 @@
       <mat-expansion-panel [expanded]="step===1" (opened)="setStep(1)" hideToggle>
 
         <mat-expansion-panel-header>
-          <mat-panel-title>Datos2</mat-panel-title>
-          <mat-panel-description>Rellene Datos2</mat-panel-description>
+          <mat-panel-title>Datos personales</mat-panel-title>
+          <mat-panel-description>Vínculos,defectos,rasgos...</mat-panel-description>
         </mat-expansion-panel-header>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Vínculos</mat-label>
+          <textarea ngModel matInput name="vinculos"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Defectos</mat-label>
+          <textarea ngModel matInput name="defectos"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Atributos</mat-label>
+          <textarea ngModel matInput name="rasgosAtt"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Otras competencias</mat-label>
+          <textarea ngModel matInput name="otrasComp"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Rasgos</mat-label>
+          <textarea ngModel matInput name="rasgos"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Notas adicionales</mat-label>
+          <textarea ngModel matInput name="notasAdd"></textarea>
+        </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Personalidad</mat-label>
@@ -134,6 +181,7 @@
 
       </mat-expansion-panel>
 
+
       <mat-expansion-panel [expanded]="step===3" (opened)="setStep(3)" hideToggle>
 
         <mat-expansion-panel-header>
@@ -174,12 +222,43 @@
           <mat-panel-description>El equipamiento del personaje</mat-panel-description>
         </mat-expansion-panel-header>
 
-        
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td mat-cell *matCellDef="let equipo">{{equipo.nombre}}</td>
+            </ng-container>
+            <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef>Tipo</th>
+              <td mat-cell *matCellDef="let equipo">{{equipo.tipo}}</td>
+            </ng-container>
+            <ng-container matColumnDef="categoria">
+              <th mat-header-cell *matHeaderCellDef>Categoría</th>
+              <td mat-cell *matCellDef="let equipo">{{equipo.categoria}}</td>
+            </ng-container>
+            <ng-container matColumnDef="add">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let equipo"><button mat-flat-button color="accent" type="button" (click)="onAdd(equipo)">Add</button></td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnasEquipo"></tr>
+            <tr mat-row *matRowDef="let row;columns: columnasEquipo;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="5">Sin datos que mostrar</td>
+            </tr>
+          </table>
+          <mat-paginator #paginator  [pageSizeOptions]=[4,8,16] showFirstLastButtons></mat-paginator>
+        </div>
+        <p class="p-equipo">Inventário: {{equipamientoAddedString}}</p>
+
+        <mat-action-row>
+          <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
+          <button mat-button color="primary" [disabled]="fichaForm.invalid">Finish</button>
+        </mat-action-row>
 
       </mat-expansion-panel>
 
     </mat-accordion>
-    <button class="mat-button" mat-flat-button color="accent" [disabled]="fichaForm.invalid" type="submit">Enviar</button>
   </form>
 </div>
 

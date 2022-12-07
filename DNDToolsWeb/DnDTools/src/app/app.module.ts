@@ -50,7 +50,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { PerfilComponent } from './component/perfil/perfil.component';
 import { LPloginComponent } from './component/login/lplogin/lplogin.component';
 import { EnumCatEquipo } from 'src/modelo/EnumCatEquipo';
-import { DialogCrearFicha, FichasAdmin } from './component/admin/fichas/fichasAdmin.component';
+import { DialogCrearFicha, DialogEditarFicha, DialogVerFicha, FichasAdmin } from './component/admin/fichas/fichasAdmin.component';
 
 const routes: Routes = [
   //invitados
@@ -121,7 +121,9 @@ const routes: Routes = [
     DialogVerEquipo,
     DialogEditarEquipo,
     FichasAdmin,
-    DialogCrearFicha
+    DialogCrearFicha,
+    DialogVerFicha,
+    DialogEditarFicha
   ],
   imports: [
     BrowserModule,
@@ -146,7 +148,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatGridListModule,
     MatExpansionModule,
-    MatCheckboxModule
+    MatCheckboxModule,
 
   ],
   entryComponents: [UsuarioFormComponent],

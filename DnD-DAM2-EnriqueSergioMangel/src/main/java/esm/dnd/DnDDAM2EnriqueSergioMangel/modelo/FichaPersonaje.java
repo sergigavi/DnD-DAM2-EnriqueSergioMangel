@@ -118,7 +118,7 @@ public class FichaPersonaje {
 
 		this.idFichaPersonaje=ObjectId.get();
 		this.idFichaPersonajeString=this.idFichaPersonaje.toString();
-		this.nombre="";
+		this.nombre="FICHA_VACIA";
 		this.nivel=1;
 		this.bonifCompetencia=calcBonifCompetencia(this.nivel);
 		this.usuario=null;
@@ -147,15 +147,22 @@ public class FichaPersonaje {
 	
 	public FichaPersonaje(FichaPersonaje ficha){
 
+		System.out.println(ficha.getNivel());
 		this.idFichaPersonaje=ficha.getIdFichaPersonaje();
 		this.idFichaPersonajeString=ficha.getIdFichaPersonajeString();
 		this.usuario = ficha.getUsuario();
 		this.inventario=ficha.getInventario();
 		this.caracteristicas=ficha.getCaracteristicas();
+		if(ficha.getNivel()>20){
+			ficha.setNivel(20);
+		}
+		if(ficha.getNivel()<1){
+			ficha.setNivel(1);
+		}
 		this.nivel=ficha.getNivel();
 		this.nombre=ficha.getNombre();
 		this.bonifCompetencia=calcBonifCompetencia(this.nivel);
-		this.habilidades=setHabilidades(this.caracteristicas, ficha.getHabilidades(), null);
+		this.habilidades=setHabilidadesNuevas(this.caracteristicas, ficha.getHabilidades(), null);
 		this.clase=ficha.getClase();
 		this.raza=ficha.getRaza();
 		this.alineamiento=getAlineamiento();
@@ -192,22 +199,24 @@ public class FichaPersonaje {
 		}
 	}
 
-	public List<Habilidad> setHabilidades(List<Caracteristica> caracteristicas,List<Habilidad> habilidades,Integer bonif){
+	public List<Habilidad> setHabilidadesNuevas(List<Caracteristica> caracteristicas,List<Habilidad> habilidades,Integer bonif){
+
 
 		int fueCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Fue"))
-			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
+			.map(car->car.getValorMod()).findFirst().orElse(0);
 
 		int desCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Des"))
-			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
+			.map(car->car.getValorMod()).findFirst().orElse(0);
 		
 		int intCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Int"))
-			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
+			.map(car->car.getValorMod()).findFirst().orElse(0);
 
 		int sabCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Sab"))
-			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
+			.map(car->car.getValorMod()).findFirst().orElse(0);
 
 		int carCaract = caracteristicas.stream().filter(car->car.getNombreIniciales().equals("Car"))
-			.mapToInt(car->car.getValorMod()).findFirst().orElse(0);
+			.map(car->car.getValorMod()).findFirst().orElse(0);
+
 
 		List<Habilidad> hs=new ArrayList<>();
 
@@ -261,7 +270,7 @@ public class FichaPersonaje {
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
 					hs.add(hab);
 					break;
-				case "Perpicacia":
+				case "Perspicacia":
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
 					hs.add(hab);
 					break;
@@ -285,8 +294,6 @@ public class FichaPersonaje {
 					hab.setMod(hab.getCompetencia(), sabCaract, bonif);
 					hs.add(hab);
 					break;
-				default:
-					break;
 			}
 		});
 		return hs;
@@ -299,76 +306,76 @@ public class FichaPersonaje {
 		for(int i=0;i<_numHabilidades;i++){
 			Habilidad h=new Habilidad();
 			switch (i) {
-				case 1:
+				case 0:
 					h=new Habilidad("Acrobacias",false,0,bonif);
 					hab.add(h);
 					break;
-				case 2:
-					h=new Habilidad("C.Arcanos",false,0,bonif);
+				case 1:
+					h=new Habilidad("C_Arcanos",false,0,bonif);
 					hab.add(h);
 					break;
-				case 3:
+				case 2:
 					h=new Habilidad("Enganiar",false,0,bonif);
 					hab.add(h);
 					break;
-				case 4:
+				case 3:
 					h=new Habilidad("Historia",false,0,bonif);
 					hab.add(h);
 					break;
-				case 5:
+				case 4:
 					h=new Habilidad("Interpretacion",false,0,bonif);
 					hab.add(h);
 					break;
-				case 6:
+				case 5:
 					h=new Habilidad("Intimidar",false,0,bonif);
 					hab.add(h);
 					break;
-				case 7:
+				case 6:
 				h=new Habilidad("Investigacion",false,0,bonif);
 					hab.add(h);
 					break;
-				case 8:
-					h=new Habilidad("Juego de manos",false,0,bonif);
+				case 7:
+					h=new Habilidad("Juego_de_manos",false,0,bonif);
 					hab.add(h);
 					break;
-				case 9:
+				case 8:
 					h=new Habilidad("Atletismo",false,0,bonif);
 					hab.add(h);
 					break;
-				case 10:
+				case 9:
 					h=new Habilidad("Medicina",false,0,bonif);
 					hab.add(h);
 					break;
-				case 11:
+				case 10:
 					h=new Habilidad("Naturaleza",false,0,bonif);
 					hab.add(h);
 					break;
-				case 12:
+				case 11:
 					h=new Habilidad("Percepcion",false,0,bonif);
 					hab.add(h);
 					break;
-				case 13:
+				case 12:
 					h=new Habilidad("Perpicacia",false,0,bonif);
 					hab.add(h);
 					break;
-				case 14:
+				case 13:
 					h=new Habilidad("Persuasion",false,0,bonif);
 					hab.add(h);
 					break;
-				case 15:
+				case 14:
 					h=new Habilidad("Religion",false,0,bonif);
 					hab.add(h);
 					break;
-				case 16:
+				case 15:
 					h=new Habilidad("Sigilo",false,0,bonif);
 					hab.add(h);
 					break;
-				case 17:
+				case 16:
 					h=new Habilidad("Supervivencia",false,0,bonif);
 					hab.add(h);
 					break;
-				case 18:
-					h=new Habilidad("Trato con animales",false,0,bonif);
+				case 17:
+					h=new Habilidad("Trato_con_animales",false,0,bonif);
 					hab.add(h);
 					break;
 				default:
