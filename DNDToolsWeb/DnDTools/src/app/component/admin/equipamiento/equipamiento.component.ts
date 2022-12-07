@@ -173,6 +173,7 @@ export class DialogEditarEquipo{
       this.equipamiento=this.equipo
       this.modificador=this.equipamiento.modificador.toString()
     }
+    
     onNoClick(){
       this.dialogRef.close()
     }

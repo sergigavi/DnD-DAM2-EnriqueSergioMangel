@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from 'src/app/services/login-service/login.service';
-import { Usuario } from 'src/app/services/usuario-service/usuario-service.service';
+import { IUsuario } from 'src/modelo/IUsuario';
 
 @Component({
   selector: 'app-lplogin',
@@ -23,7 +23,7 @@ export class LPloginComponent {
   trylogin()
   {
 
-    const usuario :Usuario = {
+    const usuario :any = {
       nickname:this.nickname,
       contrasenia:this.contrasenia
     }
@@ -31,6 +31,7 @@ export class LPloginComponent {
     //console.log(usuario)
     //  Esto llama a la api
     this.loginService.trylogin(usuario)
+
   }
 
   ngOnInit(){

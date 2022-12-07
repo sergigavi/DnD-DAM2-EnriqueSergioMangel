@@ -2,22 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-
-export interface Usuario {
-
-  idUser?:any;
-  nombre?:String;
-  apellidos?:String;
-  contrasenia:String;
-  nickname:String;
-  biografia?:String;
-  email?:String;
-  fechaNacimiento?:String;
-  urlImage?:String;
-  activo?:boolean;
-  pais?:String;
-
-}
+import { IUsuario } from 'src/modelo/IUsuario';
 
 
 @Injectable({
@@ -26,24 +11,42 @@ export interface Usuario {
 
 export class UsuarioServiceService {
 
-
   constructor(private http: HttpClient)
   {
 
   }
 
-  annadirUsuario(usuario: Usuario): Observable<any>
+  getAll() :Observable<IUsuario[]>{
+    return this.http.get<IUsuario[]>(`${environment.URLBASE}/usuarios/getAll`)
+  }
+
+  annadirUsuario(usuario: IUsuario): Observable<any>
   {
-    return this.http.post(`${environment.URLBASE}/usuarios/insertarUsuario`, usuario)
+    return this.http.post(`${environment.URLBASE}/usuarios/insertarUsuario`,usuario)
   };
 
-  eliminarUsuario(usuario: Usuario)
+  eliminarUsuario(usuario: IUsuario)
   {
 
   };
 
-  getUsuarios() : Observable<Usuario[]>
+  addUsuario(usuario:IUsuario):Observable<String>{
+    const requestOptions:Object = {
+      responseType:'text'
+    }
+    return this.http.post<String>(`${environment.URLBASE}/usuarios/add`,usuario,requestOptions)
+  }
+
+  updateUsuario(usuario:IUsuario): Observable<any>
   {
-    return this.http.get<Usuario[]>(`${environment.URLBASE}/usuarios/dametodos`)
+    const requestOptions:Object = {
+      responseType:'text'
+    }
+    return this.http.put<any>(`${environment.URLBASE}/usuarios/update`,usuario,requestOptions)
+  }
+
+  getUsuarios() : Observable<IUsuario[]>
+  {
+    return this.http.get<IUsuario[]>(`${environment.URLBASE}/usuarios/dametodos`)
   }
 }

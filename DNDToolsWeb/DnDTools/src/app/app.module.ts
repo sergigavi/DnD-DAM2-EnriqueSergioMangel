@@ -18,18 +18,21 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
 import { MatSelectModule } from '@angular/material/select';
 
-import { CookieService } from 'ngx-cookie-service';
+//import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
 import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 
 import { DialogCrearEquipo } from './component/admin/equipamiento/DialogCrearEquipo';
+import { DialogCrearUsuario } from './component/admin/usuarios/dialogCrearUsuarios';
 import { HomeComponent } from './component/home/home.component';
 import { DialogEditarEquipo, DialogVerEquipo, EquipamientoComponent } from './component/admin/equipamiento/equipamiento.component';
 import { PanelControlComponent } from './component/admin/panelControl/panelControl.component';
@@ -43,19 +46,20 @@ import { HistoriaGMComponent } from './component/usuario/historia/gameMaster/his
 import { HistoriaJugadorComponent } from './component/usuario/historia/jugador/historiaJugador.component';
 import { Dialog2HeroesGM, DialogHeroesGM, HeroesGMComponent } from './component/usuario/heroes/gameMaster/heroresGM.component';
 import { Dialog2HeroesJugador, DialogHeroesJugador, HeroesJugadorComponent } from './component/usuario/heroes/jugador/heroesJugador.component';
-import { Dialog2NpcGM, DialogNpcGM, NpcGMComponent } from './component/usuario/npc/gameMaster/npcGM.component';
-import { DialogNpcJugador, NpcJugadorComponent } from './component/usuario/npc/jugador/npcJugador.component';
-import { MenuUsuarioJugadorComponent } from './component/plantillas/menuUsuarioJugador/menuUsuarioJugador.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PerfilComponent } from './component/perfil/perfil.component';
 import { LPloginComponent } from './component/login/lplogin/lplogin.component';
 import { EnumCatEquipo } from 'src/modelo/EnumCatEquipo';
 import { DialogCrearFicha, DialogEditarFicha, DialogVerFicha, FichasAdmin } from './component/admin/fichas/fichasAdmin.component';
 
+
+
+
 const routes: Routes = [
   //invitados
-  {path:'',component: HomeComponent},
+  {path:'',component: LPloginComponent},
   //ambos
+  {path:'inicio',component: HomeComponent},
   {path:'usuario-partidasUsuario',component: PartidasUsuarioComponent},
   //admins
   {path:'fichas-admin',component: FichasAdmin},
@@ -72,8 +76,6 @@ const routes: Routes = [
   {path:'usuario-historiaGM',component: HistoriaGMComponent},
   {path:'usuario-heroesJugador',component: HeroesJugadorComponent},
   {path:'usuario-heroesGM',component: HeroesGMComponent},
-  {path:'usuario-npcJugador',component: NpcJugadorComponent},
-  {path:'usuario-npcGM',component: NpcGMComponent},
   //perfil
   {path:'perfil',component: PerfilComponent},
 
@@ -100,20 +102,14 @@ const routes: Routes = [
     HistoriaJugadorComponent,
     HeroesJugadorComponent,
     HeroesGMComponent,
-    NpcJugadorComponent,
-    NpcGMComponent,
-    MenuUsuarioJugadorComponent,
     PerfilComponent,
     DialogMapasJugador,
     DialogMapasGM,
     DialogMapasGM2,
     DialogHeroesJugador,
     Dialog2HeroesJugador,
-    DialogNpcJugador,
     DialogHeroesGM,
     Dialog2HeroesGM,
-    DialogNpcGM,
-    Dialog2NpcGM,
     DialogUsuarios,
     Dialog2Usuarios,
     DialogCrearEquipo,
@@ -124,6 +120,7 @@ const routes: Routes = [
     DialogCrearFicha,
     DialogVerFicha,
     DialogEditarFicha
+    DialogCrearUsuario
   ],
   imports: [
     BrowserModule,
@@ -148,11 +145,12 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatGridListModule,
     MatExpansionModule,
-    MatCheckboxModule,
-
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule
   ],
   entryComponents: [UsuarioFormComponent],
-  providers: [CookieService],
+  providers: [MatDatepickerModule,/*CookieService*/],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

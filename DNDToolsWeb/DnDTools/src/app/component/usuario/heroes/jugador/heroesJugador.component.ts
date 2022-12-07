@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild, EventEmitter, Output} from '@angular/core'
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   nombreHeroes: string;
@@ -43,7 +44,11 @@ export class HeroesJugadorComponent implements OnInit  {
   displayedColumns: string[] = ['nombreHeroes','acceder'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
-  constructor(public dialog: MatDialog){}
+  constructor(public dialog: MatDialog,private router:Router){}
+
+  public navegar(ruta:String){
+    this.router.navigate([`${ruta}`])
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogHeroesJugador);

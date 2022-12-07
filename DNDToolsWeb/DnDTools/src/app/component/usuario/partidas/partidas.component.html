@@ -2,21 +2,18 @@
   <mat-drawer #drawer class="example-sidenav" mode="side">
       <!--SideBar-->
       <div>
-        <ul class="nav justify-content-center controlUl">
-          <li class="nav-item controlNavbar">
-            <h1 class="h1control"></h1>
+        <ul class="ulSlide">
+          <li class="nav-item">
+            <button mat-flat-button color="accent" (click)="navegar('')"><mat-icon fontIcon="home" class=""></mat-icon>Inicio</button>
           </li>
-          <li class="nav-item controlNavbar">
-            <a class="nav-link" href="">Inicio</a>
+          <li class="nav-item">
+            <button mat-flat-button color="accent" (click)="navegar('#')">Mas Información</button>
           </li>
-          <li class="nav-item controlNavbar">
-            <a class="nav-link" href="#">Mas Información</a>
+          <li class="nav-item">
+            <button mat-flat-button color="accent" (click)="navegar('#')">Mas sobre nosotros</button>
           </li>
-          <li class="nav-item controlNavbar">
-            <a class="nav-link" href="#">Mas sobre nosotros</a>
-          </li>
-          <li class="nav-item controlNavbar">
-            <a class="nav-link" href="#">Contactanos</a>
+          <li class="nav-item">
+            <button mat-flat-button color="accent" (click)="navegar('#')">Contactanos</button>
           </li>
       </ul>
       </div>
@@ -37,11 +34,13 @@
           <a href="perfil">
             <button mat-menu-item>Perfil</button>
           </a>
-          <button mat-menu-item>Cerrar Sesion</button>
+          <a href="">
+            <button mat-menu-item>Cerrar Sesion</button>
+          </a>
         </mat-menu>
       </mat-toolbar>
   </div>
-  
+
   <!--Tabla-->
   <div>
     <table class="default">

@@ -44,6 +44,38 @@ public class UsuarioServicio implements IUsuarioServicio{
 		return usuarioDAO.existsById(idUser);
 	}
 
+	@Override
+	public List<Usuario> getAll() {
+		return usuarioDAO.findAll();
+	}
+
+	@Override
+	public Optional<Usuario> editarUsuario(Usuario usuario) {
+		Optional<Usuario> us = Optional.empty();
+		if(usuarioDAO.existsById(usuario.getIdUserString())){
+			List<Usuario> usuarios=usuarioDAO.findAll();
+
+			Usuario e = usuarioDAO.findById(usuario.getIdUserString()).get();
+                e.setNombre(usuario.getNombre());
+                e.setApellidos(e.getApellidos());
+                e.setContrasenia(e.getContrasenia());
+                e.setNickname(e.getNickname());
+                e.setBiografia(e.getBiografia());
+                e.setEmail(usuario.getEmail());
+                e.setFechaNacimiento(e.getFechaNacimiento());
+                e.setUrlImage(e.getUrlImage());
+                e.setActivo(e.isActivo());
+                e.setPais(e.getPais());
+                
+            usuarioDAO.save(e);
+			//Esta linea es redundante, pero con ella sacamos el objeto acualizado de la base de datos
+			//por si queremos hacer algo con el
+			us=usuarioDAO.findById(e.getIdUserString());
+			return us;
+		}
+		return us;
+	}
+
     @Override
     public boolean cambiarContrasenia(String idUser, String contrasenia){
         boolean exito=false;

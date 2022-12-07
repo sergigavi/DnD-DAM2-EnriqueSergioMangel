@@ -27,4 +27,8 @@ public interface IUsuarioServicio {
 	public boolean existsByNickname(String nickname);
 
 	public Optional<Usuario> findUsuarioByNickname(String nickname);
+
+    public Optional<Usuario> editarUsuario(Usuario usuario);
+
+    public List<Usuario> getAll();
 }
