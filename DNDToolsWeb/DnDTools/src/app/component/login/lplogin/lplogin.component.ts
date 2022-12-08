@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from 'src/app/services/login-service/login.service';
+import { Router } from '@angular/router';
 import { IUsuario } from 'src/modelo/IUsuario';
 
 @Component({
@@ -14,7 +15,7 @@ export class LPloginComponent {
   nickname: string;
   contrasenia: string;
 
-  constructor(private loginService: LoginService)
+  constructor(private loginService: LoginService,private router: Router)
   {
     this.nickname = "";
     this.contrasenia = "";
@@ -38,6 +39,9 @@ export class LPloginComponent {
     //this.loginService.trylogin()
   }
 
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
+  }
 
 
 }

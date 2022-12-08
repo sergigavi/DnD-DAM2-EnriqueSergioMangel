@@ -58,6 +58,9 @@ import { RegisterComponent } from './component/register/register/register.compon
 const routes: Routes = [
   //invitados
   {path:'',component: LPloginComponent},
+
+  //registro
+  {path:'registro',component: RegisterComponent},
   //ambos
   {path:'inicio',component: HomeComponent},
   {path:'usuario-partidasUsuario',component: PartidasUsuarioComponent},
