@@ -44,6 +44,9 @@
   <div class="mat-button">
     <button mat-raised-button color="accent" (click)="crearEquipo()">Crear Equipamiento</button>
   </div>
+  <div class="mat-button">
+    <button mat-flat-button color="accent" (click)="onDeleteAll()">Borrar todos</button>
+  </div>
   <div class="mat-filter">
     <mat-form-field>
       <mat-label>Filtro</mat-label>
@@ -81,10 +84,6 @@
       </tr>
     </table>
     <mat-paginator #paginator  [pageSizeOptions]=[4,8,16] showFirstLastButtons></mat-paginator>
-
-    <div class="mat-button">
-    <button mat-flat-button color="accent" (click)="onDeleteAll()">Borrar todos</button>
-    </div>
   </div>
 </mat-drawer-container>
 

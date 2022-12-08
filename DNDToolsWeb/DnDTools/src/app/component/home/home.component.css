@@ -5,14 +5,14 @@ table {
 .ulSlide{
 
   position: absolute;
-  margin: 10%;
+  padding: 5%;
 }
 
 .ulSlide button{
 
   width: 100%;
-  margin: 5%;
-  scale: 115%;
+  margin-bottom: 5px;
+  scale: 100%;
 }
 .mat-filter{
   width: 100%;

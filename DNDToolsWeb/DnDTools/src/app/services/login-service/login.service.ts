@@ -42,6 +42,8 @@ export class LoginService {
       console.log(data);
       if (data != null){
         this.router.navigate(['/'])
+      }else{
+        this.router.navigate(['inicio'])
       }
 
 

@@ -81,7 +81,7 @@ public class UsuarioController {
         ObjectId id = ObjectId.get();
         String idString = id.toString();
 
-        Usuario us= usuario.builder()
+        Usuario us= Usuario.builder()
             .idUser(id)
             .idUserString(idString)
             .nombre(usuario.getNombre())

@@ -119,7 +119,7 @@ const routes: Routes = [
     FichasAdmin,
     DialogCrearFicha,
     DialogVerFicha,
-    DialogEditarFicha
+    DialogEditarFicha,
     DialogCrearUsuario
   ],
   imports: [

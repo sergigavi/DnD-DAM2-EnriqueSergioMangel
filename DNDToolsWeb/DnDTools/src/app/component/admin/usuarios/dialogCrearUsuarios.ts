@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
-UsuariosComponent
 import {  NgForm } from '@angular/forms';
 import { UsuariosComponent } from "./usuarios.component";
 import { IUsuario } from "src/modelo/IUsuario";
