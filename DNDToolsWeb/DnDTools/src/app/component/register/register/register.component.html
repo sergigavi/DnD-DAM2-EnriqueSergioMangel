@@ -1,0 +1,87 @@
+<div class="register">
+  <form class="custom-form" method="post">
+
+    <p>
+      <img src="https://media.discordapp.net/attachments/817124115596443709/1050142083488428082/dndlogo.png?width=654&height=663" alt="">
+    </p>
+
+    <h1>Register</h1>
+
+    <input
+      type="text"
+      [(ngModel)]="nombre"
+      name="nombre"
+      placeholder="Nombre"
+      required="required"
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="apellidos"
+      name="apellidos"
+      placeholder="Apellidos"
+      required="required"
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="nickname"
+      name="nickname"
+      placeholder="Nickname"
+      required="required"
+    />
+
+    <input
+    type="password"
+    [(ngModel)]="contrasenia"
+    name="contrasenia"
+    placeholder="Contraseña"
+    required="required"
+    />
+    <input
+      type="password"
+      [(ngModel)]="contrasenia"
+      name="contrasenia2"
+      placeholder="Repetir contraseña"
+      required="required"
+    />
+
+    <input
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Email"
+      required="required"
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="biografia"
+      name="biografia"
+      placeholder="Biografía"
+    />
+
+    <input
+      type="date"
+      [(ngModel)]="fechaNacimiento"
+      name="fechaNacimiento"
+      placeholder="Fecha de nacimiento"
+    />
+
+    <input
+      type="url"
+      [(ngModel)]="urlImage"
+      name="urlImage"
+      placeholder="Enlace imagen"
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="pais"
+      name="pais"
+      placeholder="Pais"
+    />
+
+    <button type="submit" (click)="tryRegister()">Register</button>
+  </form>
+</div>
