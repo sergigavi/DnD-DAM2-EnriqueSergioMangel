@@ -129,7 +129,7 @@ export class Dialog2Usuarios {
 
   constructor(
     public dialogRef: MatDialogRef<UsuariosComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UsuariosComponent,private usuarioService: UsuarioServiceService) {}
+    @Inject(MAT_DIALOG_DATA) public data: UsuariosComponent,private usuarioServicio: UsuarioServiceService) {}
 
   usuarioData!:IUsuario
 
@@ -138,7 +138,7 @@ export class Dialog2Usuarios {
     this.usuarioData.idUser=this.usuario.idUser
     this.usuarioData.idUserString=this.usuario.idUserString
     console.log(this.usuarioData)
-    this.usuarioService.updateUsuario(this.usuarioData).subscribe((data:any)=>{
+    this.usuarioServicio.updateUsuario(this.usuarioData).subscribe((data:any)=>{
       this.dialogRef.close()
     })
   }
@@ -151,5 +151,13 @@ export class Dialog2Usuarios {
 
   onNoClick(){
     this.dialogRef.close()
+  }
+
+  onDelete(){
+    if(confirm("¿Borrar este usuario?")){
+      this.usuarioServicio.deleteUsuarioById(this.usuarioData.idUserString).subscribe((data:any)=>{
+        this.dialogRef.close()
+      })
+    }
   }
 }

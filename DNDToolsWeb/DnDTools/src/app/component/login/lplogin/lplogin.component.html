@@ -1,8 +1,9 @@
 <div class="login">
   <form class="custom-form" method="post">
-    <p>
+    <div style="padding: 10px;">
       <img src="https://media.discordapp.net/attachments/817124115596443709/1050142083488428082/dndlogo.png?width=654&height=663" alt="">
-    </p>
+      <h1 style="font-size:60px; text-align:center; padding-right: 5%; padding-top: 1%; padding-bottom: 1%;"><b>D&DTools</b></h1>
+    </div>
     <h1>Login</h1>
     <input
       type="nickname"
@@ -20,6 +21,8 @@
       required="required"
     />
     <button type="submit" (click)="trylogin()">Entrar</button>
+    <br>
+    <button type="button" (click)="goToPage('registro')">Registrarse</button>
   </form>
 
   <div id="mensajelogin" class="mensajelogin">

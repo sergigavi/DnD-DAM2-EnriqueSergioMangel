@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/services/register-service/register.service';
 import { IUsuario } from 'src/modelo/IUsuario';
 
@@ -23,7 +24,7 @@ export class RegisterComponent {
   activo:boolean;
   pais:String;
 
-  constructor(private registerService: RegisterService)
+  constructor(private registerService: RegisterService,private router: Router)
   {
     this.nombre = "";
     this.apellidos= "";
@@ -62,6 +63,10 @@ export class RegisterComponent {
 
   ngOnInit(){
 
+  }
+
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
   }
 
 }

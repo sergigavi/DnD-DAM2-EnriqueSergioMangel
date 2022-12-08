@@ -114,23 +114,17 @@ public class UsuarioController {
         return res;
     }
 
-	@DeleteMapping("/deleteById")
-	public ResponseEntity<Usuario> deleteById(@RequestParam String id)
-	{
-		Usuario u;
-		
-		ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		
-		if(usuarioServicio.existeUsuario(id))
-		{
-			u = usuarioServicio.findUsuarioById(id).get();
-			usuarioServicio.eliminarUsuario(id);
-			res = new ResponseEntity<Usuario>(u,HttpStatus.ACCEPTED);
-		}
-		
-		return res;
-		
-	}
+	@DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUsuarioById(@PathVariable String id){
+
+        ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        if(usuarioServicio.eliminarUsuario(id)){
+            return new ResponseEntity<String>("Exito",HttpStatus.OK);
+        }else{
+            return res;
+        }
+    }
 
 	@PutMapping("/update")
     public ResponseEntity<String> actualizarUsuario(@RequestBody Usuario usuario){
