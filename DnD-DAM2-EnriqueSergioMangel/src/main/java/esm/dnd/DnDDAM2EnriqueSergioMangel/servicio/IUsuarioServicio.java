@@ -31,4 +31,6 @@ public interface IUsuarioServicio {
     public Optional<Usuario> editarUsuario(Usuario usuario);
 
     public List<Usuario> getAll();
+
+    public long getCantidad();
 }

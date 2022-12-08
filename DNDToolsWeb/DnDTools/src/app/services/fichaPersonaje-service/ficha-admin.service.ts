@@ -49,4 +49,8 @@ export class FichaAdminService {
     }
     return this.http.delete<String>(`${environment.URLBASE}/personajes/deleteAll`,requestOptions)
   }
+
+  getCantidad(): Observable<any>{
+    return this.http.get<any>(`${environment.URLBASE}/personajes/cantidad`)
+  }
 }

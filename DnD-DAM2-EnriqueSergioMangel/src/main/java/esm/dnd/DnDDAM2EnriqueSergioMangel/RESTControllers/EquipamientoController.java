@@ -93,6 +93,20 @@ public class EquipamientoController {
         }
     }
 
+    @GetMapping("/cantidad")
+    public ResponseEntity<Long> getCantidad(){
+        
+        ResponseEntity<Long> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        long cantidad= equipamientoServicio.getCantidad();
+
+        if(cantidad==0){
+            return res;
+        }else{
+            return new ResponseEntity<Long>(cantidad,HttpStatus.OK);
+        }
+    }
+
     @PutMapping("/update")
     public ResponseEntity<String> updateEquipamiento(@RequestBody Equipamiento equipamiento){
         ResponseEntity<String> res = new ResponseEntity<String>("Fallo al actualizar la ficha",HttpStatus.OK);

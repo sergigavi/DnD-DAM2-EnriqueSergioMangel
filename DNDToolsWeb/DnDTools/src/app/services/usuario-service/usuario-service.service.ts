@@ -52,6 +52,10 @@ export class UsuarioServiceService {
     return this.http.delete<String>(`${environment.URLBASE}/usuarios/delete/${id}`,requestOptions);
   }
 
+  getCantidad(): Observable<any>{
+    return this.http.get<any>(`${environment.URLBASE}/usuarios/cantidad`)
+  }
+
   getUsuarios() : Observable<IUsuario[]>
   {
     return this.http.get<IUsuario[]>(`${environment.URLBASE}/usuarios/dametodos`)

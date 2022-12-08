@@ -39,4 +39,48 @@
       </mat-menu>
     </mat-toolbar>
   </div>
+  <div class="contenidoPanelControl">
+    <div>
+      En la <b>aplicación web</b> actualmente tenemos datos de:
+      <br>
+      <br>
+      <b>Usuarios: </b>{{usuario}} en total
+      <br>
+      <b>Fichas de personajes: </b>{{fichas}} en total
+      <br>
+      <b>Equipamientos: </b>{{equipamiento}} en total
+
+    </div>
+    <mat-grid-list cols="1" rowHeight="50px">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button style="font-size: 100%; margin-left: 1%; float: right;"mat-flat-button color="primary">Usuarios</button>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="2">
+        En la pestaña de usuarios obtendremos información de los usuarios y una serie de datos básico, los cuales podremos modificar o en caso de ser necesario borrar
+        dicho usuario, estos usuarios no son personajes sino la propia cuenta para acceder a la página. Todos los usuarios que se creen desde esta opción únicamente podrán
+        ser usuarios, no hay opción de crear un administrador desde la propia pagina web.
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button style="font-size: 100%; margin-left: 1%; float: right;"mat-flat-button color="primary">Ficha de personaje</button>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="2">
+        En la pestaña de ficha de personajes podremos ver todos los personajes que se han creado independientemente de la partida a la que pertenezcan, podremos tanto crear
+        una fecha de personaje a la cual ir añadiendo sus diferentes valores antes de subirla a la base de datos o crear una a vacío para luego poder editarla, existe también
+        la opción de simplemente ver los datos de la misma, en caso de no querer un personaje o ficha de personaje tenemos la opción de borrar dicha ficha si accedemos a la opción
+        editar, también se nos permite borrar todos los datos si así se requiere.
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button style="font-size: 100%; margin-left: 1%; float: right;"mat-flat-button color="primary">Equipamiento</button>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="2">
+        En la pestaña de equipamiento al igual que en la anteriores dispondremos de la opción de crear nuestros propios equipamientos o items para las partidas a los cuales
+        se les podrá asignar desde el tipo, el daño o el precio que cuesta en las tiendas, a su vez en caso de que no hallamos equivocado y queramos editarlo o eliminar en el
+        botón de editar podremos realizar estas dos opciones.
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        A su vez  en todas las pestañas dispondremos de un filtro para buscar los datos deseados y paginación para ver una cantidad especifica en pantalla.
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
 </mat-drawer-container>

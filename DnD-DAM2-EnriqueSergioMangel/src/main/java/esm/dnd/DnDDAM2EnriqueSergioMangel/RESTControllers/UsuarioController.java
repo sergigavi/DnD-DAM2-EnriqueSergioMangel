@@ -272,6 +272,20 @@ public class UsuarioController {
     	return res;
     }
 
+	@GetMapping("/cantidad")
+    public ResponseEntity<Long> getCantidad(){
+        
+        ResponseEntity<Long> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        long cantidad= usuarioServicio.getCantidad();
+
+        if(cantidad==0){
+            return res;
+        }else{
+            return new ResponseEntity<Long>(cantidad,HttpStatus.OK);
+        }
+    }
+
 	@GetMapping("/getAll")
     public ResponseEntity<List<Usuario>> getAll(){
         

@@ -41,4 +41,8 @@ export class EquipamientoAdminService {
   deleteAllEquipo():Observable<boolean>{
     return this.http.delete<any>(`${environment.URLBASE}/equipamiento/deleteAll`)
   }
+
+  getCantidad():Observable<any>{
+    return this.http.get<any>(`${environment.URLBASE}/equipamiento/cantidad`)
+  }
 }

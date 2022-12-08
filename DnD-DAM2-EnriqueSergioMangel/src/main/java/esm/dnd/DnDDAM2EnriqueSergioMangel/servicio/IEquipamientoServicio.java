@@ -18,4 +18,5 @@ public interface IEquipamientoServicio {
 	public List<Equipamiento> findAll();
 	public boolean insertarEquipamientos(List<Equipamiento> equipamientos);
 	public boolean deleteAll();
+	public long getCantidad();
 }

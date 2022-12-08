@@ -22,4 +22,7 @@ export class HomeComponent implements OnInit  {
     this.router.navigate([`${ruta}`])
   }
 
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
+  }
 }
