@@ -278,7 +278,7 @@
 
         <mat-action-row>
           <button mat-button color="warn" type="button" (click)="previousStep()">Previous</button>
-          <button mat-button color="primary" [disabled]="fichaForm.invalid">Finish</button>
+          <button mat-button color="primary" [disabled]="fichaForm.invalid || numberControlFue.invalid || numberControlDes.invalid || numberControlCon.invalid || numberControlInt.invalid || numberControlSab.invalid || numberControlCar.invalid">Finish</button>
         </mat-action-row>
 
 
