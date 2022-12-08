@@ -20,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
@@ -56,32 +57,39 @@ import { RegisterComponent } from './component/register/register/register.compon
 
 
 const routes: Routes = [
-  //invitados
-  {path:'',component: LPloginComponent},
-  //ambos
-  {path:'inicio',component: HomeComponent},
-  {path:'usuario-partidasUsuario',component: PartidasUsuarioComponent},
+  //landing page
+  {path:'',component: HomeComponent},
+
+  //login register
+  {path:'login',component: LPloginComponent},
+  {path:'register',component: RegisterComponent},
+
+  //Inicio de sesion como admin->
+  {path:'panelControl-admin',component: PanelControlComponent},
+
   //admins
   {path:'fichas-admin',component: FichasAdmin},
   {path:'equipamiento-admin',component: EquipamientoComponent},
-  {path:'panelControl-admin',component: PanelControlComponent},
   {path:'usuarios-admin',component: UsuariosComponent},
-  //usuarios
 
+  //Inicio de  sesion como usuario->
+  {path:'inicio',component: PartidasUsuarioComponent},
+
+  //vistas de un usuario en una partida como jugador
   {path:'usuario-inicioJugador',component:InicioJugadorComponent},
-  {path:'usuario-inicioGM',component: InicioGMComponent},
   {path:'usuario-mapasJugador',component: MapasJugadorComponent},
-  {path:'usuario-mapasGM',component: MapasGMComponent},
   {path:'usuario-historiaJugador',component: HistoriaJugadorComponent},
-  {path:'usuario-historiaGM',component: HistoriaGMComponent},
   {path:'usuario-heroesJugador',component: HeroesJugadorComponent},
+
+  //vistas de un usuario en una partida como GM
+  {path:'usuario-inicioGM',component: InicioGMComponent},
+  {path:'usuario-mapasGM',component: MapasGMComponent},
+  {path:'usuario-historiaGM',component: HistoriaGMComponent},
   {path:'usuario-heroesGM',component: HeroesGMComponent},
+
+
   //perfil
   {path:'perfil',component: PerfilComponent},
-
-  //landing page, login register
-  {path:'login',component: LPloginComponent},
-  {path:'register',component: RegisterComponent},
 
 ];
 

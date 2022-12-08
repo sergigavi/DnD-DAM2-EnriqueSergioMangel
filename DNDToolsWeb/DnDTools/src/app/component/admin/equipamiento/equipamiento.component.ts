@@ -25,7 +25,6 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
   opened = false;
   equipo!:IEquipo
 
-  //data nombrado aqui
   columnas:String[] = ["nombre","tipo","categoria","acceder","editar"]
 
 
@@ -173,7 +172,7 @@ export class DialogEditarEquipo{
       this.equipamiento=this.equipo
       this.modificador=this.equipamiento.modificador.toString()
     }
-    
+
     onNoClick(){
       this.dialogRef.close()
     }

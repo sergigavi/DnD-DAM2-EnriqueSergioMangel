@@ -91,32 +91,50 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 		Optional<Equipamiento> eq = Optional.empty();
 		if(equipamientoDAO.existsById(equipamiento.getIdString())){
 			List<FichaPersonaje> personajes=fichaPersonajeDAO.findAll();
+			List<Partida> partidas=partidaDAO.findAll();
+			Equipamiento equipoAntiguo = equipamientoDAO.findById(equipamiento.getIdString()).get();
+			Equipamiento equipoNuevo = new Equipamiento();
 
-			//comentado hasta hacer la vista de los personajes correctamente
+			equipoNuevo.setIdEquipo(equipoAntiguo.getIdEquipo());
+			equipoNuevo.setIdString(equipoAntiguo.getIdString());
+			equipoNuevo.setNombre(equipamiento.getNombre());
+			equipoNuevo.setDanio(equipamiento.getDanio());
+			equipoNuevo.setAlcance(equipamiento.getAlcance());
+			equipoNuevo.setCategoria(equipamiento.getCategoria());
+			equipoNuevo.setDescripcion(equipamiento.getDescripcion());
+			equipoNuevo.setModificador(equipamiento.getModificador());
+			equipoNuevo.setPeso(equipamiento.getPeso());
+			equipoNuevo.setPropiedad(equipamiento.getPropiedad());
+			equipoNuevo.setTipo(equipamiento.getTipo());
+
 			if(!personajes.isEmpty()){
 				personajes.stream()
-					.flatMap(p->p.getInventario().stream()).forEach(e->{
-						if(e.getIdEquipo().equals(equipamiento.getIdEquipo())){
-							e=equipamiento;
-						}
+					.map(p->p.getInventario())
+					.filter(i->!i.isEmpty())
+					.filter(i->i.contains(equipoAntiguo))
+					.forEach(i->{
+						i.remove(equipoAntiguo);
+						i.add(equipoNuevo);
 					});
 				fichaPersonajeDAO.saveAll(personajes);
 			}
-			
-			Equipamiento e = equipamientoDAO.findById(equipamiento.getIdString()).get();
-			e.setNombre(equipamiento.getNombre());
-			e.setDanio(equipamiento.getDanio());
-			e.setAlcance(equipamiento.getAlcance());
-			e.setCategoria(equipamiento.getCategoria());
-			e.setDescripcion(equipamiento.getDescripcion());
-			e.setModificador(equipamiento.getModificador());
-			e.setPeso(equipamiento.getPeso());
-			e.setPropiedad(equipamiento.getPropiedad());
-			e.setTipo(equipamiento.getTipo());
-			equipamientoDAO.save(e);
+			if(!partidas.isEmpty()){
+				partidas.stream()
+					.flatMap(p->p.getFichasPartida().stream())
+					.map(f->f.getInventario())
+					.filter(i->!i.isEmpty())
+					.filter(i->i.contains(equipoAntiguo))
+					.forEach(i->{
+						i.remove(equipoAntiguo);
+						i.add(equipoNuevo);
+					});
+				partidaDAO.saveAll(partidas);
+			}
+
+			equipamientoDAO.save(equipoNuevo);
 			//Esta linea es redundante, pero con ella sacamos el objeto acualizado de la base de datos
 			//por si queremos hacer algo con el
-			eq=equipamientoDAO.findById(e.getIdString());
+			eq=equipamientoDAO.findById(equipoNuevo.getIdString());
 			return eq;
 		}
 		return eq;
