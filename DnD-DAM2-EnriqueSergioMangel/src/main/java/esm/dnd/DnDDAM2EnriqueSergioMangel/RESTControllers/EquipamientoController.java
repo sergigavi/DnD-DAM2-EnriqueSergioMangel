@@ -86,7 +86,7 @@ public class EquipamientoController {
 
         ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        if(equipamientoServicio.eliminarEquipamientoTemp(id)){
+        if(equipamientoServicio.eliminarEquipamiento(id)){
             return new ResponseEntity<String>("Exito",HttpStatus.OK);
         }else{
             return res;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RegisterService } from 'src/app/services/register-service/register.service';
-import { Usuario } from 'src/app/services/usuario-service/usuario-service.service';
+import { IUsuario } from 'src/modelo/IUsuario';
 
 
 @Component({
@@ -12,16 +12,16 @@ import { Usuario } from 'src/app/services/usuario-service/usuario-service.servic
 })
 export class RegisterComponent {
 
-  nombre?:String;
-  apellidos?:String;
-  contrasenia?:any;
-  nickname?:any;
-  biografia?:String;
-  email?:String;
-  fechaNacimiento?:String;
-  urlImage?:String;
-  activo?:boolean;
-  pais?:String;
+  nombre:String;
+  apellidos:String;
+  contrasenia:any;
+  nickname:any;
+  biografia:String;
+  email:String;
+  fechaNacimiento:String;
+  urlImage:String;
+  activo:boolean;
+  pais:String;
 
   constructor(private registerService: RegisterService)
   {
@@ -40,7 +40,9 @@ export class RegisterComponent {
   tryRegister()
   {
 
-    const usuario :Usuario = {
+    const usuario :IUsuario = {
+      idUser:null,
+      idUserString:"",
       nombre:this.nombre,
       apellidos:this.apellidos,
       nickname:this.nickname,

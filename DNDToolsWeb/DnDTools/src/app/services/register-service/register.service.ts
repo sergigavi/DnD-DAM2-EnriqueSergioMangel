@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../usuario-service/usuario-service.service';
+import { IUsuario } from 'src/modelo/IUsuario';
 
 
 @Injectable({
@@ -14,7 +14,7 @@ export class RegisterService {
 
   }
 
-  register(usuario:Usuario){
+  register(usuario:IUsuario){
 
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
