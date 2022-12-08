@@ -1,6 +1,7 @@
 <h2 style="text-align: center;" mat-dialog-title>Usuario</h2>
 <mat-dialog-content class="mat-typography">
   <form #infoForm="ngForm" (ngSubmit)="onSubmit(infoForm)">
+    <button mat-flat-button color="accent" type="button" (click)="onDelete()">Borrar</button>
     <mat-form-field class="example-full-width formField">
       <mat-label>Nombre Cuenta</mat-label>
       <input [(ngModel)]="usuario.nombre" name="nombre" matInput matInput value={{usuario.nombre}} placeholder="Nombre Cuenta">
