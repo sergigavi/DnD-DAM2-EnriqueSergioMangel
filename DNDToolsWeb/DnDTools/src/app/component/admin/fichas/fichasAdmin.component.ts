@@ -470,6 +470,7 @@ export class DialogCrearFicha{
     this.ficha.inventario=this.equipamientoLista
     this.ficha.usuario=Object
 
+    console.log(this.ficha)
     this.fichaServicio.addFicha(this.ficha).subscribe((data:any)=>{
       this.dialogRef.close()
     })

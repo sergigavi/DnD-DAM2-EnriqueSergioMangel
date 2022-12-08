@@ -142,7 +142,7 @@ public class FichaPersonaje {
 		this.notasAdd="";
 		this.defectos="";
 		this.rasgosPersonalidad="";
-		this.inventario=null;
+		this.inventario= new ArrayList<Equipamiento>();
 	}
 	
 	public FichaPersonaje(FichaPersonaje ficha){

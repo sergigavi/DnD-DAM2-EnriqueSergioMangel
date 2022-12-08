@@ -168,6 +168,7 @@ public class FichaPersonajeController {
         ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         FichaPersonaje f=new FichaPersonaje();
 
+
         if(fichaPersonajeServicio.existsByIdFichaPersonaje(ficha.getIdFichaPersonajeString())){
             return res;
         }

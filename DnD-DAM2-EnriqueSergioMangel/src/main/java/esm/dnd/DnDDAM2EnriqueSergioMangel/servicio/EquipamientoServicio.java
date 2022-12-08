@@ -33,6 +33,8 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 			if(!personajes.isEmpty()){
 					personajes.stream()
 					.map(p->p.getInventario())
+					.filter(i->!i.isEmpty())
+					.filter(i->i.contains(e))
 					.forEach(i->i.remove(e));
 				fichaPersonajeDAO.saveAll(personajes);
 			}
@@ -40,6 +42,8 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 				partidas.stream()
 					.flatMap(p->p.getFichasPartida().stream())
 					.map(f->f.getInventario())
+					.filter(i->!i.isEmpty())
+					.filter(i->i.contains(e))
 					.forEach(i->i.remove(e));
 				partidaDAO.saveAll(partidas);
 			}
