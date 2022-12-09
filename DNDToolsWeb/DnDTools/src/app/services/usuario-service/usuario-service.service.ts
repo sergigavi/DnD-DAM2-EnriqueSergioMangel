@@ -56,4 +56,8 @@ export class UsuarioServiceService {
   {
     return this.http.get<IUsuario[]>(`${environment.URLBASE}/usuarios/dametodos`)
   }
+
+  getUsuario(id:String):Observable<IUsuario>{
+    return this.http.get<IUsuario>(`${environment.URLBASE}/usuarios/findById/${id}`);
+  }
 }

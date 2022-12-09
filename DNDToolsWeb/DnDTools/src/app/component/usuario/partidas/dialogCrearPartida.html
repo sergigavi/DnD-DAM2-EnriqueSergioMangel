@@ -1,0 +1,10 @@
+<div>
+    <form #partidaForm="ngForm" (ngSubmit)="onSubmit(partidaForm)">
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre de la partida</mat-label>
+            <input ngModel name="nombre" matInput required>
+        </mat-form-field>
+        <button mat-raised-button color="accent" [disabled]="partidaForm.invalid">Enviar</button>
+        <button type="button" (click)="onNoClick()" mat-raised-button color="warn">Cerrar</button>
+    </form>
+</div>

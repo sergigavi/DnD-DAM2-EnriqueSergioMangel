@@ -39,6 +39,24 @@ public class UsuarioController {
 	@Autowired
     private IFichaPersonajeServicio fichaPersonajeServicio;
     
+	@GetMapping("/findById/{id}")
+	public ResponseEntity<Usuario> findUsuarioById(@PathVariable String id){
+
+		ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		try {
+			if(usuarioServicio.existeUsuario(id)){
+				Usuario u = usuarioServicio.findUsuarioById(id).get();
+				res = new ResponseEntity<Usuario>(u,HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+
+	}
+
+
     @GetMapping("/dametodos")
     public ResponseEntity<List<Usuario>> obtenerTodosLosUsuarios()
     {

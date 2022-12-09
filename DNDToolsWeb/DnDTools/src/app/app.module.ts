@@ -38,7 +38,7 @@ import { HomeComponent } from './component/home/home.component';
 import { DialogEditarEquipo, DialogVerEquipo, EquipamientoComponent } from './component/admin/equipamiento/equipamiento.component';
 import { PanelControlComponent } from './component/admin/panelControl/panelControl.component';
 import { Dialog2Usuarios, DialogUsuarios, UsuariosComponent } from './component/admin/usuarios/usuarios.component';
-import { PartidasUsuarioComponent } from './component/usuario/partidas/partidas.component';
+import { DialogCrearPartida, PartidasUsuarioComponent } from './component/usuario/partidas/partidas.component';
 import { InicioGMComponent } from './component/usuario/inicio/gameMaster/inicioGM.component';
 import { InicioJugadorComponent } from './component/usuario/inicio/jugador/inicioJugador.component';
 import { DialogMapasGM, DialogMapasGM2, MapasGMComponent } from './component/usuario/mapas/gameMaster/mapasGM.component';
@@ -130,7 +130,8 @@ const routes: Routes = [
     DialogVerFicha,
     DialogEditarFicha,
     DialogCrearUsuario,
-    RegisterComponent
+    RegisterComponent,
+    DialogCrearPartida
 
   ],
   imports: [

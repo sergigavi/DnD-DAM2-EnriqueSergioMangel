@@ -3,14 +3,21 @@ import { Injectable } from '@angular/core';
 import { LPloginComponent } from 'src/app/component/login/lplogin/lplogin.component';
 import { IUsuario } from 'src/modelo/IUsuario';
 import {Router} from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { AuthServiceService } from '../auth-user/auth-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient, private router:Router)
+
+  constructor(private http: HttpClient, private router:Router,private auth:AuthServiceService)
   {
+
+  }
+
+  getCurrentUser(){
 
   }
 
@@ -38,9 +45,10 @@ export class LoginService {
     //debugger;
     //hago la llamada a la api
     return this.http.post('http://127.0.0.1:5189/api/dndtools/usuarios/trylogin', usuario, {headers:headers, responseType:'json', withCredentials:false})
-    .subscribe(data => {  //data es la respuesta que me devuelve la api
-      console.log(data);
+    .subscribe((data:any) => {  //data es la respuesta que me devuelve la api
       if (data != null){
+        var id = data.idUserString
+        this.auth.sendData(id)
         this.router.navigate(['/'])
       }else{
         this.router.navigate(['inicio'])
