@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthServiceService {
 
-  private signedInUser = new BehaviorSubject<String>("");
+  private signedInUser = new BehaviorSubject<String>("vacio");
   data = this.signedInUser.asObservable()
 
   constructor() { }
@@ -15,6 +15,6 @@ export class AuthServiceService {
     this.signedInUser.next(data)
   }
   deleteData(){
-    this.signedInUser.next("")
+    this.signedInUser.next("vacio")
   }
 }

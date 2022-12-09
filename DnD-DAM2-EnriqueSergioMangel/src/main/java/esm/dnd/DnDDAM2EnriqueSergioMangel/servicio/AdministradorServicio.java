@@ -66,6 +66,14 @@ public class AdministradorServicio implements IAdministradorServicio{
 	public Optional<Administrador> findAdminByID(String id) {
 		return administradorDAO.findById(id);
 	}
-    
-    
+
+	@Override
+	public boolean existsByEmail(String email) {
+		return administradorDAO.existsByEmail(email);
+	}
+
+	@Override
+	public Optional<Administrador> findByEmail(String email) {
+		return administradorDAO.findByEmail(email);
+	} 
 }

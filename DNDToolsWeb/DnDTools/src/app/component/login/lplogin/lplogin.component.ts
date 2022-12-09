@@ -12,12 +12,12 @@ import { IUsuario } from 'src/modelo/IUsuario';
 
 export class LPloginComponent {
 
-  nickname: string;
+  email: string;
   contrasenia: string;
 
   constructor(private loginService: LoginService,private router: Router)
   {
-    this.nickname = "";
+    this.email = "";
     this.contrasenia = "";
   }
 
@@ -25,7 +25,7 @@ export class LPloginComponent {
   {
 
     const usuario :any = {
-      nickname:this.nickname,
+      email:this.email,
       contrasenia:this.contrasenia
     }
 

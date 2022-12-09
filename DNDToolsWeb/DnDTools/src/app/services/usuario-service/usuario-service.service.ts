@@ -60,4 +60,8 @@ export class UsuarioServiceService {
   getUsuario(id:String):Observable<IUsuario>{
     return this.http.get<IUsuario>(`${environment.URLBASE}/usuarios/findById/${id}`);
   }
+
+  existsByEmail(email:String){
+    return this.http.get<IUsuario>(`${environment.URLBASE}/usuarios/existsByEmail/${email}`)
+  }
 }

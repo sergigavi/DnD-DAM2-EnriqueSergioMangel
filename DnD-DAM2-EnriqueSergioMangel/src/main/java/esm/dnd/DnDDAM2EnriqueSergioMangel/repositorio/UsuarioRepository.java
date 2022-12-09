@@ -12,8 +12,8 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 @Repository
 public interface UsuarioRepository extends MongoRepository<Usuario,String>{
 
-	boolean existsByNickname(String nickname);
+	boolean existsByEmail(String email);
 
-	Optional<Usuario> findByNickname(String nickname);
+	Optional<Usuario> findByEmail(String email);
     
 }

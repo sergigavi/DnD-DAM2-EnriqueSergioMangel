@@ -15,11 +15,17 @@ export interface Administrador{
 @Injectable({
   providedIn: 'root'
 })
-export class Administrador {
+export class AdministradorService {
 
   constructor(private http:HttpClient) { }
 
   getAll() :Observable<Administrador[]>{
-    return this.http.get<Administrador[]>(`${environment.URLBASE}/administrador/getAll`)
+    return this.http.get<Administrador[]>(`${environment.URLBASE}/admins/getAll`)
+  }
+  existsById(id:String):Observable<boolean>{
+    return this.http.get<boolean>(`${environment.URLBASE}/admins/existsById/${id}`)
+  }
+  existsByEmail(email:String){
+    return this.http.get<boolean>(`${environment.URLBASE}/admins/existsByEmail/${email}`)
   }
 }

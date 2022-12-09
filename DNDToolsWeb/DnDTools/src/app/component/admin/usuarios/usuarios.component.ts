@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
 import { IUsuario } from 'src/modelo/IUsuario';
 import { DialogCrearUsuario } from './dialogCrearUsuarios';
+import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -19,6 +20,7 @@ export class UsuariosComponent implements OnInit  {
   title = 'Usuarios';
   opened = false;
   usuario!:IUsuario
+  idCurrentUser="";
 
   @ViewChild(MatPaginator,{static:true}) paginator! :MatPaginator
   @ViewChild(MatSort,{static:true}) sort!:MatSort
@@ -28,12 +30,22 @@ export class UsuariosComponent implements OnInit  {
   columnas: string[] = ['nombreCuenta','correo','acceder','editar'];
   dataSource = new MatTableDataSource<IUsuario>([])
 
-  constructor(public dialog: MatDialog,private usuarioService: UsuarioServiceService,private router:Router){}
+  constructor(private auth:AuthServiceService,public dialog: MatDialog,private usuarioService: UsuarioServiceService,private router:Router){}
 
   ngOnInit(): void {
+    this.getCurrenUser()
+    if(this.idCurrentUser==null || this.idCurrentUser==""){
+      this.router.navigate(['login'])
+    }
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort
     this.showUsuario()
+  }
+
+  getCurrenUser(){
+    this.auth.data.subscribe((data:any)=>{
+      this.idCurrentUser=data;
+    })
   }
 
   ngAfterViewInit(){

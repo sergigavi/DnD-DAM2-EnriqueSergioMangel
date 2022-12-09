@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,4 +70,46 @@ public class AdministradorController {
         return res;
     }
 
+    @GetMapping("existsById/{id}")
+    public ResponseEntity<Boolean> existsById(@PathVariable String id){
+        ResponseEntity<Boolean> res = new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
+
+        try {
+            if(administradorServicio.existeAdministrador(id)){
+                res = new ResponseEntity<>(true,HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @GetMapping("existsByEmail/{email}")
+    public ResponseEntity<Boolean> existsByEmail(@PathVariable String email){
+        ResponseEntity<Boolean> res = new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
+
+        try {
+            if(administradorServicio.existsByEmail(email)){
+                res = new ResponseEntity<Boolean>(true, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @GetMapping("trylogin/{email}/{contrasenia}")
+    public ResponseEntity<Administrador> trylogin(@PathVariable String email,@PathVariable String contrasenia){
+        ResponseEntity<Administrador> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        Administrador admin;
+        try {
+            if(administradorServicio.existsByEmail(email)){
+                admin = administradorServicio.findByEmail(email).get();
+                res = new ResponseEntity<Administrador>(admin, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 }

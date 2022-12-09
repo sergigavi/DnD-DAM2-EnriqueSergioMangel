@@ -16,6 +16,7 @@ import { IFichaPersonaje } from 'src/modelo/IFichaPersonaje';
 import { IHabilidad } from 'src/modelo/IHabilidad';
 import { EnumHabilidad } from 'src/modelo/EnumHabilidad';
 import { ICaracteristica } from 'src/modelo/ICaracteristica';
+import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
 
 
 /**
@@ -33,7 +34,7 @@ export class FichasAdmin implements OnInit  {
   title = 'Fichas de Personaje';
   opened = false;
   ficha!:IFichaPersonaje
-
+  idCurrentUser="";
   columnas:String[]=["nombre","nivel","clase","acceder","editar"]
 
   @ViewChild(MatPaginator,{static:true}) paginator! :MatPaginator
@@ -41,7 +42,7 @@ export class FichasAdmin implements OnInit  {
 
   dataSource= new MatTableDataSource<IFichaPersonaje[]>([]);
 
-  constructor(private fichaService:FichaAdminService,private router:Router,private dialog:MatDialog,
+  constructor(private auth:AuthServiceService,private fichaService:FichaAdminService,private router:Router,private dialog:MatDialog,
     private equipoService:EquipamientoAdminService){}
 
   applyFilter(event:Event){
@@ -52,10 +53,17 @@ export class FichasAdmin implements OnInit  {
       this.dataSource.paginator.firstPage()
     }
   }
-
-
+  getCurrenUser(){
+    this.auth.data.subscribe((data:any)=>{
+      this.idCurrentUser=data;
+    })
+  }
 
   ngOnInit(): void {
+    this.getCurrenUser
+    if(this.idCurrentUser==null || this.idCurrentUser==""){
+      this.router.navigate(['login'])
+    }
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort
     this.showFichas()
@@ -247,7 +255,7 @@ export class DialogCrearFicha{
   @ViewChild(MatSort,{static:true}) sort!:MatSort
 
   columnasEquipo:String[] = ["nombre","tipo","categoria","add"]
-
+  idCurrentUser="";
 
   step =0;
   numberControlFue = new FormControl("Error",[Validators.min(3),Validators.max(20)])

@@ -14,19 +14,25 @@ export class HomeComponent implements OnInit  {
   title = 'Inicio';
   usuario:any
   showFiller = false;
+  idCurrentUser:String="";
 
   constructor(private router:Router,private auth:AuthServiceService){}
 
   ngOnInit(): void {
     this.getCurrenUser()
+    console.log(this.idCurrentUser)
+    if(this.idCurrentUser!="vacio"){
+      this.auth.deleteData()
+      this.router.navigate(['login'])
+    }
   }
 
   public navegar(ruta:String){
     this.router.navigate([`${ruta}`])
   }
   getCurrenUser(){
-    this.auth.data.subscribe((data:any)=>{
-      console.log(data)
+    this.auth.data.subscribe((data:String)=>{
+      this.idCurrentUser=data;
     })
   }
 }

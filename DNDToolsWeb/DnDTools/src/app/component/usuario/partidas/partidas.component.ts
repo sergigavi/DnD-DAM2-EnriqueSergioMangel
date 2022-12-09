@@ -27,10 +27,14 @@ export class PartidasUsuarioComponent implements OnInit  {
 
   columnas:String[] = ["nombre","acceder"]
   dataSource = new MatTableDataSource<IPartida>([]);
-
+  idCurrentUser="";
   constructor(private usuarioService:UsuarioServiceService,private router:Router,private partidaServicio:PartidaServiceService,private dialog : MatDialog,private auth:AuthServiceService){}
 
   ngOnInit() {
+    this.getCurrenUser()
+    if(this.idCurrentUser==null || this.idCurrentUser==""){
+      this.router.navigate(['login'])
+    }
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort
     this.showPartidas()
@@ -55,6 +59,11 @@ export class PartidasUsuarioComponent implements OnInit  {
 
     dialogRef.afterClosed().subscribe((data:any)=>{
       this.showPartidas()
+    })
+  }
+  getCurrenUser(){
+    this.auth.data.subscribe((data:any)=>{
+      this.idCurrentUser=data;
     })
   }
 

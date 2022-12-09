@@ -24,9 +24,9 @@ public interface IUsuarioServicio {
 
 	public Iterable<Usuario> eliminarTodos();
 
-	public boolean existsByNickname(String nickname);
+	public boolean existsByEmail(String email);
 
-	public Optional<Usuario> findUsuarioByNickname(String nickname);
+	public Optional<Usuario> findByEmail(String email);
 
     public Optional<Usuario> editarUsuario(Usuario usuario);
 

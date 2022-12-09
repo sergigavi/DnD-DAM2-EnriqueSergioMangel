@@ -142,12 +142,12 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
 	@Override
-	public boolean existsByNickname(String nickname) {
-		return usuarioDAO.existsByNickname(nickname);
+	public boolean existsByEmail(String email) {
+		return usuarioDAO.existsByEmail(email);
 	}
 
 	@Override
-	public Optional<Usuario> findUsuarioByNickname(String nickname) {
-		return usuarioDAO.findByNickname(nickname);
+	public Optional<Usuario> findByEmail(String email) {
+		return usuarioDAO.findByEmail(email);
 	}
 }
