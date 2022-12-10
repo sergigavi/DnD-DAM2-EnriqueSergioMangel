@@ -25,7 +25,7 @@ export class AdministradorService {
   existsById(id:String):Observable<boolean>{
     return this.http.get<boolean>(`${environment.URLBASE}/admins/existsById/${id}`)
   }
-  existsByEmail(email:String){
+  existsByEmail(email:String):Observable<boolean>{
     return this.http.get<boolean>(`${environment.URLBASE}/admins/existsByEmail/${email}`)
   }
 }

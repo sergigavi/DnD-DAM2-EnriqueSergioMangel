@@ -85,12 +85,12 @@ public class AdministradorController {
     }
 
     @GetMapping("existsByEmail/{email}")
-    public ResponseEntity<Boolean> existsByEmail(@PathVariable String email){
-        ResponseEntity<Boolean> res = new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> existsByEmail(@PathVariable String email){
+        ResponseEntity<String> res = new ResponseEntity<>("no es admin",HttpStatus.BAD_REQUEST);
 
         try {
             if(administradorServicio.existsByEmail(email)){
-                res = new ResponseEntity<Boolean>(true, HttpStatus.OK);
+                res = new ResponseEntity<String>("es admin", HttpStatus.OK);
             }
         } catch (Exception e) {
             e.printStackTrace();

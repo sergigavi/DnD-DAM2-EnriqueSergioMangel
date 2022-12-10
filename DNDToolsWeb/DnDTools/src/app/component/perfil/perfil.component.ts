@@ -48,7 +48,7 @@ export class PerfilComponent implements OnInit  {
   cambiarContrasenia()
   {
 
-    if (this.contra == this.contra2)
+    if (this.contra == this.contra2 && this.contra != "" && this.contra2 != "" )
     {
       this.userService.cambiarContrasenia(this.cookieService.get("CurrentUserId"), this.contra).subscribe((data:any) => {
         console.log(data)

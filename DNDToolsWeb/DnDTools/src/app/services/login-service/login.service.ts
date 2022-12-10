@@ -8,6 +8,7 @@ import { UsuarioServiceService } from '../usuario-service/usuario-service.servic
 import { AdministradorService } from '../administrador-service/adminstrador.service';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class LoginService {
 
   }
 
-  trylogin(usuario:any){
+  async trylogin(usuario:any){
 
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -29,9 +30,9 @@ export class LoginService {
     //borro las cookies que haya
     this.cookieService.deleteAll()
 
-    if(!!this.esAdmin(usuario.email) == true)
+    if (await this.esAdmin(usuario.email))
     {
-
+      console.log("entra admin")
       this.http.get(`${environment.URLBASE}/admins/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
       .subscribe((data:any) => {
 
@@ -53,6 +54,8 @@ export class LoginService {
       });
     }
     else{
+      console.log("entra user")
+
       this.http.get(`${environment.URLBASE}/usuarios/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
       .subscribe((data:any) => {  //data es la respuesta que me devuelve la api
         if (data != null){
@@ -73,11 +76,16 @@ export class LoginService {
 
   }
 
-  esAdmin(usuario: string) :any{
+  async esAdmin(usuario: string) :Promise<boolean>{
 
-    this.adminService.existsByEmail(usuario).subscribe((data:any) => {
-      return !!data
+    var esAdmin = false
+    await this.adminService.existsByEmail(usuario).subscribe((data:any) => {
+      console.log(data)
+      esAdmin = data
     })
+    //return await this.adminService.existsByEmail(usuario).toPromise() || false
+    console.log(esAdmin)
+    return esAdmin
   }
 
   getCurrenUser(){
