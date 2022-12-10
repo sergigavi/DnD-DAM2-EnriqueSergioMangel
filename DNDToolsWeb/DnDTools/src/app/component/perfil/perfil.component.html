@@ -1,5 +1,7 @@
 <mat-card style="background-color: rgb(221, 221, 221);" class="example-card">
-  <div mat-card-avatar class="example-header-image"></div>
+
+    <img id="avatar" mat-card-avatar src="{{datosUser.urlImage}}">
+
   <div class="example-header">
     <mat-card-title>{{datosUser.nombre}}</mat-card-title>
     <mat-card-subtitle>
@@ -14,19 +16,19 @@
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field appearance="fill" class="formField">
         <mat-label>Actividad</mat-label>
-        <input matInput placeholder="contraseña...">
+        <input matInput value="{{datosUser.activo}}">
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field appearance="fill" class="formField">
           <mat-label>Pais</mat-label>
-          <input matInput placeholder="contraseña...">
+          <input matInput value="{{datosUser.pais}}">
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field appearance="fill" class="formField">
         <mat-label>Edad</mat-label>
-        <input matInput placeholder="contraseña...">
+        <input matInput value="{{datosUser.fechaNacimiento}}">
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -37,8 +39,8 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field appearance="fill" class="formField">
-        <mat-label>Descripción</mat-label>
-        <textarea matInput value="Contenido de la descripción" placeholder="Ex. It makes me feel..."></textarea>
+        <mat-label>Biografía</mat-label>
+        <textarea matInput value="{{datosUser.biografia}}" placeholder="Tu biografía"></textarea>
       </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
@@ -47,23 +49,23 @@
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field appearance="fill" class="formField">
         <mat-label>Contraseña</mat-label>
-        <input matInput placeholder="contraseña...">
+        <input matInput type="password" [(ngModel)]="contra" [ngModelOptions]="{standalone: true}" required="required" placeholder="contraseña...">
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field appearance="fill" class="formField">
         <mat-label>Repetir Contraseña</mat-label>
-        <input matInput placeholder="repetir contraseña...">
+        <input matInput type="password" [(ngModel)]="contra2" [ngModelOptions]="{standalone: true}" required="required" placeholder="repetir contraseña...">
       </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
-  <button style="margin-left: 7%; " mat-flat-button color="accent" [disabled]="perfilForm.invalid" type="submit">Cambiar Contreseña</button>
+  <button style="margin-left: 7%; " mat-flat-button color="accent" [disabled]="perfilForm.invalid" type="submit" (click)="cambiarContrasenia()">Cambiar Contraseña</button>
 </form>
-<a href="inicio">
+<a href="/">
   <button style="margin-top: 1%; margin-left: 1%; float: right;"mat-flat-button color="accent">Volver</button>
 </a>
-<a href="">
-  <button style="margin-top: 1%; margin-left: 1%; float: right;" mat-flat-button color="accent">Cerrar Sesión</button>
+<a>
+  <button style="margin-top: 1%; margin-left: 1%; float: right;" mat-flat-button (click)="cerrarSesion()" color="accent">Cerrar Sesión</button>
 </a>
 
 

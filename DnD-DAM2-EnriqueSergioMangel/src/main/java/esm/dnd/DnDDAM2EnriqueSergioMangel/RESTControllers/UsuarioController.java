@@ -73,7 +73,24 @@ public class UsuarioController {
 
 	}
 	
-	@GetMapping("/getNombreById/{id}")
+	@GetMapping("/cambiarContraById/{id}")
+	public ResponseEntity<Boolean> cambiarContraById(@PathVariable String id, @RequestBody String contra){
+
+		ResponseEntity<Boolean> res = new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
+
+		try {
+			if(usuarioServicio.existeUsuario(id)){
+				usuarioServicio.cambiarContrasenia(id, contra);
+				res = new ResponseEntity<Boolean>(true,HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+
+	}
+	
+	@PutMapping("/getNombreById/{id}")
 	public ResponseEntity<String> findNombreUsuarioByIdString(@PathVariable String id){
 
 		ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

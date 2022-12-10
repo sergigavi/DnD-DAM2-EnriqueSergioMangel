@@ -30,6 +30,18 @@ export class UsuarioServiceService {
 
   };
 
+  cambiarContrasenia(id: string, contra: string)
+  {
+    const requestOptions:Object = {
+      responseType:'text',
+      method: 'PUT',
+      withCredentials: false,
+      crossorigin: false,
+      mode: 'no-cors'
+    }
+    return this.http.put(`${environment.URLBASE}/usuarios/cambiarContraById/${id}`, contra, requestOptions);
+  }
+
   getNombreUserById(id:String)
   {
     return this.http.get(`${environment.URLBASE}/usuarios/getNombreById`);
