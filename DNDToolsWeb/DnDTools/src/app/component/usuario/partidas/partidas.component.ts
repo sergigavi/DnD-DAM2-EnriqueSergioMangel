@@ -29,6 +29,7 @@ export class PartidasUsuarioComponent implements OnInit  {
   columnas:String[] = ["nombre","acceder"]
   dataSource = new MatTableDataSource<IPartida>([]);
   idCurrentUser="";
+
   constructor(private usuarioService:UsuarioServiceService,private router:Router, private cookieService: CookieService,private partidaServicio:PartidaServiceService,private dialog : MatDialog,private auth:AuthServiceService){}
 
   ngOnInit() {
