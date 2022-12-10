@@ -55,6 +55,40 @@ public class UsuarioController {
 		return res;
 
 	}
+	
+	@GetMapping("/findByIdString/{id}")
+	public ResponseEntity<Usuario> findUsuarioByIdString(@PathVariable String id){
+
+		ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		try {
+			if(usuarioServicio.existeUsuario(id)){
+				Usuario u = usuarioServicio.findUsuarioByIdString(id).get();
+				res = new ResponseEntity<Usuario>(u,HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+
+	}
+	
+	@GetMapping("/getNombreById/{id}")
+	public ResponseEntity<String> findNombreUsuarioByIdString(@PathVariable String id){
+
+		ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		try {
+			if(usuarioServicio.existeUsuario(id)){
+				Usuario u = usuarioServicio.findUsuarioByIdString(id).get();
+				res = new ResponseEntity<String>(u.getNombre(),HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+
+	}
 
 
     @GetMapping("/dametodos")

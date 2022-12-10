@@ -6,10 +6,10 @@
     </div>
     <h1>Login</h1>
     <input
-      type="nickname"
-      [(ngModel)]="nickname"
-      name="nickname"
-      placeholder="Nickname"
+      type="text"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Email"
       required="required"
     />
     <br>
@@ -17,12 +17,12 @@
       type="password"
       [(ngModel)]="contrasenia"
       name="contraseña"
-      placeholder="contraseña"
+      placeholder="Contraseña"
       required="required"
     />
     <button type="submit" (click)="trylogin()">Entrar</button>
     <br>
-    <button type="button" (click)="goToPage('registro')">Registrarse</button>
+    <button type="button" (click)="goToPage('register')">Registrarse</button>
   </form>
 
   <div id="mensajelogin" class="mensajelogin">

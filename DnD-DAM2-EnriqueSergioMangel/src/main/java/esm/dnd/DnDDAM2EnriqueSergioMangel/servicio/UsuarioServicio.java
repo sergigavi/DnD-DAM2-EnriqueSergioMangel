@@ -150,4 +150,9 @@ public class UsuarioServicio implements IUsuarioServicio{
 	public Optional<Usuario> findByEmail(String email) {
 		return usuarioDAO.findByEmail(email);
 	}
+
+	@Override
+	public Optional<Usuario> findUsuarioByIdString(String id) {
+		return usuarioDAO.findByIdUserString(id);
+	}
 }

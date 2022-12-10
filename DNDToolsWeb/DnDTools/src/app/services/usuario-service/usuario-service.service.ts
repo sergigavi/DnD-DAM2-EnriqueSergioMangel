@@ -30,6 +30,10 @@ export class UsuarioServiceService {
 
   };
 
+  getNombreUserById(id:String)
+  {
+    return this.http.get(`${environment.URLBASE}/usuarios/getNombreById`);
+  }
   addUsuario(usuario:IUsuario):Observable<String>{
     const requestOptions:Object = {
       responseType:'text'
@@ -58,7 +62,7 @@ export class UsuarioServiceService {
   }
 
   getUsuario(id:String):Observable<IUsuario>{
-    return this.http.get<IUsuario>(`${environment.URLBASE}/usuarios/findById/${id}`);
+    return this.http.get<IUsuario>(`${environment.URLBASE}/usuarios/findByIdString/${id}`);
   }
 
   existsByEmail(email:String){

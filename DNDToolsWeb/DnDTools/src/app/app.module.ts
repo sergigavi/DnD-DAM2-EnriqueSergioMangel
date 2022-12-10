@@ -26,7 +26,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
 import { MatSelectModule } from '@angular/material/select';
 
-//import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
@@ -162,7 +162,7 @@ const routes: Routes = [
     MatCheckboxModule
   ],
   entryComponents: [UsuarioFormComponent],
-  providers: [MatDatepickerModule,/*CookieService*/],
+  providers: [MatDatepickerModule,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

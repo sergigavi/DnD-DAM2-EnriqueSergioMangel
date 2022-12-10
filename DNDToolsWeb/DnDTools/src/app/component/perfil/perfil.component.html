@@ -1,12 +1,12 @@
 <mat-card style="background-color: rgb(221, 221, 221);" class="example-card">
   <div mat-card-avatar class="example-header-image"></div>
   <div class="example-header">
-    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-title>{{datosUser.nombre}}</mat-card-title>
     <mat-card-subtitle>
       <a href="">Editar Perfil</a>
     </mat-card-subtitle>
   </div>
-  <img class="image-perfil" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <img class="image-perfil" src="{{datosUser.urlImage}}" alt="Profile pic">
 </mat-card>
 <form #perfilForm="ngForm">
   <mat-grid-list cols="4" rowHeight="3:1">

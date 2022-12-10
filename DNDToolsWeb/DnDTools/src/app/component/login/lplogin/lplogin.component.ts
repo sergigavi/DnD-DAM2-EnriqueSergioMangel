@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoginService } from 'src/app/services/login-service/login.service';
 import { Router } from '@angular/router';
 import { IUsuario } from 'src/modelo/IUsuario';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-lplogin',
