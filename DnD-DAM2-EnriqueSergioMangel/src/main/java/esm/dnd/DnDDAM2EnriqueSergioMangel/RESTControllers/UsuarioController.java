@@ -73,7 +73,7 @@ public class UsuarioController {
 
 	}
 	
-	@GetMapping("/cambiarContraById/{id}")
+	@PutMapping("/cambiarContraById/{id}")
 	public ResponseEntity<Boolean> cambiarContraById(@PathVariable String id, @RequestBody String contra){
 
 		ResponseEntity<Boolean> res = new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
@@ -90,7 +90,7 @@ public class UsuarioController {
 
 	}
 	
-	@PutMapping("/getNombreById/{id}")
+	@GetMapping("/getNombreById/{id}")
 	public ResponseEntity<String> findNombreUsuarioByIdString(@PathVariable String id){
 
 		ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
