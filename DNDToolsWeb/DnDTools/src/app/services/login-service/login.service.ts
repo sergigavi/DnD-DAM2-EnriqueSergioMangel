@@ -28,31 +28,55 @@ export class LoginService {
 
     //borro las cookies que haya
     this.cookieService.deleteAll()
-    this.adminService.existsByEmail(usuario.email).subscribe((data:any)=>{
 
-    })
+    if(!!this.esAdmin(usuario.email) == true)
+    {
 
-    return this.http.get(`${environment.URLBASE}/usuarios/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
-    .subscribe((data:any) => {  //data es la respuesta que me devuelve la api
-      if (data != null){
-        var id = data.idUserString
-        this.auth.sendData(id)
-        this.getCurrenUser()
+      this.http.get(`${environment.URLBASE}/admins/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
+      .subscribe((data:any) => {  //data es la respuesta que me devuelve la api
+        if (data != null){
+          var id = data.idAdminString
+          this.auth.sendData(id)
+          this.getCurrenUser()
 
-        //me guardo el id en la cookie
-        this.cookieService.set("CurrentUserId",id)
+          //me guardo el id en la cookie
+          this.cookieService.set("CurrentUserId",id)
 
-        if(false){//this.adminService.existsById(this.idCurrentUser)){
           //panel admin
-          //this.router.navigate(['/'])
-        }
-        else{
+          this.router.navigate(['/panelControl-admin'])
+
+        }else{
+          alert("Error conectando con el servidor")
           this.router.navigate(['/'])
         }
-      }else{
-        this.router.navigate(['/'])
-      }
-    });
+      });
+    }
+    else{
+      this.http.get(`${environment.URLBASE}/usuarios/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
+      .subscribe((data:any) => {  //data es la respuesta que me devuelve la api
+        if (data != null){
+          var id = data.idUserString
+          this.auth.sendData(id)
+          this.getCurrenUser()
+
+          //me guardo el id en la cookie
+          this.cookieService.set("CurrentUserId",id)
+
+          this.router.navigate(['/'])
+        }else{
+          alert("Error conectando con el servidor")
+          this.router.navigate(['/'])
+        }
+      });
+    }
+
+  }
+
+  esAdmin(usuario: string) :any{
+
+    this.adminService.existsByEmail(usuario).subscribe((data:any) => {
+      return !!data
+    })
   }
 
   getCurrenUser(){
