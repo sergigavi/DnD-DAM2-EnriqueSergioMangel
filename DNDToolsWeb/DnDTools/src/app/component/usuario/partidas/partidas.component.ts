@@ -5,6 +5,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
 import { PartidaServiceService } from 'src/app/services/partida-service/partida-service.service';
 import { UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
@@ -28,12 +29,17 @@ export class PartidasUsuarioComponent implements OnInit  {
   columnas:String[] = ["nombre","acceder"]
   dataSource = new MatTableDataSource<IPartida>([]);
   idCurrentUser="";
-  constructor(private usuarioService:UsuarioServiceService,private router:Router,private partidaServicio:PartidaServiceService,private dialog : MatDialog,private auth:AuthServiceService){}
+  constructor(private usuarioService:UsuarioServiceService,private router:Router, private cookieService: CookieService,private partidaServicio:PartidaServiceService,private dialog : MatDialog,private auth:AuthServiceService){}
 
   ngOnInit() {
     this.getCurrenUser()
     if(this.idCurrentUser==null || this.idCurrentUser==""){
       this.router.navigate(['login'])
+    }
+
+    if(!this.cookieService.check("CurrentUserId")){
+      this.auth.deleteData()
+      this.router.navigate(['/'])
     }
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort

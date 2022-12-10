@@ -33,7 +33,8 @@ export class LoginService {
     {
 
       this.http.get(`${environment.URLBASE}/admins/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
-      .subscribe((data:any) => {  //data es la respuesta que me devuelve la api
+      .subscribe((data:any) => {
+
         if (data != null){
           var id = data.idAdminString
           this.auth.sendData(id)
@@ -62,7 +63,7 @@ export class LoginService {
           //me guardo el id en la cookie
           this.cookieService.set("CurrentUserId",id)
 
-          this.router.navigate(['/'])
+          this.router.navigate(['/inicio'])
         }else{
           alert("Error conectando con el servidor")
           this.router.navigate(['/'])

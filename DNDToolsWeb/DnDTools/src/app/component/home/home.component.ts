@@ -26,11 +26,10 @@ export class HomeComponent implements OnInit  {
     this.getCurrenUser()
     //console.log(this.idCurrentUser)
     //if(this.idCurrentUser="vacio" || this.cookieService.get("CurrentUserId")=="" ){
-      if(!this.cookieService.check("CurrentUserId")){
+      if(this.cookieService.check("CurrentUserId")){
       this.auth.deleteData()
-      this.router.navigate(['login'])
+      this.router.navigate(['perfil'])
     }
-
 
   }
 

@@ -5,6 +5,7 @@ import { FichaAdminService } from 'src/app/services/fichaPersonaje-service/ficha
 import { UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
 import { Administrador, AdministradorService } from 'src/app/services/administrador-service/adminstrador.service';
 import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-panelControl',
@@ -21,11 +22,17 @@ export class PanelControlComponent implements OnInit  {
   equipamiento=0;
   fichas=0;
 
-  constructor(private auth:AuthServiceService,private router:Router,private adminService:AdministradorService,private usuarioServicio: UsuarioServiceService,private equipamientoService: EquipamientoAdminService,
+  constructor(private auth:AuthServiceService,private router:Router, private cookieService: CookieService,private adminService:AdministradorService,private usuarioServicio: UsuarioServiceService,private equipamientoService: EquipamientoAdminService,
     private fichaService:FichaAdminService){}
 
   ngOnInit(): void {
     this.getCurrenUser()
+
+    if(!this.cookieService.check("CurrentUserId")){
+      this.auth.deleteData()
+      this.router.navigate(['/'])
+    }
+
     if(this.idCurrentUser==null || this.idCurrentUser==""){
       this.router.navigate(['login'])
     }else{
@@ -35,7 +42,7 @@ export class PanelControlComponent implements OnInit  {
         }
       })
     }
-    
+
     this.usuarioServicio.getCantidad().subscribe((data:any)=>{
       this.usuario=data
     })
