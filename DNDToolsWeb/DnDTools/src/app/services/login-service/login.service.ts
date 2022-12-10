@@ -30,32 +30,7 @@ export class LoginService {
     //borro las cookies que haya
     this.cookieService.deleteAll()
 
-    if (await this.esAdmin(usuario.email))
-    {
-      console.log("entra admin")
-      this.http.get(`${environment.URLBASE}/admins/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
-      .subscribe((data:any) => {
-
-        if (data != null){
-          var id = data.idAdminString
-          this.auth.sendData(id)
-          this.getCurrenUser()
-
-          //me guardo el id en la cookie
-          this.cookieService.set("CurrentUserId",id)
-
-          //panel admin
-          this.router.navigate(['/panelControl-admin'])
-
-        }else{
-          alert("Error conectando con el servidor")
-          this.router.navigate(['/'])
-        }
-      });
-    }
-    else{
-      console.log("entra user")
-
+    try {
       this.http.get(`${environment.URLBASE}/usuarios/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
       .subscribe((data:any) => {  //data es la respuesta que me devuelve la api
         if (data != null){
@@ -72,6 +47,29 @@ export class LoginService {
           this.router.navigate(['/'])
         }
       });
+
+      this.http.get(`${environment.URLBASE}/admins/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
+          .subscribe((data:any) => {
+
+            if (data != null){
+              var id = data.idAdminString
+              this.auth.sendData(id)
+              this.getCurrenUser()
+
+              //me guardo el id en la cookie
+              this.cookieService.set("CurrentUserId",id)
+
+              //panel admin
+              this.router.navigate(['/panelControl-admin'])
+
+            }else{
+              alert("Error conectando con el servidor")
+              this.router.navigate(['/'])
+            }
+          });
+
+    } catch (error) {
+      console.log("Error")
     }
 
   }

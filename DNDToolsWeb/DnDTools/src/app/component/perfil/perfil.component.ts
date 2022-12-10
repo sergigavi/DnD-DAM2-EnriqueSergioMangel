@@ -85,7 +85,6 @@ export class PerfilComponent implements OnInit  {
 
     this.datosUser.fechaNacimiento = this.calcularEdad(this.datosUser.fechaNacimiento)
 
-
     });
   }
 
