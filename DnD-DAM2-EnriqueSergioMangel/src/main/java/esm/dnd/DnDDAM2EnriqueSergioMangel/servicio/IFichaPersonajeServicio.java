@@ -32,4 +32,6 @@ public List<Caracteristica> getListaCaracteristicasPorId(String id);
 public List<Equipamiento> getEquipamientoPorIdFicha(String idFicha);
 
 public List<Habilidad> getHabilidadesPorIdFicha(String idFicha);
+
+public long getCantidad();
 }

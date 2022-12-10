@@ -50,6 +50,11 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
 	@Override
+	public long getCantidad() {
+		return usuarioDAO.count();
+	}
+
+	@Override
 	public Optional<Usuario> editarUsuario(Usuario usuario) {
 		Optional<Usuario> us = Optional.empty();
 		if(usuarioDAO.existsById(usuario.getIdUserString())){

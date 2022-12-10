@@ -111,6 +111,20 @@ public class FichaPersonajeController {
         }
         return res;
     }
+
+    @GetMapping("/cantidad")
+    public ResponseEntity<Long> getCantidad(){
+        
+        ResponseEntity<Long> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        long cantidad= fichaPersonajeServicio.getCantidad();
+
+        if(cantidad==0){
+            return res;
+        }else{
+            return new ResponseEntity<Long>(cantidad,HttpStatus.OK);
+        }
+    }
     
     @GetMapping("/getHabilidadesById/{idFicha}")
     public ResponseEntity<List<Habilidad>> obtenerTodasLasHabilidades(@PathVariable String idFicha)

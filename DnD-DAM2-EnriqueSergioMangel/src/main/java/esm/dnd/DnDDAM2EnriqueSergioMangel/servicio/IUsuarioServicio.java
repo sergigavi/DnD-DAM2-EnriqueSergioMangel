@@ -33,5 +33,7 @@ public interface IUsuarioServicio {
 
     public List<Usuario> getAll();
 
+    public long getCantidad();
+    
 	public Optional<Usuario> findUsuarioByIdString(String id);
 }

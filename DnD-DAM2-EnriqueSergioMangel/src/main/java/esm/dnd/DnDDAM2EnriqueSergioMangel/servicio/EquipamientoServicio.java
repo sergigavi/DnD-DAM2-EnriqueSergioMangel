@@ -59,6 +59,11 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 	}
 
 	@Override
+	public long getCantidad() {
+		return equipamientoDAO.count();
+	}
+
+	@Override
 	public boolean insertarEquipamiento(Equipamiento a) {
 		boolean exito=false;
 		

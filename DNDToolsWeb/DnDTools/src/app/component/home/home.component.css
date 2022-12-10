@@ -19,3 +19,35 @@ table {
   font-size: 14px;
 }
 
+.menu{
+  position: relative;
+}
+
+.contenidoInicio{
+  position: relative;
+  padding-left: 1%;
+  font-size: 17px;
+}
+
+.imagenFondo{
+  position: absolute;
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 10%;
+}
+
+.imagenIncio{
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  border-color: black;
+  border: 5px solid rgba(0, 0, 0, 1);
+}
+
+.tituloInicio{
+  position: relative;
+  font-size: 40px;
+  font-family: "Times New Roman",Times, serif;
+  color: rgb(71, 71, 255);
+}

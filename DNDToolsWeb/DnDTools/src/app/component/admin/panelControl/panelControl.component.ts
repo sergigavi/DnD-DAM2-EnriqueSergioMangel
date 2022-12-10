@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { EquipamientoAdminService } from 'src/app/services/equipamientoAdmin-service/equipamiento-admin.service';
+import { FichaAdminService } from 'src/app/services/fichaPersonaje-service/ficha-admin.service';
+import { UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
 import { Administrador, AdministradorService } from 'src/app/services/administrador-service/adminstrador.service';
 import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
 
@@ -14,8 +17,12 @@ export class PanelControlComponent implements OnInit  {
   title = 'PanelControl';
   opened = false;
   idCurrentUser="";
+  usuario=0;
+  equipamiento=0;
+  fichas=0;
 
-  constructor(private auth:AuthServiceService,private router:Router,private adminService:AdministradorService){}
+  constructor(private auth:AuthServiceService,private router:Router,private adminService:AdministradorService,private usuarioServicio: UsuarioServiceService,private equipamientoService: EquipamientoAdminService,
+    private fichaService:FichaAdminService){}
 
   ngOnInit(): void {
     this.getCurrenUser()
@@ -28,6 +35,19 @@ export class PanelControlComponent implements OnInit  {
         }
       })
     }
+    
+    this.usuarioServicio.getCantidad().subscribe((data:any)=>{
+      this.usuario=data
+    })
+
+    this.equipamientoService.getCantidad().subscribe((data:any)=>{
+      this.equipamiento=data
+    })
+
+    this.fichaService.getCantidad().subscribe((data:any)=>{
+      this.fichas=data
+    })
+
   }
 
   getCurrenUser(){

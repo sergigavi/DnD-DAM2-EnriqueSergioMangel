@@ -83,6 +83,11 @@ public class FichaPersonajeServicio implements IFichaPersonajeServicio {
     }
 
     @Override
+	public long getCantidad() {
+		return fichaPersonajeDAO.count();
+	}
+
+    @Override
     public boolean actualizarFichaPersonaje(FichaPersonaje fichaPersonaje) {
         
         Boolean exito = false;

@@ -7,15 +7,6 @@
             <button mat-flat-button color="accent" (click)="navegar('inicio')"><mat-icon fontIcon="home" class=""></mat-icon>Inicio</button>
           </li>
           <li class="nav-item">
-            <button mat-flat-button color="accent" (click)="navegar('#')">Mas Información</button>
-          </li>
-          <li class="nav-item">
-            <button mat-flat-button color="accent" (click)="navegar('#')">Mas sobre nosotros</button>
-          </li>
-          <li class="nav-item">
-            <button mat-flat-button color="accent" (click)="navegar('#')">Contactanos</button>
-          </li>
-          <li class="nav-item">
             <button mat-flat-button color="accent" (click)="navegar('panelControl-admin')">Acceso temporal Admin</button>
           </li>
           <li class="nav-item">
@@ -24,8 +15,10 @@
         </ul>
       </div>
   </mat-drawer>
-
-  <div class="example-sidenav-content">
+  <div>
+    <img class="imagenFondo" src='https://images.ctfassets.net/swt2dsco9mfe/G8hY5RaUUgMiwctolsI0K/1496009a9a957296d768d86e7503b5ca/157997_1920x1342.jpg?q=70'>
+  </div>
+  <div class="example-sidenav-content menu">
     <!--Menu-->
     <mat-toolbar color="primary">
       <button type="button" mat-icon-button mat-button (click)="drawer.toggle()">
@@ -37,14 +30,54 @@
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <a href="perfil">
-          <button mat-menu-item>Perfil</button>
-        </a>
-        <a href="">
-          <button (click)="cerrarSesion()" mat-menu-item>Cerrar Sesion</button>
+        <a href="login">
+          <button mat-menu-item>Iniciar Sesion</button>
         </a>
       </mat-menu>
     </mat-toolbar>
+  </div>
+  <div class="contenidoInicio">
+    <mat-grid-list cols="2" rowHeight="100px">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <h1 class="tituloInicio"><b><u>Información sobre la aplicación</u></b></h1>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="5">
+        <img class="imagenIncio" src="https://www.gamespot.com/a/uploads/scale_super/1562/15626911/3939537-untitled-1-recovered-recovered.jpg">
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <p>
+          <b>D&DTools</b> es una herramienta la cual le permite tanto a los jugadores como a al GameMaster gestionar sus partidas para que al realizar estas se hagan más llevaderas,
+          tendrás desde la personalización de los personajes, la gestión de los mapas, la historia y ubicaciones de interés donde se desarrollaran los conflictos o historias y
+          la gestión de los items o equipamiento que llevara cada personaje, esta herramienta está pensada para acompañar no para sustituir la forma tradicional de jugar
+          a Dungeons and Dragons lo que servirá para las nuevas generaciones a tener un mejor manejo del juego y a los más antiguos a no perder el toque que tanto les gusta.
+        </p>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <h1 class="tituloInicio"><b><u>Sobre Nosotros</u></b></h1>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="3">
+        <p>
+          Somos un pequeño grupo de personas con un gusto especial por los juegos de rol/mesa, los cuales disfrutan de las entretenidas historias que se forman al jugar
+          este tipo de juegos, con la esperanza de hacer llegar este sentimiento al resto de jugadores interesados en este tipo de juegos realizamos el desarrollo de esta
+          aplicación, si estas interesado o encuentras algún problema con el desarrollo de la misma puedes contactarnos al siguiente correo.
+          <br><br>
+          <u>Correo:</u><b> D&DToolSupport@gmail.com</b>
+          <br><br>
+          Si solo deseas disfrutar de partidas o jugar con otras personas no dudes en unirte a nuestro discord para poder formar partidas de una forma más efectiva y rapida.
+          <br><br>
+          <u>Discord:</u><b> https://discord.gg/aughdiuawdi</b>
+        </p>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="5">
+        <img class="imagenIncio" src="https://upload.wikimedia.org/wikipedia/commons/8/87/Dungeons_and_Dragons_game.jpg">
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button style="font-size: 100%; margin-left: 1%; float: right;"mat-flat-button color="primary" (click)="goToPage('registro')">Resgistrarse</button>
+        <button style="font-size: 100%; margin-left: 1%; float: right;"mat-flat-button color="primary" (click)="goToPage('login')">Iniciar Sesion</button>
+      </mat-grid-tile>
+    </mat-grid-list>
   </div>
   {{usuario}}
 </mat-drawer-container>

@@ -43,8 +43,11 @@ export class HomeComponent implements OnInit  {
     })
   }
 
-  public cerrarSesion()
-  {
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
+  }
+
+  public cerrarSesion(){
     this.cookieService.deleteAll()
     this.router.navigate(['/'])
   }
