@@ -30,6 +30,22 @@ export class UsuarioServiceService {
 
   };
 
+  cambiarContrasenia(id: string, contra: string)
+  {
+    const requestOptions:Object = {
+      responseType:'text',
+      method: 'PUT',
+      withCredentials: false,
+      crossorigin: false,
+      mode: 'no-cors'
+    }
+    return this.http.put(`${environment.URLBASE}/usuarios/cambiarContraById/${id}`, contra, requestOptions);
+  }
+
+  getNombreUserById(id:String)
+  {
+    return this.http.get(`${environment.URLBASE}/usuarios/getNombreById`);
+  }
   addUsuario(usuario:IUsuario):Observable<String>{
     const requestOptions:Object = {
       responseType:'text'
@@ -59,5 +75,13 @@ export class UsuarioServiceService {
   getUsuarios() : Observable<IUsuario[]>
   {
     return this.http.get<IUsuario[]>(`${environment.URLBASE}/usuarios/dametodos`)
+  }
+
+  getUsuario(id:String):Observable<IUsuario>{
+    return this.http.get<IUsuario>(`${environment.URLBASE}/usuarios/findByIdString/${id}`);
+  }
+
+  existsByEmail(email:String){
+    return this.http.get<IUsuario>(`${environment.URLBASE}/usuarios/existsByEmail/${email}`)
   }
 }

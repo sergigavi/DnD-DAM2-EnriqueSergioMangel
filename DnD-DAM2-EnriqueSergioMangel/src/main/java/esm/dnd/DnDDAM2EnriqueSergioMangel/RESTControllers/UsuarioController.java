@@ -39,6 +39,75 @@ public class UsuarioController {
 	@Autowired
     private IFichaPersonajeServicio fichaPersonajeServicio;
     
+	@GetMapping("/findById/{id}")
+	public ResponseEntity<Usuario> findUsuarioById(@PathVariable String id){
+
+		ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		try {
+			if(usuarioServicio.existeUsuario(id)){
+				Usuario u = usuarioServicio.findUsuarioById(id).get();
+				res = new ResponseEntity<Usuario>(u,HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+
+	}
+	
+	@GetMapping("/findByIdString/{id}")
+	public ResponseEntity<Usuario> findUsuarioByIdString(@PathVariable String id){
+
+		ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		try {
+			if(usuarioServicio.existeUsuario(id)){
+				Usuario u = usuarioServicio.findUsuarioByIdString(id).get();
+				res = new ResponseEntity<Usuario>(u,HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+
+	}
+	
+	@GetMapping("/cambiarContraById/{id}")
+	public ResponseEntity<Boolean> cambiarContraById(@PathVariable String id, @RequestBody String contra){
+
+		ResponseEntity<Boolean> res = new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
+
+		try {
+			if(usuarioServicio.existeUsuario(id)){
+				usuarioServicio.cambiarContrasenia(id, contra);
+				res = new ResponseEntity<Boolean>(true,HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+
+	}
+	
+	@PutMapping("/getNombreById/{id}")
+	public ResponseEntity<String> findNombreUsuarioByIdString(@PathVariable String id){
+
+		ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		try {
+			if(usuarioServicio.existeUsuario(id)){
+				Usuario u = usuarioServicio.findUsuarioByIdString(id).get();
+				res = new ResponseEntity<String>(u.getNombre(),HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+
+	}
+
+
     @GetMapping("/dametodos")
     public ResponseEntity<List<Usuario>> obtenerTodosLosUsuarios()
     {
@@ -56,7 +125,7 @@ public class UsuarioController {
     {
     	ResponseEntity<Usuario> res = new ResponseEntity<>(new Usuario(),HttpStatus.BAD_REQUEST);
     	
-    	if (!usuarioServicio.existsByNickname(usuario.getNickname()))
+    	if (!usuarioServicio.existsByEmail(usuario.getEmail()))
     	{
         	try {
     			usuario.setIdUser(ObjectId.get());
@@ -142,34 +211,15 @@ public class UsuarioController {
         }
     }
 	
-	@PostMapping("/trylogin")
-    public ResponseEntity<Usuario> loguearse(@RequestBody Usuario u)
+	@GetMapping("/trylogin/{email}/{contrasenia}")
+    public ResponseEntity<Usuario> loguearse(@PathVariable String email,@PathVariable String contrasenia)
     {
         ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         Usuario user;
         
-        if (usuarioServicio.existsByNickname(u.getNickname())) {
+        if (usuarioServicio.existsByEmail(email)) {
         	
-        	user = usuarioServicio.findUsuarioByNickname(u.getNickname()).get();
-        	
-        	if (user.getContrasenia().equals(u.getContrasenia()))
-        	{
-        		res = new ResponseEntity<Usuario>(user, HttpStatus.OK);
-        	}
-        			
-        }
-        
-        return res;
-    }
-	
-	@PostMapping("/tryloginParams")
-    public ResponseEntity<Usuario> loguearsePorParametros(@RequestParam String nickname, @RequestParam String contrasenia)
-    {
-        ResponseEntity<Usuario> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        
-        if (usuarioServicio.existsByNickname(nickname)) {
-        	
-        	Usuario user = usuarioServicio.findUsuarioByNickname(nickname).get();
+        	user = usuarioServicio.findByEmail(email).get();
         	
         	if (user.getContrasenia().equals(contrasenia))
         	{
@@ -180,28 +230,45 @@ public class UsuarioController {
         
         return res;
     }
-	
+
+	@GetMapping("existsByEmail/{email}")
+	public ResponseEntity<Boolean> existsByEmail(@PathVariable String email){
+		ResponseEntity<Boolean> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+		try {
+			if(usuarioServicio.existsByEmail(email)){
+				res = new ResponseEntity<Boolean>(true,HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	/*
 	@DeleteMapping("/clear")
 	public ResponseEntity<Iterable<Usuario>> deleteAll()
 	{
 		
 		ResponseEntity<Iterable<Usuario>> res = new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		
-		Iterable<Usuario> users = usuarioServicio.eliminarTodos();
+		try {
+			Iterable<Usuario> users = usuarioServicio.eliminarTodos();
 		
-		//Elimino tambien los de dentro de las fichas
-		
-		List<FichaPersonaje> fichas =  (List<FichaPersonaje>) fichaPersonajeServicio.deleteAllFichas();
-		fichas.stream().forEach(f -> f.setUsuario(null));
-		
-		fichaPersonajeServicio.addAllFichasPersonaje(fichas);
-		
-		res = new ResponseEntity<Iterable<Usuario>>(users, HttpStatus.ACCEPTED);
+			//Elimino tambien los de dentro de las fichas
+			
+			List<FichaPersonaje> fichas= fichaPersonajeServicio.findAllFichasPersonaje();
+			
+	
+			res = new ResponseEntity<Iterable<Usuario>>(users, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 		
 		return res;
 		
 	}
-    
+     */
     @PostMapping("/insertarPorParametro")
     public ResponseEntity<String> insertarPorParametros(@RequestParam String nombre, @RequestParam String apellidos, @RequestParam String contrasenia, @RequestParam String nickname, @RequestParam String biografia, @RequestParam String email, @RequestParam String fechaNac, @RequestParam String urlImage, /*@RequestParam boolean activo, */@RequestParam String pais)
     {

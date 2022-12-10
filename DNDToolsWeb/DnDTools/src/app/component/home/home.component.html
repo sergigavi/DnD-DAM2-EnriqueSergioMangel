@@ -10,7 +10,7 @@
             <button mat-flat-button color="accent" (click)="navegar('panelControl-admin')">Acceso temporal Admin</button>
           </li>
           <li class="nav-item">
-            <button mat-flat-button color="accent" (click)="navegar('usuario-partidasUsuario')">Acceso temporal Usuario</button>
+            <button mat-flat-button color="accent" (click)="navegar('inicio')">Acceso temporal Usuario</button>
           </li>
         </ul>
       </div>
@@ -32,6 +32,7 @@
       <mat-menu #menu="matMenu">
         <a href="">
           <button mat-menu-item>Iniciar Sesion</button>
+          <button (click)="cerrarSesion()" mat-menu-item>Cerrar Sesion</button>
         </a>
       </mat-menu>
     </mat-toolbar>
@@ -79,6 +80,7 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
+  {{usuario}}
 </mat-drawer-container>
 
 

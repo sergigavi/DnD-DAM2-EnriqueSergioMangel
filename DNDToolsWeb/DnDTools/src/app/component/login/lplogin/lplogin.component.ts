@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoginService } from 'src/app/services/login-service/login.service';
 import { Router } from '@angular/router';
 import { IUsuario } from 'src/modelo/IUsuario';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-lplogin',
@@ -12,12 +13,12 @@ import { IUsuario } from 'src/modelo/IUsuario';
 
 export class LPloginComponent {
 
-  nickname: string;
+  email: string;
   contrasenia: string;
 
   constructor(private loginService: LoginService,private router: Router)
   {
-    this.nickname = "";
+    this.email = "";
     this.contrasenia = "";
   }
 
@@ -25,7 +26,7 @@ export class LPloginComponent {
   {
 
     const usuario :any = {
-      nickname:this.nickname,
+      email:this.email,
       contrasenia:this.contrasenia
     }
 

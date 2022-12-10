@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
 import { EquipamientoAdminService } from 'src/app/services/equipamientoAdmin-service/equipamiento-admin.service';
 import { EnumCatEquipo } from 'src/modelo/EnumCatEquipo';
 import { EnumModificador } from 'src/modelo/EnumModificador';
@@ -24,8 +25,7 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
   title = 'Equipamiento';
   opened = false;
   equipo!:IEquipo
-
-  //data nombrado aqui
+  idCurrentUser="";
   columnas:String[] = ["nombre","tipo","categoria","acceder","editar"]
 
 
@@ -34,10 +34,20 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
 
   dataSource = new MatTableDataSource<IEquipo>([]);
 
-  constructor(private dialog : MatDialog,private equipamientoService: EquipamientoAdminService,private router:Router){
+  constructor(private auth:AuthServiceService,private dialog : MatDialog,private equipamientoService: EquipamientoAdminService,private router:Router){
+  }
+
+  getCurrenUser(){
+    this.auth.data.subscribe((data:any)=>{
+      this.idCurrentUser=data;
+    })
   }
 
   ngOnInit(): void {
+    this.getCurrenUser()
+    if(this.idCurrentUser==null || this.idCurrentUser==""){
+      this.router.navigate(['login'])
+    }
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort
     this.showEquipo()
@@ -173,7 +183,7 @@ export class DialogEditarEquipo{
       this.equipamiento=this.equipo
       this.modificador=this.equipamiento.modificador.toString()
     }
-    
+
     onNoClick(){
       this.dialogRef.close()
     }

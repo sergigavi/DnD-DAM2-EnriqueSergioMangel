@@ -20,12 +20,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+
 //import { UsuarioServiceService } from './services/usuario-service/usuario-service.service';
 //import { Usuario } from './modelo/usuario/usuario';
 import { HttpClientModule } from "@angular/common/http";  //  Para las peticiones http a la api
 import { MatSelectModule } from '@angular/material/select';
 
-//import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
 import { UsuarioFormComponent } from './components/usuario-form/usuario-form.component';
@@ -37,7 +38,7 @@ import { HomeComponent } from './component/home/home.component';
 import { DialogEditarEquipo, DialogVerEquipo, EquipamientoComponent } from './component/admin/equipamiento/equipamiento.component';
 import { PanelControlComponent } from './component/admin/panelControl/panelControl.component';
 import { Dialog2Usuarios, DialogUsuarios, UsuariosComponent } from './component/admin/usuarios/usuarios.component';
-import { PartidasUsuarioComponent } from './component/usuario/partidas/partidas.component';
+import { DialogCrearPartida, PartidasUsuarioComponent } from './component/usuario/partidas/partidas.component';
 import { InicioGMComponent } from './component/usuario/inicio/gameMaster/inicioGM.component';
 import { InicioJugadorComponent } from './component/usuario/inicio/jugador/inicioJugador.component';
 import { DialogMapasGM, DialogMapasGM2, MapasGMComponent } from './component/usuario/mapas/gameMaster/mapasGM.component';
@@ -56,35 +57,39 @@ import { RegisterComponent } from './component/register/register/register.compon
 
 
 const routes: Routes = [
-  //invitados
-  {path:'',component: LPloginComponent},
+  //landing page
+  {path:'',component: HomeComponent},
 
-  //registro
-  {path:'registro',component: RegisterComponent},
-  //ambos
-  {path:'inicio',component: HomeComponent},
-  {path:'usuario-partidasUsuario',component: PartidasUsuarioComponent},
+  //login register
+  {path:'login',component: LPloginComponent},
+  {path:'register',component: RegisterComponent},
+
+  //Inicio de sesion como admin->
+  {path:'panelControl-admin',component: PanelControlComponent},
+
   //admins
   {path:'fichas-admin',component: FichasAdmin},
   {path:'equipamiento-admin',component: EquipamientoComponent},
-  {path:'panelControl-admin',component: PanelControlComponent},
   {path:'usuarios-admin',component: UsuariosComponent},
-  //usuarios
 
+  //Inicio de  sesion como usuario->
+  {path:'inicio',component: PartidasUsuarioComponent},
+
+  //vistas de un usuario en una partida como jugador
   {path:'usuario-inicioJugador',component:InicioJugadorComponent},
-  {path:'usuario-inicioGM',component: InicioGMComponent},
   {path:'usuario-mapasJugador',component: MapasJugadorComponent},
-  {path:'usuario-mapasGM',component: MapasGMComponent},
   {path:'usuario-historiaJugador',component: HistoriaJugadorComponent},
-  {path:'usuario-historiaGM',component: HistoriaGMComponent},
   {path:'usuario-heroesJugador',component: HeroesJugadorComponent},
+
+  //vistas de un usuario en una partida como GM
+  {path:'usuario-inicioGM',component: InicioGMComponent},
+  {path:'usuario-mapasGM',component: MapasGMComponent},
+  {path:'usuario-historiaGM',component: HistoriaGMComponent},
   {path:'usuario-heroesGM',component: HeroesGMComponent},
+
+
   //perfil
   {path:'perfil',component: PerfilComponent},
-
-  //landing page, login register
-  {path:'login',component: LPloginComponent},
-  {path:'register',component: RegisterComponent},
 
 ];
 
@@ -125,7 +130,8 @@ const routes: Routes = [
     DialogVerFicha,
     DialogEditarFicha,
     DialogCrearUsuario,
-    RegisterComponent
+    RegisterComponent,
+    DialogCrearPartida
 
   ],
   imports: [
@@ -156,7 +162,7 @@ const routes: Routes = [
     MatCheckboxModule
   ],
   entryComponents: [UsuarioFormComponent],
-  providers: [MatDatepickerModule,/*CookieService*/],
+  providers: [MatDatepickerModule,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

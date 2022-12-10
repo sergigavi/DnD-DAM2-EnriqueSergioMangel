@@ -14,5 +14,6 @@ public interface IAdministradorServicio {
 	public Iterable<Administrador> findAllAdmins();
 	public Optional<Administrador> findAdminByID(String id);
 	boolean insertarAdministradores(List<Administrador> admins);
-
+	boolean existsByEmail(String email);
+	Optional<Administrador> findByEmail(String email);
 }

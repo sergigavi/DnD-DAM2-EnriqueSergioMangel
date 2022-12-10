@@ -7,10 +7,12 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Partida;
@@ -19,6 +21,7 @@ import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.PartidaServicio;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.UsuarioServicio;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
+@CrossOrigin(origins = {"*"},methods = {RequestMethod.DELETE,RequestMethod.POST,RequestMethod.GET,RequestMethod.PUT,RequestMethod.OPTIONS})
 @RestController
 @RequestMapping("/api/dndtools/partida")
 public class PartidaController {

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { EquipamientoAdminService } from 'src/app/services/equipamientoAdmin-service/equipamiento-admin.service';
 import { FichaAdminService } from 'src/app/services/fichaPersonaje-service/ficha-admin.service';
 import { UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
+import { Administrador, AdministradorService } from 'src/app/services/administrador-service/adminstrador.service';
+import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
 
 @Component({
   selector: 'app-panelControl',
@@ -14,24 +16,26 @@ import { UsuarioServiceService } from 'src/app/services/usuario-service/usuario-
 export class PanelControlComponent implements OnInit  {
   title = 'PanelControl';
   opened = false;
-  usuario=0;
-  equipamiento=0;
-  fichas=0;
+  idCurrentUser="";
 
-  constructor(private router:Router,private usuarioServicio: UsuarioServiceService,private equipamientoService: EquipamientoAdminService,
-    private fichaService:FichaAdminService){}
+  constructor(private auth:AuthServiceService,private router:Router,private adminService:AdministradorService){}
 
   ngOnInit(): void {
-    this.usuarioServicio.getCantidad().subscribe((data:any)=>{
-      this.usuario=data
-    })
+    this.getCurrenUser()
+    if(this.idCurrentUser==null || this.idCurrentUser==""){
+      this.router.navigate(['login'])
+    }else{
+      this.adminService.existsById(this.idCurrentUser).subscribe((data:any)=>{
+        if(data==false){
+          this.router.navigate(['login'])
+        }
+      })
+    }
+  }
 
-    this.equipamientoService.getCantidad().subscribe((data:any)=>{
-      this.equipamiento=data
-    })
-
-    this.fichaService.getCantidad().subscribe((data:any)=>{
-      this.fichas=data
+  getCurrenUser(){
+    this.auth.data.subscribe((data:any)=>{
+      this.idCurrentUser=data;
     })
   }
 

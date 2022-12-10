@@ -88,22 +88,9 @@ public class UsuarioServicio implements IUsuarioServicio{
 
         if(usuarioDAO.existsById(idUser)) {
             a=usuarioDAO.findById(idUser).get();
-            Usuario user=Usuario.builder()
-				.idUser(new ObjectId(idUser))
-                .idUserString(idUser)
-                .nombre(a.getNombre())
-                .apellidos(a.getApellidos())
-                .contrasenia(contrasenia)
-                .nickname(a.getNickname())
-                .biografia(a.getBiografia())
-                .email(a.getEmail())
-                .fechaNacimiento(a.getFechaNacimiento())
-                .urlImage(a.getUrlImage())
-                .activo(a.isActivo())
-                .pais(a.getPais())
-                .build();
+            a.setContrasenia(contrasenia);
 
-            usuarioDAO.save(user);
+            usuarioDAO.save(a);
             exito=true;
         }
         
@@ -147,12 +134,17 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
 	@Override
-	public boolean existsByNickname(String nickname) {
-		return usuarioDAO.existsByNickname(nickname);
+	public boolean existsByEmail(String email) {
+		return usuarioDAO.existsByEmail(email);
 	}
 
 	@Override
-	public Optional<Usuario> findUsuarioByNickname(String nickname) {
-		return usuarioDAO.findByNickname(nickname);
+	public Optional<Usuario> findByEmail(String email) {
+		return usuarioDAO.findByEmail(email);
+	}
+
+	@Override
+	public Optional<Usuario> findUsuarioByIdString(String id) {
+		return usuarioDAO.findByIdUserString(id);
 	}
 }
