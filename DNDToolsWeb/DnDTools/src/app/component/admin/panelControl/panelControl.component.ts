@@ -57,6 +57,12 @@ export class PanelControlComponent implements OnInit  {
 
   }
 
+  cerrarSesionAdmin()
+  {
+    this.cookieService.deleteAll()
+    this.router.navigate(["/"])
+  }
+
   getCurrenUser(){
     this.auth.data.subscribe((data:any)=>{
       this.idCurrentUser=data;
