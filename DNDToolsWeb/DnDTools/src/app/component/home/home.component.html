@@ -32,7 +32,6 @@
       <mat-menu #menu="matMenu">
         <a href="">
           <button mat-menu-item>Iniciar Sesion</button>
-          <button (click)="cerrarSesion()" mat-menu-item>Cerrar Sesion</button>
         </a>
       </mat-menu>
     </mat-toolbar>
@@ -76,7 +75,7 @@
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <button style="font-size: 100%; margin-left: 1%; float: right;"mat-flat-button color="primary" (click)="goToPage('registro')">Resgistrarse</button>
-        <button style="font-size: 100%; margin-left: 1%; float: right;"mat-flat-button color="primary" (click)="goToPage('')">Iniciar Sesion</button>
+        <button style="font-size: 100%; margin-left: 1%; float: right;"mat-flat-button color="primary" (click)="goToPage('login')">Iniciar Sesion</button>
       </mat-grid-tile>
     </mat-grid-list>
   </div>

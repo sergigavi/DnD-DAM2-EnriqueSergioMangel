@@ -47,7 +47,7 @@ export class LoginService {
           //this.router.navigate(['/'])
         }
         else{
-          this.router.navigate(['/'])
+          this.router.navigate(['inicio'])
         }
       }else{
         this.router.navigate(['/'])
