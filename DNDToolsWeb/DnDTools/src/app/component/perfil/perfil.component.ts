@@ -48,14 +48,19 @@ export class PerfilComponent implements OnInit  {
   cambiarContrasenia()
   {
 
-    if (this.contra.trim == this.contra2.trim)
+    if (this.contra == this.contra2)
     {
-      this.userService.cambiarContrasenia(this.cookieService.get("CurrentUserId"), this.contra.trim.toString()).subscribe((data:any) => {
+      this.userService.cambiarContrasenia(this.cookieService.get("CurrentUserId"), this.contra).subscribe((data:any) => {
         console.log(data)
       })
+      alert("Contraseña actualizada correctamente")
+      this.contra = ""
+      this.contra2 = ""
     }
     else{
       alert("Deben coincidir las contraseñas")
+      this.contra = ""
+      this.contra2 = ""
     }
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { IUsuario } from 'src/modelo/IUsuario';
@@ -32,14 +32,13 @@ export class UsuarioServiceService {
 
   cambiarContrasenia(id: string, contra: string)
   {
-    const requestOptions:Object = {
-      responseType:'text',
-      method: 'PUT',
-      withCredentials: false,
-      crossorigin: false,
-      mode: 'no-cors'
-    }
-    return this.http.put(`${environment.URLBASE}/usuarios/cambiarContraById/${id}`, contra, requestOptions);
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', '*/*')
+    headers.append('Accept-Encoding', 'gzip, deflate, br')
+    headers.append('Connection', 'keep.alive')
+
+    return this.http.put(`${environment.URLBASE}/usuarios/cambiarContraById/${id}`, contra, {headers:headers, responseType:'json', withCredentials:false});
   }
 
   getNombreUserById(id:String)
