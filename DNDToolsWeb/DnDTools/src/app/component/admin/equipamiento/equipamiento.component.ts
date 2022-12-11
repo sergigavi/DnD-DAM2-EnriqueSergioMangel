@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
 import { EquipamientoAdminService } from 'src/app/services/equipamientoAdmin-service/equipamiento-admin.service';
 import { EnumCatEquipo } from 'src/modelo/EnumCatEquipo';
@@ -34,7 +35,7 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
 
   dataSource = new MatTableDataSource<IEquipo>([]);
 
-  constructor(private auth:AuthServiceService,private dialog : MatDialog,private equipamientoService: EquipamientoAdminService,private router:Router){
+  constructor(private auth:AuthServiceService,private dialog : MatDialog,private equipamientoService: EquipamientoAdminService,private router:Router, private cookieService: CookieService){
   }
 
   getCurrenUser(){
@@ -47,6 +48,10 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
     this.getCurrenUser()
     if(this.idCurrentUser==null || this.idCurrentUser==""){
       this.router.navigate(['login'])
+    }
+    if(!this.cookieService.check("CurrentAdminId")){
+      this.auth.deleteData()
+      this.router.navigate(['/'])
     }
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort

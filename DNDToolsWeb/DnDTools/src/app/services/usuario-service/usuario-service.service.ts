@@ -61,6 +61,17 @@ export class UsuarioServiceService {
     return this.http.put<any>(`${environment.URLBASE}/usuarios/update`,usuario,requestOptions)
   }
 
+  actualizarUsuarioById(idUser:string, usuario:IUsuario)//nombre:string, apellidos:string, nickname:string, actividad:boolean, pais:string, fechaNacimiento:Date, biografia:string, urlImage:string)
+  {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', '*/*')
+    headers.append('Accept-Encoding', 'gzip, deflate, br')
+    headers.append('Connection', 'keep.alive')
+
+    return this.http.put(`${environment.URLBASE}/usuarios/editarUserById/${idUser}`, usuario, {headers:headers, responseType:'json', withCredentials:false});
+  }
+
   deleteUsuarioById(id:String):Observable<String>{
     const requestOptions:Object = {
       responseType:'text'

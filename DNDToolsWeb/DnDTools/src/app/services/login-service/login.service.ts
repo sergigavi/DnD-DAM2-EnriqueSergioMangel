@@ -28,7 +28,7 @@ export class LoginService {
     headers.append('Content-Type', 'application/json');
 
     //borro las cookies que haya
-    this.cookieService.deleteAll()
+    //this.cookieService.deleteAll()
 
     try {
       this.http.get(`${environment.URLBASE}/usuarios/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
@@ -57,7 +57,7 @@ export class LoginService {
               this.getCurrenUser()
 
               //me guardo el id en la cookie
-              this.cookieService.set("CurrentUserId",id)
+              this.cookieService.set("CurrentAdminId",id)
 
               //panel admin
               this.router.navigate(['/panelControl-admin'])

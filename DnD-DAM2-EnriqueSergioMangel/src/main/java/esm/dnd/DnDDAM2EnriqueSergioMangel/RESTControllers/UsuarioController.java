@@ -90,6 +90,35 @@ public class UsuarioController {
 
 	}
 	
+	@PutMapping("/editarUserById/{id}")
+	public ResponseEntity<Boolean> editarUserById(@PathVariable String id, @RequestBody Usuario usuario){
+
+		ResponseEntity<Boolean> res = new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
+
+		try {
+			if(usuarioServicio.existeUsuario(id)){
+				
+				Usuario u = usuarioServicio.findUsuarioByIdString(id).get();
+				u.setNombre(usuario.getNombre());
+				u.setApellidos(usuario.getApellidos());
+				u.setNickname(usuario.getNickname());
+				u.setActivo(usuario.isActivo());
+				u.setPais(usuario.getPais());
+				u.setFechaNacimiento(usuario.getFechaNacimiento());
+				u.setBiografia(usuario.getBiografia());
+				u.setUrlImage(usuario.getUrlImage());
+				
+				usuarioServicio.guardarUserCompletoEnDB(u);
+				
+				res = new ResponseEntity<Boolean>(true,HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+
+	}
+	
 	@GetMapping("/getNombreById/{id}")
 	public ResponseEntity<String> findNombreUsuarioByIdString(@PathVariable String id){
 

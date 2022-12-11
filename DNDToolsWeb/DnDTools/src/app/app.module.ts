@@ -53,6 +53,7 @@ import { LPloginComponent } from './component/login/lplogin/lplogin.component';
 import { EnumCatEquipo } from 'src/modelo/EnumCatEquipo';
 import { DialogCrearFicha, DialogEditarFicha, DialogVerFicha, FichasAdmin } from './component/admin/fichas/fichasAdmin.component';
 import { RegisterComponent } from './component/register/register/register.component';
+import { EditarPerfilComponent } from './component/editar-perfil/editar-perfil.component';
 
 
 
@@ -90,6 +91,7 @@ const routes: Routes = [
 
   //perfil
   {path:'perfil',component: PerfilComponent},
+  {path:'editarPerfil',component: EditarPerfilComponent},
 
 ];
 
@@ -131,7 +133,8 @@ const routes: Routes = [
     DialogEditarFicha,
     DialogCrearUsuario,
     RegisterComponent,
-    DialogCrearPartida
+    DialogCrearPartida,
+    EditarPerfilComponent
 
   ],
   imports: [
