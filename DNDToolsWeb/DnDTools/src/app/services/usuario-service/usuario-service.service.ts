@@ -45,6 +45,7 @@ export class UsuarioServiceService {
   {
     return this.http.get(`${environment.URLBASE}/usuarios/getNombreById`);
   }
+  
   addUsuario(usuario:IUsuario):Observable<String>{
     const requestOptions:Object = {
       responseType:'text'

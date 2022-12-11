@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,30 +106,36 @@ public class PartidaController {
         return res;
     }
 
-    @PostMapping("/addPartida/{usuario}/{partida}")
-    public ResponseEntity<Partida> addPartida(@PathVariable Usuario usuario, @PathVariable Partida partida){
-        ResponseEntity<Partida> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    @PostMapping("/add")
+    public ResponseEntity<String> addPartida(@RequestBody Partida partida){
+        ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         ObjectId id = ObjectId.get();
         ObjectId idPartida = ObjectId.get();
         String idString = id.toString();
         String idStringPartida = idPartida.toString();
+        
+        System.out.println(partida.toString());
 
         Partida pa= Partida.builder()
-        .idPartida(id)
-        .idStringPartida(idString)
-        .codigoPartida(idStringPartida)
-        .nombre(partida.getNombre())
-        .creador(usuario)
-        .usuariosPartida(null)
-        .equipoPartida(null)
-        .fichasPartida(null)
-        .build();
+            .idPartida(id)
+            .idStringPartida(idString)
+            .codigoPartida(idStringPartida)
+            .nombre(partida.getNombre())
+            .creador(partida.getCreador())
+            .usuariosPartida(null)
+            .equipoPartida(null)
+            .fichasPartida(null)
+            .build();
 
         try {
             partidaServicio.addPartida(pa);
-            res = new ResponseEntity<>(partidaServicio.findPartidaById(pa.getIdStringPartida()).get(),HttpStatus.OK);
-        } catch (Exception e) {
+            res = new ResponseEntity<String>("Exito",HttpStatus.OK);
+        } catch (HttpMessageNotReadableException e) {
+            res = new ResponseEntity<String>("Fallo al leer",HttpStatus.BAD_REQUEST);
+            e.printStackTrace();
+        } catch(Exception e){
+            res = new ResponseEntity<String>("Fallo al leer",HttpStatus.BAD_REQUEST);
             e.printStackTrace();
         }
         return res;

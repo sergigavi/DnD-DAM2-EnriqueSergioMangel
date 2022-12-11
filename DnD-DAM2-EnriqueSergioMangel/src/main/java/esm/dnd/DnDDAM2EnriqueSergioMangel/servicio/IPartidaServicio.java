@@ -5,7 +5,6 @@ import java.util.Optional;
 
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Partida;
-import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 
 public interface IPartidaServicio {
     

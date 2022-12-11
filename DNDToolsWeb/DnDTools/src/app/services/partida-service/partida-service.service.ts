@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IPartida } from 'src/modelo/IPartida';
-import { IUsuario } from 'src/modelo/IUsuario';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +15,12 @@ export class PartidaServiceService {
     return this.http.get<IPartida[]>(`${environment.URLBASE}/partida/getAll`);
   }
 
-  addPartida(usuario:IUsuario,partida:IPartida):Observable<String>{
+  addPartida(partida:IPartida):Observable<String>{
+
     const requestOptions:Object = {
       responseType:'text'
     }
-
-    return this.http.post<String>(`${environment.URLBASE}/partida/addPartida/${usuario}/${partida}`, requestOptions)
+    console.log(partida)
+    return this.http.post<String>(`${environment.URLBASE}/partida/add`,partida, requestOptions)
   }
 }

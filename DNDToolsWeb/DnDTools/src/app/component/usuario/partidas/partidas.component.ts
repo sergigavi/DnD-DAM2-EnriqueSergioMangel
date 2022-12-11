@@ -77,23 +77,20 @@ export class PartidasUsuarioComponent implements OnInit  {
 export class DialogCrearPartida{
 
   constructor(private partidaServicio: PartidaServiceService, private cookieService: CookieService,private usuarioService:UsuarioServiceService,private dialogRef:MatDialogRef<PartidasUsuarioComponent>,private auth:AuthServiceService){}
-  par:any
   partida!:IPartida
   idCurrentUser="";
   currentuser!:IUsuario
   nombrePartida:String=""
 
   onSubmit(ngForm:NgForm){
-    this.par=ngForm.value
-    this.partida=this.par
+    this.partida=ngForm.value
     this.getCurrenUser()
 
     this.usuarioService.getUsuario(this.idCurrentUser).subscribe((data:any)=>{
       this.currentuser=data
-      console.log(this.currentuser)
-      console.log(this.partida)
-      this.partidaServicio.addPartida(this.currentuser,this.partida).subscribe((data:any)=>{
-
+      this.partida.creador=this.currentuser;
+      this.partidaServicio.addPartida(this.partida).subscribe((data:any)=>{
+  
       })
       this.dialogRef.close();
     })
