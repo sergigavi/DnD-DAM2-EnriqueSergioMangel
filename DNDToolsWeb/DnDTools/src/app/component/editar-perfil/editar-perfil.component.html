@@ -1,0 +1,87 @@
+<mat-card style="background-color: rgb(221, 221, 221);" class="example-card">
+
+    <img id="avatar" mat-card-avatar src="{{datosUser.urlImage}}">
+
+  <div class="example-header">
+    <mat-card-title>{{datosUser.nombre}}</mat-card-title>
+    <mat-card-subtitle>
+      <a href="editarPerfil">Editar Perfil</a>
+    </mat-card-subtitle>
+  </div>
+  <img class="image-perfil" src="{{datosUser.urlImage}}" alt="Profile pic">
+</mat-card>
+<form #perfilForm="ngForm">
+  <mat-grid-list cols="4" rowHeight="3:1">
+    <h1 style="margin-left: 7%;">Datos de Interes</h1>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" [(ngModel)]="datosUser.nombre" [ngModelOptions]="{standalone: true}" value="{{datosUser.nombre}}">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Apellidos</mat-label>
+          <input matInput type="text" [(ngModel)]="datosUser.apellidos" [ngModelOptions]="{standalone: true}" value="{{datosUser.apellidos}}">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Nickname</mat-label>
+          <input matInput type="text" [(ngModel)]="datosUser.nickname" [ngModelOptions]="{standalone: true}" value="{{datosUser.nickname}}">
+        </mat-form-field>
+      </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>Actividad reciente</mat-label>
+          <input matInput value="{{datosUser.activo}}" [(ngModel)]="datosUser.activo" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+      </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field appearance="fill" class="formField">
+          <mat-label>Pais</mat-label>
+          <input matInput value="{{datosUser.pais}}" [(ngModel)]="datosUser.pais" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field appearance="fill" class="formField">
+        <mat-label>Fecha de nacimiento</mat-label>
+        <input matInput type="date" [(ngModel)]="datosUser.fechaNacimiento" [ngModelOptions]="{standalone: true}" value="{{datosUser.fechaNacimiento}}">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field appearance="fill" class="formField">
+        <mat-label>Biografía</mat-label>
+        <textarea matInput value="{{datosUser.biografia}}" [(ngModel)]="datosUser.biografia" [ngModelOptions]="{standalone: true}" placeholder="Tu biografía"></textarea>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field appearance="fill" class="formField">
+          <mat-label>urlImage</mat-label>
+          <textarea matInput value="{{datosUser.urlImage}}" [(ngModel)]="datosUser.urlImage" [ngModelOptions]="{standalone: true}" placeholder="Url Imagen"></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+
+  </mat-grid-list>
+</form>
+
+<div>
+    <button style="margin-left: 7%; " mat-flat-button color="accent" type="submit" (click)="actualizarPerfil()">Actualizar perfil</button>
+
+</div>
+
+<a href="inicio">
+  <button style="margin-top: 1%; margin-left: 1%; float: right;"mat-flat-button color="accent">Volver</button>
+</a>
+<a>
+  <button style="margin-top: 1%; margin-left: 1%; float: right;" mat-flat-button (click)="cerrarSesion()" color="accent">Cerrar Sesión</button>
+</a>
+
+

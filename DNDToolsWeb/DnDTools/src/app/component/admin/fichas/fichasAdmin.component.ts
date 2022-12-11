@@ -64,11 +64,11 @@ export class FichasAdmin implements OnInit  {
 
   ngOnInit(): void {
     this.getCurrenUser
-    this.idCurrentUser=this.cookieService.get("CurrentUserId")
+    this.idCurrentUser=this.cookieService.get("CurrentAdminId")
     /*if(this.idCurrentUser==null || this.idCurrentUser==""){
       this.router.navigate(['login'])
     }*/
-    if(!this.cookieService.check("CurrentUserId")){
+    if(!this.cookieService.check("CurrentAdminId")){
       this.auth.deleteData()
       this.router.navigate(['/'])
     }

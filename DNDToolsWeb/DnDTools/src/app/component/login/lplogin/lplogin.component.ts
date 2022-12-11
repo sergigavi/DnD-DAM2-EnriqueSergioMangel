@@ -16,7 +16,7 @@ export class LPloginComponent {
   email: string;
   contrasenia: string;
 
-  constructor(private loginService: LoginService,private router: Router)
+  constructor(private loginService: LoginService,private router: Router, private cookieService: CookieService)
   {
     this.email = "";
     this.contrasenia = "";
@@ -38,6 +38,8 @@ export class LPloginComponent {
 
   ngOnInit(){
     //this.loginService.trylogin()
+    //borro las cookies que haya
+    this.cookieService.deleteAll()
   }
 
   goToPage(pageName:string){
