@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 export interface PeriodicElement {
   nombreHeroes: string;
@@ -36,6 +37,9 @@ export class HeroesJugadorComponent implements OnInit  {
 
   ngOnInit(): void {
     this.messageEvent.emit(this.message);
+    if(!this.cookieService.check("CurrentAdminId")){
+      this.router.navigate(['/'])
+    }
   }
 
   title = 'Heroes Jugador';
@@ -44,7 +48,7 @@ export class HeroesJugadorComponent implements OnInit  {
   displayedColumns: string[] = ['nombreHeroes','acceder'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
-  constructor(public dialog: MatDialog,private router:Router){}
+  constructor(public dialog: MatDialog,private router:Router, private cookieService:CookieService){}
 
   public navegar(ruta:String){
     this.router.navigate([`${ruta}`])

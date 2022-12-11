@@ -53,6 +53,8 @@ export class PartidasUsuarioComponent implements OnInit  {
   cerrarSesion()
   {
     this.cookieService.deleteAll();
+    this.router.navigate(['/'])
+
   }
 
   showPartidas(){

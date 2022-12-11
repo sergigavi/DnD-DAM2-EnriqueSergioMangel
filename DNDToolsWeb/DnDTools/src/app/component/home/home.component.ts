@@ -27,9 +27,14 @@ export class HomeComponent implements OnInit  {
     //console.log(this.idCurrentUser)
     //if(this.idCurrentUser="vacio" || this.cookieService.get("CurrentUserId")=="" ){
       if(this.cookieService.check("CurrentUserId")){
-      this.auth.deleteData()
-      this.router.navigate(['perfil'])
-    }
+        this.auth.deleteData()
+        this.router.navigate(['inicio'])
+      }
+
+      if(this.cookieService.check("CurrentAdminId")){
+        this.auth.deleteData()
+        this.router.navigate(['panelControl-admin'])
+      }
 
   }
 

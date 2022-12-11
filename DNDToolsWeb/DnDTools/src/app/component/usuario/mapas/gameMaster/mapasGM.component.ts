@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 export interface PeriodicElement {
   nombreUbicacion: string;
@@ -35,7 +36,7 @@ export class MapasGMComponent implements OnInit  {
   displayedColumns: string[] = ['nombreUbicacion','acceder', 'editar'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
-  constructor(public dialog: MatDialog,private router:Router){}
+  constructor(public dialog: MatDialog,private router:Router, private cookieService:CookieService){}
 
   public navegar(ruta:String){
     this.router.navigate([`${ruta}`])
@@ -61,6 +62,9 @@ export class MapasGMComponent implements OnInit  {
 
   ngOnInit(): void {
     this.dataSource.paginator=this.paginator;
+    if(!this.cookieService.check("CurrentAdminId") && !this.cookieService.check("CurrentUserId")){
+      this.router.navigate(['/'])
+    }
   }
 
   ngAfterViewInit(){

@@ -73,7 +73,7 @@ export class LoginService {
     }
 
     if(!this.cookieService.check("CurrentUserId") && !this.cookieService.check("CurrentAdminId")){
-      alert("Credenciales incorrectas")
+      //alert("Credenciales incorrectas")
       this.router.navigate(['login'])
     }
   }
