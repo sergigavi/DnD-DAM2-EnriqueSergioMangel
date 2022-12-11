@@ -28,7 +28,7 @@ export class PanelControlComponent implements OnInit  {
   ngOnInit(): void {
     this.getCurrenUser()
 
-    if(!this.cookieService.check("CurrentUserId")){
+    if(!this.cookieService.check("CurrentAdminId")){
       this.auth.deleteData()
       this.router.navigate(['/'])
     }

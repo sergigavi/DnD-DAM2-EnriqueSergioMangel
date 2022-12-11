@@ -80,6 +80,18 @@ public class UsuarioServicio implements IUsuarioServicio{
 		}
 		return us;
 	}
+	
+	@Override
+	public boolean guardarUserCompletoEnDB(Usuario usuario) {
+		boolean exito = false;
+		if(usuarioDAO.existsById(usuario.getIdUserString())){
+			
+			usuarioDAO.save(usuario);
+			
+			exito = true;
+		}
+		return exito;
+	}
 
     @Override
     public boolean cambiarContrasenia(String idUser, String contrasenia){

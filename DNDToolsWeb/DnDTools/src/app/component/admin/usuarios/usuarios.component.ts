@@ -9,6 +9,7 @@ import { UsuarioServiceService } from 'src/app/services/usuario-service/usuario-
 import { IUsuario } from 'src/modelo/IUsuario';
 import { DialogCrearUsuario } from './dialogCrearUsuarios';
 import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-usuarios',
@@ -30,12 +31,17 @@ export class UsuariosComponent implements OnInit  {
   columnas: string[] = ['nombreCuenta','correo','acceder','editar'];
   dataSource = new MatTableDataSource<IUsuario>([])
 
-  constructor(private auth:AuthServiceService,public dialog: MatDialog,private usuarioService: UsuarioServiceService,private router:Router){}
+  constructor(private auth:AuthServiceService,public dialog: MatDialog,private usuarioService: UsuarioServiceService,private router:Router, private cookieService: CookieService){}
 
   ngOnInit(): void {
     this.getCurrenUser()
     if(this.idCurrentUser==null || this.idCurrentUser==""){
       this.router.navigate(['login'])
+    }
+
+    if(!this.cookieService.check("CurrentAdminId")){
+      this.auth.deleteData()
+      this.router.navigate(['/'])
     }
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort

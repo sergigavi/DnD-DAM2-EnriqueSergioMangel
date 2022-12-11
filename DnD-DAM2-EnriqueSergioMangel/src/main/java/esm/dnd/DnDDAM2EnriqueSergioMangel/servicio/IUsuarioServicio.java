@@ -36,4 +36,6 @@ public interface IUsuarioServicio {
     public long getCantidad();
     
 	public Optional<Usuario> findUsuarioByIdString(String id);
+
+	public boolean guardarUserCompletoEnDB(Usuario usuario);
 }
