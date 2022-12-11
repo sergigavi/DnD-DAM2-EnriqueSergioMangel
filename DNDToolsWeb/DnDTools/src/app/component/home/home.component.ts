@@ -38,9 +38,7 @@ export class HomeComponent implements OnInit  {
     this.router.navigate([`${ruta}`])
   }
   getCurrenUser(){
-    this.auth.data.subscribe((data:String)=>{
-      this.idCurrentUser=data;
-    })
+    this.idCurrentUser=this.cookieService.get("CurrentUserId");
   }
 
   goToPage(pageName:string){

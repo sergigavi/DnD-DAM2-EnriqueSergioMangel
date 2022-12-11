@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -104,17 +105,29 @@ public class PartidaController {
         return res;
     }
 
-    @PostMapping("/addPartida")
-    public ResponseEntity<Partida> addPartida(@RequestBody Partida partida){
+    @PostMapping("/addPartida/{usuario}/{partida}")
+    public ResponseEntity<Partida> addPartida(@PathVariable Usuario usuario, @PathVariable Partida partida){
         ResponseEntity<Partida> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
+        ObjectId id = ObjectId.get();
+        ObjectId idPartida = ObjectId.get();
+        String idString = id.toString();
+        String idStringPartida = idPartida.toString();
+
+        Partida pa= Partida.builder()
+        .idPartida(id)
+        .idStringPartida(idString)
+        .codigoPartida(idStringPartida)
+        .nombre(partida.getNombre())
+        .creador(usuario)
+        .usuariosPartida(null)
+        .equipoPartida(null)
+        .fichasPartida(null)
+        .build();
+
         try {
-            if(!partidaServicio.existePartida(partida.getIdStringPartida())){
-                partida.setIdPartida(ObjectId.get());
-                partida.setIdStringPartida(partida.getIdPartida().toString());
-                partidaServicio.addPartida(partida);
-                res = new ResponseEntity<>(partidaServicio.findPartidaById(partida.getIdStringPartida()).get(),HttpStatus.OK);
-            }
+            partidaServicio.addPartida(pa);
+            res = new ResponseEntity<>(partidaServicio.findPartidaById(pa.getIdStringPartida()).get(),HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
         }

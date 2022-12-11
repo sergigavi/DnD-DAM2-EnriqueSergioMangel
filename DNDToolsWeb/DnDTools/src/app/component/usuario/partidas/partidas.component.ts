@@ -5,10 +5,12 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
 import { PartidaServiceService } from 'src/app/services/partida-service/partida-service.service';
 import { UsuarioServiceService } from 'src/app/services/usuario-service/usuario-service.service';
 import { IPartida } from 'src/modelo/IPartida';
+import { IUsuario } from 'src/modelo/IUsuario';
 
 @Component({
   selector: 'app-partidas',
@@ -28,7 +30,7 @@ export class PartidasUsuarioComponent implements OnInit  {
   columnas:String[] = ["nombre","acceder"]
   dataSource = new MatTableDataSource<IPartida>([]);
   idCurrentUser="";
-  constructor(private usuarioService:UsuarioServiceService,private router:Router,private partidaServicio:PartidaServiceService,private dialog : MatDialog,private auth:AuthServiceService){}
+  constructor(private cookieService: CookieService,private usuarioService:UsuarioServiceService,private router:Router,private partidaServicio:PartidaServiceService,private dialog : MatDialog,private auth:AuthServiceService){}
 
   ngOnInit() {
     this.getCurrenUser()
@@ -61,10 +63,9 @@ export class PartidasUsuarioComponent implements OnInit  {
       this.showPartidas()
     })
   }
+
   getCurrenUser(){
-    this.auth.data.subscribe((data:any)=>{
-      this.idCurrentUser=data;
-    })
+    this.idCurrentUser=this.cookieService.get("CurrentUserId");
   }
 
 }
@@ -75,19 +76,25 @@ export class PartidasUsuarioComponent implements OnInit  {
 })
 export class DialogCrearPartida{
 
-  constructor(private usuarioService:UsuarioServiceService,private dialogRef:MatDialogRef<PartidasUsuarioComponent>,private auth:AuthServiceService){}
-  partida:any
+  constructor(private partidaServicio: PartidaServiceService, private cookieService: CookieService,private usuarioService:UsuarioServiceService,private dialogRef:MatDialogRef<PartidasUsuarioComponent>,private auth:AuthServiceService){}
+  par:any
+  partida!:IPartida
   idCurrentUser="";
-  currentuser:any
+  currentuser!:IUsuario
   nombrePartida:String=""
 
   onSubmit(ngForm:NgForm){
-    console.log(ngForm.value)
-    this.partida=ngForm
+    this.par=ngForm.value
+    this.partida=this.par
     this.getCurrenUser()
+
     this.usuarioService.getUsuario(this.idCurrentUser).subscribe((data:any)=>{
       this.currentuser=data
       console.log(this.currentuser)
+      console.log(this.partida)
+      this.partidaServicio.addPartida(this.currentuser,this.partida).subscribe((data:any)=>{
+
+      })
       this.dialogRef.close();
     })
 
@@ -97,10 +104,10 @@ export class DialogCrearPartida{
     this.dialogRef.close()
   }
 
+
+
   getCurrenUser(){
-    this.auth.data.subscribe((data:any)=>{
-      this.idCurrentUser=data;
-    })
+    this.idCurrentUser=this.cookieService.get("CurrentUserId");
   }
 }
 

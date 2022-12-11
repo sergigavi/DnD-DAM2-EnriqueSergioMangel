@@ -3,10 +3,12 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.servicio;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Partida;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.repositorio.PartidaRepository;
 
 @Service
