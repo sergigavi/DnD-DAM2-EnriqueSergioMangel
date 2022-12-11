@@ -8,6 +8,7 @@ import { UsuarioServiceService } from '../usuario-service/usuario-service.servic
 import { AdministradorService } from '../administrador-service/adminstrador.service';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,38 +22,68 @@ export class LoginService {
 
   }
 
-  trylogin(usuario:any){
+  async trylogin(usuario:any){
 
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
 
     //borro las cookies que haya
     this.cookieService.deleteAll()
-    this.adminService.existsByEmail(usuario.email).subscribe((data:any)=>{
 
+    try {
+      this.http.get(`${environment.URLBASE}/usuarios/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
+      .subscribe((data:any) => {  //data es la respuesta que me devuelve la api
+        if (data != null){
+          var id = data.idUserString
+          this.auth.sendData(id)
+          this.getCurrenUser()
+
+          //me guardo el id en la cookie
+          this.cookieService.set("CurrentUserId",id)
+
+          this.router.navigate(['/inicio'])
+        }else{
+          alert("Error conectando con el servidor")
+          this.router.navigate(['/'])
+        }
+      });
+
+      this.http.get(`${environment.URLBASE}/admins/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
+          .subscribe((data:any) => {
+
+            if (data != null){
+              var id = data.idAdminString
+              this.auth.sendData(id)
+              this.getCurrenUser()
+
+              //me guardo el id en la cookie
+              this.cookieService.set("CurrentUserId",id)
+
+              //panel admin
+              this.router.navigate(['/panelControl-admin'])
+
+            }else{
+              alert("Error conectando con el servidor")
+              this.router.navigate(['/'])
+            }
+          });
+
+    } catch (error) {
+      console.log("Error")
+    }
+
+  }
+
+  async esAdmin(usuario: string) :Promise<boolean>{
+
+    var esAdmin = false
+    await this.adminService.existsByEmail(usuario).subscribe((data:any) => {
+      console.log(data)
+      esAdmin = data
     })
-
-    return this.http.get(`${environment.URLBASE}/usuarios/trylogin/${usuario.email}/${usuario.contrasenia}`,{headers:headers, responseType:'json', withCredentials:false})
-    .subscribe((data:any) => {  //data es la respuesta que me devuelve la api
-      if (data != null){
-        var id = data.idUserString
-        this.auth.sendData(id)
-        this.getCurrenUser()
-
-        //me guardo el id en la cookie
-        this.cookieService.set("CurrentUserId",id)
-
-        if(false){//this.adminService.existsById(this.idCurrentUser)){
-          //panel admin
-          //this.router.navigate(['/'])
-        }
-        else{
-          this.router.navigate(['inicio'])
-        }
-      }else{
-        this.router.navigate(['/'])
-      }
-    });
+    //return await this.adminService.existsByEmail(usuario).toPromise() || false
+    console.log(esAdmin)
+    return esAdmin
   }
 
   getCurrenUser(){

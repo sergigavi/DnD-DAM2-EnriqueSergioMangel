@@ -30,12 +30,18 @@ export class PartidasUsuarioComponent implements OnInit  {
   columnas:String[] = ["nombre","acceder"]
   dataSource = new MatTableDataSource<IPartida>([]);
   idCurrentUser="";
-  constructor(private cookieService: CookieService,private usuarioService:UsuarioServiceService,private router:Router,private partidaServicio:PartidaServiceService,private dialog : MatDialog,private auth:AuthServiceService){}
+
+  constructor(private usuarioService:UsuarioServiceService,private router:Router, private cookieService: CookieService,private partidaServicio:PartidaServiceService,private dialog : MatDialog,private auth:AuthServiceService){}
 
   ngOnInit() {
     this.getCurrenUser()
     if(this.idCurrentUser==null || this.idCurrentUser==""){
       this.router.navigate(['login'])
+    }
+
+    if(!this.cookieService.check("CurrentUserId")){
+      this.auth.deleteData()
+      this.router.navigate(['/'])
     }
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort
@@ -90,7 +96,7 @@ export class DialogCrearPartida{
       this.currentuser=data
       this.partida.creador=this.currentuser;
       this.partidaServicio.addPartida(this.partida).subscribe((data:any)=>{
-  
+
       })
       this.dialogRef.close();
     })

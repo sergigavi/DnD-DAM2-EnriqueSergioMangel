@@ -17,6 +17,7 @@ import { IHabilidad } from 'src/modelo/IHabilidad';
 import { EnumHabilidad } from 'src/modelo/EnumHabilidad';
 import { ICaracteristica } from 'src/modelo/ICaracteristica';
 import { AuthServiceService } from 'src/app/services/auth-user/auth-service.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 /**
@@ -43,7 +44,9 @@ export class FichasAdmin implements OnInit  {
   dataSource= new MatTableDataSource<IFichaPersonaje[]>([]);
 
   constructor(private auth:AuthServiceService,private fichaService:FichaAdminService,private router:Router,private dialog:MatDialog,
-    private equipoService:EquipamientoAdminService){}
+    private equipoService:EquipamientoAdminService, private cookieService: CookieService){
+
+    }
 
   applyFilter(event:Event){
     const filterValue = (event.target as HTMLInputElement).value
@@ -61,9 +64,15 @@ export class FichasAdmin implements OnInit  {
 
   ngOnInit(): void {
     this.getCurrenUser
-    if(this.idCurrentUser==null || this.idCurrentUser==""){
+    this.idCurrentUser=this.cookieService.get("CurrentUserId")
+    /*if(this.idCurrentUser==null || this.idCurrentUser==""){
       this.router.navigate(['login'])
+    }*/
+    if(!this.cookieService.check("CurrentUserId")){
+      this.auth.deleteData()
+      this.router.navigate(['/'])
     }
+
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort
     this.showFichas()

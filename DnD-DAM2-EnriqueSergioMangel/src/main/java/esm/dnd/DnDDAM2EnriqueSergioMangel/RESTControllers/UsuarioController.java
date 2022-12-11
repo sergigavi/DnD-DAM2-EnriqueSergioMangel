@@ -4,7 +4,7 @@ package esm.dnd.DnDDAM2EnriqueSergioMangel.RESTControllers;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -189,6 +189,8 @@ public class UsuarioController {
         ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         if(usuarioServicio.eliminarUsuario(id)){
+        	List<FichaPersonaje> fichasAEliminar = fichaPersonajeServicio.findAllFichasPersonaje().stream().filter(f -> f.getUsuario().getIdUserString().equals(id)).collect(Collectors.toList());
+        	fichasAEliminar.forEach(f -> fichaPersonajeServicio.deleteFichaPersonajeById(f.getIdFichaPersonajeString()));
             return new ResponseEntity<String>("Exito",HttpStatus.OK);
         }else{
             return res;

@@ -16,6 +16,7 @@ export class RegisterComponent {
   nombre:String;
   apellidos:String;
   contrasenia:any;
+  contrasenia2:any;
   nickname:any;
   biografia:String;
   email:String;
@@ -30,6 +31,7 @@ export class RegisterComponent {
     this.apellidos= "";
     this.nickname = "";
     this.contrasenia = "";
+    this.contrasenia2 = "";
     this.biografia = "";
     this.email = "";
     this.fechaNacimiento = "";
@@ -40,25 +42,31 @@ export class RegisterComponent {
 
   tryRegister()
   {
+    if (this.contrasenia == this.contrasenia2)
+    {
+      const usuario :IUsuario = {
+        idUser:null,
+        idUserString:"",
+        nombre:this.nombre,
+        apellidos:this.apellidos,
+        nickname:this.nickname,
+        contrasenia:this.contrasenia,
+        biografia:this.biografia,
+        email:this.email,
+        fechaNacimiento:this.fechaNacimiento,
+        urlImage:this.urlImage,
+        activo:this.activo,
+        pais:this.pais
+      }
 
-    const usuario :IUsuario = {
-      idUser:null,
-      idUserString:"",
-      nombre:this.nombre,
-      apellidos:this.apellidos,
-      nickname:this.nickname,
-      contrasenia:this.contrasenia,
-      biografia:this.biografia,
-      email:this.email,
-      fechaNacimiento:this.fechaNacimiento,
-      urlImage:this.urlImage,
-      activo:this.activo,
-      pais:this.pais
+      //console.log(usuario)
+      //  Esto llama a la api
+      this.registerService.register(usuario)
+    }
+    else{
+      alert("Deben coincidir las contraseñas")
     }
 
-    //console.log(usuario)
-    //  Esto llama a la api
-    this.registerService.register(usuario)
   }
 
   ngOnInit(){
