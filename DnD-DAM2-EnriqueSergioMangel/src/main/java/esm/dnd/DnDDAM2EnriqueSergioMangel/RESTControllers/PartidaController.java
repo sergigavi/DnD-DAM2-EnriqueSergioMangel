@@ -129,8 +129,8 @@ public class PartidaController {
             .fichasPartida(null)
             .build();
         
-        pa.setNombre("partida 1");
-        pa.setCreador(usuarioServicio.findUsuarioById("637b9cb20d32f0417cb74e80").get());
+        //pa.setNombre("partida 1");
+        //pa.setCreador(usuarioServicio.findUsuarioById("637b9cb20d32f0417cb74e80").get());
 
 
         try {
