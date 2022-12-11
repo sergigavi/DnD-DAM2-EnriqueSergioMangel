@@ -13,7 +13,7 @@ public interface IAdministradorServicio {
 	public boolean existeAdministrador(String idAdmin);
 	public Iterable<Administrador> findAllAdmins();
 	public Optional<Administrador> findAdminByID(String id);
-	boolean insertarAdministradores(List<Administrador> admins);
-	boolean existsByEmail(String email);
-	Optional<Administrador> findByEmail(String email);
+	public boolean insertarAdministradores(List<Administrador> admins);
+	public boolean existsByEmail(String email);
+	public Optional<Administrador> findByEmail(String email);
 }
