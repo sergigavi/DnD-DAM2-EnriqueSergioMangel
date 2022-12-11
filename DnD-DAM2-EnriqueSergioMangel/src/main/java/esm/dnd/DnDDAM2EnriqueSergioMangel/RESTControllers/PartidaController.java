@@ -108,15 +108,16 @@ public class PartidaController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addPartida(@RequestBody Partida partida){
-        ResponseEntity<String> res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	
+        ResponseEntity<String> res = new ResponseEntity<>("Error insertando la partida",HttpStatus.BAD_REQUEST);
 
+        System.out.println(partida);
+        
         ObjectId id = ObjectId.get();
         ObjectId idPartida = ObjectId.get();
         String idString = id.toString();
         String idStringPartida = idPartida.toString();
         
-        System.out.println(partida.toString());
-
         Partida pa= Partida.builder()
             .idPartida(id)
             .idStringPartida(idString)
@@ -127,6 +128,10 @@ public class PartidaController {
             .equipoPartida(null)
             .fichasPartida(null)
             .build();
+        
+        pa.setNombre("partida 1");
+        pa.setCreador(usuarioServicio.findUsuarioById("637b9cb20d32f0417cb74e80").get());
+
 
         try {
             partidaServicio.addPartida(pa);

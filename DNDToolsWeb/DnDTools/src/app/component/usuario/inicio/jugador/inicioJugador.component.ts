@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -12,13 +13,19 @@ import { Router } from '@angular/router';
 export class InicioJugadorComponent implements OnInit  {
   title = 'Inicio Jugador'
 
-  constructor(private router:Router){}
+  constructor(private router:Router, private cookieService: CookieService)
+  {
+
+  }
 
   public navegar(ruta:String){
     this.router.navigate([`${ruta}`])
   }
 
   ngOnInit(): void {
+    if(!this.cookieService.check("CurrentUserId")){
+      this.router.navigate(['login'])
+    }
   }
 
 }

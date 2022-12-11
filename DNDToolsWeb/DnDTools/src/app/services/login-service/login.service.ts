@@ -72,6 +72,10 @@ export class LoginService {
       console.log("Error")
     }
 
+    if(!this.cookieService.check("CurrentUserId") && !this.cookieService.check("CurrentAdminId")){
+      alert("Credenciales incorrectas")
+      this.router.navigate(['login'])
+    }
   }
 
   async esAdmin(usuario: string) :Promise<boolean>{

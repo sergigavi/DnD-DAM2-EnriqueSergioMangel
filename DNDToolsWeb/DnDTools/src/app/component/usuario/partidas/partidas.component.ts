@@ -22,7 +22,7 @@ import { IUsuario } from 'src/modelo/IUsuario';
 export class PartidasUsuarioComponent implements OnInit  {
   title = 'Partidas';
   opened = false;
-  partida!:IPartida
+  partida:any //Ipartida
 
   @ViewChild('matPaginator',{static:true}) paginator!:MatPaginator
   @ViewChild('sort',{static:true}) sort!:MatSort
@@ -31,10 +31,12 @@ export class PartidasUsuarioComponent implements OnInit  {
   dataSource = new MatTableDataSource<IPartida>([]);
   idCurrentUser="";
 
-  constructor(private usuarioService:UsuarioServiceService,private router:Router, private cookieService: CookieService,private partidaServicio:PartidaServiceService,private dialog : MatDialog,private auth:AuthServiceService){}
+  constructor(private usuarioService:UsuarioServiceService,private router:Router, private cookieService: CookieService,private partidaServicio:PartidaServiceService,private dialog : MatDialog,private auth:AuthServiceService){
+  }
 
   ngOnInit() {
     this.getCurrenUser()
+    this.idCurrentUser = this.cookieService.get("CurrentUserId")
     if(this.idCurrentUser==null || this.idCurrentUser==""){
       this.router.navigate(['login'])
     }
@@ -46,6 +48,11 @@ export class PartidasUsuarioComponent implements OnInit  {
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort
     this.showPartidas()
+  }
+
+  cerrarSesion()
+  {
+    this.cookieService.deleteAll();
   }
 
   showPartidas(){
