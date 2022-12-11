@@ -74,6 +74,10 @@ export class PartidasUsuarioComponent implements OnInit  {
     this.idCurrentUser=this.cookieService.get("CurrentUserId");
   }
 
+  goToPage(pageName:string){
+    this.router.navigate([`${pageName}`]);
+  }
+
 }
 
 @Component({
