@@ -48,6 +48,12 @@ export class UsuariosComponent implements OnInit  {
     this.showUsuario()
   }
 
+  cerrarSesionAdmin()
+  {
+    this.cookieService.deleteAll()
+    this.router.navigate(["/"])
+  }
+
   getCurrenUser(){
     this.auth.data.subscribe((data:any)=>{
       this.idCurrentUser=data;

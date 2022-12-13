@@ -58,6 +58,13 @@ export class EquipamientoComponent implements OnInit,AfterViewInit   {
     this.showEquipo()
   }
 
+
+  cerrarSesionAdmin()
+  {
+    this.cookieService.deleteAll()
+    this.router.navigate(["/"])
+  }
+
   ngAfterViewInit(){
     this.dataSource.paginator=this.paginator
     this.dataSource.sort=this.sort

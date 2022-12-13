@@ -89,6 +89,12 @@ export class FichasAdmin implements OnInit  {
     })
   }
 
+  cerrarSesionAdmin()
+  {
+    this.cookieService.deleteAll()
+    this.router.navigate(["/"])
+  }
+
   toggleSidebar() {
     this.opened = !this.opened;
   }
