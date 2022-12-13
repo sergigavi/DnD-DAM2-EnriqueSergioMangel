@@ -38,15 +38,20 @@ public class EquipamientoServicio implements IEquipamientoServicio{
 					.forEach(i->i.remove(e));
 				fichaPersonajeDAO.saveAll(personajes);
 			}
-			if(!partidas.isEmpty()){
-				partidas.stream()
-					.flatMap(p->p.getFichasPartida().stream())
-					.map(f->f.getInventario())
-					.filter(i->!i.isEmpty())
-					.filter(i->i.contains(e))
-					.forEach(i->i.remove(e));
-				partidaDAO.saveAll(partidas);
+			try {
+				if(!partidas.isEmpty()){
+					partidas.stream()
+						.flatMap(p->p.getFichasPartida().stream())
+						.map(f->f.getInventario())
+						.filter(i->!i.isEmpty())
+						.filter(i->i.contains(e))
+						.forEach(i->i.remove(e));
+					partidaDAO.saveAll(partidas);
+				}
+			} catch (Exception e2) {
+				// TODO: handle exception
 			}
+			
 			equipamientoDAO.delete(e);
 			exito=true;
 		}
