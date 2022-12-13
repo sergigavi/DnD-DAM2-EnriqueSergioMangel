@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Administrador;
+import esm.dnd.DnDDAM2EnriqueSergioMangel.modelo.Usuario;
 import esm.dnd.DnDDAM2EnriqueSergioMangel.servicio.IAdministradorServicio;
 
 @CrossOrigin
@@ -105,7 +106,11 @@ public class AdministradorController {
         try {
             if(administradorServicio.existsByEmail(email)){
                 admin = administradorServicio.findByEmail(email).get();
-                res = new ResponseEntity<Administrador>(admin, HttpStatus.OK);
+
+            	if (admin.getContrasenia().equals(contrasenia))
+            	{
+            		res = new ResponseEntity<Administrador>(admin, HttpStatus.OK);
+            	}
             }
         } catch (Exception e) {
             e.printStackTrace();
